@@ -32,6 +32,7 @@
     "@sanity/desk-tool": "2.29.8",
     "@sanity/production-preview": "2.29.3",
     "@sanity/vision": "2.29.8",
+    "get-youtube-id": "1.0.1",
     "prop-types": "15.8.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
