@@ -1,0 +1,49 @@
+{
+  "name": "capra-sanity",
+  "private": true,
+  "version": "1.0.0",
+  "description": "The Sanity CMS for capraconsulting.no",
+  "main": "package.json",
+  "author": "Skjalg <skjalgepalg@gmail.com>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "sanity start",
+    "build": "npm run sanity-build && npm run graphql-deploy",
+    "develop": "sanity start",
+    "sanity-build": "sanity build",
+    "sanity-deploy": "SANITY_AUTH_TOKEN=$SANITY_DEPLOY_STUDIO_TOKEN sanity deploy",
+    "graphql-deploy": "SANITY_AUTH_TOKEN=$SANITY_DEPLOY_STUDIO_TOKEN sanity graphql deploy --playground",
+    "format": "prettier --write '**/*.{ts,tsx,js}'",
+    "sanity-import-employees-pre": "node import/employees.js",
+    "sanity-import-employees": "sanity dataset import --replace ./import/ansatte.ndjson production",
+    "sanity-codegen": "sanity-codegen"
+  },
+  "keywords": [
+    "sanity"
+  ],
+  "dependencies": {
+    "@sanity/base": "2.29.8",
+    "@sanity/code-input": "2.29.8",
+    "@sanity/components": "2.14.0",
+    "@sanity/core": "2.29.5",
+    "@sanity/dashboard": "2.29.8",
+    "@sanity/default-layout": "2.29.8",
+    "@sanity/default-login": "2.29.8",
+    "@sanity/desk-tool": "2.29.8",
+    "@sanity/production-preview": "2.29.3",
+    "@sanity/vision": "2.29.8",
+    "prop-types": "15.8.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-icons": "3.11.0",
+    "react-youtube": "9.0.1",
+    "sanity-plugin-dashboard-widget-document-list": "0.0.13",
+    "sanity-plugin-dashboard-widget-netlify": "1.2.1",
+    "styled-components": "5.3.5"
+  },
+  "devDependencies": {
+    "@sanity/cli": "2.29.8",
+    "prettier": "2.6.2",
+    "sanity-codegen": "0.9.8"
+  }
+}
