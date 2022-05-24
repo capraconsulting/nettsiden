@@ -1,5 +1,6 @@
 import { createClient } from "sanity-codegen";
-import { Documents } from "./schema";
+
+import type { Documents } from "./schema";
 
 export default createClient<Documents>({
   projectId: process.env.SANITY_PROJECT_ID || "3drrs17h",
