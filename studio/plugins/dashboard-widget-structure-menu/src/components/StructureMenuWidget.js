@@ -1,7 +1,9 @@
-import { Link } from "part:@sanity/base/router";
-import FolderIcon from "part:@sanity/base/folder-icon";
-import FileIcon from "part:@sanity/base/file-icon";
 import React from "react";
+
+import FileIcon from "part:@sanity/base/file-icon";
+import FolderIcon from "part:@sanity/base/folder-icon";
+import { Link } from "part:@sanity/base/router";
+
 import * as styles from "./StructureMenuWidget.css";
 
 function getIconComponent(item) {

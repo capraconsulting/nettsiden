@@ -32,6 +32,8 @@ const client = sanityClient({
   useCdn: false,
 });
 
+// TODO: Can this be removed?
+// eslint-disable-next-line no-unused-vars
 const getCategories = () => {
   return client.fetch('*[_type == "jobCategory"]');
 };
@@ -60,7 +62,7 @@ fs.createReadStream(csvpath)
               return /^\d$/.test(c);
             })
             .slice(-8)
-            .join("")
+            .join(""),
         )
         .reduce((phone, cur) => {
           return phone || cur || undefined;

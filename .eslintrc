@@ -1,3 +1,45 @@
 {
-  "extends": ["@remix-run/eslint-config", "@remix-run/eslint-config/node"]
+  "extends": [
+    "@remix-run/eslint-config",
+    "@remix-run/eslint-config/node",
+    "plugin:prettier/recommended",
+    "prettier"
+  ],
+  "plugins": ["import", "simple-import-sort"],
+  "rules": {
+    // Enforces no extra curly braces around string props or children
+    "react/jsx-curly-brace-presence": [
+      2,
+      {
+        "props": "never",
+        "children": "never",
+        "propElementValues": "always"
+      }
+    ],
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          // Load imports with side-effects first, because duh
+          ["^\\u0000"],
+          // node, react + remix imports at the top
+          ["^node:\\w", "^react(-dom)?/?", "^@remix-run/\\w"],
+          // Other npm imports
+          ["^@?\\w"],
+          // Relative imports
+          ["^~", "^\\."]
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    }
+  }
 }

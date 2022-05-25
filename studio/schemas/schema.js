@@ -2,6 +2,7 @@
 import schemaTypes from "all:part:@sanity/base/schema-type";
 // First, we must import the schema creator
 import createSchema from "part:@sanity/base/schema-creator";
+
 import author from "./documents/author";
 import blogg from "./documents/blogg";
 import bloggFilter from "./documents/bloggFilter";

@@ -1,5 +1,7 @@
-import { json, LoaderFunction } from "@remix-run/node";
+import type { LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+
 import sanityClient from "~/sanity/sanity-client";
 
 const query = () =>
