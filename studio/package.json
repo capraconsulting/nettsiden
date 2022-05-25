@@ -15,8 +15,7 @@
     "graphql-deploy": "SANITY_AUTH_TOKEN=$SANITY_DEPLOY_STUDIO_TOKEN sanity graphql deploy --playground",
     "format": "prettier --write '**/*.{ts,tsx,js}'",
     "sanity-import-employees-pre": "node import/employees.js",
-    "sanity-import-employees": "sanity dataset import --replace ./import/ansatte.ndjson production",
-    "sanity-codegen": "sanity-codegen"
+    "sanity-import-employees": "sanity dataset import --replace ./import/ansatte.ndjson production"
   },
   "keywords": [
     "sanity"
@@ -31,7 +30,7 @@
     "@sanity/default-login": "2.29.8",
     "@sanity/desk-tool": "2.29.8",
     "@sanity/production-preview": "2.29.3",
-    "@sanity/vision": "2.29.8",
+    "@sanity/vision": "2.30.0",
     "get-youtube-id": "1.0.1",
     "prop-types": "15.8.1",
     "react": "^16.9.0",
@@ -44,7 +43,6 @@
   },
   "devDependencies": {
     "@sanity/cli": "2.29.8",
-    "prettier": "2.6.2",
-    "sanity-codegen": "0.9.8"
+    "prettier": "2.6.2"
   }
 }
