@@ -1,0 +1,4 @@
+# Reference: https://www.netlify.com/docs/netlify-toml-reference/
+
+[build]
+  ignore = "git diff --quiet HEAD^ HEAD ./"
