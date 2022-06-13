@@ -1,4 +1,5 @@
-import { MetaFunction } from "@remix-run/node";
+import type { MetaFunction } from "@remix-run/node";
+
 import { Todo } from "~/components/Todo";
 
 export const meta: MetaFunction = () => ({
