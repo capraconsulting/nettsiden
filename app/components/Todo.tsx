@@ -1,5 +1,5 @@
 interface Props {
-  title?: string;
+  title?: React.ReactNode;
   className?: string;
   display?: "block" | "inline-block";
   size?: "small" | "large";
@@ -12,7 +12,7 @@ export const Todo = ({
   className,
   children,
 }: Props) => {
-  let classNames = "border-gray-600 ";
+  let classNames = "border-gray-600 border-dashed";
   let titleClassName = "";
   if (size === "large") {
     classNames += " border-4 p-6";
