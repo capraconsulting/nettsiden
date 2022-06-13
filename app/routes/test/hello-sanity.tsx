@@ -2,7 +2,7 @@ import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
-import sanityClient from "~/sanity/sanity-client";
+import sanityClient from "~/sanity/sanity-client.server";
 
 const query = () =>
   sanityClient.get("selvskryt", "49e6900e-71e9-4a23-a84c-be7a6bbb4956");
