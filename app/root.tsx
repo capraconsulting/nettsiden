@@ -8,6 +8,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
+import { Todo } from "./components/Todo";
 import styles from "./tailwind.css";
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
@@ -25,8 +26,16 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
-        <Outlet />
+      <body className="flex flex-col h-screen">
+        <Todo
+          title="HEADER"
+          className="border-l-0 border-r-0 border-t-0 border-b-2 h-20"
+        />
+        <main className="flex-grow">
+          <Outlet />
+        </main>
+        <Todo title="FOOTER" className="bg-red-500 grow border-none h-96" />
+
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
