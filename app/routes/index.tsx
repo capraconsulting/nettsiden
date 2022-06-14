@@ -17,8 +17,8 @@ export default function Index() {
         <Todo title="Vi er Norges beste på ...">Bold statement? Absolutt.</Todo>
 
         <div className="flex gap-4 justify-center">
-          <Todo display="inline-block" size="small" title="Bli kunde?" />
-          <Todo display="inline-block" size="small" title="Jobb hos oss!" />
+          <Todo display="inline-flex" size="small" title="Bli kunde?" />
+          <Todo display="inline-flex" size="small" title="Jobb hos oss!" />
         </div>
 
         <Todo title="Hva trenger du?">
@@ -29,41 +29,61 @@ export default function Index() {
           </p>
         </Todo>
 
-        <div className="flex gap-4 flex-col-reverse lg:flex-row">
-          <Todo title="Liflig">
+        <div className="flex gap-4 flex-col-reverse md:flex-row">
+          <Todo title="Liflig" className="flex-1" style={{ minHeight: 340 }}>
             Du har ideene - la vårt inhouse team bygge og forvalte hele
             tjenesten for deg
           </Todo>
-          <div className="flex flex-wrap">
-            <CardModule title="Vi tar det tekniske" className="bg-red-900" />
-            <CardModule title="Kompetanse på laget" className="bg-red-900" />
-            <CardModule title="Kort oppstartstid" className="bg-red-900" />
-            <CardModule title="" className="bg-red-900" />
+          <div className="flex-1 grid grid-cols-2 gap-2">
+            <CardModule
+              title="Vi tar det tekniske"
+              className="bg-red-900 text-white"
+            />
+            <CardModule
+              title="Kompetanse på laget"
+              className="bg-red-900 text-white"
+            />
+            <CardModule
+              title="Kort oppstartstid"
+              className="bg-red-900 text-white"
+            />
+            <CardModule
+              title=""
+              illustration={
+                <div className="h-full w-full bg-gradient-to-r from-red-200 to-fuchsia-500" />
+              }
+            />
           </div>
         </div>
 
-        <div className="flex gap-4 flex-col-reverse lg:flex-row">
-          <Todo title="Konsulenter">
+        <div className="flex gap-4 flex-col-reverse md:flex-row">
+          <Todo
+            title="Konsulenter"
+            className="flex-1"
+            style={{ minHeight: 340 }}
+          >
             Trenger du flere gode hoder på teamet ditt? Vi gir deg
             IT-konsulenter med spisskompetanse!
           </Todo>
-          <div className="flex flex-wrap">
+          <div className="flex-1 grid grid-cols-2 gap-2">
             <CardModule
-              title="Opp i skyen
-"
-              className="bg-sky-400"
+              title="Opp i skyen"
+              className="bg-sky-400 text-slate-800"
             />
             <CardModule
-              title="Vi tør å rådgi
-"
-              className="bg-sky-400"
+              title="Vi tør å rådgi"
+              className="bg-sky-400 text-slate-800"
             />
             <CardModule
-              title="Faglig sterke
-"
-              className="bg-sky-400"
+              title="Faglig sterke"
+              className="bg-sky-400 text-slate-800"
             />
-            <CardModule title="" className="bg-sky-400" />
+            <CardModule
+              title=""
+              illustration={
+                <div className="h-full w-full bg-gradient-to-r from-sky-200 to-slate-500" />
+              }
+            />
           </div>
         </div>
 
@@ -92,8 +112,8 @@ interface CardModuleProps {
 const CardModule = ({ title, illustration, className }: CardModuleProps) => {
   return (
     <Todo
-      display="inline-block"
-      className={`border-none rounded text-white h-full w-full ${className}`}
+      display="inline-flex"
+      className={`p-0 aspect-square border-none overflow-hidden rounded ${className}`}
       title=""
     >
       {illustration}

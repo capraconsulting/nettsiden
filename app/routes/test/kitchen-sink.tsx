@@ -26,11 +26,11 @@ export default function KitchenSink() {
 
       <ComponentDemo title="Todo komponent">
         <div>
-          <Todo size="small" display="inline-block" title="Liten" />
+          <Todo size="small" display="inline-flex" title="Liten" />
         </div>
         <Todo
           size="small"
-          display="inline-block"
+          display="inline-flex"
           className="w-48 h-8"
           title="Liten'ish"
         />

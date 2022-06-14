@@ -1,15 +1,17 @@
 interface Props {
   title?: React.ReactNode;
   className?: string;
-  display?: "block" | "inline-block";
+  style?: React.CSSProperties;
+  display?: "flex" | "inline-flex";
   size?: "small" | "large";
   children?: React.ReactNode;
 }
 export const Todo = ({
   title = "TODO",
-  display = "block",
+  display = "flex",
   size = "large",
   className,
+  style,
   children,
 }: Props) => {
   let classNames = "border-gray-600 border-dashed";
@@ -24,13 +26,12 @@ export const Todo = ({
   }
 
   return (
-    <div className={display}>
-      <div
-        className={`flex flex-col justify-center items-center ${classNames} ${className}`}
-      >
-        <div className={titleClassName}>{title}</div>
-        <div>{children}</div>
-      </div>
+    <div
+      style={style}
+      className={`${display} flex-col justify-center items-center ${classNames} ${className}`}
+    >
+      <div className={titleClassName}>{title}</div>
+      {children}
     </div>
   );
 };
