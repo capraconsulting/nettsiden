@@ -6,6 +6,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useCatch,
 } from "@remix-run/react";
 
 import { Todo } from "./components/Todo";
@@ -36,6 +37,49 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+      </body>
+    </html>
+  );
+}
+
+export function CatchBoundary() {
+  // Her fanges alle errors
+  // Den mest vanlige som kommer til å skje er 404
+  // Vi trenger å håndtere to cases:
+  //
+  // 1. 404 - Når brukeren har blitt navigert til noe som ikke eksisterer
+  // 2. 500 - Når noe går feil på server siden
+  const caught = useCatch();
+  return (
+    <html>
+      <head>
+        <title>TODO Error side</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <Header />
+        <main className="flex flex-col h-screen">
+          {caught.status === 404 && (
+            <Todo badge className="h-full" title="404 - Siden ble ikke funnet">
+              <Todo title="F.eks. bilde av en søt/forvirret geit" />
+            </Todo>
+          )}
+
+          {/* Alt annet, hovedsaklig 500 */}
+          {caught.status !== 404 && (
+            <Todo
+              badge
+              className="h-full"
+              title={`${caught.status} ${caught.statusText}`}
+            >
+              <Todo title="Kanskje en stacktrace?"></Todo>
+              <Todo title="F.eks. bilde av en geit som prøver frebrilsk å fikse nettsiden" />
+            </Todo>
+          )}
+        </main>
+        <Footer />
+        <Scripts />
       </body>
     </html>
   );

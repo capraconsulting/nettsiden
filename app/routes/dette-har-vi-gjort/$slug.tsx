@@ -2,6 +2,7 @@ import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
+import { Todo } from "~/components/Todo";
 import sanityClient from "~/sanity/sanity-client.server";
 
 // TODO: I propose to move this function to a shared utility/common file
@@ -28,7 +29,7 @@ export const meta: MetaFunction = ({ data }: { data: Data }) => ({
   description: data.item.helmetDescription,
 });
 
-export default function () {
+export default function DetteHarViGjortItem() {
   const { item } = useLoaderData<Data>();
 
   // Quick and dirty
@@ -38,7 +39,7 @@ export default function () {
     .filter(Boolean);
 
   return (
-    <main>
+    <Todo>
       <h1>{item.helmetTitle}</h1>
       <p>{item.helmetDescription}</p>
       {texts?.map((x, i) => (
@@ -48,6 +49,6 @@ export default function () {
         <summary>See JSON</summary>
         <pre>{JSON.stringify(item, null, 2)}</pre>
       </details>
-    </main>
+    </Todo>
   );
 }
