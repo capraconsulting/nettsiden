@@ -107,7 +107,9 @@ const Header = () => {
       className="border-l-0 border-r-0 border-t-0 border-b-2 h-20 w-full"
     >
       <div className="flex w-screen gap-2 justify-between items-center px-4">
-        <div className="text-2xl font-bold">CAPRA</div>
+        <a href="/" className="text-2xl font-bold">
+          CAPRA
+        </a>
         <ul className="flex items-center">
           {MENU_ITEMS.map((item) => (
             <li key={item.href}>
