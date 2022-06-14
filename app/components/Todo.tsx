@@ -5,6 +5,7 @@ interface Props {
   display?: "flex" | "inline-flex";
   size?: "small" | "large";
   children?: React.ReactNode;
+  badge?: boolean;
 }
 export const Todo = ({
   title = "TODO",
@@ -13,6 +14,7 @@ export const Todo = ({
   className,
   style,
   children,
+  badge = false,
 }: Props) => {
   let classNames = "border-gray-600 border-dashed";
   let titleClassName = "";
@@ -28,8 +30,13 @@ export const Todo = ({
   return (
     <div
       style={style}
-      className={`${display} flex-col justify-center items-center ${classNames} ${className}`}
+      className={`${display} relative flex-col justify-center items-center ${classNames} ${className}`}
     >
+      {badge && (
+        <span className="absolute left-2 top-2 font-bold bg-yellow-400 border-black border-2 text-black rounded p-1">
+          TODO
+        </span>
+      )}
       <div className={titleClassName}>{title}</div>
       {children}
     </div>

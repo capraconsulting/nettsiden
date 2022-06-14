@@ -58,6 +58,7 @@ const MENU_ITEMS: MenuItem[] = [
 const Header = () => {
   return (
     <Todo
+      badge
       title=""
       className="border-l-0 border-r-0 border-t-0 border-b-2 h-20 w-full"
     >
@@ -77,7 +78,7 @@ const Header = () => {
 
 const Footer = () => {
   return (
-    <Todo title="FOOTER" className="bg-red-500 grow border-none h-96">
+    <Todo badge title="FOOTER" className="bg-red-500 grow border-none h-96">
       <ul>
         {MENU_ITEMS.map((item) => (
           <li key={item.href}>

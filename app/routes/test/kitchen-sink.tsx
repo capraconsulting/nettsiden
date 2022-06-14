@@ -45,8 +45,12 @@ export default function KitchenSink() {
         />
 
         <Todo className="h-40" title="Stor med en høyde" />
-        <Todo className="h-40" title="Stor med innhold">
-          Her kan man putte litt mer beskrivelse av hva som skal lages
+        <Todo badge className="h-40" title="Stor med innhold">
+          <p>Her kan man putte litt mer beskrivelse av hva som skal lages.</p>
+          <p>
+            Bruk <code>badge</code> prop'en for å vise tydlig at komponetet er
+            en Todo i de tilfellene man legger på ekstra midlertidig styling
+          </p>
         </Todo>
       </ComponentDemo>
     </div>
