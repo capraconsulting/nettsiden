@@ -56,7 +56,7 @@ export default function Index() {
           </div>
         </div>
 
-        <div className="flex gap-4 flex-col-reverse md:flex-row">
+        <div className="flex gap-4 flex-col-reverse md:flex-row-reverse">
           <Todo
             title="Konsulenter"
             className="flex-1"
