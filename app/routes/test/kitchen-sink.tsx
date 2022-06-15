@@ -29,6 +29,7 @@ export default function KitchenSink() {
           <Todo size="small" display="inline-flex" title="Liten" />
         </div>
         <Todo
+          badge
           size="small"
           display="inline-flex"
           className="w-48 h-8"

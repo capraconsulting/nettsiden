@@ -16,24 +16,29 @@ export const Todo = ({
   children,
   badge = false,
 }: Props) => {
-  let classNames = "border-gray-600 border-dashed";
+  let rootClassName = "border-gray-600 border-dashed";
   let titleClassName = "";
+  let badgeClassName = "";
   if (size === "large") {
-    classNames += " border-4 p-6";
+    rootClassName += " border-4 p-6";
     titleClassName += " text-2xl font-semibold";
+    badgeClassName += " left-2 top-2 border-2 p-1";
   }
   if (size === "small") {
-    classNames += " border-2 p-2";
+    rootClassName += " border-2 p-2";
     titleClassName += " text-xl";
+    badgeClassName += " left-1 top-1 border px-1 text-xs";
   }
 
   return (
     <div
       style={style}
-      className={`${display} relative flex-col justify-center items-center ${classNames} ${className}`}
+      className={`${display} relative flex-col justify-center items-center ${rootClassName} ${className}`}
     >
       {badge && (
-        <span className="absolute left-2 top-2 font-bold bg-yellow-400 border-black border-2 text-black rounded p-1">
+        <span
+          className={`absolute font-bold bg-yellow-400 border-black text-black rounded ${badgeClassName}`}
+        >
           TODO
         </span>
       )}
