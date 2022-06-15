@@ -1,7 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
 
-import { ContactForm } from "~/components/ContactForm";
-import { Todo } from "~/components/Todo";
+import { ContactForm } from "~/components/contact-form";
+import { Todo } from "~/components/todo";
 
 export const meta: MetaFunction = () => ({
   title: "Capra Consulting: IT-konsulenter med ekspertise i software",

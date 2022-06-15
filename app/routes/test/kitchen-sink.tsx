@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 
-import { Todo } from "~/components/Todo";
+import { Todo } from "~/components/todo";
 
 export const meta: MetaFunction = () => ({
   title: "Kitchen Sink",

@@ -2,7 +2,7 @@ import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
-import { Todo } from "~/components/Todo";
+import { Todo } from "~/components/todo";
 import sanityClient from "~/sanity/sanity-client.server";
 
 // TODO: I propose to move this function to a shared utility/common file

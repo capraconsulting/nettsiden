@@ -9,7 +9,7 @@ import {
   useCatch,
 } from "@remix-run/react";
 
-import { Todo } from "./components/Todo";
+import { Todo } from "./components/todo";
 import styles from "./tailwind.css";
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
