@@ -1,5 +1,14 @@
 import { Todo } from "./todo";
 
+/**
+ * Notes:
+ * This component uses some fixed dimensions, like 100px
+ * and some kinda fixed dimenision with vw
+ *
+ * This might set some limitations on how we do layoting 🤔
+ * Or maybe it's not a problem 🤷
+ */
+
 interface Props {
   title: React.ReactNode;
   children: React.ReactNode;
