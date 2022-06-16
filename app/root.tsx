@@ -124,7 +124,7 @@ const Header = () => {
 
 const Footer = () => {
   return (
-    <Todo badge title="FOOTER" className="bg-red-500 grow border-none h-96">
+    <Todo badge title="FOOTER" className="bg-red-500 border-none h-96">
       <ul>
         {MENU_ITEMS.map((item) => (
           <li key={item.href}>

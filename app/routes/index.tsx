@@ -1,6 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
 
 import { ContactForm } from "~/components/contact-form";
+import { ContentAndImageBox } from "~/components/content-and-image-box";
 import { Todo } from "~/components/todo";
 
 export const meta: MetaFunction = () => ({
@@ -15,12 +16,10 @@ export default function Index() {
     <>
       <div className="container mx-auto flex flex-col gap-16 py-8">
         <Todo title="Vi er Norges beste på ...">Bold statement? Absolutt.</Todo>
-
         <div className="flex gap-4 justify-center">
           <Todo display="inline-flex" size="small" title="Bli kunde?" />
           <Todo display="inline-flex" size="small" title="Jobb hos oss!" />
         </div>
-
         <Todo title="Hva trenger du?">
           <p>
             Vi elsker å løse komplekse problemer, men vi vet at en enkelt
@@ -28,7 +27,6 @@ export default function Index() {
             utfordringene dine!
           </p>
         </Todo>
-
         <div className="flex gap-4 flex-col-reverse md:flex-row">
           <Todo title="Liflig" className="flex-1" style={{ minHeight: 340 }}>
             Du har ideene - la vårt inhouse team bygge og forvalte hele
@@ -55,7 +53,6 @@ export default function Index() {
             />
           </div>
         </div>
-
         <div className="flex gap-4 flex-col-reverse md:flex-row-reverse">
           <Todo
             title="Konsulenter"
@@ -86,9 +83,24 @@ export default function Index() {
             />
           </div>
         </div>
-
-        <Todo title="Fancy AWS card" className="h-60" />
-        <Todo title={`Fancy "Vi er spesialister" Card`} className="h-60" />
+        <ContentAndImageBox
+          title="Vi er Advanced Tier Consulting Partner"
+          image={undefined}
+          height="32vw"
+          contentBoxClassName="bg-orange-200"
+        >
+          Vi er et av fire norske selskaper som kan kalle seg AWS-Partner!
+        </ContentAndImageBox>
+        <ContentAndImageBox
+          title="Vi er spesialister"
+          image={undefined}
+          height="35vw"
+          direction="right"
+          contentBoxClassName="bg-blue-200"
+        >
+          Ingen kan være best i alt! Derfor spesialiserer vi oss på utvalgte
+          markedsledenede teknologier.
+        </ContentAndImageBox>
         <Todo title="Fancy Vi har kickass folk" className="h-60" />
         <Todo title="Vi jobber med store aktører i Norge">
           <div className="flex flex-wrap gap-4">

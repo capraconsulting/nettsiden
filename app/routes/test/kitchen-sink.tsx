@@ -1,5 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 
+import { ContentAndImageBox } from "~/components/content-and-image-box";
 import { Todo } from "~/components/todo";
 
 export const meta: MetaFunction = () => ({
@@ -21,7 +22,7 @@ const ComponentDemo = ({ title, children }: ComponentDemoProps) => {
 
 export default function KitchenSink() {
   return (
-    <div className="bg-gray-100 h-screen w-full">
+    <div className="bg-gray-100 h-full w-full">
       <h1 className="text-4xl">Kitchen sink</h1>
 
       <ComponentDemo title="Todo komponent">
@@ -53,6 +54,27 @@ export default function KitchenSink() {
             en Todo i de tilfellene man legger på ekstra midlertidig styling
           </p>
         </Todo>
+      </ComponentDemo>
+
+      <ComponentDemo title="Content and Illustration Box">
+        <ContentAndImageBox
+          title="Bratte læringskurver"
+          image={<div>Image here!</div>}
+          height="35vw"
+        >
+          For å bli de beste på våre fagområder, må vi kunne lære. Derfor setter
+          vi av tid til fagsamlinger og inviduell læring .
+        </ContentAndImageBox>
+
+        <ContentAndImageBox
+          title="Vi er spesialister"
+          image={<div>Image here!</div>}
+          height="35vw"
+          direction="right"
+        >
+          Ingen kan være best i alt! Derfor spesialiserer vi oss på utvalgte
+          markedsledenede teknologier.
+        </ContentAndImageBox>
       </ComponentDemo>
     </div>
   );
