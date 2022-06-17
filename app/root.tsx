@@ -110,7 +110,7 @@ const Header = () => {
         <a href="/" className="text-2xl font-bold">
           CAPRA
         </a>
-        <ul className="flex items-center">
+        <ul className="flex items-center overflow-scroll">
           {MENU_ITEMS.map((item) => (
             <li key={item.href}>
               <a href={item.href}>{item.title}</a>

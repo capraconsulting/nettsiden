@@ -39,20 +39,21 @@ export const ContentAndImageBox = ({
   let imageBoxClassName = initialImageBoxClassName;
 
   if (direction === "left") {
-    contentBoxClassName += " pl-[40px] pr-[100px]";
-    imageBoxClassName += " -ml-[100px]";
+    className += "flex-col md:flex-row";
+    contentBoxClassName += " md:pl-[40px] md:pr-[100px]";
+    imageBoxClassName += " md:-ml-[100px]";
   }
   if (direction === "right") {
-    className += " flex-row-reverse";
-    contentBoxClassName += " pl-[100px]";
-    imageBoxClassName += " -mr-[100px]";
+    className += "flex-col md:flex-row-reverse";
+    contentBoxClassName += " md:pl-[100px]";
+    imageBoxClassName += " md:-mr-[100px]";
   }
 
   return (
-    <Todo badge title="" className="border-none p-0">
+    <Todo badge title="" className="border-none px-0 py-0">
       <div className={`flex items-center ${className}`}>
         <div
-          className={`bg-blue w-full md:w-[40vw] lg:w-[60w] min-w-[500px] flex flex-col items-center justify-center text-center ${contentBoxClassName}`}
+          className={`bg-blue w-full md:w-[40vw] lg:w-[60w] md:min-w-[500px] flex flex-col items-center justify-center text-center ${contentBoxClassName}`}
           style={{ height }}
         >
           <div className="text-2xl font-semibold">{title}</div>
