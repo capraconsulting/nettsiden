@@ -112,7 +112,7 @@ export default function Index() {
           <Todo title="Bilde fra sanity" className="h-40 w-40" />
         </div>
       </Todo>
-      <ContactForm />
+      <ContactForm title="Vil du vite mer om hvordan vi kan hjelpe deg?" />
     </>
   );
 }
