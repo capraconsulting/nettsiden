@@ -12,7 +12,6 @@ export default function Blogg() {
         </TitleAndText>
 
         <Todo badge title="filter buttons" className="w-full" />
-
         <Todo badge className="h-96" title="Blogg items" />
       </div>
       <ContactForm title="Vil du vite mer om hvordan vi kan hjelpe deg?" />
