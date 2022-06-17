@@ -53,11 +53,11 @@ export const ContentAndImageBox = ({
     <Todo badge title="" className="border-none px-0 py-0">
       <div className={`flex items-center ${className}`}>
         <div
-          className={`bg-blue w-full md:w-[40vw] lg:w-[60w] md:min-w-[500px] flex flex-col items-center justify-center text-center ${contentBoxClassName}`}
+          className={`bg-blue w-full md:w-[40vw] lg:w-[60w] md:min-w-[500px] flex flex-col justify-center ${contentBoxClassName}`}
           style={{ height }}
         >
-          <div className="text-2xl font-semibold">{title}</div>
-          <div className="p-[2vw]">{children}</div>
+          <div className="p-[2vw] pb-0 text-2xl font-semibold">{title}</div>
+          <div className="p-[2vw] whitespace-pre-line">{children}</div>
         </div>
 
         <div
