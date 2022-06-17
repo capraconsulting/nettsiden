@@ -2,6 +2,7 @@ import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 
+import { Todo } from "~/components/todo";
 import sanityClient from "~/sanity/sanity-client.server";
 import { TitleAndText } from "../../components/title-and-text";
 
@@ -35,23 +36,84 @@ export default function DetteHarViGjort() {
 
   return (
     <>
-      <TitleAndText title="Dette har vi gjort for andre" titleAs="h1">
-        Vi skaper samfunsnytte for over 1 000 000 brukere hver eneste dag! Her
-        har du noen få av tingene våre kick-ass folk gjør for kunder.
-      </TitleAndText>
+      <div className="w-full flex flex-col gap-8">
+        <TitleAndText title="Dette har vi gjort for andre" titleAs="h1">
+          Vi skaper samfunsnytte for over 1 000 000 brukere hver eneste dag! Her
+          har du noen få av tingene våre kick-ass folk gjør for kunder.
+        </TitleAndText>
 
-      <ul>
-        {items.map((item) => (
-          <li key={item._id}>
-            <Link to={item.slug?.current!}>{item.title}</Link>
-          </li>
-        ))}
-      </ul>
+        <Todo badge title="filter buttons" className="w-full" />
+        <ul
+          className="grid gap-10"
+          style={{ gridTemplateColumns: "repeat(auto-fit,360px)" }}
+        >
+          {items.map((item) => (
+            <li key={item._id} className="">
+              <Todo
+                title=""
+                className="block border-none py-0 px-0 h-full w-full"
+              >
+                <Link className="w-full border shadow" to={item.slug?.current!}>
+                  <Todo title="image" className="h-40" />
+                  <div className="p-4">
+                    <div className="text-lg font-semibold text-sky-500">
+                      {item.title}
+                    </div>
+                    <div>{item.helmetTitle}</div>
+                    <div className="mt-4 flex gap-2">
+                      <Todo
+                        size="small"
+                        title=""
+                        className="text-xs py-0 px-1 w-20"
+                      >
+                        Konsulent
+                      </Todo>
+                      <Todo
+                        size="small"
+                        title=""
+                        className="text-xs py-0 px-1 w-20"
+                      >
+                        Privat
+                      </Todo>
+                    </div>
+                  </div>
+                </Link>
+              </Todo>
+            </li>
+          ))}
+        </ul>
+      </div>
 
-      <details>
-        <summary>See JSON</summary>
-        <pre>{JSON.stringify(items, null, 2)}</pre>
-      </details>
+      <CallToActionBox
+        title="Er du nysgjerrig om du og Capra er en match?"
+        description="Ta en titt på stillingene våre da vel!"
+        linkText="Se stillinger"
+      />
     </>
   );
 }
+
+interface CardGridProps {}
+export const CardGrid = ({}: CardGridProps) => {
+  return <Todo />;
+};
+interface CallToActionBoxProps {
+  title: React.ReactNode;
+  description: React.ReactNode;
+  linkText: React.ReactNode;
+}
+export const CallToActionBox = ({
+  title,
+  description,
+  linkText,
+}: CallToActionBoxProps) => {
+  return (
+    <Todo badge title="" className="border-none py-0 px-0 w-full">
+      <div className="w-11/12 max-w-7xl py-24 px-6 bg-orange-100 flex flex-col items-center">
+        <p className="font-bold text-xl">{title}</p>
+        <p>{description}</p>
+        <Todo className="mt-7 w-48" badge size="small" title={linkText} />
+      </div>
+    </Todo>
+  );
+};
