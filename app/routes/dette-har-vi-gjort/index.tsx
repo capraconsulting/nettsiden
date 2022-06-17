@@ -2,8 +2,8 @@ import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 
-import { Todo } from "~/components/todo";
 import sanityClient from "~/sanity/sanity-client.server";
+import { TitleAndText } from "../../components/title-and-text";
 
 // TODO: I propose to move this function to a shared utility/common file
 export function assertItemFound<T>(item: T | undefined): asserts item is T {
@@ -21,8 +21,10 @@ export const loader: LoaderFunction = async () => {
   return json<Data>({ items });
 };
 
-const TITLE = "Dette har vi gjort"; // TODO: get from sanity
-const DESCRIPTION = "Dette har vi gjort"; // TODO: get from sanity
+const TITLE =
+  "Vi er stolte av arbeidet vi gjør - Se caser her | Capra Consulting";
+const DESCRIPTION =
+  "Det er viktig å løfte frem godt arbeid! Vi syns også det er helt nødvendig å vise frem det flotte vi i Capra får til sammen med våre kunder. Se caser her.";
 export const meta: MetaFunction = () => ({
   title: TITLE,
   description: DESCRIPTION,
@@ -32,8 +34,11 @@ export default function DetteHarViGjort() {
   const { items } = useLoaderData<Data>();
 
   return (
-    <Todo className="h-full">
-      <h1>{TITLE}</h1>
+    <>
+      <TitleAndText title="Dette har vi gjort for andre" titleAs="h1">
+        Vi skaper samfunsnytte for over 1 000 000 brukere hver eneste dag! Her
+        har du noen få av tingene våre kick-ass folk gjør for kunder.
+      </TitleAndText>
 
       <ul>
         {items.map((item) => (
@@ -47,6 +52,6 @@ export default function DetteHarViGjort() {
         <summary>See JSON</summary>
         <pre>{JSON.stringify(items, null, 2)}</pre>
       </details>
-    </Todo>
+    </>
   );
 }

@@ -2,6 +2,7 @@ import type { MetaFunction } from "@remix-run/node";
 
 import { ContactForm } from "~/components/contact-form";
 import { ContentAndImageBox } from "~/components/content-and-image-box";
+import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
 
 export const meta: MetaFunction = () => ({
@@ -14,27 +15,21 @@ export const meta: MetaFunction = () => ({
 export default function Index() {
   return (
     <>
-      <div className="flex flex-col gap-12">
-        <Todo
-          title={
-            <h1 className="font-bold text-4xl">Vi er Norges beste på ...</h1>
-          }
-        >
+      <div className="flex flex-col gap-12 w-full">
+        <TitleAndText title="Vi er Norges beste på ..." titleAs="h1">
           Bold statement? Absolutt.
-        </Todo>
+        </TitleAndText>
         <div className="flex gap-4 justify-center">
           <Todo display="inline-flex" size="small" title="Bli kunde?" />
           <Todo display="inline-flex" size="small" title="Jobb hos oss!" />
         </div>
       </div>
 
-      <Todo title="Hva trenger du?">
-        <p>
-          Vi elsker å løse komplekse problemer, men vi vet at en enkelt
-          arbeidsmetode ikke passer alle. Derfor tilbyr vi to måter å løse
-          utfordringene dine!
-        </p>
-      </Todo>
+      <TitleAndText title="Hva trenger du?" titleAs="h2">
+        Vi elsker å løse komplekse problemer, men vi vet at en enkelt
+        arbeidsmetode ikke passer alle. Derfor tilbyr vi to måter å løse
+        utfordringene dine!
+      </TitleAndText>
 
       <div className="max-w-4xl w-11/12 flex gap-4 flex-col-reverse md:flex-row">
         <Todo title="Liflig" className="flex-1" style={{ minHeight: 340 }}>
