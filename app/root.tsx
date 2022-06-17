@@ -29,7 +29,7 @@ export default function App() {
       </head>
       <body className="flex flex-col h-screen">
         <Header />
-        <main className="flex-grow">
+        <main className="flex-grow flex flex-col items-center gap-12 md:gap-36 py-8">
           <Outlet />
         </main>
         <Footer />
