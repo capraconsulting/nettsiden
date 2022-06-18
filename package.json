@@ -3,6 +3,7 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
+    "postinstall": "npm run generate-routes",
     "build": "run-s build:*",
     "build:css": "npm run generate:css -- --minify",
     "build:remix": "remix build",
@@ -13,7 +14,8 @@
     "start": "cross-env NODE_ENV=production netlify dev",
     "lint": "eslint \"./{app,studio}/**/*.{ts,tsx,js,jsx}\"",
     "lint:fix": "npm run lint -- --fix",
-    "sanity-codegen": "sanity-codegen"
+    "sanity-codegen": "sanity-codegen",
+    "generate-routes": "routes-gen -d @routes-gen/remix && eslint \"./app/routes.d.ts\" --fix"
   },
   "prettier": {
     "trailingComma": "all"
@@ -26,12 +28,14 @@
     "cross-env": "7.0.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "routes-gen": "0.5.0",
     "sanity-codegen": "0.9.8",
     "whatwg-fetch": "3.6.2"
   },
   "devDependencies": {
     "@remix-run/dev": "1.6.0",
     "@remix-run/eslint-config": "1.6.0",
+    "@routes-gen/remix": "0.3.0",
     "@types/react": "17.0.45",
     "@types/react-dom": "17.0.17",
     "eslint": "8.18.0",

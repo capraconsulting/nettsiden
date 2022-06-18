@@ -9,6 +9,8 @@ import {
   useCatch,
 } from "@remix-run/react";
 
+import { route } from "routes-gen";
+
 import { Todo } from "./components/todo";
 import globalStyles from "./global.css";
 import tailwindStyles from "./tailwind.css";
@@ -98,14 +100,14 @@ interface MenuItem {
   href: string;
 }
 const MENU_ITEMS: MenuItem[] = [
-  { title: "Dette kan vi", href: "/dette-kan-vi" },
-  { title: "Dette har vi gjort", href: "/dette-har-vi-gjort" },
-  { title: "Blogg", href: "/blogg" },
-  { title: "Mentorprogram", href: "/mentor" },
-  { title: "Bli en av oss", href: "/bli-en-av-oss" },
-  { title: "Partnere", href: "/partnere" },
-  { title: "Om oss", href: "/om-oss" },
-  { title: "Ansatte", href: "/ansatte" },
+  { title: "Dette kan vi", href: route("/dette-kan-vi") },
+  { title: "Dette har vi gjort", href: route("/dette-har-vi-gjort") },
+  { title: "Blogg", href: route("/blogg") },
+  { title: "Mentorprogram", href: route("/mentor") },
+  { title: "Bli en av oss", href: route("/bli-en-av-oss") },
+  { title: "Partnere", href: route("/partnere") },
+  { title: "Om oss", href: route("/om-oss") },
+  { title: "Ansatte", href: route("/ansatte") },
 ];
 const Header = () => {
   return (
@@ -115,7 +117,7 @@ const Header = () => {
       className="border-l-0 border-r-0 border-t-0 border-b-2 h-20 w-full"
     >
       <div className="flex w-screen gap-2 justify-between items-center px-4">
-        <a href="/" className="text-2xl font-bold">
+        <a href={route("/")} className="text-2xl font-bold">
           CAPRA
         </a>
         <ul className="flex items-center overflow-scroll">
