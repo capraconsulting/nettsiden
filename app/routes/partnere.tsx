@@ -12,7 +12,7 @@ export default function Partnere() {
       </TitleAndText>
 
       <Todo badge className="py-0 px-0 w-full" title="">
-        <div className="bg-orange-100 flex flex-row items-center py-[5%] px-[10%] ">
+        <div className="bg-peach-20 flex flex-row items-center py-[5%] px-[10%] ">
           <div>
             Som{" "}
             <a

@@ -8,9 +8,9 @@ export const ContactForm = ({ title }: Props) => {
     <Todo
       badge
       title="Contact form"
-      className="bg-blue-700 text-white h-96 w-full -mb-[50px]"
+      className="bg-secondary text-white h-96 w-full -mb-[50px]"
     >
-      <div className="text-3xl font-semibold text-orange-200">{title}</div>
+      <div className="text-3xl font-semibold text-peach">{title}</div>
       <span>Fyll ut skjemaet så kontakter vi deg!</span>
     </Todo>
   );

@@ -1,5 +1,7 @@
-import { createRequestHandler } from "@remix-run/netlify";
+import "whatwg-fetch";
+
 import * as build from "@remix-run/dev/server-build";
+import { createRequestHandler } from "@remix-run/netlify";
 
 /*
  * Returns a context object with at most 3 keys:

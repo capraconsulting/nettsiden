@@ -39,15 +39,15 @@ export default function Index() {
         <div className="flex-1 grid grid-cols-2 gap-2">
           <CardModule
             title="Vi tar det tekniske"
-            className="bg-red-900 text-white"
+            className="bg-bordeaux text-white"
           />
           <CardModule
             title="Kompetanse på laget"
-            className="bg-red-900 text-white"
+            className="bg-bordeaux text-white"
           />
           <CardModule
             title="Kort oppstartstid"
-            className="bg-red-900 text-white"
+            className="bg-bordeaux text-white"
           />
           <CardModule
             title=""
@@ -66,15 +66,15 @@ export default function Index() {
         <div className="flex-1 grid grid-cols-2 gap-2">
           <CardModule
             title="Opp i skyen"
-            className="bg-sky-400 text-slate-800"
+            className="bg-light-blue text-slate-800"
           />
           <CardModule
             title="Vi tør å rådgi"
-            className="bg-sky-400 text-slate-800"
+            className="bg-light-blue text-slate-800"
           />
           <CardModule
             title="Faglig sterke"
-            className="bg-sky-400 text-slate-800"
+            className="bg-light-blue text-slate-800"
           />
           <CardModule
             title=""
@@ -89,7 +89,7 @@ export default function Index() {
         title="Vi er Advanced Tier Consulting Partner"
         image={undefined}
         height="32vw"
-        contentBoxClassName="bg-orange-200"
+        contentBoxClassName="bg-peach"
       >
         Vi er et av fire norske selskaper som kan kalle seg AWS-Partner!
       </ContentAndImageBox>
@@ -98,7 +98,7 @@ export default function Index() {
         image={undefined}
         height="35vw"
         direction="right"
-        contentBoxClassName="bg-blue-200"
+        contentBoxClassName="bg-light-blue"
       >
         Ingen kan være best i alt! Derfor spesialiserer vi oss på utvalgte
         markedsledenede teknologier.

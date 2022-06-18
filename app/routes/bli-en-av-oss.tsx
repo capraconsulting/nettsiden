@@ -31,6 +31,7 @@ export default function BliEnAvOss() {
         title="TODO: Info om størrelse på selskapet"
         image={undefined}
         height="40vw"
+        contentBoxClassName="bg-light-blue"
       >
         Er du happy og kunden happy, så er Capra happy!
       </ContentAndImageBox>
@@ -40,6 +41,7 @@ export default function BliEnAvOss() {
         image={undefined}
         height="40vw"
         direction="right"
+        contentBoxClassName="bg-peach"
       >
         Vi består av en gjeng som er over gjennomsnittet interessert i tech, og
         det reflekteres i fagmiljøet vårt. Fagmiljøene er åpne og du kan delta
@@ -50,6 +52,7 @@ export default function BliEnAvOss() {
         title="Vi liker å være sammen"
         image={undefined}
         height="50vw"
+        contentBoxClassName="bg-bordeaux text-peach-20"
       >
         Kontoret til Capra ligger midt på Jernbanetorget sånn at du enkelt kan
         komme “hjemom” en tur, før eller etter du har vært hos kunde. Kontoret

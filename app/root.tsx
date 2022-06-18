@@ -10,9 +10,17 @@ import {
 } from "@remix-run/react";
 
 import { Todo } from "./components/todo";
-import styles from "./tailwind.css";
+import globalStyles from "./global.css";
+import tailwindStyles from "./tailwind.css";
 
-export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: globalStyles },
+  { rel: "stylesheet", href: tailwindStyles },
+  {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900&display=swap",
+  },
+];
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -124,7 +132,7 @@ const Header = () => {
 
 const Footer = () => {
   return (
-    <Todo badge title="FOOTER" className="bg-red-500 border-none h-96">
+    <Todo badge title="FOOTER" className="bg-main border-none h-96">
       <ul>
         {MENU_ITEMS.map((item) => (
           <li key={item.href}>

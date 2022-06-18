@@ -27,6 +27,7 @@ export default function Mentor() {
         title="Hva får du ut av det?"
         image={undefined}
         height="40vw"
+        contentBoxClassName="bg-peach"
       >
         Du får din egen helt egne mentor som følger deg gjennom et semester.
         Målet er å hjelpe deg til å få din drømmejobb etter studiene, enten du
@@ -41,6 +42,7 @@ export default function Mentor() {
         image={undefined}
         height="40vw"
         direction="right"
+        contentBoxClassName="bg-bordeaux text-peach-20"
       >
         Vi ser etter deg som går i 1-3. klasse og som ønsker å forberede seg til
         det faktiske arbeidslivet. Vi er ikke opptatt av karakterer, og du

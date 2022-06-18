@@ -58,7 +58,10 @@ export default function OmOss() {
         title="Organisasjon | Forretningsutvikling | Markedsføring | Kompetanse"
       />
 
-      <InfoBox title={`Hva betyr egentlig "Capra"?`}>
+      <InfoBox
+        title={`Hva betyr egentlig "Capra"?`}
+        className="bg-light-blue-20"
+      >
         Navnet Capra betyr geit på latin. Geiter er naturlig nysgjerrige og
         intelligente , og de lever gjerne i flokk , samtidig som de har evnen
         til å være selvstendige . Det syns vi egentlig er ganske beskrivende for
@@ -75,6 +78,7 @@ export default function OmOss() {
         title="Bratte læringskurver"
         image={undefined}
         height="40vw"
+        contentBoxClassName="bg-peach"
       >
         For å bli de beste på våre fagområder, må vi kunne lære. Derfor setter
         vi av tid til fagsamlinger og inviduell læring .
@@ -85,6 +89,7 @@ export default function OmOss() {
         image={undefined}
         height="40vw"
         direction="right"
+        contentBoxClassName="bg-light-blue"
       >
         Vi vet at mange liker å holde på med hobby prosjekter. Så lenge
         prosjektet ikke faller under Capras anvendelsesområde så er ideen din.
@@ -132,11 +137,16 @@ export default function OmOss() {
 interface InfoBoxProps {
   title: React.ReactNode;
   children: React.ReactNode;
+  className?: string;
 }
-const InfoBox = ({ title, children }: InfoBoxProps) => {
+const InfoBox = ({ title, children, className }: InfoBoxProps) => {
   return (
-    <Todo badge title="" className="border-none bg-red-50 w-11/12 max-w-7xl">
-      <div className="uppercase font-bold text-red-600">{title}</div>
+    <Todo
+      badge
+      title=""
+      className={`border-none bg-peach-20 w-11/12 max-w-7xl ${className ?? ""}`}
+    >
+      <div className="uppercase font-bold text-main">{title}</div>
       <div>{children}</div>
     </Todo>
   );
