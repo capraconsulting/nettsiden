@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "The Sanity CMS for capraconsulting.no",
   "main": "package.json",
-  "author": "Skjalg <skjalgepalg@gmail.com>",
+  "author": "Team CapraWeb",
   "license": "UNLICENSED",
   "scripts": {
     "start": "sanity start",
@@ -33,8 +33,6 @@
     "@sanity/vision": "2.30.0",
     "get-youtube-id": "1.0.1",
     "prop-types": "15.8.1",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
     "react-icons": "3.11.0",
     "react-youtube": "9.0.1",
     "sanity-plugin-dashboard-widget-document-list": "0.0.13",

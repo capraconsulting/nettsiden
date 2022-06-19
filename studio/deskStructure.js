@@ -8,7 +8,23 @@ export default () =>
     .title("Content")
     .items([
       S.listItem()
-        .title("Personer")
+        .title("Ansatte")
+        .schemaType("author")
+        .child(
+          S.documentTypeList("author")
+            .title("Ansatte")
+            .filter("employee == true"),
+        ),
+      S.listItem()
+        .title("Ikke ansatte")
+        .schemaType("author")
+        .child(
+          S.documentTypeList("author")
+            .title("Ikke ansatte")
+            .filter("employee == false"),
+        ),
+      S.listItem()
+        .title("Alle personer")
         .schemaType("author")
         .child(S.documentTypeList("author").title("Personer")),
       S.listItem()
