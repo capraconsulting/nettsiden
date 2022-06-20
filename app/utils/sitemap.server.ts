@@ -1,9 +1,12 @@
 import type { EntryContext } from "@remix-run/node";
 
-import isEqual from "fast-deep-equal/es6";
-
 import type { CapraHandle, SitemapEntry } from "~/types";
-import { getDomainUrl, removeTrailingSlash, typedBoolean } from "~/utils/misc";
+import {
+  getDomainUrl,
+  isEqual,
+  removeTrailingSlash,
+  typedBoolean,
+} from "~/utils/misc";
 
 async function getSiteMapEntries(
   request: Request,
