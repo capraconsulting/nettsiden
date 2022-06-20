@@ -1,5 +1,6 @@
 import * as build from "@remix-run/dev/server-build";
 import { createRequestHandler } from "@remix-run/netlify";
+import { createEntryRouteModules } from "@remix-run/server-runtime/entry";
 
 /*
  * Returns a context object with at most 3 keys:
@@ -28,6 +29,8 @@ function getLoadContext(event, context) {
     clientNetlifyGraphAccessToken: rawAuthorizationString,
     netlifyGraphToken: netlifyGraphToken,
     netlifyGraphSignature: graphSignatureHeader,
+    routeModules: createEntryRouteModules(build.routes),
+    manifest: build.assets,
   };
 
   // Remove keys with undefined values

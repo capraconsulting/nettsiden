@@ -1,4 +1,8 @@
-import type { EntryContext } from "@remix-run/node";
+import type { AssetsManifest } from "@remix-run/server-runtime/entry";
+import type {
+  EntryRouteModule,
+  RouteModules,
+} from "@remix-run/server-runtime/routeModules";
 
 import type { CapraHandle, SitemapEntry } from "~/types";
 import {
@@ -10,10 +14,11 @@ import {
 
 async function getSiteMapEntries(
   request: Request,
-  remixContext: EntryContext,
+  routeModules: RouteModules<EntryRouteModule>,
+  manifest: AssetsManifest,
 ): Promise<SitemapEntry[]> {
   const entries = await Promise.all(
-    Object.entries(remixContext.routeModules).map(async ([id, mod]) => {
+    Object.entries(routeModules).map(async ([id, mod]) => {
       if (
         id === "root" ||
         id.startsWith("routes/_") ||
@@ -31,13 +36,13 @@ async function getSiteMapEntries(
       // (these are an opt-in via the getSitemapEntries method)
       if (!("default" in mod)) return;
 
-      const manifestEntry = remixContext.manifest.routes[id];
+      const manifestEntry = manifest.routes[id];
       if (!manifestEntry) {
         console.warn(`Could not find a manifest entry for ${id}`);
         return;
       }
       let parentId = manifestEntry.parentId;
-      let parent = parentId ? remixContext.manifest.routes[parentId] : null;
+      let parent = parentId ? manifest.routes[parentId] : null;
 
       let path;
       if (manifestEntry.path) {
@@ -53,7 +58,7 @@ async function getSiteMapEntries(
         const parentPath = parent.path ? removeTrailingSlash(parent.path) : "";
         path = `${parentPath}/${path}`;
         parentId = parent.parentId;
-        parent = parentId ? remixContext.manifest.routes[parentId] : null;
+        parent = parentId ? manifest.routes[parentId] : null;
       }
 
       // we can't handle dynamic routes, so if the handle doesn't have a
@@ -101,13 +106,15 @@ function getEntry(domainUrl: string, { route, ...entry }: SitemapEntry) {
 
 export async function getSitemapXml(
   request: Request,
-  remixContext: EntryContext,
+  routeModules: RouteModules<EntryRouteModule>,
+  manifest: AssetsManifest,
 ) {
   const domainUrl = getDomainUrl(request);
 
   const sitemapEntries: SitemapEntry[] = await getSiteMapEntries(
     request,
-    remixContext,
+    routeModules,
+    manifest,
   );
 
   return `

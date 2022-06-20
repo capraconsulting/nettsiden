@@ -2,21 +2,12 @@ import { renderToString } from "react-dom/server";
 import type { EntryContext } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 
-import { routes as otherRoutes } from "./other-routes.server";
-
 export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext,
 ) {
-  for (const handler of otherRoutes) {
-    const res = await handler(request, remixContext);
-    if (res) {
-      return res;
-    }
-  }
-
   let markup = renderToString(
     <RemixServer context={remixContext} url={request.url} />,
   );
