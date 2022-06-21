@@ -22,10 +22,15 @@ export function removeTrailingSlash(s: string) {
  * Simple deep equality checker. It will check value of every field in each object, as well as the length of their key sets.
  */
 export function isEqual<T>(entry1: T, entry2: T): boolean {
+  // 1. We can do simple type + equality check on primitive values
+  if (typeof entry1 !== "object") {
+    return typeof entry1 === typeof entry2 && entry1 === entry2;
+  }
+
   const fieldsIn1 = Object.entries(entry1);
   const keysIn2 = Object.keys(entry2);
 
-  // 1. Different key/entry count? Different objects
+  // 2. Different key/entry count? Different objects
   if (fieldsIn1.length !== keysIn2.length) {
     return false;
   }
@@ -33,19 +38,14 @@ export function isEqual<T>(entry1: T, entry2: T): boolean {
   return fieldsIn1.every(([key1, value1]) => {
     const containsField = keysIn2.includes(key1);
 
-    // 2. Key in 1 not in 2? Different objects
+    // 3. Key in 1 not in 2? Different objects
     if (!containsField) {
       return false;
     }
 
     const value2 = entry2[key1 as keyof T];
 
-    // 3. We can do simple type + equality check on primitive fields
-    if (typeof value1 !== "object") {
-      return typeof value1 === typeof value2 && value1 === value2;
-    }
-
-    // 4. Field is an object? Recursion, here we come
+    // 4. Recursion, here we come
     return isEqual(value1, value2);
   });
 }
