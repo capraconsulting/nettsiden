@@ -3,7 +3,7 @@ import { Link } from "@remix-run/react";
 import { Todo } from "~/components/todo";
 import type { SocialPlatform } from "~/utils/constants";
 import {
-  constants,
+  contactInfo,
   externalLinks,
   menuItems,
   socialIcons,
@@ -27,6 +27,8 @@ interface FooterSocialIconProps {
   platform: SocialPlatform;
 }
 
+const ICON_SIZE = 24;
+
 const FooterSocialIcon: React.VFC<FooterSocialIconProps> = ({ platform }) => (
   <FooterLink
     href={externalLinks[platform]}
@@ -34,8 +36,8 @@ const FooterSocialIcon: React.VFC<FooterSocialIconProps> = ({ platform }) => (
     title={capitalize(platform)}
   >
     <svg
-      width={constants.iconSize}
-      height={constants.iconSize}
+      width={ICON_SIZE}
+      height={ICON_SIZE}
       className="fill-white"
       xmlns="https://www.w3.org/2000/svg"
     >
@@ -95,17 +97,24 @@ export const Footer: React.VFC = () => (
             external={true}
             title="Adressen til Capra"
           >
-            {constants.address}
+            <p className="mb-6">
+              {contactInfo.companyAddress.name}
+              <br />
+              {contactInfo.companyAddress.street}
+              <br />
+              {contactInfo.companyAddress.postalCode}{" "}
+              {contactInfo.companyAddress.city}
+            </p>
           </FooterLink>
         </FooterModule>
         <FooterModule title="Kontakt">
           <FooterLink href={externalLinks.mailto}>
-            {constants.contactEmail}
+            {contactInfo.email}
           </FooterLink>
         </FooterModule>
         <FooterModule title="Telefon">
           <FooterLink href={externalLinks.callUs}>
-            {formatPhoneNumber(constants.contactPhoneNumber)}
+            {formatPhoneNumber(contactInfo.phoneNumber)}
           </FooterLink>
         </FooterModule>
       </div>

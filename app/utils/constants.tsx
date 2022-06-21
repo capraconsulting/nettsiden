@@ -1,16 +1,12 @@
-export const constants = {
-  contactEmail: "post@capraconsulting.no",
-  contactPhoneNumber: "45832632",
-  iconSize: 24,
-  address: (
-    <p className="mb-6">
-      Capra&nbsp;Consulting&nbsp;AS
-      <br />
-      Stenersgata&nbsp;2
-      <br />
-      0184&nbsp;Oslo
-    </p>
-  ),
+export const contactInfo = {
+  email: "post@capraconsulting.no",
+  phoneNumber: "45832632",
+  companyAddress: {
+    name: "Capra Consulting AS",
+    street: "Stenersgata 2",
+    postalCode: "0184",
+    city: "Oslo",
+  },
 } as const;
 
 interface MenuItem {
@@ -30,8 +26,8 @@ export const menuItems: readonly MenuItem[] = [
 ];
 
 export const externalLinks = {
-  mailto: `mailto:${constants.contactEmail}`,
-  callUs: `tel:+47${constants.contactPhoneNumber}`,
+  mailto: `mailto:${contactInfo.email}`,
+  callUs: `tel:+47${contactInfo.phoneNumber}`,
   facebook: "https://facebook.com/capraconsulting",
   instagram: "https://instagram.com/capraconsulting",
   linkedIn: "https://linkedin.com/company/capraconsulting",
