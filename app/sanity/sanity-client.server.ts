@@ -7,7 +7,15 @@ import type { Documents } from "./schema";
 export const sanityClient = createClient<Documents>({
   projectId: process.env.SANITY_PROJECT_ID || "3drrs17h",
   dataset: process.env.SANITY_DATASET || "production",
-  fetch,
+
+  // Avoid "ReferenceError - fetch is not defined"
+  // By wrapping it I lambda function we defer the initilisation
+  // of fetch until after remix has put fetch into the global scope.
+  //
+  // Ideally this should not be needed, fetch should be in the global scope
+  // when this is parsed. It worked in previous commits 🤷
+  fetch: (...args) => fetch(...args),
+
   previewMode: false,
   token: process.env.SANITY_TOKEN || "",
   useCdn: false,
