@@ -2,14 +2,7 @@ import * as build from "@remix-run/dev/server-build";
 import { createRequestHandler } from "@remix-run/netlify";
 import { createEntryRouteModules } from "@remix-run/server-runtime/entry";
 
-import type { HandlerContext, HandlerEvent } from "@netlify/functions";
-
-import type { CapraLoadContext } from "~/types";
-
-function getLoadContext(
-  event: HandlerEvent & { authlifyToken?: string | null },
-  context: HandlerContext,
-): CapraLoadContext {
+function getLoadContext(event, context) {
   let rawAuthorizationString;
   let netlifyGraphToken;
 
@@ -34,7 +27,7 @@ function getLoadContext(
 
   // Remove keys with undefined values
   Object.keys(loadContext).forEach((rawKey) => {
-    const key = rawKey as keyof typeof loadContext;
+    const key = rawKey;
     if (loadContext[key] == null) {
       delete loadContext[key];
     }
