@@ -3,7 +3,7 @@ import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 
 import { Todo } from "~/components/todo";
-import sanityClient from "~/sanity/sanity-client.server";
+import { sanityClient } from "~/sanity/sanity-client.server";
 import { CallToActionBox } from "../../components/call-to-action-box";
 import { TitleAndText } from "../../components/title-and-text";
 
