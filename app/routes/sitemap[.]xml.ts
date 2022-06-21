@@ -1,6 +1,4 @@
-import type { LoaderFunction } from "@remix-run/node";
-
-import type { SitemapEntry } from "~/types";
+import type { LoaderFunctionWithContext, SitemapEntry } from "~/types";
 import { getDomainUrl } from "~/utils/misc";
 import { getSiteMapEntries } from "~/utils/sitemap.server";
 
@@ -16,7 +14,10 @@ function toXmlEntry(domainUrl: string) {
   };
 }
 
-export const loader: LoaderFunction = async ({ request, context }) => {
+export const loader: LoaderFunctionWithContext = async ({
+  request,
+  context,
+}) => {
   const domainUrl = getDomainUrl(request);
 
   const sitemapEntries: SitemapEntry[] = await getSiteMapEntries(
