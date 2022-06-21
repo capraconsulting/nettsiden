@@ -5,14 +5,9 @@ import type {
 } from "@remix-run/server-runtime/routeModules";
 
 import type { CapraHandle, SitemapEntry } from "~/types";
-import {
-  getDomainUrl,
-  isEqual,
-  removeTrailingSlash,
-  typedBoolean,
-} from "~/utils/misc";
+import { isEqual, removeTrailingSlash, typedBoolean } from "~/utils/misc";
 
-async function getSiteMapEntries(
+export async function getSiteMapEntries(
   request: Request,
   routeModules: RouteModules<EntryRouteModule>,
   manifest: AssetsManifest,
@@ -92,39 +87,4 @@ async function getSiteMapEntries(
   }
 
   return sitemapEntries;
-}
-
-function toXmlTag([key, value]: [string, string]) {
-  return value ? `<${key}>${value}</${key}>` : "";
-}
-
-function getEntry(domainUrl: string, { route, ...entry }: SitemapEntry) {
-  const tags = Object.entries(entry).map(toXmlTag);
-
-  return `<url><loc>${domainUrl}${route}</loc>${tags.join("")}</url>`;
-}
-
-export async function getSitemapXml(
-  request: Request,
-  routeModules: RouteModules<EntryRouteModule>,
-  manifest: AssetsManifest,
-) {
-  const domainUrl = getDomainUrl(request);
-
-  const sitemapEntries: SitemapEntry[] = await getSiteMapEntries(
-    request,
-    routeModules,
-    manifest,
-  );
-
-  return `
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
->
-  ${sitemapEntries.map((entry) => getEntry(domainUrl, entry)).join("")}
-</urlset>
-  `.trim();
 }
