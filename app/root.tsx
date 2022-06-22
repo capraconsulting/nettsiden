@@ -9,6 +9,8 @@ import {
   useCatch,
 } from "@remix-run/react";
 
+import { Footer } from "~/components/footer";
+import { menuItems } from "~/utils/constants";
 import { Todo } from "./components/todo";
 import globalStyles from "./global.css";
 import tailwindStyles from "./tailwind.css";
@@ -93,20 +95,6 @@ export function CatchBoundary() {
   );
 }
 
-interface MenuItem {
-  title: string;
-  href: string;
-}
-const MENU_ITEMS: MenuItem[] = [
-  { title: "Dette kan vi", href: "/dette-kan-vi" },
-  { title: "Dette har vi gjort", href: "/dette-har-vi-gjort" },
-  { title: "Blogg", href: "/blogg" },
-  { title: "Mentorprogram", href: "/mentor" },
-  { title: "Bli en av oss", href: "/bli-en-av-oss" },
-  { title: "Partnere", href: "/partnere" },
-  { title: "Om oss", href: "/om-oss" },
-  { title: "Ansatte", href: "/ansatte" },
-];
 const Header = () => {
   return (
     <Todo
@@ -119,27 +107,13 @@ const Header = () => {
           CAPRA
         </a>
         <ul className="flex items-center overflow-scroll">
-          {MENU_ITEMS.map((item) => (
+          {menuItems.map((item) => (
             <li key={item.href}>
               <a href={item.href}>{item.title}</a>
             </li>
           ))}
         </ul>
       </div>
-    </Todo>
-  );
-};
-
-const Footer = () => {
-  return (
-    <Todo badge title="FOOTER" className="bg-main border-none h-96">
-      <ul>
-        {MENU_ITEMS.map((item) => (
-          <li key={item.href}>
-            <a href={item.href}>{item.title}</a>
-          </li>
-        ))}
-      </ul>
     </Todo>
   );
 };

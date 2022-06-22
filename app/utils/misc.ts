@@ -18,6 +18,14 @@ export function removeTrailingSlash(s: string) {
   return s.endsWith("/") ? s.slice(0, -1) : s;
 }
 
+export function capitalize(value: string) {
+  return value.substring(0, 1).toUpperCase() + value.substring(1);
+}
+
+export function formatPhoneNumber(value: string) {
+  return value.replace(/^(\d{3})(\d{2})(\d{3})$/, "$1 $2 $3");
+}
+
 /**
  * Simple deep equality checker. It will check value of every field in each object, as well as the length of their key sets.
  */
