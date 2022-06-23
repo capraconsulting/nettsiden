@@ -1,4 +1,9 @@
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import type {
+  LinksFunction,
+  LoaderFunction,
+  MetaFunction,
+} from "@remix-run/node";
+import { json } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -7,6 +12,7 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
+  useLoaderData,
 } from "@remix-run/react";
 
 import { Footer } from "~/components/footer";
@@ -30,10 +36,20 @@ export const meta: MetaFunction = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 
+interface Data {
+  baseUrl: string;
+}
+export const loader: LoaderFunction = ({ request }) => {
+  const host = request.headers.get("host")!;
+  return json<Data>({ baseUrl: `//${host}/` });
+};
+
 export default function App() {
+  const { baseUrl } = useLoaderData<Data>();
   return (
     <html lang="en">
       <head>
+        <base href={baseUrl} />
         <Meta />
         <Links />
       </head>
