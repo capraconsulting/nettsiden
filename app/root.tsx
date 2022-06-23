@@ -38,10 +38,14 @@ export const meta: MetaFunction = () => ({
 
 interface Data {
   baseUrl: string;
+  requestHeaders: any;
 }
 export const loader: LoaderFunction = ({ request }) => {
   const host = request.headers.get("host")!;
-  return json<Data>({ baseUrl: `//${host}/` });
+  return json<Data>({
+    baseUrl: `//${host}/`,
+    requestHeaders: Object.fromEntries(request.headers),
+  });
 };
 
 export default function App() {
