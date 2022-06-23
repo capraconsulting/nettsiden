@@ -42,8 +42,9 @@ interface Data {
 }
 export const loader: LoaderFunction = ({ request }) => {
   const host = request.headers.get("host")!;
+  const xHost = request.headers.get("X-Host");
   return json<Data>({
-    baseUrl: `//${host}/`,
+    baseUrl: `//${xHost ?? host}/`,
     requestHeaders: Object.fromEntries(request.headers),
   });
 };
