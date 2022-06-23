@@ -49,7 +49,8 @@ export const loader: LoaderFunction = ({ request }) => {
 };
 
 export default function App() {
-  const { baseUrl } = useLoaderData<Data>();
+  const { baseUrl, requestHeaders } = useLoaderData<Data>();
+
   return (
     <html lang="en">
       <head>
@@ -62,6 +63,7 @@ export default function App() {
         <main className="flex-grow flex flex-col items-center gap-12 md:gap-36 py-[50px]">
           <Outlet />
         </main>
+        <pre>{JSON.stringify(requestHeaders, null, 2)}</pre>
         <Footer />
 
         <ScrollRestoration />
