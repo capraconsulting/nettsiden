@@ -42,7 +42,14 @@ interface Data {
 }
 export const loader: LoaderFunction = ({ request }) => {
   const host = request.headers.get("host")!;
-  const xHost = request.headers.get("X-Redirected-To");
+  let xHost: string | undefined = undefined;
+  if (
+    host === "capraconsulting.no" ||
+    host === "deploy-preview-416--capra.netlify.app"
+  ) {
+    xHost = "add-base-url--capraconsulting.netlify.app";
+  }
+
   return json<Data>({
     baseUrl: `//${xHost ?? host}/`,
     requestHeaders: Object.fromEntries(request.headers),
