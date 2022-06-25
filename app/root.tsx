@@ -38,7 +38,6 @@ export const meta: MetaFunction = () => ({
 
 interface Data {
   baseUrl: string;
-  requestHeaders: any;
 }
 export const loader: LoaderFunction = ({ request }) => {
   const host = request.headers.get("host")!;
@@ -52,12 +51,11 @@ export const loader: LoaderFunction = ({ request }) => {
 
   return json<Data>({
     baseUrl: `//${xHost ?? host}/`,
-    requestHeaders: Object.fromEntries(request.headers),
   });
 };
 
 export default function App() {
-  const { baseUrl, requestHeaders } = useLoaderData<Data>();
+  const { baseUrl } = useLoaderData<Data>();
 
   return (
     <html lang="en">
@@ -71,7 +69,6 @@ export default function App() {
         <main className="flex-grow flex flex-col items-center gap-12 md:gap-36 py-[50px]">
           <Outlet />
         </main>
-        <pre>{JSON.stringify(requestHeaders, null, 2)}</pre>
         <Footer />
 
         <ScrollRestoration />
