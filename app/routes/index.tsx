@@ -2,6 +2,7 @@ import type { MetaFunction } from "@remix-run/node";
 
 import { ContactForm } from "~/components/contact-form";
 import { ContentAndImageBox } from "~/components/content-and-image-box";
+import { LinkButton } from "~/components/LinkButton";
 import { TextHeader } from "~/components/text-header";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
@@ -31,9 +32,13 @@ export default function Index() {
           ]}
           subTitle="Bold statement? Absolutt."
         />
-        <div className="flex gap-4 justify-center">
-          <Todo display="inline-flex" size="small" title="Bli kunde?" />
-          <Todo display="inline-flex" size="small" title="Jobb hos oss!" />
+        <div className="flex flex-col md:flex-row items-center justify-center">
+          <LinkButton href="/dette-kan-vi" variant="outline">
+            Bli kunde?
+          </LinkButton>
+          <LinkButton href="/bli-en-av-oss" variant="outline">
+            Jobb hos oss!
+          </LinkButton>
         </div>
       </div>
 

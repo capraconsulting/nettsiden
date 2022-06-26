@@ -1,6 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
 
 import { ContentAndImageBox } from "~/components/content-and-image-box";
+import { LinkButton } from "~/components/LinkButton";
 import { Todo } from "~/components/todo";
 import { TypingText } from "~/components/typing-text";
 
@@ -80,6 +81,14 @@ export default function KitchenSink() {
 
       <ComponentDemo title="Typing text">
         <TypingText text={["first", "second", "third"]} />
+      </ComponentDemo>
+      <ComponentDemo title="Link button">
+        <LinkButton href="/test" variant="outline">
+          Test
+        </LinkButton>
+        <LinkButton href="/test2" variant="solid">
+          Test2
+        </LinkButton>
       </ComponentDemo>
     </div>
   );
