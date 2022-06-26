@@ -6,7 +6,11 @@ module.exports = {
       serif: ["'Source Sans Pro'", "serif"],
     },
     extend: {
+      spacing: {
+        "nav-height": "72px",
+      },
       screens: {
+        desktop: "1200px",
         xl: "1360px",
       },
       colors: {

@@ -10,7 +10,7 @@ import {
 } from "@remix-run/react";
 
 import { Footer } from "~/components/footer";
-import { menuItems } from "~/utils/constants";
+import { Header } from "~/components/header";
 import { Todo } from "./components/todo";
 import globalStyles from "./global.css";
 import tailwindStyles from "./tailwind.css";
@@ -26,20 +26,20 @@ export const links: LinksFunction = () => [
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "Capra Consulting: IT-konsulenter med ekspertise i software",
   viewport: "width=device-width,initial-scale=1",
 });
 
 export default function App() {
   return (
-    <html lang="en">
+    <html lang="no">
       <head>
         <Meta />
         <Links />
       </head>
-      <body className="flex flex-col h-screen">
+      <body className="flex flex-col h-full">
         <Header />
-        <main className="flex-grow flex flex-col items-center gap-12 md:gap-36 py-[50px]">
+        <main className="flex-grow flex flex-col items-center gap-12 md:gap-36 py-[50px] overflow-x-hidden md:overflow-x-auto">
           <Outlet />
         </main>
         <Footer />
@@ -94,26 +94,3 @@ export function CatchBoundary() {
     </html>
   );
 }
-
-const Header = () => {
-  return (
-    <Todo
-      badge
-      title=""
-      className="border-l-0 border-r-0 border-t-0 border-b-2 h-20 w-full"
-    >
-      <div className="flex w-screen gap-2 justify-between items-center px-4">
-        <a href="/" className="text-2xl font-bold">
-          CAPRA
-        </a>
-        <ul className="flex items-center overflow-scroll">
-          {menuItems.map((item) => (
-            <li key={item.href}>
-              <a href={item.href}>{item.title}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </Todo>
-  );
-};
