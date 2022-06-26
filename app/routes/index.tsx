@@ -2,6 +2,7 @@ import type { MetaFunction } from "@remix-run/node";
 
 import { ContactForm } from "~/components/contact-form";
 import { ContentAndImageBox } from "~/components/content-and-image-box";
+import { TextHeader } from "~/components/text-header";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
 
@@ -16,9 +17,20 @@ export default function Index() {
   return (
     <>
       <div className="flex flex-col gap-12 w-full">
-        <TitleAndText title="Vi er Norges beste på ..." titleAs="h1">
-          Bold statement? Absolutt.
-        </TitleAndText>
+        <TextHeader
+          title="Vi er Norges beste på"
+          dynamicText={[
+            "AWS",
+            "selvskryt",
+            "java",
+            "vaffelspising",
+            "javascript",
+            "smash",
+            "agile",
+            "bordtennis",
+          ]}
+          subTitle="Bold statement? Absolutt."
+        />
         <div className="flex gap-4 justify-center">
           <Todo display="inline-flex" size="small" title="Bli kunde?" />
           <Todo display="inline-flex" size="small" title="Jobb hos oss!" />
