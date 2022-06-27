@@ -37,7 +37,7 @@ export const Todo = ({
     >
       {badge && (
         <span
-          className={`absolute font-bold bg-yellow-400 border-black text-black rounded ${badgeClassName}`}
+          className={`absolute font-bold bg-yellow border-black text-black rounded ${badgeClassName}`}
         >
           TODO
         </span>
