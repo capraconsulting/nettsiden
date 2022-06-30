@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "react-router";
-import { Link } from "@remix-run/react";
+import { Link, NavLink } from "@remix-run/react";
 
 import { useDisableScroll } from "~/hooks/use-disable-scroll";
 import { useHasScrolled } from "~/hooks/use-has-scrolled";
@@ -9,8 +8,6 @@ import { classNames } from "~/utils/misc";
 
 export const Header: React.VFC = () => {
   const [expanded, setExpanded] = useState(false);
-
-  const location = useLocation();
 
   const showBottomBorder = useHasScrolled();
 
@@ -56,18 +53,19 @@ export const Header: React.VFC = () => {
         )}
       >
         {menuItems.map((item) => (
-          <Link
+          <NavLink
             key={item.href}
             to={item.href}
             prefetch="intent"
-            className={classNames("px-2 leading-loose", {
-              "desktop:border-b-[3px] desktop:border-b-main":
-                location.pathname === item.href,
-            })}
+            className={({ isActive }) =>
+              classNames("px-2 leading-loose", {
+                "desktop:border-b-[3px] desktop:border-b-main": isActive,
+              })
+            }
             onClick={() => setExpanded(false)}
           >
             {item.title}
-          </Link>
+          </NavLink>
         ))}
       </nav>
     </header>
