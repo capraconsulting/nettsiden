@@ -17,10 +17,10 @@ interface FooterModuleProps {
 }
 
 const FooterModule: React.VFC<FooterModuleProps> = ({ title, children }) => (
-  <div>
+  <>
     <h3 className="uppercase text-white font-bold text-lg mb-0.5">{title}</h3>
     {children}
-  </div>
+  </>
 );
 
 interface FooterSocialIconProps {
@@ -89,7 +89,7 @@ const FooterLink: React.FC<FooterLinkProps> = ({
 
 export const Footer: React.VFC = () => (
   <footer className="bg-main border-none flex flex-col gap-4 py-7 items-center">
-    <section className="flex flex-col md:flex-row justify-evenly w-full max-w-6xl ml-6 md:ml-0">
+    <section className="flex flex-col md:flex-row justify-evenly w-full max-w-6xl px-6 md:px-0">
       <div>
         <FooterModule title="Besøksadresse">
           <FooterLink
