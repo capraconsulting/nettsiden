@@ -6,7 +6,7 @@ import { useHasScrolled } from "~/hooks/use-has-scrolled";
 import { menuItems } from "~/utils/constants";
 import { classNames } from "~/utils/misc";
 
-export const Header: React.VFC = () => {
+export function Header() {
   const [expanded, setExpanded] = useState(false);
 
   const showBottomBorder = useHasScrolled();
@@ -70,7 +70,7 @@ export const Header: React.VFC = () => {
       </nav>
     </header>
   );
-};
+}
 
 interface ToggleMenuButtonProps {
   isOpen: boolean;
