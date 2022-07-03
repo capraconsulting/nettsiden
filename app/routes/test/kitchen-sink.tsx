@@ -2,6 +2,7 @@ import type { MetaFunction } from "@remix-run/node";
 
 import { ContentAndImageBox } from "~/components/content-and-image-box";
 import { Todo } from "~/components/todo";
+import { TypingText } from "~/components/typing-text";
 
 export const meta: MetaFunction = () => ({
   title: "Kitchen Sink",
@@ -75,6 +76,10 @@ export default function KitchenSink() {
           Ingen kan være best i alt! Derfor spesialiserer vi oss på utvalgte
           markedsledenede teknologier.
         </ContentAndImageBox>
+      </ComponentDemo>
+
+      <ComponentDemo title="Typing text">
+        <TypingText text={["test", "test2", "test3"]} />
       </ComponentDemo>
     </div>
   );
