@@ -1,6 +1,6 @@
 import * as build from "@remix-run/dev/server-build";
 import { createRequestHandler } from "@remix-run/netlify";
-import { createEntryRouteModules } from "@remix-run/server-runtime/entry";
+import { createEntryRouteModules } from "@remix-run/server-runtime/dist/entry";
 
 import type { HandlerContext, HandlerEvent } from "@netlify/functions";
 

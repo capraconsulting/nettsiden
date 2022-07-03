@@ -1,8 +1,8 @@
-import type { AssetsManifest } from "@remix-run/server-runtime/entry";
+import type { AssetsManifest } from "@remix-run/server-runtime/dist/entry";
 import type {
   EntryRouteModule,
   RouteModules,
-} from "@remix-run/server-runtime/routeModules";
+} from "@remix-run/server-runtime/dist/routeModules";
 
 import type { CapraHandle, SitemapEntry } from "~/types";
 import { isEqual, removeTrailingSlash, typedBoolean } from "~/utils/misc";
