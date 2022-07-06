@@ -17,7 +17,6 @@ interface Props {
   text: string | string[];
   typing?: Timing;
   erasing?: Timing;
-  cursorInterval?: number;
 }
 
 const timings: Required<Pick<Props, "typing" | "erasing">> = {
@@ -35,7 +34,6 @@ export const TypingText: React.FC<Props> = ({
   text,
   typing = timings.typing,
   erasing = timings.erasing,
-  cursorInterval = 500,
 }) => {
   const [{ state, displayText }, tick] = useTextReducer(
     typeof text === "string" ? [text] : text,
@@ -72,7 +70,7 @@ export const TypingText: React.FC<Props> = ({
   return (
     <span>
       {displayText}
-      <Cursor interval={cursorInterval} />
+      <Cursor />
     </span>
   );
 };
@@ -127,20 +125,16 @@ function useTextReducer(texts: string[]) {
   );
 }
 
-interface CursorProps {
-  interval: number;
-}
-
-const Cursor: React.FC<CursorProps> = ({ interval }) => {
+const Cursor: React.FC = () => {
   const [show, setShow] = useState(true);
 
   useEffect(() => {
     const cursorInterval = setInterval(() => {
       setShow((prev) => !prev);
-    }, interval);
+    }, 500);
 
     return () => clearInterval(cursorInterval);
-  }, [interval]);
+  }, []);
 
   return (
     <span
