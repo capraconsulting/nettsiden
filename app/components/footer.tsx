@@ -17,10 +17,10 @@ interface FooterModuleProps {
 }
 
 const FooterModule: React.VFC<FooterModuleProps> = ({ title, children }) => (
-  <>
+  <div>
     <h3 className="uppercase text-white font-bold text-lg mb-0.5">{title}</h3>
     {children}
-  </>
+  </div>
 );
 
 interface FooterSocialIconProps {
@@ -47,8 +47,18 @@ const FooterSocialIcon: React.VFC<FooterSocialIconProps> = ({ platform }) => (
 );
 
 type FooterLinkProps =
-  | { external: true; title: string; href: `https://${string}` }
-  | { external?: false; title?: never; href: string };
+  | {
+      external: true;
+      title: string;
+      children?: React.ReactNode;
+      href: `https://${string}`;
+    }
+  | {
+      external?: false;
+      title?: never;
+      children?: React.ReactNode;
+      href: string;
+    };
 
 const footerLinkClass = "text-secondary underline block mb-2 mt-1 md:my-0";
 
@@ -88,16 +98,16 @@ const FooterLink: React.FC<FooterLinkProps> = ({
 };
 
 export const Footer: React.VFC = () => (
-  <footer className="bg-main border-none flex flex-col gap-4 py-7 items-center">
-    <section className="flex flex-col md:flex-row justify-evenly w-full max-w-6xl px-6 md:px-0">
-      <div>
+  <footer className="bg-main border-none flex flex-col gap-10 py-7 items-center">
+    <section className="flex flex-col gap-10 md:gap-0 md:flex-row justify-evenly w-full max-w-6xl px-6 md:px-0">
+      <div className="flex flex-col gap-6">
         <FooterModule title="Besøksadresse">
           <FooterLink
             href={externalLinks.googleMaps}
             external={true}
             title="Adressen til Capra"
           >
-            <p className="mb-6">
+            <p>
               {contactInfo.companyAddress.name}
               <br />
               {contactInfo.companyAddress.street}
@@ -120,11 +130,13 @@ export const Footer: React.VFC = () => (
       </div>
       <div>
         <FooterModule title="Meny">
-          {menuItems.map((it) => (
-            <FooterLink key={it.href} href={it.href}>
-              {it.title}
-            </FooterLink>
-          ))}
+          <ul className="flex flex-col gap-1">
+            {menuItems.map((it) => (
+              <li key={it.href}>
+                <FooterLink href={it.href}>{it.title}</FooterLink>
+              </li>
+            ))}
+          </ul>
         </FooterModule>
       </div>
       <div>
