@@ -163,7 +163,7 @@ export const Footer: React.VFC = () => (
       ))}
     </section>
     <section className="flex flex-row justify-center gap-3 text-xs text-white underline">
-      <a href="/personvernerklæring">Personvernerklæring</a>
+      <a href="/personvernerklaering">Personvernerklæring</a>
       <a href="/informasjonskapsler">Informasjonskapsler</a>
     </section>
   </footer>
