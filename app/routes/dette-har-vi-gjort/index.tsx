@@ -1,4 +1,4 @@
-import type { LoaderFunction, MetaFunction } from "@remix-run/node";
+import type { MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 
@@ -7,20 +7,9 @@ import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
 import { sanityClient } from "~/sanity/sanity-client.server";
 
-// TODO: I propose to move this function to a shared utility/common file
-export function assertItemFound<T>(item: T | undefined): asserts item is T {
-  if (item === undefined)
-    throw new Response("Not Found", {
-      status: 404,
-    });
-}
-
-const query = () => sanityClient.getAll("selvskryt");
-
-type Data = { items: Awaited<ReturnType<typeof query>> };
-export const loader: LoaderFunction = async () => {
-  const items = await query();
-  return json<Data>({ items });
+export const loader = async () => {
+  const items = await sanityClient.getAll("selvskryt");
+  return json({ items });
 };
 
 const TITLE =
@@ -33,7 +22,7 @@ export const meta: MetaFunction = () => ({
 });
 
 export default function DetteHarViGjort() {
-  const { items } = useLoaderData<Data>();
+  const { items } = useLoaderData<typeof loader>();
 
   return (
     <>

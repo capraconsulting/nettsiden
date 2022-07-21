@@ -1,6 +1,7 @@
-import type { LoaderFunction, MetaFunction } from "@remix-run/node";
+import type { LoaderArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import type { UseDataFunctionReturn } from "@remix-run/react/dist/components";
 
 import { Todo } from "~/components/todo";
 import {
@@ -22,24 +23,24 @@ export function assertItemFound<T>(item: T | undefined): asserts item is T {
     });
 }
 
-const query = (slug: string) =>
-  sanityClient.getAll("selvskryt", `slug.current == "${slug}"`);
+export const loader = async ({ params }: LoaderArgs) => {
+  const query = (slug: string) =>
+    sanityClient.getAll("selvskryt", `slug.current == "${slug}"`);
 
-type Data = { item: Awaited<ReturnType<typeof query>>[0] };
-export const loader: LoaderFunction = async ({ params }) => {
   const item = (await query(params.slug ?? ""))[0];
   assertItemFound(item);
 
-  return json<Data>({ item });
+  return json({ item });
 };
 
-export const meta: MetaFunction = ({ data }: { data: Data }) => ({
+type LoaderData = UseDataFunctionReturn<typeof loader>;
+export const meta: MetaFunction = ({ data }: { data: LoaderData }) => ({
   title: data.item.helmetTitle,
   description: data.item.helmetDescription,
 });
 
 export default function DetteHarViGjortItem() {
-  const { item } = useLoaderData<Data>();
+  const { item } = useLoaderData<typeof loader>();
 
   // Quick and dirty
   // Extract some text from the BlockContent body
