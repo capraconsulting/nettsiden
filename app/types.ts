@@ -1,10 +1,10 @@
 import type { LoaderFunction } from "@remix-run/node";
-import type { AssetsManifest } from "@remix-run/server-runtime/entry";
+import type { AssetsManifest } from "@remix-run/server-runtime/dist/entry";
 import type {
   DataFunctionArgs,
   EntryRouteModule,
   RouteModules,
-} from "@remix-run/server-runtime/routeModules";
+} from "@remix-run/server-runtime/dist/routeModules";
 
 export interface SitemapEntry {
   route: string;
