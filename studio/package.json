@@ -9,7 +9,7 @@
   "scripts": {
     "start": "sanity start",
     "build": "npm run sanity-build && npm run graphql-deploy",
-    "develop": "sanity start",
+    "dev": "sanity start",
     "sanity-build": "sanity build",
     "sanity-deploy": "SANITY_AUTH_TOKEN=$SANITY_DEPLOY_STUDIO_TOKEN sanity deploy",
     "graphql-deploy": "SANITY_AUTH_TOKEN=$SANITY_DEPLOY_STUDIO_TOKEN sanity graphql deploy --playground",

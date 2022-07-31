@@ -7,6 +7,7 @@ import author from "./documents/author";
 import blogg from "./documents/blogg";
 import bloggFilter from "./documents/bloggFilter";
 import category from "./documents/category";
+import imageAsset from "./documents/imageAsset";
 import jobCategory from "./documents/jobCategory";
 import richText from "./documents/richText";
 import selvskryt from "./documents/selvskryt";
@@ -29,18 +30,19 @@ export default createSchema({
     // The following are document types which will appear
     // in the studio.
     author,
-    richText,
-    youtube,
     blogg,
     bloggFilter,
     category,
+    factbox,
+    imageAsset,
+    jobCategory,
+    mainImage,
     selvskryt,
     selvskrytFilter,
     services,
-    factbox,
-    mainImage,
-    jobCategory,
+    richText,
     richTextImage,
+    youtube,
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
     blockContent,
