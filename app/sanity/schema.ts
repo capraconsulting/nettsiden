@@ -293,6 +293,129 @@ export interface Category extends SanityDocument {
 }
 
 /**
+ * Faktaboks
+ *
+ *
+ */
+export interface Factbox extends SanityDocument {
+  _type: "factbox";
+
+  /**
+   * Navn i venstrekolonne her inne — `string`
+   *
+   * Brukes aldri utenfor Sanity studio
+   */
+  title?: string;
+
+  /**
+   * Overskrift — `string`
+   *
+   *
+   */
+  titleLong?: string;
+
+  /**
+   * Beskrivelse — `text`
+   *
+   *
+   */
+  description?: string;
+
+  /**
+   * Tjenester fra — `string`
+   *
+   *
+   */
+  servicesName?: string;
+
+  /**
+   * Tjenester fra (url) — `url`
+   *
+   *
+   */
+  servicesUrl?: string;
+
+  /**
+   * Tjenesteliste — `array`
+   *
+   *
+   */
+  servicesList?: Array<SanityKeyedReference<Services>>;
+}
+
+/**
+ * Bilderessurser
+ *
+ *
+ */
+export interface ImageAsset extends SanityDocument {
+  _type: "imageAsset";
+
+  /**
+   * Tittel — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Asset — `image`
+   *
+   *
+   */
+  image?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Alt tekst — `string`
+   *
+   * Alt tekst
+   */
+  imageAlt?: string;
+
+  /**
+   * Image description — `string`
+   *
+   *
+   */
+  description?: string;
+}
+
+/**
+ * Teams og stillinger
+ *
+ *
+ */
+export interface JobCategory extends SanityDocument {
+  _type: "jobCategory";
+
+  /**
+   * Navn — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Formål — `text`
+   *
+   *
+   */
+  purpose?: string;
+
+  /**
+   * Synlig i orgnisasjonskart? — `boolean`
+   *
+   *
+   */
+  visibleInOrgChart?: boolean;
+}
+
+/**
  * Selvskryt
  *
  *
@@ -443,110 +566,6 @@ export interface Services extends SanityDocument {
   description?: string;
 }
 
-/**
- * Faktaboks
- *
- *
- */
-export interface Factbox extends SanityDocument {
-  _type: "factbox";
-
-  /**
-   * Navn i venstrekolonne her inne — `string`
-   *
-   * Brukes aldri utenfor Sanity studio
-   */
-  title?: string;
-
-  /**
-   * Overskrift — `string`
-   *
-   *
-   */
-  titleLong?: string;
-
-  /**
-   * Beskrivelse — `text`
-   *
-   *
-   */
-  description?: string;
-
-  /**
-   * Tjenester fra — `string`
-   *
-   *
-   */
-  servicesName?: string;
-
-  /**
-   * Tjenester fra (url) — `url`
-   *
-   *
-   */
-  servicesUrl?: string;
-
-  /**
-   * Tjenesteliste — `array`
-   *
-   *
-   */
-  servicesList?: Array<SanityKeyedReference<Services>>;
-}
-
-/**
- * Teams og stillinger
- *
- *
- */
-export interface JobCategory extends SanityDocument {
-  _type: "jobCategory";
-
-  /**
-   * Navn — `string`
-   *
-   *
-   */
-  title?: string;
-
-  /**
-   * Formål — `text`
-   *
-   *
-   */
-  purpose?: string;
-
-  /**
-   * Synlig i orgnisasjonskart? — `boolean`
-   *
-   *
-   */
-  visibleInOrgChart?: boolean;
-}
-
-export type RichText = Array<
-  | SanityKeyed<SanityBlock>
-  | SanityKeyed<RichTextImage>
-  | SanityKeyed<Code>
-  | SanityKeyed<Youtube>
-  | SanityKeyed<{
-      _type: "image";
-      asset: SanityReference<SanityImageAsset>;
-      crop?: SanityImageCrop;
-      hotspot?: SanityImageHotspot;
-    }>
->;
-
-export type Youtube = {
-  _type: "youtube";
-  /**
-   * YouTube video URL — `url`
-   *
-   *
-   */
-  url?: string;
-};
-
 export type MainImage = {
   _type: "mainImage";
   asset: SanityReference<SanityImageAsset>;
@@ -568,6 +587,19 @@ export type MainImage = {
   alt?: string;
 };
 
+export type RichText = Array<
+  | SanityKeyed<SanityBlock>
+  | SanityKeyed<RichTextImage>
+  | SanityKeyed<Code>
+  | SanityKeyed<Youtube>
+  | SanityKeyed<{
+      _type: "image";
+      asset: SanityReference<SanityImageAsset>;
+      crop?: SanityImageCrop;
+      hotspot?: SanityImageHotspot;
+    }>
+>;
+
 export type RichTextImage = {
   _type: "richTextImage";
   asset: SanityReference<SanityImageAsset>;
@@ -584,13 +616,23 @@ export type RichTextImage = {
   /**
        * Alternative text — `text`
        *
-       * Some of your visitors cannot see images, 
-            be they blind, color-blind, low-sighted; 
-            alternative text is of great help for those 
-            people that can rely on it to have a good idea of 
+       * Some of your visitors cannot see images,
+            be they blind, color-blind, low-sighted;
+            alternative text is of great help for those
+            people that can rely on it to have a good idea of
             what's on your page.
        */
   alt?: string;
+};
+
+export type Youtube = {
+  _type: "youtube";
+  /**
+   * YouTube video URL — `url`
+   *
+   *
+   */
+  url?: string;
 };
 
 export type BlockContent = Array<
@@ -602,11 +644,12 @@ export type Documents =
   | Blogg
   | Bloggfilter
   | Category
+  | Factbox
+  | ImageAsset
+  | JobCategory
   | Selvskryt
   | Selvskrytfilter
-  | Services
-  | Factbox
-  | JobCategory;
+  | Services;
 
 /**
  * This interface is a stub. It was referenced in your sanity schema but

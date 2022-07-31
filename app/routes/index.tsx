@@ -1,9 +1,14 @@
 import type { MetaFunction } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+
+import type { SanityImageObject } from "@sanity/image-url/lib/types/types";
 
 import { ContactForm } from "~/components/contact-form";
 import { ContentAndImageBox } from "~/components/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
+import { sanityClient } from "~/sanity/sanity-client.server";
+import { urlFor } from "~/utils/imageBuilder";
 
 export const meta: MetaFunction = () => ({
   title: "Capra Consulting: IT-konsulenter med ekspertise i software",
@@ -12,7 +17,26 @@ export const meta: MetaFunction = () => ({
     "Vi er IT-konsulenter innen softwareutvikling og Norges beste på sky. I Capra har vi høy kvalitet på våre ansatte, og det vil vi fortsette med. Bli med oss!",
 });
 
+export const loader = async () => {
+  const data = await sanityClient.getAll(
+    "imageAsset",
+    "title in ['tech', 'aws']",
+  );
+  const images: Record<string, { imageUrl: string; alt: string }> = {};
+  data.forEach((asset) => {
+    if (asset?.title) {
+      images[asset.title] = {
+        imageUrl: urlFor(asset.image as SanityImageObject).url(),
+        alt: asset.imageAlt ?? "",
+      };
+    }
+  });
+  return images; // TODO: Return default image on error. Do not crash site
+};
+
 export default function Index() {
+  const { aws, tech } = useLoaderData<typeof loader>();
+
   return (
     <>
       <div className="flex flex-col gap-12 w-full">
@@ -87,7 +111,7 @@ export default function Index() {
 
       <ContentAndImageBox
         title="Vi er Advanced Tier Consulting Partner"
-        image={undefined}
+        image={<img src={aws.imageUrl} alt={aws.alt} />}
         height="32vw"
         contentBoxClassName="bg-peach"
       >
@@ -95,7 +119,13 @@ export default function Index() {
       </ContentAndImageBox>
       <ContentAndImageBox
         title="Vi er spesialister"
-        image={undefined}
+        image={
+          <img
+            className="w-full h-full object-contain overflow-hidden"
+            src={tech.imageUrl}
+            alt={tech.alt}
+          />
+        }
         height="35vw"
         direction="right"
         contentBoxClassName="bg-light-blue"
@@ -103,6 +133,7 @@ export default function Index() {
         Ingen kan være best i alt! Derfor spesialiserer vi oss på utvalgte
         markedsledenede teknologier.
       </ContentAndImageBox>
+
       <Todo title="Fancy Vi har kickass folk" className="h-60" />
       <Todo title="Vi jobber med store aktører i Norge">
         <div className="flex flex-wrap gap-4">
