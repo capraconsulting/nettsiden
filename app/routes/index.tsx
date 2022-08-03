@@ -8,6 +8,7 @@ import { ContentAndImageBox } from "~/components/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
 import { sanityClient } from "~/sanity/sanity-client.server";
+import type { ImageAsset } from "~/sanity/schema";
 import { urlFor } from "~/utils/imageBuilder";
 
 export const meta: MetaFunction = () => ({
@@ -17,21 +18,50 @@ export const meta: MetaFunction = () => ({
     "Vi er IT-konsulenter innen softwareutvikling og Norges beste på sky. I Capra har vi høy kvalitet på våre ansatte, og det vil vi fortsette med. Bli med oss!",
 });
 
-export const loader = async () => {
+async function fetchImageAssetsByTitles<T extends string>(titles: T[]) {
   const data = await sanityClient.getAll(
     "imageAsset",
-    "title in ['tech', 'aws']",
+    `title in ${JSON.stringify(titles)}`,
   );
-  const images: Record<string, { imageUrl: string; alt: string }> = {};
+  const result: Partial<Record<T, ImageAsset>> = {};
   data.forEach((asset) => {
-    if (asset?.title) {
-      images[asset.title] = {
-        imageUrl: urlFor(asset.image as SanityImageObject).url(),
-        alt: asset.imageAlt ?? "",
-      };
-    }
+    if (asset.title === undefined) return;
+    result[asset.title as T] = asset;
   });
-  return images; // TODO: Return default image on error. Do not crash site
+  return result;
+}
+
+interface SimplifiedImageObject {
+  url: string;
+  alt: string;
+}
+const transformImageAsset = (
+  imageAsset: ImageAsset,
+): SimplifiedImageObject => ({
+  url: urlFor(imageAsset.image!).url(),
+  alt: imageAsset.imageAlt ?? "",
+});
+
+export function assertAllKeysPresent<K extends string, V>(
+  object: Partial<Record<K, V>>,
+  keys: K[],
+): asserts object is Record<K, V> {
+  keys.forEach((key) => {
+    if (object[key] === undefined || object[key] === null)
+      throw new Error(`${key} is missing from object`);
+  });
+}
+
+export const loader = async () => {
+  const imageAssets = await fetchImageAssetsByTitles(["tech", "aws"]);
+  const images: Partial<
+    Record<keyof typeof imageAssets, SimplifiedImageObject>
+  > = {};
+  Object.entries(imageAssets).forEach(([k, v]) => {
+    images[k as keyof typeof imageAssets] = transformImageAsset(v);
+  });
+
+  return images;
 };
 
 export default function Index() {
@@ -111,7 +141,7 @@ export default function Index() {
 
       <ContentAndImageBox
         title="Vi er Advanced Tier Consulting Partner"
-        image={<img src={aws.imageUrl} alt={aws.alt} />}
+        image={<img src={aws?.url} alt={aws?.alt} />}
         height="32vw"
         contentBoxClassName="bg-peach"
       >
@@ -122,8 +152,8 @@ export default function Index() {
         image={
           <img
             className="w-full h-full object-contain overflow-hidden"
-            src={tech.imageUrl}
-            alt={tech.alt}
+            src={tech?.url}
+            alt={tech?.alt}
           />
         }
         height="35vw"
