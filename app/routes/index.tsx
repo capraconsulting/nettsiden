@@ -1,14 +1,13 @@
 import type { MetaFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-
-import type { SanityImageObject } from "@sanity/image-url/lib/types/types";
 
 import { ContactForm } from "~/components/contact-form";
 import { ContentAndImageBox } from "~/components/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
 import { sanityClient } from "~/sanity/sanity-client.server";
-import { urlFor } from "~/utils/imageBuilder";
+import { getImageObjectWithDefaultImages } from "~/utils/dataRetrieval";
 
 export const meta: MetaFunction = () => ({
   title: "Capra Consulting: IT-konsulenter med ekspertise i software",
@@ -18,20 +17,13 @@ export const meta: MetaFunction = () => ({
 });
 
 export const loader = async () => {
+  const imageNames = ["tech", "aws"] as const;
   const data = await sanityClient.getAll(
     "imageAsset",
-    "title in ['tech', 'aws']",
+    `title in ${JSON.stringify(imageNames)}`,
   );
-  const images: Record<string, { imageUrl: string; alt: string }> = {};
-  data.forEach((asset) => {
-    if (asset?.title) {
-      images[asset.title] = {
-        imageUrl: urlFor(asset.image as SanityImageObject).url(),
-        alt: asset.imageAlt ?? "",
-      };
-    }
-  });
-  return images; // TODO: Return default image on error. Do not crash site
+
+  return json(getImageObjectWithDefaultImages(imageNames, data));
 };
 
 export default function Index() {
