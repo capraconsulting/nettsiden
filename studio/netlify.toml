@@ -2,3 +2,8 @@
 
 [build]
   ignore = "git diff --quiet HEAD^ HEAD ./"
+
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 200
