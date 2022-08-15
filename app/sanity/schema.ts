@@ -356,14 +356,14 @@ export interface ImageAsset extends SanityDocument {
    *
    *
    */
-  title?: string;
+  title: string;
 
   /**
    * Asset — `image`
    *
    *
    */
-  image?: {
+  image: {
     _type: "image";
     asset: SanityReference<SanityImageAsset>;
     crop?: SanityImageCrop;
@@ -375,14 +375,14 @@ export interface ImageAsset extends SanityDocument {
    *
    * Alt tekst
    */
-  imageAlt?: string;
+  imageAlt: string;
 
   /**
    * Image description — `string`
    *
    *
    */
-  description?: string;
+  description: string;
 }
 
 /**

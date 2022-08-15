@@ -1,5 +1,3 @@
-import type { SanityImageObject } from "@sanity/image-url/lib/types/types";
-
 import type { ImageAsset } from "~/sanity/schema";
 import { urlFor } from "./imageBuilder";
 
@@ -19,7 +17,7 @@ export const getImageObjectWithDefaultImages = <T extends readonly string[]>(
         ? {
             ...images,
             [asset.title]: {
-              imageUrl: urlFor(asset.image as SanityImageObject).url(),
+              imageUrl: urlFor(asset.image).url(),
               alt: asset.imageAlt ?? "",
             },
           }

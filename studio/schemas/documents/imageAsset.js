@@ -7,6 +7,9 @@ export default {
       name: "title",
       title: "Tittel",
       type: "string",
+
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "image",
@@ -15,6 +18,9 @@ export default {
       options: {
         hotspot: true,
       },
+
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "imageAlt",
