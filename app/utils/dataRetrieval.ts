@@ -3,7 +3,10 @@ import type { SanityImageObject } from "@sanity/image-url/lib/types/types";
 import type { ImageAsset } from "~/sanity/schema";
 import { urlFor } from "./imageBuilder";
 
-type Images<T extends string> = Record<T, { imageUrl: string; alt: string }>;
+export type Images<T extends string> = Record<
+  T,
+  { imageUrl: string; alt: string }
+>;
 
 export const getImageObjectWithDefaultImages = <T extends readonly string[]>(
   imageNames: T,
