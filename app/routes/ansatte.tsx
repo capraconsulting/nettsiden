@@ -1,8 +1,6 @@
 import { useLoaderData } from "@remix-run/react";
 import { json } from "@remix-run/server-runtime";
 
-import imageUrlBuilder from "@sanity/image-url";
-
 import { ContactForm } from "~/components/contact-form";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
@@ -10,14 +8,9 @@ import { sanityClient } from "~/sanity/sanity-client.server";
 import type { Author, JobCategory } from "~/sanity/schema";
 import type { Images } from "~/utils/dataRetrieval";
 import { getImageObjectWithDefaultImages } from "~/utils/dataRetrieval";
+import { urlFor } from "~/utils/imageBuilder";
 
 type AuthorExpanded = Omit<Author, "filter"> & { filter: JobCategory[] };
-
-// TEMP: 🤷
-const imageBuilder = imageUrlBuilder({
-  dataset: "production",
-  projectId: "3drrs17h",
-});
 
 export const loader = async () => {
   const employyes = await sanityClient.query<AuthorExpanded>(
@@ -90,8 +83,7 @@ export const AnsattCard = ({ employee, icons }: AnsattCardProps) => {
 
       <img
         alt={`Bilde av ${employee.name}`}
-        src={imageBuilder
-          .image(employee.image!)
+        src={urlFor(employee.image!)
           .size(4500 / 5, 3000 / 5)
           .url()}
       />
