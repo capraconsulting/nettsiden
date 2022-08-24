@@ -6,6 +6,7 @@ import { ContactForm } from "~/components/contact-form";
 import { ContentAndImageBox } from "~/components/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
+import { TypingText } from "~/components/typing-text";
 import { sanityClient } from "~/sanity/sanity-client.server";
 import { getImageObjectWithDefaultImages } from "~/utils/dataRetrieval";
 
@@ -32,7 +33,26 @@ export default function Index() {
   return (
     <>
       <div className="flex flex-col gap-12 w-full">
-        <TitleAndText title="Vi er Norges beste på ..." titleAs="h1">
+        <TitleAndText
+          title={
+            <>
+              Vi er norges beste på{" "}
+              <TypingText
+                text={[
+                  "AWS",
+                  "selvskryt",
+                  "java",
+                  "vaffelspising",
+                  "javascript",
+                  "smash",
+                  "agile",
+                  "bordtennis",
+                ]}
+              />
+            </>
+          }
+          titleAs="h1"
+        >
           Bold statement? Absolutt.
         </TitleAndText>
         <div className="flex gap-4 justify-center">
