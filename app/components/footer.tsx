@@ -1,6 +1,5 @@
 import { Link } from "@remix-run/react";
 
-import { Todo } from "~/components/todo";
 import type { SocialPlatform } from "~/utils/constants";
 import {
   contactInfo,
@@ -9,6 +8,7 @@ import {
   socialIcons,
   socialPlatforms,
 } from "~/utils/constants";
+import type { Images } from "~/utils/dataRetrieval";
 import { capitalize, formatPhoneNumber } from "~/utils/misc";
 
 interface FooterModuleProps {
@@ -97,7 +97,12 @@ const FooterLink: React.FC<FooterLinkProps> = ({
   );
 };
 
-export const Footer: React.VFC = () => (
+interface FooterProps {
+  images: Images<
+    "logo-quality-sys-cert-iso-9001" | "logo-miljofyrtaarn" | "logo-ekt"
+  >;
+}
+export const Footer = ({ images }: FooterProps) => (
   <footer className="bg-main border-none flex flex-col gap-10 py-7 items-center">
     <section className="flex flex-col gap-10 md:gap-0 md:flex-row justify-evenly w-full max-w-6xl px-6 md:px-0">
       <div className="flex flex-col gap-6">
@@ -141,19 +146,48 @@ export const Footer: React.VFC = () => (
       </div>
       <div>
         <FooterModule title="Samarbeidspartner">
-          <Todo badge title="Bilde">
-            Rideskole
-          </Todo>
+          <a
+            href="https://www.rideskole.no/"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="EKT Rideskole og Husdyrpark"
+          >
+            <img
+              className="p-1 w-20 rounded bg-white"
+              src={images["logo-ekt"].imageUrl}
+              alt={images["logo-ekt"].alt}
+            />
+          </a>
         </FooterModule>
       </div>
       <div>
         <FooterModule title="Sertifiseringer">
-          <Todo badge title="Bilde">
-            Miljøfyrtårn
-          </Todo>
-          <Todo badge title="Bilde">
-            DNV
-          </Todo>
+          <div className="flex flex-col gap-2">
+            <a
+              href="https://rapportering.miljofyrtarn.no/stats/119100"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Capra er Miljøtårnsertifisert"
+            >
+              <img
+                className="p-1 w-20 rounded bg-white"
+                src={images["logo-miljofyrtaarn"].imageUrl}
+                alt={images["logo-miljofyrtaarn"].alt}
+              />
+            </a>
+            <a
+              href="https://baproddnvglbcvecert-frontend.azurefd.net/certificate/v3/150234-2014-AQ-NOR-NA"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Capra er ISO-9001-sertifisert - trykk for å se sertifikat"
+            >
+              <img
+                className="p-1 w-20 rounded bg-white"
+                src={images["logo-quality-sys-cert-iso-9001"].imageUrl}
+                alt={images["logo-quality-sys-cert-iso-9001"].alt}
+              />
+            </a>
+          </div>
         </FooterModule>
       </div>
     </section>

@@ -48,7 +48,6 @@ export const loader = async ({ request }: LoaderArgs) => {
     "imageAsset",
     `title in ${JSON.stringify(iconNames)}`,
   );
-
   const icons = getImageObjectWithDefaultImages(iconNames, iconData);
 
   return json({ employyes: filteredEmployees, filters, icons });

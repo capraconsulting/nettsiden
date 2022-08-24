@@ -1,4 +1,5 @@
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -7,13 +8,34 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
+  useLoaderData,
 } from "@remix-run/react";
 
 import { Footer } from "~/components/footer";
 import { Header } from "~/components/header";
 import { Todo } from "./components/todo";
 import globalStyles from "./global.css";
+import { sanityClient } from "./sanity/sanity-client.server";
 import tailwindStyles from "./tailwind.css";
+import { getImageObjectWithDefaultImages } from "./utils/dataRetrieval";
+
+export const loader = async () => {
+  const imageNames = [
+    "logo-quality-sys-cert-iso-9001",
+    "logo-miljofyrtaarn",
+    "logo-ekt",
+  ] as const;
+  const imageData = await sanityClient.getAll(
+    "imageAsset",
+    `title in ${JSON.stringify(imageNames)}`,
+  );
+  const images = getImageObjectWithDefaultImages(imageNames, imageData);
+
+  return json({ images });
+};
+
+// https://remix.run/docs/en/v1/api/conventions#never-reloading-the-root
+export const unstable_shouldReload = () => false;
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: globalStyles },
@@ -31,6 +53,7 @@ export const meta: MetaFunction = () => ({
 });
 
 export default function App() {
+  const data = useLoaderData<typeof loader>();
   return (
     <html lang="no">
       <head>
@@ -42,7 +65,7 @@ export default function App() {
         <main className="flex-grow flex flex-col items-center gap-12 md:gap-36 py-[50px] overflow-x-hidden md:overflow-x-auto">
           <Outlet />
         </main>
-        <Footer />
+        <Footer images={data.images} />
 
         <ScrollRestoration />
         <Scripts />
@@ -60,6 +83,7 @@ export function CatchBoundary() {
   // 1. 404 - Når brukeren har blitt navigert til noe som ikke eksisterer
   // 2. 500 - Når noe går feil på server siden
   const caught = useCatch();
+  const data = useLoaderData<typeof loader>();
   return (
     <html>
       <head>
@@ -88,7 +112,7 @@ export function CatchBoundary() {
             </Todo>
           )}
         </main>
-        <Footer />
+        <Footer images={data.images} />
         <Scripts />
       </body>
     </html>
