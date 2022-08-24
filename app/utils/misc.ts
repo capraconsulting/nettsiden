@@ -81,3 +81,15 @@ export function classNames(...args: ClassName[]): string {
   }
   return resolved.filter(typedBoolean).join(" ");
 }
+
+export function uniqueBy<T>(list: T[], selector: (x: T) => any) {
+  const s = new Set();
+  const result: T[] = [];
+  list.forEach((x) => {
+    const key = selector(x);
+    if (s.has(key)) return;
+    result.push(x);
+    s.add(key);
+  });
+  return result;
+}
