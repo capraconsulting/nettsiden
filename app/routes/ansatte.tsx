@@ -8,6 +8,8 @@ import {
 import type { LoaderArgs } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
+import { Badge } from "~/components/badge";
+import { Card } from "~/components/card";
 import { ContactForm } from "~/components/contact-form";
 import { FilterButton } from "~/components/filter-button";
 import { TitleAndText } from "~/components/title-and-text";
@@ -125,79 +127,82 @@ export const AnsattCard = ({ employee, icons }: AnsattCardProps) => {
     icon: "w-6 h-6 transition-all hover:invert",
   };
   return (
-    <div className="flex flex-col w-full h-full border transition-shadow shadow hover:shadow-xl">
-      {/* Image */}
-      <div className="relative pb-[66%] md:pb-[100%]">
-        <img
-          className="absolute h-full w-full object-cover"
-          alt={`Bilde av ${employee.name}`}
-          src={urlFor(employee.image!)
-            .size(4500 / 5, 3000 / 5)
-            .url()}
-        />
+    <Card
+      image={
+        <div className="relative pb-[66%] md:pb-[100%]">
+          <img
+            className="absolute h-full w-full object-cover"
+            alt={`Bilde av ${employee.name}`}
+            src={urlFor(employee.image!)
+              .size(4500 / 5, 3000 / 5)
+              .url()}
+          />
+        </div>
+      }
+    >
+      <div>
+        <p className="text-lg font-bold color-secondary¨">{employee.name}</p>
+        <a href={`mailto:${employee.email}`} className="underline">
+          {employee.email}
+        </a>
+        {employee.phone && (
+          <a
+            href={`tel:+47${employee.phone.replace(/\s/g, "")}`}
+            className="underline"
+          >
+            {employee.phone}
+          </a>
+        )}
       </div>
 
-      <div className="h-full px-3 py-4 flex flex-col gap-5">
-        <div>
-          <p className="text-lg font-bold color-secondary¨">{employee.name}</p>
-          <p className="underline">
-            <a href={`mailto:${employee.email}`}>{employee.email}</a>
-          </p>
-          <p>{employee.phone}</p>
-        </div>
-
-        {/* Categories */}
-        <div className="flex flex-wrap gap-1">
-          {employee.filter.map((x) => (
-            <span
-              key={x._id}
-              className="bg-main py-1 px-2 rounded text-sm text-white font-semibold"
-            >
-              {x.title}
-            </span>
-          ))}
-        </div>
-
-        {/* Social Icons */}
-        <div className="mt-auto flex gap-1">
-          {employee.linkedIn && (
-            <a href={employee.linkedIn}>
-              <img
-                alt="linkedin"
-                className={classes.icon}
-                src={icons["icon-linkedin"].imageUrl}
-              />
-            </a>
-          )}
-          {employee.twitter && (
-            <a href={employee.twitter}>
-              <img
-                alt="twitter"
-                className={classes.icon}
-                src={icons["icon-twitter"].imageUrl}
-              />
-            </a>
-          )}
-          {employee.github && (
-            <a href={employee.github}>
-              <img
-                alt="github"
-                className={classes.icon}
-                src={icons["icon-github"].imageUrl}
-              />
-            </a>
-          )}
-          {employee.website && (
-            <a href={employee.website}>
-              <img
-                alt="nettside"
-                className={classes.icon}
-                src={icons["icon-website"].imageUrl}
-              />
-            </a>
-          )}
-        </div>
+      {/* Categories */}
+      <div className="flex flex-wrap gap-1">
+        {employee.filter.map((x) => (
+          <Badge key={x._id} variant="solid" color="main" size="sm">
+            {x.title}
+          </Badge>
+        ))}
       </div>
-    </div>
+
+      {/* Social Icons */}
+      <div className="mt-auto flex gap-1">
+        {employee.linkedIn && (
+          <a href={employee.linkedIn}>
+            <img
+              alt="linkedin"
+              className={classes.icon}
+              src={icons["icon-linkedin"].imageUrl}
+            />
+          </a>
+        )}
+        {employee.twitter && (
+          <a href={employee.twitter}>
+            <img
+              alt="twitter"
+              className={classes.icon}
+              src={icons["icon-twitter"].imageUrl}
+            />
+          </a>
+        )}
+        {employee.github && (
+          <a href={employee.github}>
+            <img
+              alt="github"
+              className={classes.icon}
+              src={icons["icon-github"].imageUrl}
+            />
+          </a>
+        )}
+        {employee.website && (
+          <a href={employee.website}>
+            <img
+              alt="nettside"
+              className={classes.icon}
+              src={icons["icon-website"].imageUrl}
+            />
+          </a>
+        )}
+      </div>
+    </Card>
   );
 };

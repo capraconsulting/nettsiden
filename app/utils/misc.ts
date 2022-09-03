@@ -63,7 +63,12 @@ export function isEqual<T>(entry1: T, entry2: T): boolean {
   });
 }
 
-type ClassName = string | number | Record<string, boolean> | ClassName[];
+type ClassName =
+  | undefined
+  | string
+  | number
+  | Record<string, boolean>
+  | ClassName[];
 
 /**
  * Simple utility function for creating conditional class names with a bit more
