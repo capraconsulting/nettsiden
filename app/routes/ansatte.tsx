@@ -18,17 +18,22 @@ type AuthorExpanded = Omit<Author, "filter"> & { filter: JobCategory[] };
 
 const URL_FILTER_KEY = "kategori";
 export const loader = async ({ request }: LoaderArgs) => {
-  const allEmployees = await sanityClient.query<AuthorExpanded>(
+  const allItems = await sanityClient.query<AuthorExpanded>(
     `* [_type == "author" && employee == true] | order(name){ ..., filter[]-> }`,
   );
+  // Hack: Replace null with empty list
+  // Perfably the groq api call should return empty list, but it returns null
+  allItems.forEach((item) => {
+    if (item.filter === null) item.filter = [];
+  });
 
-  let filters = allEmployees.flatMap((x) => x.filter);
+  let filters = allItems.flatMap((x) => x.filter);
   filters = uniqueBy(filters, (x) => x._id);
 
   // Filter the results
   const searchParams = new URL(request.url).searchParams;
   const activeFilters = new Set(searchParams.getAll(URL_FILTER_KEY));
-  const filteredEmployees = allEmployees.filter(
+  const filteredItems = allItems.filter(
     (x) =>
       activeFilters.size === 0 ||
       x.filter.some((filter) => activeFilters.has(filter.title!)),
@@ -41,7 +46,7 @@ export const loader = async ({ request }: LoaderArgs) => {
     "icon-github",
   ]);
 
-  return json({ employyes: filteredEmployees, filters, icons });
+  return json({ items: filteredItems, filters, icons });
 };
 
 export default function Ansatte() {
@@ -64,7 +69,7 @@ export default function Ansatte() {
           </Form>
 
           <ul className="grid gap-12 sm:gap-10 md:gap-8 lg:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center">
-            {data.employyes.map((x) => (
+            {data.items.map((x) => (
               <li key={x._id}>
                 <AnsattCard employee={x as AuthorExpanded} icons={data.icons} />
               </li>

@@ -13,7 +13,7 @@ export const TitleAndText = ({
       <TitleComponent className="font-bold text-3xl md:text-4xl lg:text-6xl text-secondary">
         {title}
       </TitleComponent>
-      <p className="font-light text-lg md:text-xl lg:text-2xl text-secondary">
+      <p className="max-w-4xl font-light text-lg md:text-xl lg:text-2xl text-secondary">
         {children}
       </p>
     </div>

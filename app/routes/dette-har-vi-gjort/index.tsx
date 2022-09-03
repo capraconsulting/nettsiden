@@ -18,23 +18,29 @@ type SelvskrytExpanded = Omit<Selvskryt, "filter"> & {
 
 const URL_FILTER_KEY = "kategori";
 export const loader = async ({ request }: LoaderArgs) => {
-  const allSelvskryt = await sanityClient.query<SelvskrytExpanded>(
+  const allItems = await sanityClient.query<SelvskrytExpanded>(
     `* [_type == "selvskryt"] { ..., filter[]-> }`,
   );
 
-  let filters = allSelvskryt.flatMap((x) => x.filter);
+  // Hack: Replace null with empty list
+  // Perfably the groq api call should return empty list, but it returns null
+  allItems.forEach((item) => {
+    if (item.filter === null) item.filter = [];
+  });
+
+  let filters = allItems.flatMap((x) => x.filter);
   filters = uniqueBy(filters, (x) => x._id);
 
   // Filter the results
   const searchParams = new URL(request.url).searchParams;
   const activeFilters = new Set(searchParams.getAll(URL_FILTER_KEY));
-  const filteredSelvskryt = allSelvskryt.filter(
+  const filteredItems = allItems.filter(
     (x) =>
       activeFilters.size === 0 ||
       x.filter.some((filter) => activeFilters.has(filter.title!)),
   );
 
-  return json({ selvskrytList: filteredSelvskryt, filters });
+  return json({ items: filteredItems, filters });
 };
 
 export const meta: MetaFunction = () => ({
@@ -64,7 +70,7 @@ export default function DetteHarViGjort() {
           </Form>
 
           <ul className="grid gap-12 sm:gap-10 md:gap-8 lg:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center">
-            {data.selvskrytList.map((x) => (
+            {data.items.map((x) => (
               <li key={x._id}>
                 <SelvskrytCard key={x._id} selvskryt={x as SelvskrytExpanded} />
               </li>
