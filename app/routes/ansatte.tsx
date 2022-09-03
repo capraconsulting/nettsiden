@@ -1,22 +1,16 @@
-import {
-  Form,
-  useLoaderData,
-  useSearchParams,
-  useSubmit,
-  useTransition,
-} from "@remix-run/react";
+import { Form, useLoaderData, useSearchParams } from "@remix-run/react";
 import type { LoaderArgs } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import { Badge } from "~/components/badge";
 import { Card } from "~/components/card";
 import { ContactForm } from "~/components/contact-form";
-import { FilterButton } from "~/components/filter-button";
+import { FilterRow } from "~/components/filter-row";
 import { TitleAndText } from "~/components/title-and-text";
 import { sanityClient } from "~/sanity/sanity-client.server";
 import type { Author, JobCategory } from "~/sanity/schema";
 import type { Images } from "~/utils/dataRetrieval";
-import { getImageObjectWithDefaultImages } from "~/utils/dataRetrieval";
+import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { urlFor } from "~/utils/imageBuilder";
 import { uniqueBy } from "~/utils/misc";
 
@@ -40,35 +34,19 @@ export const loader = async ({ request }: LoaderArgs) => {
       x.filter.some((filter) => activeFilters.has(filter.title!)),
   );
 
-  const iconNames = [
+  const icons = await fetchImageAssets([
     "icon-website",
     "icon-twitter",
     "icon-linkedin",
     "icon-github",
-  ] as const;
-  const iconData = await sanityClient.getAll(
-    "imageAsset",
-    `title in ${JSON.stringify(iconNames)}`,
-  );
-  const icons = getImageObjectWithDefaultImages(iconNames, iconData);
+  ]);
 
   return json({ employyes: filteredEmployees, filters, icons });
 };
 
 export default function Ansatte() {
   const data = useLoaderData<typeof loader>();
-
-  const submit = useSubmit();
-  const transition = useTransition();
   const [search] = useSearchParams();
-
-  const isFilterActive = (key: string, filter: string) => {
-    if (transition.submission?.formData)
-      return transition.submission?.formData.getAll(key).includes(filter);
-    else if (search.getAll(key).includes(filter)) return true;
-    else return false;
-  };
-
   return (
     <>
       <div className="max-w-7xl w-full sm:w-11/12 flex flex-col gap-12">
@@ -77,30 +55,14 @@ export default function Ansatte() {
         </TitleAndText>
 
         <div className="flex flex-col gap-8">
-          {/* Filter */}
-          <Form method="get" action="">
-            <div className="flex gap-3 flex-wrap">
-              {data.filters.map((x) => (
-                <label key={x._id} className="cursor-pointer">
-                  <input
-                    type="checkbox"
-                    name={URL_FILTER_KEY}
-                    className="peer sr-only"
-                    value={x.title}
-                    checked={isFilterActive(URL_FILTER_KEY, x.title!)}
-                    onChange={(e) => submit(e.currentTarget.form)}
-                  />
-                  <FilterButton
-                    active={isFilterActive(URL_FILTER_KEY, x.title!)}
-                  >
-                    {x.title}
-                  </FilterButton>
-                </label>
-              ))}
-            </div>
+          <Form method="get" action=".">
+            <FilterRow
+              filters={data.filters.map((x) => x.title!)}
+              activeFilters={search.getAll(URL_FILTER_KEY)}
+              filterKey={URL_FILTER_KEY}
+            />
           </Form>
 
-          {/* Cards */}
           <ul className="grid gap-12 sm:gap-10 md:gap-8 lg:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center">
             {data.employyes.map((x) => (
               <li key={x._id}>

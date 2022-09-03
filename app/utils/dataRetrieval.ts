@@ -1,5 +1,6 @@
 import type { SanityImageObject } from "@sanity/image-url/lib/types/types";
 
+import { sanityClient } from "~/sanity/sanity-client.server";
 import type { ImageAsset } from "~/sanity/schema";
 import { urlFor } from "./imageBuilder";
 
@@ -41,3 +42,11 @@ export const getImageObjectWithDefaultImages = <T extends readonly string[]>(
     {} as ReturnType,
   );
 };
+
+export async function fetchImageAssets<T extends string>(imageNames: T[]) {
+  const imageData = await sanityClient.getAll(
+    "imageAsset",
+    `title in ${JSON.stringify(imageNames)}`,
+  );
+  return getImageObjectWithDefaultImages(imageNames, imageData);
+}
