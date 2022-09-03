@@ -6,7 +6,6 @@ interface FilterRowProps {
   filters: string[];
   activeFilters: string[];
   filterKey: string;
-  method?: "append" | "replace";
 }
 /**
  * Use inside a Remix Form component
@@ -34,7 +33,7 @@ export const FilterRow = ({
       {filters.map((x) => (
         <label key={x} className="cursor-pointer">
           <input
-            type="radio"
+            type="checkbox"
             name={filterKey}
             className="peer sr-only"
             value={x}
