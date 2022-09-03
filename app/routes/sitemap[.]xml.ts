@@ -1,8 +1,10 @@
-import type { LoaderFunctionWithContext, SitemapEntry } from "~/types";
+import type { DataFunctionArgs } from "@remix-run/server-runtime/dist/routeModules";
+
+import type { SitemapEntry } from "~/types";
 import { getDomainUrl } from "~/utils/misc";
 import { getSiteMapEntries } from "~/utils/sitemap.server";
 
-function toXmlTag([key, value]: [string, string]) {
+function toXmlTag([key, value]: [string, string | number]) {
   return value ? `<${key}>${value}</${key}>` : "";
 }
 
@@ -14,10 +16,7 @@ function toXmlEntry(domainUrl: string) {
   };
 }
 
-export const loader: LoaderFunctionWithContext = async ({
-  request,
-  context,
-}) => {
+export const loader = async ({ request, context }: DataFunctionArgs) => {
   const domainUrl = getDomainUrl(request);
 
   const sitemapEntries: SitemapEntry[] = await getSiteMapEntries(

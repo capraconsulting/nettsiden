@@ -1,15 +1,13 @@
 import * as build from "@remix-run/dev/server-build";
+import type { GetLoadContextFunction } from "@remix-run/netlify";
 import { createRequestHandler } from "@remix-run/netlify";
 import { createEntryRouteModules } from "@remix-run/server-runtime/dist/entry";
 
-import type { HandlerContext, HandlerEvent } from "@netlify/functions";
+import type { HandlerEvent } from "@netlify/functions";
 
-import type { CapraLoadContext } from "~/types";
-
-function getLoadContext(
+const getLoadContext: GetLoadContextFunction = (
   event: HandlerEvent & { authlifyToken?: string | null },
-  context: HandlerContext,
-): CapraLoadContext {
+) => {
   let rawAuthorizationString;
   let netlifyGraphToken;
 
@@ -41,7 +39,7 @@ function getLoadContext(
   });
 
   return loadContext;
-}
+};
 
 export const handler = createRequestHandler({
   build,

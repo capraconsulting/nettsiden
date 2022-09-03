@@ -31,7 +31,12 @@ export function formatPhoneNumber(value: string) {
  */
 export function isEqual<T>(entry1: T, entry2: T): boolean {
   // 1. We can do simple type + equality check on primitive values
-  if (typeof entry1 !== "object") {
+  if (
+    typeof entry1 !== "object" ||
+    typeof entry2 !== "object" ||
+    entry1 === null ||
+    entry2 === null
+  ) {
     return typeof entry1 === typeof entry2 && entry1 === entry2;
   }
 
