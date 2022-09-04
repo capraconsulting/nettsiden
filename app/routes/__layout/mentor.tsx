@@ -1,5 +1,5 @@
 import { CallToActionBox } from "~/components/call-to-action-box";
-import { ContentAndImageBox } from "~/components/content-and-image-box";
+import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
 
@@ -27,7 +27,7 @@ export default function Mentor() {
         title="Hva får du ut av det?"
         image={undefined}
         height="40vw"
-        contentBoxClassName="bg-peach"
+        color="peach"
       >
         Du får din egen helt egne mentor som følger deg gjennom et semester.
         Målet er å hjelpe deg til å få din drømmejobb etter studiene, enten du
@@ -42,7 +42,7 @@ export default function Mentor() {
         image={undefined}
         height="40vw"
         direction="right"
-        contentBoxClassName="bg-bordeaux text-peach-20"
+        color="bordeaux"
       >
         Vi ser etter deg som går i 1-3. klasse og som ønsker å forberede seg til
         det faktiske arbeidslivet. Vi er ikke opptatt av karakterer, og du
