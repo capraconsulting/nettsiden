@@ -18,9 +18,18 @@ type AuthorExpanded = Omit<Author, "filter"> & { filter: JobCategory[] };
 
 const URL_FILTER_KEY = "kategori";
 export const loader = async ({ request }: LoaderArgs) => {
-  const allItems = await sanityClient.query<AuthorExpanded>(
-    `* [_type == "author" && employee == true] | order(name){ ..., filter[]-> }`,
-  );
+  const [allItems, icons] = await Promise.all([
+    sanityClient.query<AuthorExpanded>(
+      `* [_type == "author" && employee == true] | order(name){ ..., filter[]-> }`,
+    ),
+    fetchImageAssets([
+      "icon-website",
+      "icon-twitter",
+      "icon-linkedin",
+      "icon-github",
+    ]),
+  ]);
+
   // Hack: Replace null with empty list
   // Perfably the groq api call should return empty list, but it returns null
   allItems.forEach((item) => {
@@ -38,13 +47,6 @@ export const loader = async ({ request }: LoaderArgs) => {
       activeFilters.size === 0 ||
       x.filter.some((filter) => activeFilters.has(filter.title!)),
   );
-
-  const icons = await fetchImageAssets([
-    "icon-website",
-    "icon-twitter",
-    "icon-linkedin",
-    "icon-github",
-  ]);
 
   return json({ items: filteredItems, filters, icons });
 };
