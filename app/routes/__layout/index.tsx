@@ -2,6 +2,7 @@ import type { MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
+import { Button } from "~/components/button";
 import { ContactForm } from "~/components/contact-form";
 import { ContentAndImageBox } from "~/components/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
@@ -50,8 +51,12 @@ export default function Index() {
           Bold statement? Absolutt.
         </TitleAndText>
         <div className="flex gap-4 justify-center">
-          <Todo display="inline-flex" size="small" title="Bli kunde?" />
-          <Todo display="inline-flex" size="small" title="Jobb hos oss!" />
+          <Button variant="outline" href="/dette-kan-vi">
+            Bli kunde?
+          </Button>
+          <Button variant="outline" href="/bli-en-av-oss">
+            Jobb hos oss!
+          </Button>
         </div>
       </div>
 
