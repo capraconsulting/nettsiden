@@ -4,7 +4,7 @@ import type { SerializeFrom } from "@remix-run/server-runtime";
 
 import { Button } from "~/components/button";
 import { Todo } from "~/components/todo";
-import type { action as contactAction } from "~/routes/contact";
+import type { action as contactAction } from "~/routes/api.contact";
 
 export const ContactForm: React.FC<{
   title: React.ReactNode;
@@ -26,8 +26,8 @@ export const ContactForm: React.FC<{
       <section className="flex justify-between w-full max-w-7xl gap-12 mb-10">
         <fetcher.Form
           method="post"
-          action="/contact"
-          className="w-[50%]"
+          action="/api/contact"
+          className="w-1/2 flex flex-col gap-[4vh]"
           name="contact"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
@@ -56,11 +56,11 @@ export const ContactForm: React.FC<{
             placeholder="Din e-post"
             errors={fetcher.data?.errors}
           />
-          <Button variant="solid" type="submit" className="m-0 mt-8">
+          <Button variant="solid" type="submit">
             Kontakt meg
           </Button>
         </fetcher.Form>
-        <Todo badge title="Salgsrepresentanter" className="w-[50%]" />
+        <Todo badge title="Salgsrepresentanter" className="w-1/2" />
       </section>
     </article>
   );
@@ -76,7 +76,7 @@ const Input: React.FC<{
 }> = ({ id, label, required, placeholder, type = "text", errors }) => {
   const fieldErrors = errors?.[id];
   return (
-    <div className="my-[2vh]">
+    <div>
       <label htmlFor={id} className="block" aria-required={required}>
         {label}
         {required && <span className="inline-block text-red">*</span>}

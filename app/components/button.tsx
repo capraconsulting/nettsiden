@@ -6,7 +6,7 @@ import { classNames } from "~/utils/misc";
 
 function getClassNames(variant: Props["variant"]) {
   return classNames(
-    "w-[200px] rounded-md border-2 font-bold min-h-[40px] leading-snug m-1 block py-3 text-center transition ease-in-out",
+    "w-[200px] rounded-md border-2 font-bold min-h-[40px] leading-snug block py-3 text-center transition ease-in-out",
     {
       "bg-white border-main text-main hover:bg-main hover:text-white":
         variant === "outline",
