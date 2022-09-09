@@ -7,8 +7,7 @@ import { ContentAndImageBox } from "~/components/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
 import { TypingText } from "~/components/typing-text";
-import { sanityClient } from "~/sanity/sanity-client.server";
-import { getImageObjectWithDefaultImages } from "~/utils/dataRetrieval";
+import { fetchImageAssets } from "~/utils/dataRetrieval";
 
 export const meta: MetaFunction = () => ({
   title: "Capra Consulting: IT-konsulenter med ekspertise i software",
@@ -18,17 +17,12 @@ export const meta: MetaFunction = () => ({
 });
 
 export const loader = async () => {
-  const imageNames = ["tech", "aws"] as const;
-  const data = await sanityClient.getAll(
-    "imageAsset",
-    `title in ${JSON.stringify(imageNames)}`,
-  );
-
-  return json(getImageObjectWithDefaultImages(imageNames, data));
+  const images = await fetchImageAssets(["tech", "aws"]);
+  return json({ images });
 };
 
 export default function Index() {
-  const { aws, tech } = useLoaderData<typeof loader>();
+  const { images } = useLoaderData<typeof loader>();
 
   return (
     <>
@@ -123,7 +117,7 @@ export default function Index() {
 
       <ContentAndImageBox
         title="Vi er Advanced Tier Consulting Partner"
-        image={<img src={aws.imageUrl} alt={aws.alt} />}
+        image={<img src={images.aws.imageUrl} alt={images.aws.alt} />}
         height="32vw"
         contentBoxClassName="bg-peach"
       >
@@ -134,8 +128,8 @@ export default function Index() {
         image={
           <img
             className="w-full h-full object-contain overflow-hidden"
-            src={tech.imageUrl}
-            alt={tech.alt}
+            src={images.tech.imageUrl}
+            alt={images.tech.alt}
           />
         }
         height="35vw"
