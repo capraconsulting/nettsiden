@@ -1,23 +1,23 @@
 import { BrowserRouter } from "react-router-dom";
 
-import { LinkButton } from "~/components/link-button";
+import { Button } from "~/components/button";
 
 export const SolidVariant: React.FC = () => (
   // Wrap it in a router since it uses Link (and thus the router context) internally
   <BrowserRouter>
-    <LinkButton href="#" variant="solid">
+    <Button href="#" variant="solid">
       Se våre ansatte
-    </LinkButton>
+    </Button>
   </BrowserRouter>
 );
 
 export const OutlineVariant: React.FC = () => (
   <BrowserRouter>
-    <LinkButton href="#" variant="outline">
+    <Button href="#" variant="outline">
       Bli kunde?
-    </LinkButton>
-    <LinkButton href="#" variant="outline">
+    </Button>
+    <Button href="#" variant="outline">
       Jobb hos oss!
-    </LinkButton>
+    </Button>
   </BrowserRouter>
 );
