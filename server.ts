@@ -22,12 +22,15 @@ const getLoadContext: GetLoadContextFunction = (
     rawAuthorizationString = authHeader.split(" ")[1];
   }
 
-  let loadContext = {
+  const loadContext: ReturnType<GetLoadContextFunction> = {
     clientNetlifyGraphAccessToken: rawAuthorizationString,
     netlifyGraphToken: netlifyGraphToken,
     netlifyGraphSignature: graphSignatureHeader,
     routeModules: createEntryRouteModules(build.routes),
     manifest: build.assets,
+    currentMatches: Object.values(build.routes).filter(
+      (it) => `/${it.path ?? ""}` === event.path,
+    ),
   };
 
   // Remove keys with undefined values

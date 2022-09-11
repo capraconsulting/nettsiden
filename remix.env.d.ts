@@ -6,6 +6,7 @@ import type {
   EntryRouteModule,
   RouteModules,
 } from "@remix-run/server-runtime/dist/routeModules";
+import type { ServerRouteManifest } from "@remix-run/server-runtime/dist/routes";
 
 declare module "@remix-run/server-runtime" {
   interface AppLoadContext {
@@ -14,5 +15,6 @@ declare module "@remix-run/server-runtime" {
     netlifyGraphSignature?: string; // a signature for subscription events. Will be present if a secret is set.
     routeModules: RouteModules<EntryRouteModule>;
     manifest: AssetsManifest;
+    currentMatches: ServerRouteManifest[keyof ServerRouteManifest][];
   }
 }
