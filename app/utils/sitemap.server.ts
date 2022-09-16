@@ -16,7 +16,7 @@ export async function getSiteMapEntries(
     Object.entries(routeModules).map(async ([id, mod]) => {
       if (
         id === "root" ||
-        id.startsWith("routes/_") ||
+        // id.startsWith("routes/_") ||
         id.startsWith("routes/test")
       ) {
         return;
@@ -55,6 +55,9 @@ export async function getSiteMapEntries(
         parentId = parent.parentId;
         parent = parentId ? manifest.routes[parentId] : null;
       }
+
+      // Quick-fix: removing double leading slashes
+      if (path.startsWith("//")) path = path.slice(0, 1);
 
       // we can't handle dynamic routes, so if the handle doesn't have a
       // getSitemapEntries function, we just
