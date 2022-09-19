@@ -1,4 +1,4 @@
-import React from "react";
+import type { SliceProps } from "./types";
 import { getFlags } from "./utils";
 
 const $j = (ary: string[] | number[], ...args: [number?, number?]) => {
@@ -30,11 +30,11 @@ export const Slice = ({
         `A ${$j(arc2, 2, 4)} ${$j(getFlags({ invert: true }))} ${$j(
           arc2,
           0,
-          2
+          2,
         )}`,
         `L ${$j(arc1, 0, 2)}`,
       ],
-      0
+      0,
     ),
     id,
     filter,

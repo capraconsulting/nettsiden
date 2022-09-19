@@ -1,5 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+
 import { TextSpan } from "./text-span";
+import type { AnimatedBubbleProps } from "./types";
 
 const canAnimate = (ref: React.MutableRefObject<any>) => {
   return ref && ref.current && "beginElement" in ref.current;

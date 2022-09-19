@@ -1,3 +1,5 @@
+import type { Arc } from "./types";
+
 /**
  * polarToCartesian
  * @param {*} centerX
@@ -9,7 +11,7 @@ export const polarToCartesian = (
   centerX: number,
   centerY: number,
   radius: number,
-  angleInDegrees: number
+  angleInDegrees: number,
 ) => {
   var angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0;
 
@@ -39,7 +41,7 @@ export const createArc = (
   y: number,
   radius: number,
   startAngle: number,
-  endAngle: number
+  endAngle: number,
 ): Arc => {
   const start = polarToCartesian(x, y, radius, endAngle);
   const end = polarToCartesian(x, y, radius, startAngle);

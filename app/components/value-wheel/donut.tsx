@@ -1,36 +1,25 @@
-import { graphql, useStaticQuery } from "gatsby";
-import React from "react";
 import { AnimatedBubble } from "./bubble";
 import { Filter } from "./filter";
 import { Slice } from "./slice";
+import type { Arc, Point2D } from "./types";
 import { createAngles, createArc } from "./utils";
+import type { ValueProposition } from "./value-wheel";
 
-export const Donut = ({
-  active,
-  onClick,
-}: {
+interface DonutProps {
+  title: string;
+  valuePropositions: ValueProposition[];
+
   active: number;
   onClick: (idx: number) => void;
-}) => {
-  const q = graphql`
-    query valuePropositions {
-      allValueProposition {
-        edges {
-          node {
-            text
-            content
-            color
-            textColor
-          }
-        }
-      }
-    }
-  `;
+}
 
-  const queryResult: ValuePropositionQueryResult = useStaticQuery(q);
-  const nodes = queryResult.allValueProposition.edges.map((edge) => {
-    return edge.node;
-  });
+export const Donut = ({
+  title,
+  valuePropositions,
+  active,
+  onClick,
+}: DonutProps) => {
+  const nodes = valuePropositions;
 
   const x = 50;
   const y = 50;
@@ -96,7 +85,7 @@ export const Donut = ({
           textTransform: "uppercase",
         }}
       >
-        Våre verdier
+        {title}
       </text>
       <AnimatedBubble
         isActive={active > -1}
@@ -107,7 +96,7 @@ export const Donut = ({
         }}
         textColor={nodes[active]?.textColor}
         onClick={() => onClick(active)}
-        text={nodes[active]?.content || "Våre verdier"}
+        text={nodes[active]?.content || title}
       />
     </svg>
   );

@@ -1,5 +1,6 @@
-import React from "react";
-
+interface FilterProps {
+  id: string;
+}
 export const Filter = ({ id }: FilterProps) => (
   <filter id={id} height="200%">
     {/** stdDeviation is how much to blur */}

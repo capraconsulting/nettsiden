@@ -1,4 +1,4 @@
-import React from "react";
+import type { BubbleProps } from "./types";
 
 const reducefn =
   (n: number) =>
@@ -9,6 +9,7 @@ const reducefn =
     return acc;
   };
 
+// eslint-disable-next-line react/display-name
 const mapfn = (x: number) => (line: string[], i: number) => {
   const tprops: {
     key: string;
