@@ -1,5 +1,5 @@
 import { ContactForm } from "~/components/contact-form";
-import { ContentAndImageBox } from "~/components/content-and-image-box";
+import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 
 export default function Frontend() {
@@ -18,7 +18,7 @@ export default function Frontend() {
         title="Løsningen"
         image={undefined}
         height="50vw"
-        contentBoxClassName="bg-light-blue"
+        color="lightBlue"
       >
         For å bygge en robust løsning trenger du gode frontend-utviklere som
         hjelper deg med å velge riktig arkitektur. Riktig arkitektur sørger
@@ -36,7 +36,7 @@ export default function Frontend() {
         title="Våre utviklere"
         image={undefined}
         height="40vw"
-        contentBoxClassName="bg-bordeaux text-peach-20"
+        color="bordeaux"
         direction="right"
       >
         I dag skaper våre frontend utviklere kick-ass brukeropplevelser hos bla.

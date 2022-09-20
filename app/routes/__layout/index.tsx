@@ -4,7 +4,7 @@ import { useLoaderData } from "@remix-run/react";
 
 import { Button } from "~/components/button";
 import { ContactForm } from "~/components/contact-form";
-import { ContentAndImageBox } from "~/components/content-and-image-box";
+import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
 import { TypingText } from "~/components/typing-text";
@@ -124,7 +124,7 @@ export default function Index() {
         title="Vi er Advanced Tier Consulting Partner"
         image={<img src={images.aws.imageUrl} alt={images.aws.alt} />}
         height="32vw"
-        contentBoxClassName="bg-peach"
+        color="peach"
       >
         Vi er et av fire norske selskaper som kan kalle seg AWS-Partner!
       </ContentAndImageBox>
@@ -139,7 +139,7 @@ export default function Index() {
         }
         height="35vw"
         direction="right"
-        contentBoxClassName="bg-light-blue"
+        color="lightBlue"
       >
         Ingen kan være best i alt! Derfor spesialiserer vi oss på utvalgte
         markedsledenede teknologier.

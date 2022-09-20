@@ -1,5 +1,5 @@
 import { CallToActionBox } from "~/components/call-to-action-box";
-import { ContentAndImageBox } from "~/components/content-and-image-box";
+import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
 
@@ -78,7 +78,7 @@ export default function OmOss() {
         title="Bratte læringskurver"
         image={undefined}
         height="40vw"
-        contentBoxClassName="bg-peach"
+        color="peach"
       >
         For å bli de beste på våre fagområder, må vi kunne lære. Derfor setter
         vi av tid til fagsamlinger og inviduell læring .
@@ -89,7 +89,7 @@ export default function OmOss() {
         image={undefined}
         height="40vw"
         direction="right"
-        contentBoxClassName="bg-light-blue"
+        color="lightBlue"
       >
         Vi vet at mange liker å holde på med hobby prosjekter. Så lenge
         prosjektet ikke faller under Capras anvendelsesområde så er ideen din.
