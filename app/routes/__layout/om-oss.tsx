@@ -1,11 +1,27 @@
+import { useLoaderData } from "@remix-run/react";
+import { json } from "@remix-run/server-runtime";
+
+import { BubbleGrid } from "~/components/bubbles/bubble-grid";
+import { fetchEmployeeImages } from "~/components/bubbles/capra-helper.server";
 import { CallToActionBox } from "~/components/call-to-action-box";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
 import type { ValueProposition } from "~/components/value-wheel/value-wheel";
 import { ValueWheel } from "~/components/value-wheel/value-wheel";
+import { fetchImageAssets } from "~/utils/dataRetrieval";
+
+export const loader = async () => {
+  const [images, employeeImages] = await Promise.all([
+    fetchImageAssets([]),
+    fetchEmployeeImages(),
+  ]);
+
+  return json({ images, employeeImages });
+};
 
 export default function OmOss() {
+  const { employeeImages } = useLoaderData<typeof loader>();
   return (
     <>
       <TitleAndText title="Om oss" titleAs="h1">
@@ -33,14 +49,19 @@ export default function OmOss() {
         />
       </section>
 
-      <TitleAndText title="Vi skal bli passe store" titleAs="h2">
-        Vi vil være et selskap hvor alle kjenner alle, hvor vi er små nok til å
-        være smidig, men samtidig store nok til å ha innflytelse. Derfor skal vi
-        ikke bli fler enn 140 personer. Det er akkurat nok folk til å fylle det
-        området under!
-      </TitleAndText>
-
-      <Todo badge className="w-11/12 h-[600px]" title="human bubles" />
+      <section className="flex flex-col gap-12">
+        <TitleAndText title="Vi skal bli passe store" titleAs="h2">
+          Vi vil være et selskap hvor alle kjenner alle, hvor vi er små nok til
+          å være smidig, men samtidig store nok til å ha innflytelse. Derfor
+          skal vi ikke bli fler enn 140 personer. Det er akkurat nok folk til å
+          fylle det området under!
+        </TitleAndText>
+        <BubbleGrid
+          items={employeeImages.map((x) => (
+            <img key={x} src={x} alt="Ansatt i Capra" />
+          ))}
+        />
+      </section>
 
       <TitleAndText title="Capra er organisert i team" titleAs="h2">
         Vi bryr oss ikke om titler eller hieraki. Derfor har vi ingen

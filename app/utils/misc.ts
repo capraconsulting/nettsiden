@@ -103,3 +103,31 @@ export function uniqueBy<T>(list: T[], selector: (x: T) => any) {
   });
   return result;
 }
+
+/**
+ * Shift (or rotate) an array to left of right
+ *
+ * @param arr - The array to shift
+ * @param i - How many times to shift
+ * @param direction - Which direction to shift
+ * @returns a new shifted list
+ */
+export function shiftedBy<T>(
+  arr: ReadonlyArray<T> | T[],
+  i: number,
+  direction: "left" | "right" = "left",
+): T[] {
+  const _arr = arr.slice();
+  const n = i % arr.length;
+
+  // Take n
+  const taken = _arr.splice(direction === "left" ? 0 : arr.length - n, n);
+
+  // and add them to the other side
+  if (direction === "left") {
+    _arr.push(...taken);
+  } else {
+    _arr.unshift(...taken);
+  }
+  return _arr;
+}
