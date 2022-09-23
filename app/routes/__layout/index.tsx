@@ -2,6 +2,8 @@ import type { MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
+import { BubbleSandwich } from "~/components/bubbles/bubble-sandwich";
+import { fetchEmployeeImages } from "~/components/bubbles/capra-helper.server";
 import { Button } from "~/components/button";
 import { ContactForm } from "~/components/contact-form";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
@@ -9,6 +11,7 @@ import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
 import { TypingText } from "~/components/typing-text";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
+import { shuffled } from "~/utils/random";
 
 export const meta: MetaFunction = () => ({
   title: "Capra Consulting: IT-konsulenter med ekspertise i software",
@@ -18,12 +21,17 @@ export const meta: MetaFunction = () => ({
 });
 
 export const loader = async () => {
-  const images = await fetchImageAssets(["tech", "aws"]);
-  return json({ images });
+  const [images, employeeImages] = await Promise.all([
+    fetchImageAssets(["tech", "aws"]),
+    fetchEmployeeImages()
+      .then(shuffled)
+      .then((l) => l.slice(0, 13)),
+  ]);
+  return json({ images, employeeImages });
 };
 
 export default function Index() {
-  const { images } = useLoaderData<typeof loader>();
+  const { images, employeeImages } = useLoaderData<typeof loader>();
 
   return (
     <>
@@ -145,7 +153,22 @@ export default function Index() {
         markedsledenede teknologier.
       </ContentAndImageBox>
 
-      <Todo title="Fancy Vi har kickass folk" className="h-60" />
+      <BubbleSandwich
+        items={employeeImages.map((x) => (
+          <img key={x} src={x} alt="Ansatt i Capra" />
+        ))}
+      >
+        <div className="flex flex-col items-center gap-8 sm:gap-[10vh]">
+          <TitleAndText title="Vi har kickass folk" titleAs="h2">
+            I Capra setter vi menneskene først. Vi vet at fornøyde og motiverte
+            folk skaper den beste arbeidsplassen.
+          </TitleAndText>
+          <Button href="/ansatte" variant="solid">
+            Se våre ansatte
+          </Button>
+        </div>
+      </BubbleSandwich>
+
       <Todo title="Vi jobber med store aktører i Norge">
         <div className="flex flex-wrap gap-4">
           <Todo title="Bilde fra sanity" className="h-40 w-40" />
