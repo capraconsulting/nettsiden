@@ -1,9 +1,96 @@
+import { useLoaderData } from "@remix-run/react";
+import { json } from "@remix-run/server-runtime";
+
+import { Button } from "~/components/button";
 import { CallToActionBox } from "~/components/call-to-action-box";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
-import { Todo } from "~/components/todo";
+import { uniqueBy } from "~/utils/misc";
+
+/**
+ * Team Tailor integration
+ */
+interface TeamTailorJobsResponse {
+  data: TeamTailorJob[];
+}
+interface TeamTailorJob {
+  id: string;
+  attributes: {
+    title: string;
+    internal: boolean;
+  };
+  links: {
+    "careersite-job-url": string;
+  };
+  relationships: {
+    department: {
+      links: {
+        related: string;
+      };
+    };
+  };
+}
+interface TeamTailorDepartmentResponse {
+  data: TeamTailorDepartment;
+}
+interface TeamTailorDepartment {
+  id: string;
+  attributes: {
+    name: string;
+  };
+}
+interface CapraJob {
+  id: string;
+  title: string;
+  url: string;
+  department: string;
+}
+const TEAM_TAILOR_API_VERSION = "20210218";
+
+export const loader = async () => {
+  if (!process.env.TEAM_TAILOR_API_KEY) {
+    throw new Response(`process.env.TEAM_TAILOR_API_KEY needs to be set`, {
+      status: 500,
+    });
+  }
+
+  const headers = {
+    Authorization: `Token token=${process.env.TEAM_TAILOR_API_KEY}`,
+    "X-Api-Version": TEAM_TAILOR_API_VERSION,
+  };
+
+  // Fetch all job listings and their departments
+  const jobsTeamTailor = (await fetch("https://api.teamtailor.com/v1/jobs", {
+    headers,
+  }).then((x) => x.json())) as TeamTailorJobsResponse;
+
+  const fetchDepartment = (
+    url: string,
+  ): Promise<TeamTailorDepartmentResponse> =>
+    fetch(url, {
+      headers,
+    }).then((x) => x.json());
+
+  const jobs = await Promise.all(
+    jobsTeamTailor.data
+      .filter((job) => !job.attributes.internal)
+      .map(
+        async (job): Promise<CapraJob> => ({
+          id: job.id,
+          title: job.attributes.title,
+          url: job.links["careersite-job-url"],
+          department: (
+            await fetchDepartment(job.relationships.department.links.related)
+          ).data.attributes.name,
+        }),
+      ),
+  );
+
+  return json({ jobs });
+};
 
 export default function BliEnAvOss() {
+  const data = useLoaderData<typeof loader>();
   return (
     <>
       <div className="flex flex-col gap-12 w-full">
@@ -14,18 +101,23 @@ export default function BliEnAvOss() {
         </TitleAndText>
 
         <div className="flex gap-4 justify-center">
-          <Todo display="inline-flex" size="small" title="Se stillinger" />
-          <Todo display="inline-flex" size="small" title="Se de ansatte" />
+          <Button
+            variant="outline"
+            href="https://capraconsulting.teamtailor.com/jobs"
+          >
+            Se stillinger
+          </Button>
+          <Button variant="outline" href="/ansatte">
+            Se de ansatte
+          </Button>
         </div>
       </div>
 
-      <Todo
-        badge
+      <JobListingsByDepartment
         className="w-11/12 max-w-4xl"
-        title="Stillinger fra TeamTailor"
-      >
-        Disse henter vi fra team tailor sitt api
-      </Todo>
+        jobs={data.jobs}
+        titleAs="h2"
+      />
 
       <ContentAndImageBox
         title="TODO: Info om størrelse på selskapet"
@@ -73,3 +165,57 @@ export default function BliEnAvOss() {
     </>
   );
 }
+
+interface JobListingsByDepartmentProps {
+  jobs: CapraJob[];
+  titleAs: "h2" | "h3" | "h4";
+  className?: string;
+}
+const JobListingsByDepartment = ({
+  jobs,
+  titleAs: TitleComponent,
+  className,
+}: JobListingsByDepartmentProps) => {
+  const departments = uniqueBy(
+    jobs.map((x) => x.department),
+    (x) => x,
+  );
+  return (
+    <div className={`flex flex-col gap-8 ${className}`}>
+      {departments.map((department) => (
+        <div key={department} className="flex flex-col gap-4">
+          <TitleComponent className="text-2xl font-bold">
+            {department}
+          </TitleComponent>
+          <JobListings
+            key={department}
+            jobs={jobs.filter((job) => job.department === department)}
+          />
+        </div>
+      ))}
+    </div>
+  );
+};
+
+interface JobListingsProps {
+  jobs: CapraJob[];
+}
+const JobListings = ({ jobs }: JobListingsProps) => {
+  return (
+    <ul className="flex flex-col gap-2">
+      {jobs.map((x) => (
+        <li key={x.id}>
+          {/* TODO: Create Link component for shared styling */}
+          <a
+            href={x.url}
+            target="_blank"
+            rel="noreferrer"
+            className="text-xl underline decoration-main"
+          >
+            {x.title}
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+};
