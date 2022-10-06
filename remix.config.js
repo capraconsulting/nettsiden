@@ -4,7 +4,7 @@
 module.exports = {
   devServerPort: 8002,
   serverBuildTarget: "netlify",
-  server: "./server.js",
+  server: "./server.ts",
   ignoredRouteFiles: ["**/.*"],
   // appDirectory: "app",
   // assetsBuildDirectory: "public/build",
