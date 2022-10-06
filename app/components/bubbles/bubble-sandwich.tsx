@@ -17,7 +17,7 @@ export const BubbleSandwich = ({
 
   return (
     <div
-      className="min-h-[300px] max-w-4xl sm:grid"
+      className="sm:min-h-[300px] max-w-4xl sm:grid"
       style={{ gridTemplateColumns: "22% 54% 22%" }}
     >
       <BubbleContainer
