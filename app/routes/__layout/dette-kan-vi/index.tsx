@@ -1,8 +1,40 @@
+import { useLoaderData } from "@remix-run/react";
+import type { MetaFunction } from "@remix-run/server-runtime";
+import { json } from "@remix-run/server-runtime";
+
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
+import { ContentAndSlogansBox } from "~/components/content-and-slogans-box";
 import { TitleAndText } from "~/components/title-and-text";
-import { Todo } from "~/components/todo";
+import type { Images } from "~/utils/dataRetrieval";
+import { fetchImageAssets } from "~/utils/dataRetrieval";
+
+export const meta: MetaFunction = () => ({});
+
+export const loader = async () => {
+  const images = await fetchImageAssets([
+    "cloud",
+    "backend",
+    "frontend",
+    "tech-architecture",
+    "project-lead",
+
+    "icon-brain",
+    "icon-tech",
+    "icon-time",
+    "illustration-square-dots",
+
+    "icon-cloud",
+    "icon-counsel",
+    "icon-book",
+    "illustration-square-dots2",
+  ]);
+  return json({
+    images,
+  });
+};
 
 export default function DetteKanVi() {
+  const { images } = useLoaderData<typeof loader>();
   return (
     <>
       <TitleAndText title="Våre tjenester og ekspertiser" titleAs="h1">
@@ -10,9 +42,8 @@ export default function DetteKanVi() {
         derfor to tjenester for å skape løsninger for deg og din bedrift.
       </TitleAndText>
 
-      {/* Disse er de samme som brukes på hovedsiden */}
-      <Todo badge className="w-full" title="Liflig" />
-      <Todo badge className="w-full" title="Konsulenter" />
+      <LifligPitchAndSloganBox direction="left" images={images} />
+      <KonsulenterPitchAndSloganBox direction="right" images={images} />
 
       <TitleAndText title="Teknologier" titleAs="h2">
         Vi i Capra er spesialister. Vi har tatt klare tekniske valg og blitt
@@ -21,7 +52,13 @@ export default function DetteKanVi() {
 
       <ContentAndImageBox
         title="Sky"
-        image={undefined}
+        image={
+          <img
+            className="w-full h-full object-contain overflow-hidden"
+            src={images.cloud.imageUrl}
+            alt={images.cloud.alt}
+          />
+        }
         height="40vw"
         color="peach"
       >
@@ -34,7 +71,13 @@ export default function DetteKanVi() {
       <ContentAndImageBox
         title="Backend"
         direction="right"
-        image={undefined}
+        image={
+          <img
+            className="w-full h-full object-contain overflow-hidden"
+            src={images.backend.imageUrl}
+            alt={images.backend.alt}
+          />
+        }
         height="40vw"
         color="darkBlue"
       >
@@ -45,7 +88,13 @@ export default function DetteKanVi() {
 
       <ContentAndImageBox
         title="Frontend"
-        image={undefined}
+        image={
+          <img
+            className="w-full h-full object-contain overflow-hidden"
+            src={images.frontend.imageUrl}
+            alt={images.frontend.alt}
+          />
+        }
         height="40vw"
         color="lightBlue"
       >
@@ -57,7 +106,13 @@ export default function DetteKanVi() {
       <ContentAndImageBox
         title="Teknisk arkitektur"
         direction="right"
-        image={undefined}
+        image={
+          <img
+            className="w-full h-full object-contain overflow-hidden"
+            src={images["tech-architecture"].imageUrl}
+            alt={images["tech-architecture"].alt}
+          />
+        }
         height="40vw"
         color="bordeaux"
       >
@@ -68,7 +123,13 @@ export default function DetteKanVi() {
 
       <ContentAndImageBox
         title="Team-, prosjektleder og smidig coach"
-        image={undefined}
+        image={
+          <img
+            className="w-full h-full object-contain overflow-hidden"
+            src={images["project-lead"].imageUrl}
+            alt={images["project-lead"].alt}
+          />
+        }
         height="40vw"
         color="peach"
       >
@@ -79,3 +140,79 @@ export default function DetteKanVi() {
     </>
   );
 }
+
+export const LifligPitchAndSloganBox = ({
+  direction,
+  images,
+}: {
+  direction: "left" | "right";
+  images: Images<
+    "icon-tech" | "icon-brain" | "icon-time" | "illustration-square-dots"
+  >;
+}) => {
+  return (
+    <ContentAndSlogansBox
+      direction={direction}
+      title="Liflig"
+      titleAs="h2"
+      sloganColor="bordeaux"
+      slogans={[
+        {
+          title: "Vi tar det tekniske",
+          imageUrl: images["icon-tech"].imageUrl,
+        },
+        {
+          title: "Kompetanse på laget",
+          imageUrl: images["icon-brain"].imageUrl,
+        },
+        {
+          title: "Kort oppstartstid",
+          imageUrl: images["icon-time"].imageUrl,
+        },
+      ]}
+      illustrationImageUrl={images["illustration-square-dots"].imageUrl}
+      readMoreHref="/dette-kan-vi/liflig"
+    >
+      Du har ideene - la vårt inhouse team bygge og forvalte hele tjenesten for
+      deg
+    </ContentAndSlogansBox>
+  );
+};
+
+export const KonsulenterPitchAndSloganBox = ({
+  direction,
+  images,
+}: {
+  direction: "left" | "right";
+  images: Images<
+    "icon-cloud" | "icon-counsel" | "icon-book" | "illustration-square-dots2"
+  >;
+}) => {
+  return (
+    <ContentAndSlogansBox
+      direction={direction}
+      title="Konsulenter"
+      titleAs="h2"
+      sloganColor="lightBlue"
+      slogans={[
+        {
+          title: "Opp i skyen",
+          imageUrl: images["icon-cloud"].imageUrl,
+        },
+        {
+          title: "Vi tør å rådgi",
+          imageUrl: images["icon-counsel"].imageUrl,
+        },
+        {
+          title: "Faglig sterke",
+          imageUrl: images["icon-book"].imageUrl,
+        },
+      ]}
+      illustrationImageUrl={images["illustration-square-dots2"].imageUrl}
+      readMoreHref="/dette-kan-vi/it-konsulenter"
+    >
+      Trenger du flere gode hoder på teamet ditt? Vi gir deg IT-konsulenter med
+      spisskompetanse!
+    </ContentAndSlogansBox>
+  );
+};

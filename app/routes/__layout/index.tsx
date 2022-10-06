@@ -6,13 +6,15 @@ import { BubbleSandwich } from "~/components/bubbles/bubble-sandwich";
 import { fetchEmployeeImages } from "~/components/bubbles/capra-helper.server";
 import { Button } from "~/components/button";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
-import { ContentAndSlogansBox } from "~/components/content-and-slogans-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { TypingText } from "~/components/typing-text";
 import type { CapraHandle } from "~/types";
-import type { Images } from "~/utils/dataRetrieval";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { shuffled } from "~/utils/random";
+import {
+  KonsulenterPitchAndSloganBox,
+  LifligPitchAndSloganBox,
+} from "./dette-kan-vi";
 
 export const meta: MetaFunction = () => ({
   title: "Capra Consulting: IT-konsulenter med ekspertise i software",
@@ -167,79 +169,3 @@ export default function Index() {
     </>
   );
 }
-
-export const LifligPitchAndSloganBox = ({
-  direction,
-  images,
-}: {
-  direction: "left" | "right";
-  images: Images<
-    "icon-tech" | "icon-brain" | "icon-time" | "illustration-square-dots"
-  >;
-}) => {
-  return (
-    <ContentAndSlogansBox
-      direction={direction}
-      title="Liflig"
-      titleAs="h2"
-      sloganColor="bordeaux"
-      slogans={[
-        {
-          title: "Vi tar det tekniske",
-          imageUrl: images["icon-tech"].imageUrl,
-        },
-        {
-          title: "Kompetanse på laget",
-          imageUrl: images["icon-brain"].imageUrl,
-        },
-        {
-          title: "Kort oppstartstid",
-          imageUrl: images["icon-time"].imageUrl,
-        },
-      ]}
-      illustrationImageUrl={images["illustration-square-dots"].imageUrl}
-      readMoreHref="/dette-kan-vi/liflig"
-    >
-      Du har ideene - la vårt inhouse team bygge og forvalte hele tjenesten for
-      deg
-    </ContentAndSlogansBox>
-  );
-};
-
-export const KonsulenterPitchAndSloganBox = ({
-  direction,
-  images,
-}: {
-  direction: "left" | "right";
-  images: Images<
-    "icon-cloud" | "icon-counsel" | "icon-book" | "illustration-square-dots2"
-  >;
-}) => {
-  return (
-    <ContentAndSlogansBox
-      direction={direction}
-      title="Konsulenter"
-      titleAs="h2"
-      sloganColor="lightBlue"
-      slogans={[
-        {
-          title: "Opp i skyen",
-          imageUrl: images["icon-cloud"].imageUrl,
-        },
-        {
-          title: "Vi tør å rådgi",
-          imageUrl: images["icon-counsel"].imageUrl,
-        },
-        {
-          title: "Faglig sterke",
-          imageUrl: images["icon-book"].imageUrl,
-        },
-      ]}
-      illustrationImageUrl={images["illustration-square-dots2"].imageUrl}
-      readMoreHref="/dette-kan-vi/it-konsulenter"
-    >
-      Trenger du flere gode hoder på teamet ditt? Vi gir deg IT-konsulenter med
-      spisskompetanse!
-    </ContentAndSlogansBox>
-  );
-};
