@@ -189,15 +189,6 @@ export default function Index() {
         </div>
       </BubbleSandwich>
 
-      <Todo title="Vi jobber med store aktører i Norge">
-        <div className="flex flex-wrap gap-4">
-          <Todo title="Bilde fra sanity" className="h-40 w-40" />
-          <Todo title="Bilde fra sanity" className="h-40 w-40" />
-          <Todo title="Bilde fra sanity" className="h-40 w-40" />
-          <Todo title="Bilde fra sanity" className="h-40 w-40" />
-        </div>
-      </Todo>
-
       <section className="flex flex-col gap-12">
         <TitleAndText title="Vi jobber med store aktører i Norge" titleAs="h2">
           Capra leverer kompetanse til prosjekter over hele landet. Som

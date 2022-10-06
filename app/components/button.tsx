@@ -27,6 +27,7 @@ type Props = {
   | PropsWithChildren<{
       href: string;
       prefetch?: RemixLinkProps["prefetch"];
+      target?: string;
     }>
 );
 
@@ -34,11 +35,28 @@ type Props = {
 //       "almost white" background. Consider using something darker? It's fine as a button bg color.
 export const Button: React.FC<Props> = ({ variant, ...props }) => {
   const className = classNames(getClassNames(variant), props.className);
-  return "href" in props ? (
-    <Link to={props.href} prefetch={props.prefetch} className={className}>
-      {props.children}
-    </Link>
-  ) : (
-    <button {...props} className={className} />
-  );
+
+  if (
+    "href" in props &&
+    (props.href.startsWith("http://") || props.href.startsWith("https://"))
+  ) {
+    return (
+      <a
+        className={className}
+        href={props.href}
+        rel="noopener noreferrer"
+        target={props.target}
+      >
+        {props.children}
+      </a>
+    );
+  } else if ("href" in props) {
+    return (
+      <Link to={props.href} prefetch={props.prefetch} className={className}>
+        {props.children}
+      </Link>
+    );
+  } else {
+    return <button {...props} className={className} />;
+  }
 };
