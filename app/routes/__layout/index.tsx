@@ -11,6 +11,7 @@ import { Todo } from "~/components/todo";
 import { TypingText } from "~/components/typing-text";
 import type { CapraHandle } from "~/types";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
+import { urlFor } from "~/utils/imageBuilder";
 import { shuffled } from "~/utils/random";
 
 export const meta: MetaFunction = () => ({
@@ -22,12 +23,27 @@ export const meta: MetaFunction = () => ({
 
 export const loader = async () => {
   const [images, employeeImages] = await Promise.all([
-    fetchImageAssets(["tech", "aws"]),
+    fetchImageAssets([
+      "tech",
+      "aws",
+
+      "company-europris",
+      "company-gjensidige",
+      "company-kinnetik",
+      "company-vy",
+    ]),
     fetchEmployeeImages()
       .then(shuffled)
       .then((l) => l.slice(0, 13)),
   ]);
-  return json({ images, employeeImages });
+  return json({
+    images,
+    employeeImages,
+
+    companies: Object.entries(images)
+      .filter(([name]) => name.startsWith("company-"))
+      .map(([_, image]) => image),
+  });
 };
 
 export const handle: CapraHandle = {
@@ -35,7 +51,7 @@ export const handle: CapraHandle = {
 };
 
 export default function Index() {
-  const { images, employeeImages } = useLoaderData<typeof loader>();
+  const { images, employeeImages, companies } = useLoaderData<typeof loader>();
 
   return (
     <>
@@ -181,6 +197,22 @@ export default function Index() {
           <Todo title="Bilde fra sanity" className="h-40 w-40" />
         </div>
       </Todo>
+
+      <section className="flex flex-col gap-12">
+        <TitleAndText title="Vi jobber med store aktører i Norge" titleAs="h2">
+          Capra leverer kompetanse til prosjekter over hele landet. Som
+          bransjeuavhengig er vi åpne for både{" "}
+          <strong className="font-bold">offentlig</strong> og{" "}
+          <strong className="font-bold">privat</strong> virksomhet
+        </TitleAndText>
+        <div className="grid grid-cols-2 max-w-xl mx-auto items-center">
+          {companies.map(({ alt, imageUrl }) => (
+            <div key={imageUrl} className="flex justify-center items-center">
+              <img src={imageUrl} alt={alt} />
+            </div>
+          ))}
+        </div>
+      </section>
     </>
   );
 }
