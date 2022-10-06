@@ -2,32 +2,36 @@ import type { HTMLInputTypeAttribute } from "react";
 import { useFetcher } from "@remix-run/react";
 import type { SerializeFrom } from "@remix-run/server-runtime";
 
-import { Button } from "~/components/button";
-import { Todo } from "~/components/todo";
-import type { action as contactAction } from "~/routes/api.contact";
+import type { SanityImageAsset, SanityReference } from "sanity-codegen";
 
-export const ContactForm: React.FC<{
+import { Button } from "~/components/button";
+import type { action as contactAction } from "~/routes/api.contact";
+import { urlFor } from "~/utils/imageBuilder";
+
+interface ContactFormProps {
   title: React.ReactNode;
-}> = ({ title }) => {
+  representatives: ContactFormRepresentative[];
+}
+export const ContactForm = ({ title, representatives }: ContactFormProps) => {
   const fetcher = useFetcher<SerializeFrom<typeof contactAction>>();
   const isSuccess = fetcher.type === "done" && !fetcher.data;
   return (
-    <article className="bg-secondary flex flex-col items-center text-white w-full -mb-[50px] py-[3vh] px-[100px] mx-auto">
+    <article className="bg-secondary flex flex-col items-center text-white w-full pt-[3vh] pb-[6vh] px-[100px] mx-auto">
       <section className="text-center">
-        <div className="text-3xl font-semibold text-peach">
+        <p className="text-xl md:text-4xl font-bold text-peach">
           {isSuccess ? "Takk for din interesse!" : title}
-        </div>
-        <span>
+        </p>
+        <p className="md:mt-5">
           {isSuccess
             ? "Vi tar kontakt med deg så snart som mulig."
             : "Fyll ut skjemaet så kontakter vi deg!"}
-        </span>
+        </p>
       </section>
-      <section className="flex justify-between w-full max-w-7xl gap-12 mb-10">
+      <section className="grid grid-cols-1 lg:grid-cols-2 w-full max-w-7xl gap-12">
         <fetcher.Form
           method="post"
           action="/api/contact"
-          className="w-1/2 flex flex-col gap-[4vh]"
+          className="w-full flex flex-col gap-[4vh]"
           name="contact"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
@@ -60,7 +64,9 @@ export const ContactForm: React.FC<{
             Kontakt meg
           </Button>
         </fetcher.Form>
-        <Todo badge title="Salgsrepresentanter" className="w-1/2" />
+        <div className="w-full">
+          <Representatives representatives={representatives} />
+        </div>
       </section>
     </article>
   );
@@ -89,6 +95,34 @@ const Input: React.FC<{
         className="w-full p-[1vh] text-black"
       />
       {fieldErrors && <div className="text-red">{fieldErrors}</div>}
+    </div>
+  );
+};
+
+export interface ContactFormRepresentative {
+  name: string;
+  email: string;
+  image: SanityImageAsset | SanityReference<SanityImageAsset>;
+}
+interface RepresentativesProps {
+  representatives: ContactFormRepresentative[];
+}
+const Representatives = ({ representatives }: RepresentativesProps) => {
+  return (
+    <div className="grid grid-flow-dense grid-cols-1 md:grid-cols-2 gap-y-5 gap-x-14 px-5">
+      {representatives.map(({ name, email, image }) => (
+        <div key={name} className="flex flex-col">
+          <img
+            className=""
+            alt={`Bilde av ${name}`}
+            src={urlFor(image).size(600, 600).url()}
+          />
+          <strong className="mt-5">{name}</strong>
+          <a className="underline decoration-main" href={`mailto:${email}`}>
+            {email}
+          </a>
+        </div>
+      ))}
     </div>
   );
 };
