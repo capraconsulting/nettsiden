@@ -6,6 +6,7 @@ export const ViErSpesialister = () => (
     image={<div>Image here!</div>}
     height="35vw"
     direction="right"
+    color="bordeaux"
   >
     Ingen kan være best i alt! Derfor spesialiserer vi oss på utvalgte
     markedsledenede teknologier.
@@ -17,6 +18,7 @@ export const BratteLaeringsKurver = () => (
     title="Bratte læringskurver"
     image={<div>Image here!</div>}
     height="35vw"
+    color="peach"
   >
     For å bli de beste på våre fagområder, må vi kunne lære. Derfor setter vi av
     tid til fagsamlinger og inviduell læring .

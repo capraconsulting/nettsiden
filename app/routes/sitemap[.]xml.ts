@@ -2,6 +2,7 @@ import type { DataFunctionArgs } from "@remix-run/server-runtime/dist/routeModul
 
 import type { SitemapEntry } from "~/types";
 import { getDomainUrl } from "~/utils/misc";
+import { createRemixContext } from "~/utils/remix-context.server";
 import { getSiteMapEntries } from "~/utils/sitemap.server";
 
 function toXmlTag([key, value]: [string, string | number]) {
@@ -16,13 +17,13 @@ function toXmlEntry(domainUrl: string) {
   };
 }
 
-export const loader = async ({ request, context }: DataFunctionArgs) => {
+export const loader = async ({ request }: DataFunctionArgs) => {
   const domainUrl = getDomainUrl(request);
-
+  const { routeModules, manifest } = createRemixContext(request);
   const sitemapEntries: SitemapEntry[] = await getSiteMapEntries(
     request,
-    context.routeModules,
-    context.manifest,
+    routeModules,
+    manifest,
   );
 
   const sitemap = `

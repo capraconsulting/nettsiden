@@ -1,7 +1,6 @@
 import type { LoaderArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import type { UseDataFunctionReturn } from "@remix-run/react/dist/components";
 
 import { Todo } from "~/components/todo";
 import {
@@ -33,8 +32,7 @@ export const loader = async ({ params }: LoaderArgs) => {
   return json({ item });
 };
 
-type LoaderData = UseDataFunctionReturn<typeof loader>;
-export const meta: MetaFunction = ({ data }: { data: LoaderData }) => ({
+export const meta: MetaFunction<typeof loader> = ({ data }) => ({
   title: data.item.helmetTitle,
   description: data.item.helmetDescription,
 });

@@ -1,9 +1,27 @@
+import { useLoaderData } from "@remix-run/react";
+import { json } from "@remix-run/server-runtime";
+
+import { BubbleGrid } from "~/components/bubbles/bubble-grid";
+import { fetchEmployeeImages } from "~/components/bubbles/capra-helper.server";
 import { CallToActionBox } from "~/components/call-to-action-box";
-import { ContentAndImageBox } from "~/components/content-and-image-box";
+import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
+import type { ValueProposition } from "~/components/value-wheel/value-wheel";
+import { ValueWheel } from "~/components/value-wheel/value-wheel";
+import { fetchImageAssets } from "~/utils/dataRetrieval";
+
+export const loader = async () => {
+  const [images, employeeImages] = await Promise.all([
+    fetchImageAssets([]),
+    fetchEmployeeImages(),
+  ]);
+
+  return json({ images, employeeImages });
+};
 
 export default function OmOss() {
+  const { employeeImages } = useLoaderData<typeof loader>();
   return (
     <>
       <TitleAndText title="Om oss" titleAs="h1">
@@ -19,25 +37,31 @@ export default function OmOss() {
         kundene våre.
       </InfoBox>
 
-      <TitleAndText title="Verdier driver oss i riktig retning" titleAs="h2">
-        Verdiene er egenskaper som vi setter pris på hos våre kollegaer. Vi
-        bruker verdiene når vi tar beslutninger, hver eneste dag!
-      </TitleAndText>
+      <section className="flex flex-col gap-12">
+        <TitleAndText title="Verdier driver oss i riktig retning" titleAs="h2">
+          Verdiene er egenskaper som vi setter pris på hos våre kollegaer. Vi
+          bruker verdiene når vi tar beslutninger, hver eneste dag!
+        </TitleAndText>
 
-      <Todo
-        badge
-        className="rounded-full aspect-square w-4/5 max-w-xl"
-        title="Våre verdier hjul"
-      />
+        <ValueWheel
+          title="Våre Verdier"
+          valuePropositions={valuePropositions}
+        />
+      </section>
 
-      <TitleAndText title="Vi skal bli passe store" titleAs="h2">
-        Vi vil være et selskap hvor alle kjenner alle, hvor vi er små nok til å
-        være smidig, men samtidig store nok til å ha innflytelse. Derfor skal vi
-        ikke bli fler enn 140 personer. Det er akkurat nok folk til å fylle det
-        området under!
-      </TitleAndText>
-
-      <Todo badge className="w-11/12 h-[600px]" title="human bubles" />
+      <section className="flex flex-col gap-12">
+        <TitleAndText title="Vi skal bli passe store" titleAs="h2">
+          Vi vil være et selskap hvor alle kjenner alle, hvor vi er små nok til
+          å være smidig, men samtidig store nok til å ha innflytelse. Derfor
+          skal vi ikke bli fler enn 140 personer. Det er akkurat nok folk til å
+          fylle det området under!
+        </TitleAndText>
+        <BubbleGrid
+          items={employeeImages.map((x) => (
+            <img key={x} src={x} alt="Ansatt i Capra" />
+          ))}
+        />
+      </section>
 
       <TitleAndText title="Capra er organisert i team" titleAs="h2">
         Vi bryr oss ikke om titler eller hieraki. Derfor har vi ingen
@@ -78,7 +102,7 @@ export default function OmOss() {
         title="Bratte læringskurver"
         image={undefined}
         height="40vw"
-        contentBoxClassName="bg-peach"
+        color="peach"
       >
         For å bli de beste på våre fagområder, må vi kunne lære. Derfor setter
         vi av tid til fagsamlinger og inviduell læring .
@@ -89,7 +113,7 @@ export default function OmOss() {
         image={undefined}
         height="40vw"
         direction="right"
-        contentBoxClassName="bg-light-blue"
+        color="lightBlue"
       >
         Vi vet at mange liker å holde på med hobby prosjekter. Så lenge
         prosjektet ikke faller under Capras anvendelsesområde så er ideen din.
@@ -151,3 +175,46 @@ const InfoBox = ({ title, children, className }: InfoBoxProps) => {
     </Todo>
   );
 };
+
+export const valuePropositions: ValueProposition[] = [
+  {
+    id: "value-proposition-1",
+    textColor: "#03173E",
+    text: "fleksibel",
+    content: `Vi har fokus på frihet og er åpen for endringer.`,
+    color: "#F8D3BC",
+  },
+  {
+    id: "value-proposition-2",
+    textColor: "#03173E",
+    text: "stolt",
+    content: `Vi har yrkesstolthet og føler eierskap. 
+  Vi tar ansvar utover det som forventes av oss.`,
+    color: "#C1DCE5",
+  },
+  {
+    id: "value-proposition-3",
+    textColor: "#fff",
+    text: "lærende",
+    content: `Vi lærer mye og fort, og 
+  vi lærer bort. Vi søker forbedring og 
+  utfordrer etablerte sannheter.`,
+    color: "#EA5154",
+  },
+  {
+    id: "value-proposition-4",
+    textColor: "#fff",
+    text: "uselvisk",
+    content: `Vi er inkluderende og vi bryr oss. Vi unner og 
+  feirer andres suksess.`,
+    color: "#03173E",
+  },
+  {
+    id: "value-proposition-5",
+    textColor: "#fff",
+    text: "åpen",
+    content: `Vi er uformelle og ærlige. 
+  Vi deler alt, med mindre norsk lov sier at vi ikke kan.`,
+    color: "#5D2332",
+  },
+];

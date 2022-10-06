@@ -5,4 +5,5 @@ import { config } from "~/sanity/config";
 
 const builder = imageUrlBuilder(config);
 
-export const urlFor = (source: SanityImageSource) => builder.image(source);
+export const urlFor = (source: SanityImageSource) =>
+  builder.image(source).format("webp");
