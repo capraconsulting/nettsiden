@@ -7,6 +7,7 @@ import type { SanityImageAsset, SanityReference } from "sanity-codegen";
 import { Button } from "~/components/button";
 import type { action as contactAction } from "~/routes/api.contact";
 import { urlFor } from "~/utils/imageBuilder";
+import { CapraLink } from "./capra-link";
 
 interface ContactFormProps {
   title: React.ReactNode;
@@ -118,9 +119,7 @@ const Representatives = ({ representatives }: RepresentativesProps) => {
             src={urlFor(image).size(600, 600).url()}
           />
           <strong className="mt-5">{name}</strong>
-          <a className="underline decoration-main" href={`mailto:${email}`}>
-            {email}
-          </a>
+          <CapraLink href={`mailto:${email}`}>{email}</CapraLink>
         </div>
       ))}
     </div>

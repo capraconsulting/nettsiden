@@ -3,6 +3,7 @@ import { json } from "@remix-run/server-runtime";
 
 import { Button } from "~/components/button";
 import { CallToActionBox } from "~/components/call-to-action-box";
+import { CapraLink } from "~/components/capra-link";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { uniqueBy } from "~/utils/misc";
@@ -205,15 +206,9 @@ const JobListings = ({ jobs }: JobListingsProps) => {
     <ul className="flex flex-col gap-2">
       {jobs.map((x) => (
         <li key={x.id}>
-          {/* TODO: Create Link component for shared styling */}
-          <a
-            href={x.url}
-            target="_blank"
-            rel="noreferrer"
-            className="text-xl underline decoration-main"
-          >
+          <CapraLink href={x.url} target="_blank" className="text-xl">
             {x.title}
-          </a>
+          </CapraLink>
         </li>
       ))}
     </ul>

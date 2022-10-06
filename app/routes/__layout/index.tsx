@@ -6,12 +6,12 @@ import { BubbleSandwich } from "~/components/bubbles/bubble-sandwich";
 import { fetchEmployeeImages } from "~/components/bubbles/capra-helper.server";
 import { Button } from "~/components/button";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
+import { ContentAndSlogansBox } from "~/components/content-and-slogans-box";
 import { TitleAndText } from "~/components/title-and-text";
-import { Todo } from "~/components/todo";
 import { TypingText } from "~/components/typing-text";
 import type { CapraHandle } from "~/types";
+import type { Images } from "~/utils/dataRetrieval";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
-import { urlFor } from "~/utils/imageBuilder";
 import { shuffled } from "~/utils/random";
 
 export const meta: MetaFunction = () => ({
@@ -26,6 +26,16 @@ export const loader = async () => {
     fetchImageAssets([
       "tech",
       "aws",
+
+      "icon-brain",
+      "icon-tech",
+      "icon-time",
+      "illustration-square-dots",
+
+      "icon-cloud",
+      "icon-counsel",
+      "icon-book",
+      "illustration-square-dots2",
 
       "company-europris",
       "company-gjensidige",
@@ -94,59 +104,9 @@ export default function Index() {
         utfordringene dine!
       </TitleAndText>
 
-      <div className="max-w-4xl w-11/12 flex gap-4 flex-col-reverse md:flex-row">
-        <Todo title="Liflig" className="flex-1" style={{ minHeight: 340 }}>
-          Du har ideene - la vårt inhouse team bygge og forvalte hele tjenesten
-          for deg
-        </Todo>
-        <div className="flex-1 grid grid-cols-2 gap-2">
-          <CardModule
-            title="Vi tar det tekniske"
-            className="bg-bordeaux text-white"
-          />
-          <CardModule
-            title="Kompetanse på laget"
-            className="bg-bordeaux text-white"
-          />
-          <CardModule
-            title="Kort oppstartstid"
-            className="bg-bordeaux text-white"
-          />
-          <CardModule
-            title=""
-            illustration={
-              <div className="h-full w-full bg-gradient-to-r from-red-200 to-fuchsia-500" />
-            }
-          />
-        </div>
-      </div>
+      <LifligPitchAndSloganBox direction="left" images={images} />
 
-      <div className="max-w-4xl w-11/12 flex gap-4 flex-col-reverse md:flex-row-reverse">
-        <Todo title="Konsulenter" className="flex-1" style={{ minHeight: 340 }}>
-          Trenger du flere gode hoder på teamet ditt? Vi gir deg IT-konsulenter
-          med spisskompetanse!
-        </Todo>
-        <div className="flex-1 grid grid-cols-2 gap-2">
-          <CardModule
-            title="Opp i skyen"
-            className="bg-light-blue text-slate-800"
-          />
-          <CardModule
-            title="Vi tør å rådgi"
-            className="bg-light-blue text-slate-800"
-          />
-          <CardModule
-            title="Faglig sterke"
-            className="bg-light-blue text-slate-800"
-          />
-          <CardModule
-            title=""
-            illustration={
-              <div className="h-full w-full bg-gradient-to-r from-sky-200 to-slate-500" />
-            }
-          />
-        </div>
-      </div>
+      <KonsulenterPitchAndSloganBox direction="right" images={images} />
 
       <ContentAndImageBox
         title="Vi er Advanced Tier Consulting Partner"
@@ -208,21 +168,78 @@ export default function Index() {
   );
 }
 
-interface CardModuleProps {
-  title: React.ReactNode;
-  illustration?: React.ReactNode;
-  className?: string;
-}
-
-const CardModule = ({ title, illustration, className }: CardModuleProps) => {
+export const LifligPitchAndSloganBox = ({
+  direction,
+  images,
+}: {
+  direction: "left" | "right";
+  images: Images<
+    "icon-tech" | "icon-brain" | "icon-time" | "illustration-square-dots"
+  >;
+}) => {
   return (
-    <Todo
-      display="inline-flex"
-      className={`p-0 aspect-square border-none overflow-hidden rounded ${className}`}
-      title=""
+    <ContentAndSlogansBox
+      direction={direction}
+      title="Liflig"
+      titleAs="h2"
+      sloganColor="bordeaux"
+      slogans={[
+        {
+          title: "Vi tar det tekniske",
+          imageUrl: images["icon-tech"].imageUrl,
+        },
+        {
+          title: "Kompetanse på laget",
+          imageUrl: images["icon-brain"].imageUrl,
+        },
+        {
+          title: "Kort oppstartstid",
+          imageUrl: images["icon-time"].imageUrl,
+        },
+      ]}
+      illustrationImageUrl={images["illustration-square-dots"].imageUrl}
+      readMoreHref="/dette-kan-vi/liflig"
     >
-      {illustration}
-      <div className="font-semibold">{title}</div>
-    </Todo>
+      Du har ideene - la vårt inhouse team bygge og forvalte hele tjenesten for
+      deg
+    </ContentAndSlogansBox>
+  );
+};
+
+export const KonsulenterPitchAndSloganBox = ({
+  direction,
+  images,
+}: {
+  direction: "left" | "right";
+  images: Images<
+    "icon-cloud" | "icon-counsel" | "icon-book" | "illustration-square-dots2"
+  >;
+}) => {
+  return (
+    <ContentAndSlogansBox
+      direction={direction}
+      title="Konsulenter"
+      titleAs="h2"
+      sloganColor="lightBlue"
+      slogans={[
+        {
+          title: "Opp i skyen",
+          imageUrl: images["icon-cloud"].imageUrl,
+        },
+        {
+          title: "Vi tør å rådgi",
+          imageUrl: images["icon-counsel"].imageUrl,
+        },
+        {
+          title: "Faglig sterke",
+          imageUrl: images["icon-book"].imageUrl,
+        },
+      ]}
+      illustrationImageUrl={images["illustration-square-dots2"].imageUrl}
+      readMoreHref="/dette-kan-vi/it-konsulenter"
+    >
+      Trenger du flere gode hoder på teamet ditt? Vi gir deg IT-konsulenter med
+      spisskompetanse!
+    </ContentAndSlogansBox>
   );
 };

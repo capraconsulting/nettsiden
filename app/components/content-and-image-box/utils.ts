@@ -14,7 +14,7 @@ const PATTERN_CLASSES: Record<BoxColor, [BoxClass, FillClass[]]> = {
     "bg-light-blue text-secondary",
     ["fill-main", "fill-secondary", "fill-bordeaux", "fill-peach"],
   ],
-  bordeaux: ["bg-bordeaux text-secondary", ["fill-peach", "fill-light-blue"]],
+  bordeaux: ["bg-bordeaux text-white", ["fill-peach", "fill-light-blue"]],
   darkBlue: [
     "bg-secondary-80 text-peach-20",
     ["fill-peach", "fill-light-blue"],
