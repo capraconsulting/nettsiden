@@ -5,11 +5,11 @@ import { useLoaderData } from "@remix-run/react";
 import { BubbleSandwich } from "~/components/bubbles/bubble-sandwich";
 import { fetchEmployeeImages } from "~/components/bubbles/capra-helper.server";
 import { Button } from "~/components/button";
-import { ContactForm } from "~/components/contact-form";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
 import { TypingText } from "~/components/typing-text";
+import type { CapraHandle } from "~/types";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { shuffled } from "~/utils/random";
 
@@ -28,6 +28,10 @@ export const loader = async () => {
       .then((l) => l.slice(0, 13)),
   ]);
   return json({ images, employeeImages });
+};
+
+export const handle: CapraHandle = {
+  contactFormTitle: "Vil du vite mer om hvordan vi kan hjelpe deg?",
 };
 
 export default function Index() {
@@ -177,7 +181,6 @@ export default function Index() {
           <Todo title="Bilde fra sanity" className="h-40 w-40" />
         </div>
       </Todo>
-      <ContactForm title="Vil du vite mer om hvordan vi kan hjelpe deg?" />
     </>
   );
 }
@@ -187,6 +190,7 @@ interface CardModuleProps {
   illustration?: React.ReactNode;
   className?: string;
 }
+
 const CardModule = ({ title, illustration, className }: CardModuleProps) => {
   return (
     <Todo

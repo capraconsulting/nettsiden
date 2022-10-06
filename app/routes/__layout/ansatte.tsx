@@ -4,11 +4,11 @@ import { json } from "@remix-run/server-runtime";
 
 import { Badge } from "~/components/badge";
 import { Card } from "~/components/card";
-import { ContactForm } from "~/components/contact-form";
 import { FilterRow } from "~/components/filter-row";
 import { TitleAndText } from "~/components/title-and-text";
 import { sanityClient } from "~/sanity/sanity-client.server";
 import type { Author, JobCategory } from "~/sanity/schema";
+import type { CapraHandle } from "~/types";
 import type { Images } from "~/utils/dataRetrieval";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { urlFor } from "~/utils/imageBuilder";
@@ -51,36 +51,37 @@ export const loader = async ({ request }: LoaderArgs) => {
   return json({ items: filteredItems, filters, icons });
 };
 
+export const handle: CapraHandle = {
+  contactFormTitle: "Snakk med oss om dine IT-utfordringer!",
+};
+
 export default function Ansatte() {
   const data = useLoaderData<typeof loader>();
   const [search] = useSearchParams();
   return (
-    <>
-      <div className="max-w-7xl w-full sm:w-11/12 flex flex-col gap-12">
-        <TitleAndText title="Kontakt oss i Capra" titleAs="h1">
-          Vi vil gjerne høre fra deg.
-        </TitleAndText>
+    <div className="max-w-7xl w-full sm:w-11/12 flex flex-col gap-12">
+      <TitleAndText title="Kontakt oss i Capra" titleAs="h1">
+        Vi vil gjerne høre fra deg.
+      </TitleAndText>
 
-        <div className="flex flex-col gap-8">
-          <Form method="get" action=".">
-            <FilterRow
-              filters={data.filters.map((x) => x.title!)}
-              activeFilters={search.getAll(URL_FILTER_KEY)}
-              filterKey={URL_FILTER_KEY}
-            />
-          </Form>
+      <div className="flex flex-col gap-8">
+        <Form method="get" action=".">
+          <FilterRow
+            filters={data.filters.map((x) => x.title!)}
+            activeFilters={search.getAll(URL_FILTER_KEY)}
+            filterKey={URL_FILTER_KEY}
+          />
+        </Form>
 
-          <ul className="grid gap-12 sm:gap-10 md:gap-8 lg:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center">
-            {data.items.map((x) => (
-              <li key={x._id}>
-                <AnsattCard employee={x as AuthorExpanded} icons={data.icons} />
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul className="grid gap-12 sm:gap-10 md:gap-8 lg:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center">
+          {data.items.map((x) => (
+            <li key={x._id}>
+              <AnsattCard employee={x as AuthorExpanded} icons={data.icons} />
+            </li>
+          ))}
+        </ul>
       </div>
-      <ContactForm title="Snakk med oss om dine IT-utfordringer!" />
-    </>
+    </div>
   );
 }
 

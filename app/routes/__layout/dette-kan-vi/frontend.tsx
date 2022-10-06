@@ -1,6 +1,10 @@
-import { ContactForm } from "~/components/contact-form";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
+import type { CapraHandle } from "~/types";
+
+export const handle: CapraHandle = {
+  contactFormTitle: "Trenger du frontend spisskompetanse på ditt team?",
+};
 
 export default function Frontend() {
   return (
@@ -49,8 +53,6 @@ export default function Frontend() {
         effektivt. Og Capra har selvfølgelig de mest brukerorienterte frontend
         utviklerene som er å oppdrive!
       </ContentAndImageBox>
-
-      <ContactForm title="Trenger du frontend spisskompetanse på ditt team?" />
     </>
   );
 }

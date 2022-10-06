@@ -1,7 +1,11 @@
 import { CallToActionBox } from "~/components/call-to-action-box";
-import { ContactForm } from "~/components/contact-form";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
+import type { CapraHandle } from "~/types";
+
+export const handle: CapraHandle = {
+  contactFormTitle: "Hvordan kan vi hjelpe deg?",
+};
 
 export default function Partnere() {
   return (
@@ -50,7 +54,6 @@ export default function Partnere() {
         description="Sjekk ut hva som skjer i og rundt Capra"
         linkText="Les bloggen"
       />
-      <ContactForm title="Hvordan kan vi hjelpe deg?" />
     </>
   );
 }
