@@ -6,4 +6,4 @@ import { config } from "~/sanity/config";
 const builder = imageUrlBuilder(config);
 
 export const urlFor = (source: SanityImageSource) =>
-  builder.image(source).format("webp");
+  builder.image(source).auto("format");
