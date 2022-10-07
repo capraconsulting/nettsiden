@@ -72,18 +72,20 @@ export default function Index() {
           title={
             <>
               Vi er norges beste på{" "}
-              <TypingText
-                text={[
-                  "AWS",
-                  "selvskryt",
-                  "java",
-                  "vaffelspising",
-                  "javascript",
-                  "smash",
-                  "agile",
-                  "bordtennis",
-                ]}
-              />
+              <span className="block sm:inline-block">
+                <TypingText
+                  text={[
+                    "AWS",
+                    "selvskryt",
+                    "java",
+                    "vaffelspising",
+                    "javascript",
+                    "smash",
+                    "agile",
+                    "bordtennis",
+                  ]}
+                />
+              </span>
             </>
           }
           titleAs="h1"
