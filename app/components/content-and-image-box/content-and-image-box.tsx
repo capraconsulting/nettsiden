@@ -56,7 +56,7 @@ export const ContentAndImageBox: React.FC<Props> = ({
             "md:pl-[100px]": direction === "right",
           },
         )}
-        style={{ height }}
+        style={{ minHeight: height }}
       >
         <div className="p-[2vw] pb-0 text-2xl md:text-4xl font-bold">
           {title}
