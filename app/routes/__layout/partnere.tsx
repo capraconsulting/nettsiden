@@ -1,11 +1,16 @@
+import type { HeadersFunction } from "@remix-run/server-runtime";
+
 import { CallToActionBox } from "~/components/call-to-action-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
 import type { CapraHandle } from "~/types";
+import { cacheControlHeaders } from "~/utils/cache-control";
 
 export const handle: CapraHandle = {
   contactFormTitle: "Hvordan kan vi hjelpe deg?",
 };
+
+export const headers: HeadersFunction = () => cacheControlHeaders;
 
 export default function Partnere() {
   return (

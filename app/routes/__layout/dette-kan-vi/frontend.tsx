@@ -1,10 +1,15 @@
+import type { HeadersFunction } from "@remix-run/server-runtime";
+
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import type { CapraHandle } from "~/types";
+import { cacheControlHeaders } from "~/utils/cache-control";
 
 export const handle: CapraHandle = {
   contactFormTitle: "Trenger du frontend spisskompetanse på ditt team?",
 };
+
+export const headers: HeadersFunction = () => cacheControlHeaders;
 
 export default function Frontend() {
   return (

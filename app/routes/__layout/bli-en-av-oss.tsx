@@ -1,4 +1,5 @@
 import { useLoaderData } from "@remix-run/react";
+import type { HeadersFunction, LoaderArgs } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import { Button } from "~/components/button";
@@ -6,6 +7,7 @@ import { CallToActionBox } from "~/components/call-to-action-box";
 import { CapraLink } from "~/components/capra-link";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
+import { cacheControlHeaders } from "~/utils/cache-control";
 import { uniqueBy } from "~/utils/misc";
 
 /**
@@ -48,15 +50,24 @@ interface CapraJob {
 }
 const TEAM_TAILOR_API_VERSION = "20210218";
 
-export const loader = async () => {
-  if (!process.env.TEAM_TAILOR_API_KEY) {
-    throw new Response(`process.env.TEAM_TAILOR_API_KEY needs to be set`, {
+export const loader = async ({ context }: LoaderArgs) => {
+  // Env
+  let env = {} as Partial<Record<string, unknown>>;
+  if (typeof process !== "undefined") {
+    env = { ...env, ...process.env };
+  }
+  if (context) {
+    env = { ...env, ...context };
+  }
+
+  if (!env.TEAM_TAILOR_API_KEY) {
+    throw new Response(`TEAM_TAILOR_API_KEY needs to be set`, {
       status: 500,
     });
   }
 
   const headers = {
-    Authorization: `Token token=${process.env.TEAM_TAILOR_API_KEY}`,
+    Authorization: `Token token=${env.TEAM_TAILOR_API_KEY}`,
     "X-Api-Version": TEAM_TAILOR_API_VERSION,
   };
 
@@ -87,8 +98,9 @@ export const loader = async () => {
       ),
   );
 
-  return json({ jobs });
+  return json({ jobs }, { headers: cacheControlHeaders });
 };
+export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
 export default function BliEnAvOss() {
   const data = useLoaderData<typeof loader>();

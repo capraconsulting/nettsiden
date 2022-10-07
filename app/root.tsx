@@ -1,4 +1,3 @@
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -7,6 +6,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import type { LinksFunction, MetaFunction } from "@remix-run/server-runtime";
 
 import globalStyles from "./global.css";
 import tailwindStyles from "./tailwind.css";

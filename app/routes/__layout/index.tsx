@@ -1,6 +1,6 @@
-import type { MetaFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import type { HeadersFunction, MetaFunction } from "@remix-run/server-runtime";
+import { json } from "@remix-run/server-runtime";
 
 import { BubbleSandwich } from "~/components/bubbles/bubble-sandwich";
 import { fetchEmployeeImages } from "~/components/bubbles/capra-helper.server";
@@ -9,6 +9,7 @@ import { ContentAndImageBox } from "~/components/content-and-image-box/content-a
 import { TitleAndText } from "~/components/title-and-text";
 import { TypingText } from "~/components/typing-text";
 import type { CapraHandle } from "~/types";
+import { cacheControlHeaders } from "~/utils/cache-control";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { shuffled } from "~/utils/random";
 import {
@@ -48,15 +49,19 @@ export const loader = async () => {
       .then(shuffled)
       .then((l) => l.slice(0, 13)),
   ]);
-  return json({
-    images,
-    employeeImages,
+  return json(
+    {
+      images,
+      employeeImages,
 
-    companies: Object.entries(images)
-      .filter(([name]) => name.startsWith("company-"))
-      .map(([_, image]) => image),
-  });
+      companies: Object.entries(images)
+        .filter(([name]) => name.startsWith("company-"))
+        .map(([_, image]) => image),
+    },
+    { headers: cacheControlHeaders },
+  );
 };
+export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
 export const handle: CapraHandle = {
   contactFormTitle: "Vil du vite mer om hvordan vi kan hjelpe deg?",

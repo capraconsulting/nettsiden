@@ -1,6 +1,10 @@
-import type { LoaderArgs, MetaFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import type {
+  HeadersFunction,
+  LoaderArgs,
+  MetaFunction,
+} from "@remix-run/server-runtime";
+import { json } from "@remix-run/server-runtime";
 
 import { Todo } from "~/components/todo";
 import {
@@ -8,6 +12,7 @@ import {
   sanityClient,
 } from "~/sanity/sanity-client.server";
 import type { CapraHandle } from "~/types";
+import { cacheControlHeaders } from "~/utils/cache-control";
 
 export const handle: CapraHandle = {
   getSitemapEntries: () =>
@@ -29,8 +34,9 @@ export const loader = async ({ params }: LoaderArgs) => {
   const item = (await query(params.slug ?? ""))[0];
   assertItemFound(item);
 
-  return json({ item });
+  return json({ item }, { headers: cacheControlHeaders });
 };
+export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => ({
   title: data.item.helmetTitle,

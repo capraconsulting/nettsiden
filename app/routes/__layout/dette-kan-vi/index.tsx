@@ -1,10 +1,11 @@
 import { useLoaderData } from "@remix-run/react";
-import type { MetaFunction } from "@remix-run/server-runtime";
+import type { HeadersFunction, MetaFunction } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { ContentAndSlogansBox } from "~/components/content-and-slogans-box";
 import { TitleAndText } from "~/components/title-and-text";
+import { cacheControlHeaders } from "~/utils/cache-control";
 import type { Images } from "~/utils/dataRetrieval";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
 
@@ -28,10 +29,14 @@ export const loader = async () => {
     "icon-book",
     "illustration-square-dots2",
   ]);
-  return json({
-    images,
-  });
+  return json(
+    {
+      images,
+    },
+    { headers: cacheControlHeaders },
+  );
 };
+export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
 export default function DetteKanVi() {
   const { images } = useLoaderData<typeof loader>();

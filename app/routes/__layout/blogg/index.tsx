@@ -1,12 +1,17 @@
-import type { LoaderArgs, MetaFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
 import { Form, Link, useLoaderData, useSearchParams } from "@remix-run/react";
+import type {
+  HeadersFunction,
+  LoaderArgs,
+  MetaFunction,
+} from "@remix-run/server-runtime";
+import { json } from "@remix-run/server-runtime";
 
 import { Card } from "~/components/card";
 import { FilterRow } from "~/components/filter-row";
 import { TitleAndText } from "~/components/title-and-text";
 import { sanityClient } from "~/sanity/sanity-client.server";
 import type { Author, Blogg, Bloggfilter } from "~/sanity/schema";
+import { cacheControlHeaders } from "~/utils/cache-control";
 import { urlFor } from "~/utils/imageBuilder";
 import { uniqueBy } from "~/utils/misc";
 
@@ -40,8 +45,12 @@ export const loader = async ({ request }: LoaderArgs) => {
       x.filter.some((filter) => activeFilters.has(filter.title!)),
   );
 
-  return json({ items: filteredItems, filters });
+  return json(
+    { items: filteredItems, filters },
+    { headers: cacheControlHeaders },
+  );
 };
+export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
 export const meta: MetaFunction = () => ({
   title: "Les hva som rører seg i IT-bransjen - Blogg | Capra Consulting",
