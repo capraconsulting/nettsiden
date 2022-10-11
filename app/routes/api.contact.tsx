@@ -1,4 +1,4 @@
-import { json } from "@remix-run/node";
+import { json } from "@remix-run/server-runtime";
 import type { DataFunctionArgs } from "@remix-run/server-runtime/dist/routeModules";
 
 function validate(formData: FormData): Record<string, string> {

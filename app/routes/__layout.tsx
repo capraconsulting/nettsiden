@@ -84,7 +84,7 @@ export default function Layout() {
   );
 }
 
-export function CatchBoundary() {
+export function UnusedCatchBoundary() {
   // Her fanges alle errors
   // Den mest vanlige som kommer til å skje er 404
   // Vi trenger å håndtere to cases:

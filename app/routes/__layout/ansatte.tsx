@@ -1,5 +1,5 @@
 import { Form, useLoaderData, useSearchParams } from "@remix-run/react";
-import type { LoaderArgs } from "@remix-run/server-runtime";
+import type { HeadersFunction, LoaderArgs } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import { Badge } from "~/components/badge";
@@ -9,6 +9,7 @@ import { TitleAndText } from "~/components/title-and-text";
 import { sanityClient } from "~/sanity/sanity-client.server";
 import type { Author, JobCategory } from "~/sanity/schema";
 import type { CapraHandle } from "~/types";
+import { cacheControlHeaders } from "~/utils/cache-control";
 import type { Images } from "~/utils/dataRetrieval";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { urlFor } from "~/utils/imageBuilder";
@@ -48,8 +49,12 @@ export const loader = async ({ request }: LoaderArgs) => {
       x.filter.some((filter) => activeFilters.has(filter.title!)),
   );
 
-  return json({ items: filteredItems, filters, icons });
+  return json(
+    { items: filteredItems, filters, icons },
+    { headers: cacheControlHeaders },
+  );
 };
+export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
 export const handle: CapraHandle = {
   contactFormTitle: "Snakk med oss om dine IT-utfordringer!",

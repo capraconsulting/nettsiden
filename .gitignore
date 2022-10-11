@@ -10,3 +10,10 @@ node_modules
 .vscode/
 
 /app/tailwind.css
+
+remix.config.js
+
+.dev.vars
+/functions/\[\[path\]\].js
+/functions/\[\[path\]\].js.map
+/functions/

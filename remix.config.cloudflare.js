@@ -1,13 +1,11 @@
 /** @type {import('@remix-run/dev').AppConfig} */
 module.exports = {
-  serverBuildTarget: "netlify",
-  server:
-    process.env.NETLIFY || process.env.NETLIFY_LOCAL
-      ? "./server.ts"
-      : undefined,
+  serverBuildTarget: "cloudflare-pages",
+  server: "./server.cloudflare.ts",
+  devServerBroadcastDelay: 1000,
   ignoredRouteFiles: ["**/.*"],
   // appDirectory: "app",
   // assetsBuildDirectory: "public/build",
-  // serverBuildPath: ".netlify/functions-internal/server.js",
+  // serverBuildPath: "functions/[[path]].js",
   // publicPath: "/build/",
 };

@@ -3,16 +3,23 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
-    "build": "run-s build:*",
+    "set-cloudflare-config": "cp remix.config.cloudflare.js remix.config.js",
+    "set-netlify-config": "cp remix.config.netlify.js remix.config.js",
+    "build-cloudflare": "npm-run-all set-cloudflare-config build:*",
+    "build": "npm-run-all set-netlify-config build:*",
     "build:css": "npm run generate:css -- --minify",
     "build:remix": "remix build",
     "build:ladle": "ladle build",
-    "dev": "run-p dev:*",
+    "dev": "npm run set-netlify-config && run-p dev:*",
     "dev:css": "npm run generate:css -- --watch",
     "dev:remix": "remix dev",
     "dev:ladle": "ladle serve",
+    "dev-cloudflare": "npm run set-cloudflare-config && run-p dev:css dev-cloudflare:*",
+    "dev-cloudflare:remix": "remix watch",
+    "dev-cloudflare:wrangler": "cross-env NODE_ENV=development wrangler pages dev ./public",
     "generate:css": "npx tailwindcss -o ./app/tailwind.css",
     "start": "cross-env NODE_ENV=production netlify dev",
+    "start-cloudflare": "cross-env NODE_ENV=production npm run dev:wrangler",
     "lint": "eslint \"./{app,studio}/**/*.{ts,tsx,js,jsx}\"",
     "lint:fix": "npm run lint -- --fix",
     "sanity-codegen": "sanity-codegen"
@@ -22,6 +29,7 @@
   },
   "dependencies": {
     "@netlify/functions": "1.2.0",
+    "@remix-run/cloudflare": "1.7.2",
     "@remix-run/netlify": "1.7.2",
     "@remix-run/node": "1.7.2",
     "@remix-run/react": "1.7.2",
@@ -34,6 +42,7 @@
     "sanity-codegen": "0.9.8"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "3.16.0",
     "@ladle/react": "2.4.3",
     "@remix-run/dev": "1.7.2",
     "@remix-run/eslint-config": "1.7.2",
@@ -49,7 +58,8 @@
     "npm-run-all": "4.1.5",
     "prettier": "2.7.1",
     "tailwindcss": "3.1.8",
-    "typescript": "4.8.3"
+    "typescript": "4.8.3",
+    "wrangler": "2.1.10"
   },
   "engines": {
     "node": ">=18"

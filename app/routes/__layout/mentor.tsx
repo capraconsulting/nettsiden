@@ -1,7 +1,12 @@
+import type { HeadersFunction } from "@remix-run/server-runtime";
+
 import { CallToActionBox } from "~/components/call-to-action-box";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
+import { cacheControlHeaders } from "~/utils/cache-control";
+
+export const headers: HeadersFunction = () => cacheControlHeaders;
 
 export default function Mentor() {
   return (
