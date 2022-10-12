@@ -40,7 +40,6 @@ export const loader = async ({ request }: DataFunctionArgs) => {
   return new Response(sitemap, {
     headers: {
       "Content-Type": "application/xml",
-      "Content-Length": String(Buffer.byteLength(sitemap)),
     },
   });
 };
