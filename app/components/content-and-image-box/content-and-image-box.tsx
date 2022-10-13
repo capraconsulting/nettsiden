@@ -5,6 +5,7 @@ import type { BoxColor } from "~/components/content-and-image-box/utils";
 import { getBoxConfig } from "~/components/content-and-image-box/utils";
 import { Pattern } from "~/components/pattern/pattern";
 import { classNames } from "~/utils/misc";
+import { CapraLink } from "../capra-link";
 
 /**
  * Notes:
@@ -15,6 +16,11 @@ import { classNames } from "~/utils/misc";
  * Or maybe it's not a problem 🤷
  */
 
+type ReadMoreLink = {
+  to: string;
+  linkText?: string;
+};
+
 interface Props {
   title: React.ReactNode;
   children: React.ReactNode;
@@ -24,6 +30,7 @@ interface Props {
 
   height: `${number}vw`;
   direction?: "left" | "right";
+  readMoreLink?: ReadMoreLink;
 }
 
 export const ContentAndImageBox: React.FC<Props> = ({
@@ -35,6 +42,7 @@ export const ContentAndImageBox: React.FC<Props> = ({
 
   height,
   direction = "left",
+  readMoreLink,
 }) => {
   const { boxClassName, patternClassName } = getBoxConfig(color);
   return (
@@ -49,7 +57,7 @@ export const ContentAndImageBox: React.FC<Props> = ({
     >
       <div
         className={classNames(
-          "w-full md:w-[40vw] lg:w-[60w] md:min-w-[500px] flex flex-col justify-center",
+          "w-full md:w-[40vw] lg:w-[60w] md:min-w-[500px] flex flex-col justify-center p-6",
           boxClassName,
           {
             "md:pl-[40px] md:pr-[100px]": direction === "left",
@@ -64,6 +72,18 @@ export const ContentAndImageBox: React.FC<Props> = ({
         <div className="p-[2vw] whitespace-pre-line text-md md:text-lg">
           {children}
         </div>
+        {readMoreLink && (
+          <CapraLink
+            href={readMoreLink.to}
+            className={`p-[2vw] text-md md:text-lg underline-offset-4 ${
+              color === "bordeaux" || color === "darkBlue"
+                ? "text-white"
+                : "text-secondary"
+            }`}
+          >
+            {readMoreLink.linkText ?? "Les mer"}
+          </CapraLink>
+        )}
       </div>
 
       <div
