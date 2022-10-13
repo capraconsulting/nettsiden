@@ -1,22 +1,20 @@
 # Capra Nettsiden
 
-| [https://nettsiden.pages.dev](https://nettsiden.pages.dev)
+> [https://nettsiden.pages.dev](https://nettsiden.pages.dev)
 
-UI med [React](https://reactjs.org/)
-
-Server side rendering med [Remix](https://remix.run/)
-
-Styling med [Tailwind](https://tailwindcss.com/)
-
-Hosted hos [Cloudflare Pages](https://pages.cloudflare.com/)
-
-Innhold hos [Sanity](https://www.sanity.io/)
+- UI med [React](https://reactjs.org/)
+- Server side rendering med [Remix](https://remix.run/)
+- Styling med [Tailwind](https://tailwindcss.com/)
+- Hosted hos [Cloudflare Pages](https://pages.cloudflare.com/)
+- Innhold og bilder hos [Sanity](https://www.sanity.io/)
 
 ## Utvikling
 
-Enkelst bare ett klikk 👇 for å prosjektet i nettleseren med StackBlitz Codeflow
+Bare trykk 👇 for å åpne prosjektet med StackBlitz Codeflow rett i nettleseren
 
 [![Open in Codeflow](https://developer.stackblitz.com/img/open_in_codeflow.svg)](https:///pr.new/capraconsulting/nettsiden)
+
+_Du trenger å logge inn med Github og bli med i beta'en til Codeflow, det går fort._
 
 **Eller** kjør det opp lokalt
 
