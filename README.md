@@ -16,7 +16,7 @@ Innhold hos [Sanity](https://www.sanity.io/)
 
 Enkelst bare ett klikk 👇 for å prosjektet i nettleseren med StackBlitz Codeflow
 
-[![Open in Codeflow](https://developer.stackblitz.com/assets/button-open-in-codeflow-medium.0e08f09f.svg)](https:///pr.new/capraconsulting/nettsiden)
+[![Open in Codeflow](https://developer.stackblitz.com/img/open_in_codeflow.svg)](https:///pr.new/capraconsulting/nettsiden)
 
 **Eller** kjør det opp lokalt
 
