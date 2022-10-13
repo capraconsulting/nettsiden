@@ -16,6 +16,11 @@ import { CapraLink } from "../capra-link";
  * Or maybe it's not a problem 🤷
  */
 
+type ReadMoreLink = {
+  to: string;
+  linkText?: string;
+};
+
 interface Props {
   title: React.ReactNode;
   children: React.ReactNode;
@@ -25,7 +30,7 @@ interface Props {
 
   height: `${number}vw`;
   direction?: "left" | "right";
-  readMoreLink?: string;
+  readMoreLink?: ReadMoreLink;
 }
 
 export const ContentAndImageBox: React.FC<Props> = ({
@@ -69,14 +74,14 @@ export const ContentAndImageBox: React.FC<Props> = ({
         </div>
         {readMoreLink && (
           <CapraLink
-            href={readMoreLink}
+            href={readMoreLink.to}
             className={`p-[2vw] text-md md:text-lg underline-offset-4 ${
               color === "bordeaux" || color === "darkBlue"
                 ? "text-white"
                 : "text-secondary"
             }`}
           >
-            Les mer
+            {readMoreLink.linkText ?? "Les mer"}
           </CapraLink>
         )}
       </div>
