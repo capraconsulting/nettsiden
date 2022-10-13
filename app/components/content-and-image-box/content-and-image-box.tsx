@@ -25,7 +25,7 @@ interface Props {
 
   height: `${number}vw`;
   direction?: "left" | "right";
-  link?: string;
+  readMoreLink?: string;
 }
 
 export const ContentAndImageBox: React.FC<Props> = ({
@@ -37,7 +37,7 @@ export const ContentAndImageBox: React.FC<Props> = ({
 
   height,
   direction = "left",
-  link,
+  readMoreLink,
 }) => {
   const { boxClassName, patternClassName } = getBoxConfig(color);
   return (
@@ -67,9 +67,9 @@ export const ContentAndImageBox: React.FC<Props> = ({
         <div className="p-[2vw] whitespace-pre-line text-md md:text-lg">
           {children}
         </div>
-        {link && (
+        {readMoreLink && (
           <CapraLink
-            href={link}
+            href={readMoreLink}
             className={`p-[2vw] text-md md:text-lg underline-offset-4 ${
               color === "bordeaux" || color === "darkBlue"
                 ? "text-white"

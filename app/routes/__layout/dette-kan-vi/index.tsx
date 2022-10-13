@@ -85,7 +85,7 @@ export default function DetteKanVi() {
         }
         height="40vw"
         color="darkBlue"
-        link="/dette-kan-vi/backend"
+        readMoreLink="/dette-kan-vi/backend"
       >
         {
           "På backend har vi valgt å satse på Java-plattformen og Kotlin for å løse de store og tunge prosessene i kulissene. \n\n Hvorfor det? Vi har valgt markedets største, modne og levende språk. Ved å velge de språkene som utvikler seg raskest sørger vi for at vi alltid vil kunne levere nye og smartere løsninger som vi vet fungerer."
@@ -103,7 +103,7 @@ export default function DetteKanVi() {
         }
         height="40vw"
         color="lightBlue"
-        link="/dette-kan-vi/frontend"
+        readMoreLink="/dette-kan-vi/frontend"
       >
         {
           "På frontend satser vi blant annet på TypeScript, JavaScript, React og Vue. \n\n Riktig bruk av rammeverk og fokus på framtidsrettet og testet kode, mener vi er   suksessfaktorer. Med rette applikasjoner som raskt kan endres og som er enkle å vedlikeholde, skaper vi brukeropplevelser i verdensklasse."
