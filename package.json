@@ -1,5 +1,5 @@
 {
-  "name": "remix-template-netlify",
+  "name": "capraconsulting-nettsiden",
   "private": true,
   "sideEffects": false,
   "scripts": {
@@ -62,6 +62,6 @@
     "wrangler": "2.1.11"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=16"
   }
 }
