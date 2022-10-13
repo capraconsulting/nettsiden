@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "@remix-run/react";
 
 import { randomPattern } from "~/components/content-and-image-box/patterns";
 import type { BoxColor } from "~/components/content-and-image-box/utils";
@@ -24,6 +25,7 @@ interface Props {
 
   height: `${number}vw`;
   direction?: "left" | "right";
+  link?: string;
 }
 
 export const ContentAndImageBox: React.FC<Props> = ({
@@ -35,6 +37,7 @@ export const ContentAndImageBox: React.FC<Props> = ({
 
   height,
   direction = "left",
+  link,
 }) => {
   const { boxClassName, patternClassName } = getBoxConfig(color);
   return (
@@ -49,7 +52,7 @@ export const ContentAndImageBox: React.FC<Props> = ({
     >
       <div
         className={classNames(
-          "w-full md:w-[40vw] lg:w-[60w] md:min-w-[500px] flex flex-col justify-center",
+          "w-full md:w-[40vw] lg:w-[60w] md:min-w-[500px] flex flex-col justify-center p-6",
           boxClassName,
           {
             "md:pl-[40px] md:pr-[100px]": direction === "left",
@@ -64,6 +67,18 @@ export const ContentAndImageBox: React.FC<Props> = ({
         <div className="p-[2vw] whitespace-pre-line text-md md:text-lg">
           {children}
         </div>
+        {link && (
+          <Link
+            to={link}
+            className={`p-[2vw] text-md md:text-lg underline underline-offset-4 decoration-main ${
+              color === "bordeaux" || color === "darkBlue"
+                ? "text-white"
+                : "text-secondary"
+            }`}
+          >
+            Les mer
+          </Link>
+        )}
       </div>
 
       <div
