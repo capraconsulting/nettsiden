@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "@remix-run/react";
 
 import { randomPattern } from "~/components/content-and-image-box/patterns";
 import type { BoxColor } from "~/components/content-and-image-box/utils";
 import { getBoxConfig } from "~/components/content-and-image-box/utils";
 import { Pattern } from "~/components/pattern/pattern";
 import { classNames } from "~/utils/misc";
+import { CapraLink } from "../capra-link";
 
 /**
  * Notes:
@@ -68,16 +68,16 @@ export const ContentAndImageBox: React.FC<Props> = ({
           {children}
         </div>
         {link && (
-          <Link
-            to={link}
-            className={`p-[2vw] text-md md:text-lg underline underline-offset-4 decoration-main ${
+          <CapraLink
+            href={link}
+            className={`p-[2vw] text-md md:text-lg underline-offset-4 ${
               color === "bordeaux" || color === "darkBlue"
                 ? "text-white"
                 : "text-secondary"
             }`}
           >
             Les mer
-          </Link>
+          </CapraLink>
         )}
       </div>
 
