@@ -10,7 +10,7 @@
     "build:css": "npm run generate:css -- --minify",
     "build:remix": "remix build",
     "build:ladle": "ladle build",
-    "dev": "npm run set-netlify-config && run-p dev:*",
+    "dev": "npm run set-netlify-config && npm run generate:css && run-p dev:*",
     "dev:css": "npm run generate:css -- --watch",
     "dev:remix": "remix dev",
     "ladle": "ladle serve",
