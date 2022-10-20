@@ -7,6 +7,7 @@
 - Styling med [Tailwind](https://tailwindcss.com/)
 - Hosted hos [Cloudflare Pages](https://pages.cloudflare.com/)
 - Innhold og bilder hos [Sanity](https://www.sanity.io/)
+- Komponent utvikling med [Ladle](https://ladle.dev/)
 
 ## Utvikling
 
@@ -28,6 +29,14 @@ npm run dev
 ### Secrets
 
 Noen ruter trenger hemmelige API nøkkler disse finner du på [Notion](https://www.notion.so/capra/Tokens-og-s-nn-9f9b4683fefc4a0886967739754109f8), eller spør i [#team_capraweb](https://capra.slack.com/archives/C01A1QLRKJM). Men dette er ikke nødvendig for få repoet til å kjøre og gjøre endringer på de fleste sidene.
+
+### Ladle / Storybook
+
+Flere av felles komponentene utvikler og dokumenterer vi i [ladle](https://ladle.dev/)
+
+```
+npm run ladle
+```
 
 ## Deployment
 

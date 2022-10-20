@@ -13,7 +13,7 @@
     "dev": "npm run set-netlify-config && run-p dev:*",
     "dev:css": "npm run generate:css -- --watch",
     "dev:remix": "remix dev",
-    "dev:ladle": "ladle serve",
+    "ladle": "ladle serve",
     "dev-cloudflare": "npm run set-cloudflare-config && run-p dev:css dev-cloudflare:*",
     "dev-cloudflare:remix": "remix watch",
     "dev-cloudflare:wrangler": "cross-env NODE_ENV=development wrangler pages dev ./public",
