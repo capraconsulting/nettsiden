@@ -45,8 +45,8 @@
     "sanity-codegen": "0.9.8"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "3.16.0",
-    "@ladle/react": "2.4.4",
+    "@cloudflare/workers-types": "3.17.0",
+    "@ladle/react": "2.4.5",
     "@remix-run/dev": "1.7.2",
     "@remix-run/eslint-config": "1.7.2",
     "@remix-run/serve": "1.7.2",
@@ -55,15 +55,15 @@
     "@types/react-dom": "18.0.6",
     "eslint": "8.25.0",
     "eslint-config-prettier": "8.5.0",
-    "eslint-import-resolver-typescript": "3.5.1",
+    "eslint-import-resolver-typescript": "3.5.2",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-simple-import-sort": "8.0.0",
     "npm-run-all": "4.1.5",
     "prettier": "2.7.1",
-    "tailwindcss": "3.1.8",
+    "tailwindcss": "3.2.0",
     "typescript": "4.8.4",
-    "wrangler": "2.1.11"
+    "wrangler": "2.1.12"
   },
   "engines": {
     "node": ">=16"
