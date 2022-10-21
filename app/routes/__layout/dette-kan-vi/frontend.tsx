@@ -14,8 +14,8 @@ export const headers: HeadersFunction = () => cacheControlHeaders;
 export default function Frontend() {
   return (
     <>
-      <TitleAndText title="Hvorfor frontend?" titleAs="h1">
-        Frontend er det vanlige folk har mest forhold til. Det er her de store
+      <TitleAndText title="frontend er best" titleAs="h1">
+        frontend er det vanlige folk har mest forhold til. Det er her de store
         brukeropplevelsene skapes. Om det gjelder et internsystem, hjemmeside
         eller nettbutikk, er frontend absolutt noe alle selskaper bør investere
         i. En god frontendopplevelse kan være forskjellen på å vinne og tape
