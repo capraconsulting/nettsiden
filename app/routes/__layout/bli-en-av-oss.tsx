@@ -27,14 +27,15 @@ interface TeamTailorJob {
   };
   relationships: {
     department: {
-      links: {
-        related: string;
+      data: {
+        type: "departments";
+        id: string;
       };
     };
   };
 }
-interface TeamTailorDepartmentResponse {
-  data: TeamTailorDepartment;
+interface TeamTailorDepartmentsResponse {
+  data: TeamTailorDepartment[];
 }
 interface TeamTailorDepartment {
   id: string;
@@ -72,31 +73,27 @@ export const loader = async ({ context }: LoaderArgs) => {
   };
 
   // Fetch all job listings and their departments
-  const jobsTeamTailor = (await fetch("https://api.teamtailor.com/v1/jobs", {
-    headers,
-  }).then((x) => x.json())) as TeamTailorJobsResponse;
-
-  const fetchDepartment = (
-    url: string,
-  ): Promise<TeamTailorDepartmentResponse> =>
-    fetch(url, {
+  const [jobsTeamTailor, departmentsTeamTailor] = await Promise.all([
+    fetch("https://api.teamtailor.com/v1/jobs?include=department", {
       headers,
-    }).then((x) => x.json());
+    }).then((x) => x.json<TeamTailorJobsResponse>()),
+    fetch("https://api.teamtailor.com/v1/departments", {
+      headers,
+    }).then((x) => x.json<TeamTailorDepartmentsResponse>()),
+  ]);
 
-  const jobs = await Promise.all(
-    jobsTeamTailor.data
-      .filter((job) => !job.attributes.internal)
-      .map(
-        async (job): Promise<CapraJob> => ({
-          id: job.id,
-          title: job.attributes.title,
-          url: job.links["careersite-job-url"],
-          department: (
-            await fetchDepartment(job.relationships.department.links.related)
-          ).data.attributes.name,
-        }),
-      ),
-  );
+  const jobs = jobsTeamTailor.data
+    .filter((job) => !job.attributes.internal)
+    .map(
+      (job): CapraJob => ({
+        id: job.id,
+        title: job.attributes.title,
+        url: job.links["careersite-job-url"],
+        department: departmentsTeamTailor.data.find(
+          (x) => x.id === job.relationships.department.data.id,
+        )!.attributes.name,
+      }),
+    );
 
   return json({ jobs }, { headers: cacheControlHeaders });
 };
