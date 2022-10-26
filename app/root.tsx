@@ -12,6 +12,11 @@ import globalStyles from "./global.css";
 import tailwindStyles from "./tailwind.css";
 
 export const links: LinksFunction = () => [
+  {
+    rel: "icon",
+    href: "/favicon-32x32.png",
+    type: "image/png",
+  },
   { rel: "stylesheet", href: globalStyles },
   { rel: "stylesheet", href: tailwindStyles },
   {
