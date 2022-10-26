@@ -18,7 +18,6 @@ export const menuItems: readonly MenuItem[] = [
   { title: "Dette kan vi", href: "/dette-kan-vi" },
   { title: "Dette har vi gjort", href: "/dette-har-vi-gjort" },
   { title: "Blogg", href: "/blogg" },
-  { title: "Mentorprogram", href: "/mentor" },
   { title: "Bli en av oss", href: "/bli-en-av-oss" },
   { title: "Partnere", href: "/partnere" },
   { title: "Om oss", href: "/om-oss" },
