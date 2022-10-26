@@ -14,6 +14,21 @@ import tailwindStyles from "./tailwind.css";
 export const links: LinksFunction = () => [
   {
     rel: "icon",
+    href: "/favicon.ico",
+    type: "image/ico",
+    sizes: "any"
+  },
+  {
+    rel: "icon",
+    href: "/icon.svg",
+    type: "mage/svg+xml",
+  },
+  {
+    rel: "apple-touch-icon",
+    href: "/apple-touch-icon.png",
+  },
+  {
+    rel: "icon",
     href: "/favicon-32x32.png",
     type: "image/png",
   },
