@@ -16,12 +16,12 @@ export const links: LinksFunction = () => [
     rel: "icon",
     href: "/favicon.ico",
     type: "image/ico",
-    sizes: "any"
+    sizes: "any",
   },
   {
     rel: "icon",
     href: "/icon.svg",
-    type: "mage/svg+xml",
+    type: "image/svg+xml",
   },
   {
     rel: "apple-touch-icon",

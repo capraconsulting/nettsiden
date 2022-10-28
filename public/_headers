@@ -1,2 +1,20 @@
 /build/*
   Cache-Control: public, max-age=31536000, s-maxage=31536000, immutable
+
+# Cache favicon and other icons for one month (2592000 seconds)
+#
+# As alternative we could include these static files in our
+# `app` directory and include them in code, this way they would
+# get the same caching as all the other static content (see caching statement above)
+/apple-touch-icon.png
+  Cache-Control: public, max-age=2592000
+/favicon.ico
+  Cache-Control: public, max-age=2592000
+/icon-192.png
+  Cache-Control: public, max-age=2592000
+/icon-512.png
+  Cache-Control: public, max-age=2592000
+/icon.svg
+  Cache-Control: public, max-age=2592000
+/manifest.webmanifest
+  Cache-Control: public, max-age=2592000
