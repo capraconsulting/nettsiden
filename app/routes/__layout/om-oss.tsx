@@ -150,6 +150,7 @@ export default function OmOss() {
         title="Vi arrangerer en kick-ass konferanse"
         description="Vi elsker å lære bort det vi kan. Derfor arrangerer vi internkonferanse hvert år!"
         linkText="Les om CapraCon"
+        href="https://capracon.no"
       />
 
       <TitleAndText title="Kontakt" titleAs="h2">

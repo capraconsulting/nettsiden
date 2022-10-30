@@ -89,9 +89,10 @@ export default function DetteHarViGjort() {
       </div>
 
       <CallToActionBox
-        title="Er du nysgjerrig om du og Capra er en match?"
+        title="Er du nysgjerrig på om du og Capra er en match?"
         description="Ta en titt på stillingene våre da vel!"
         linkText="Se stillinger"
+        href="https://capraconsulting.teamtailor.com/jobs"
       />
     </>
   );

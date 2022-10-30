@@ -58,6 +58,7 @@ export default function Partnere() {
         title="Vi skriver ofte om partnerne våre i bloggen"
         description="Sjekk ut hva som skjer i og rundt Capra"
         linkText="Les bloggen"
+        href="/blogg"
       />
     </>
   );
