@@ -1,3 +1,4 @@
+import type { PropsWithChildren } from "react";
 import { useLoaderData } from "@remix-run/react";
 import type { HeadersFunction } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
@@ -33,11 +34,11 @@ export default function OmOss() {
       </TitleAndText>
 
       <InfoBox title="Hvem er vi?">
-        Capra ble startet i 2005 og er i dag fremdeles et uavhengig og heleid
-        norskt selskap . Vår rolle er å inspirere gjennom innovativ teknologi og
-        løsninger, ikke bare for kundene våre, men hele bransjen. Vi tilegner,
-        deler, bruker og utvikler kunnskap og løsninger for oss selv og for
-        kundene våre.
+        Capra ble <strong>startet i 2005</strong> og er i dag fremdeles et{" "}
+        <strong>uavhengig og heleid norskt selskap</strong>. Vår rolle er å
+        inspirere gjennom innovativ teknologi og løsninger, ikke bare for
+        kundene våre, men hele bransjen. Vi tilegner, deler, bruker og utvikler
+        kunnskap og løsninger for oss selv og for kundene våre.
       </InfoBox>
 
       <section className="flex flex-col gap-12">
@@ -67,10 +68,16 @@ export default function OmOss() {
       </section>
 
       <TitleAndText title="Capra er organisert i team" titleAs="h2">
-        Vi bryr oss ikke om titler eller hieraki. Derfor har vi ingen
-        ledergruppe, men heller team som består av kollegaer som har frivillig
-        meldt seg til å gjøre Capra bedre.
+        Vi bryr oss ikke om titler eller hieraki.{" "}
+        <strong>Derfor har vi ingen ledergruppe, men heller team</strong> som
+        består av kollegaer som har frivillig meldt seg til å gjøre Capra bedre.
       </TitleAndText>
+
+      <section className="grid grid-cols-2 sm:grid-cols-3 gap-3 w-[90%] max-w-3xl">
+        {teams.map((props) => (
+          <TeamCard key={props.title} {...props} />
+        ))}
+      </section>
 
       <Todo badge className="w-11/12 h-[400px]" title="Forskjelige teams" />
 
@@ -169,14 +176,26 @@ interface InfoBoxProps {
 }
 const InfoBox = ({ title, children, className }: InfoBoxProps) => {
   return (
-    <Todo
-      badge
-      title=""
-      className={`border-none bg-peach-20 w-11/12 max-w-7xl ${className ?? ""}`}
+    <div
+      className={`border-none bg-peach-20 w-11/12 max-w-7xl py-7 px-6 flex flex-col gap-4 ${
+        className ?? ""
+      }`}
     >
       <div className="uppercase font-bold text-main">{title}</div>
       <div>{children}</div>
-    </Todo>
+    </div>
+  );
+};
+
+interface TeamCardProps {
+  title: string;
+}
+const TeamCard = ({ title, children }: PropsWithChildren<TeamCardProps>) => {
+  return (
+    <div className="bg-white shadow-md py-3 px-4 text-sm">
+      <div className="uppercase font-bold text-main">{title}</div>
+      <div>{children}</div>
+    </div>
   );
 };
 
@@ -220,5 +239,42 @@ export const valuePropositions: ValueProposition[] = [
     content: `Vi er uformelle og ærlige. 
   Vi deler alt, med mindre norsk lov sier at vi ikke kan.`,
     color: "#5D2332",
+  },
+];
+
+const teams: PropsWithChildren<TeamCardProps>[] = [
+  {
+    title: "Team felles retning",
+    children:
+      "Sørger for at alle geiter vet hvilke topp vi skal bestige og jobber sammen om å bringe oss dit.",
+  },
+  {
+    title: "Team sosialt",
+    children: "Organiserer morsomme felles aktiviteter for alle sammen!",
+  },
+  {
+    title: "HR",
+    children: "Sørger for at alle blir tatt godt vare på.",
+  },
+  {
+    title: "Salgsteam",
+    children: "Sørger for oppdrag med bratte læringskurver.",
+  },
+  {
+    title: "Team økonomi",
+    children: "Holder den økonomiske skuta gående",
+  },
+  {
+    title: "Team marked",
+    children:
+      "Jobber for at blant annet du skal vite hvem vi er og hva vi gjør!",
+  },
+  {
+    title: "Fagteam",
+    children: "Vi har 5 fagteam som sørger for et levende fagmiljø!",
+  },
+  {
+    title: "Team Organisasjonsutvikling",
+    children: "Fasilitere og støtte organiseringen.",
   },
 ];
