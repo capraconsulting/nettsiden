@@ -104,6 +104,20 @@ export function uniqueBy<T>(list: T[], selector: (x: T) => any) {
   return result;
 }
 
+export function groupBy<T>(
+  list: T[],
+  selector: (t: T) => string,
+): Record<string, T[]> {
+  return list.reduce<Record<string, T[]>>((acc, curr) => {
+    const key = selector(curr);
+    if (!(key in acc)) {
+      acc[key] = [];
+    }
+    acc[key].push(curr);
+    return acc;
+  }, {});
+}
+
 /**
  * Shift (or rotate) an array to left of right
  *

@@ -8,7 +8,7 @@ import { CapraLink } from "~/components/capra-link";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { cacheControlHeaders } from "~/utils/cache-control";
-import { uniqueBy } from "~/utils/misc";
+import { groupBy } from "~/utils/misc";
 
 /**
  * Team Tailor integration
@@ -16,6 +16,7 @@ import { uniqueBy } from "~/utils/misc";
 interface TeamTailorJobsResponse {
   data: TeamTailorJob[];
 }
+
 interface TeamTailorJob {
   id: string;
   attributes: {
@@ -34,21 +35,25 @@ interface TeamTailorJob {
     };
   };
 }
+
 interface TeamTailorDepartmentsResponse {
   data: TeamTailorDepartment[];
 }
+
 interface TeamTailorDepartment {
   id: string;
   attributes: {
     name: string;
   };
 }
+
 interface CapraJob {
   id: string;
   title: string;
   url: string;
   department: string;
 }
+
 const TEAM_TAILOR_API_VERSION = "20210218";
 
 export const loader = async ({ context }: LoaderArgs) => {
@@ -84,23 +89,20 @@ export const loader = async ({ context }: LoaderArgs) => {
 
   const jobs = jobsTeamTailor.data
     .filter((job) => !job.attributes.internal)
-    .map(
-      (job): CapraJob => ({
-        id: job.id,
-        title: job.attributes.title,
-        url: job.links["careersite-job-url"],
-        department: departmentsTeamTailor.data.find(
-          (x) => x.id === job.relationships.department.data.id,
-        )!.attributes.name,
-      }),
-    );
+    .map<CapraJob>((job) => ({
+      id: job.id,
+      title: job.attributes.title,
+      url: job.links["careersite-job-url"],
+      department: departmentsTeamTailor.data.find(
+        (x) => x.id === job.relationships.department.data.id,
+      )!.attributes.name,
+    }));
 
   return json({ jobs }, { headers: cacheControlHeaders });
 };
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
 export default function BliEnAvOss() {
-  const data = useLoaderData<typeof loader>();
   return (
     <>
       <div className="flex flex-col gap-12 w-full">
@@ -123,11 +125,7 @@ export default function BliEnAvOss() {
         </div>
       </div>
 
-      <JobListingsByDepartment
-        className="w-11/12 max-w-4xl"
-        jobs={data.jobs}
-        titleAs="h2"
-      />
+      <JobListingsByDepartment />
 
       <ContentAndImageBox
         title="TODO: Info om størrelse på selskapet"
@@ -146,8 +144,8 @@ export default function BliEnAvOss() {
         color="peach"
       >
         Vi består av en gjeng som er over gjennomsnittet interessert i tech, og
-        det reflekteres i fagmiljøet vårt. Fagmiljøene er åpne og du kan delta
-        på det du vil .
+        det reflekteres i fagmiljøet vårt.{" "}
+        <strong>Fagmiljøene er åpne og du kan delta på det du vil .</strong>
       </ContentAndImageBox>
 
       <ContentAndImageBox
@@ -157,14 +155,20 @@ export default function BliEnAvOss() {
         color="bordeaux"
       >
         Kontoret til Capra ligger midt på Jernbanetorget sånn at du enkelt kan
-        komme “hjemom” en tur, før eller etter du har vært hos kunde. Kontoret
-        blir brukt mye . Når du er på hjemmebane kan du slappe av med ping pong,
-        spill, noe digg å drikke og godt selskap. I tillegg til julelunsj,
-        juletrefest, sommerfest, årsfest, lønningspilser og internkonferansen
-        CapraCon , så har vi mange sosiale initiativ som er startet av våre
-        egne. Blant annet er det flere som digger squash, toppturer, cageball,
-        familieturer på teater, vinsmaking osv . Savner du noe? Det er åpent for
-        nye initiativer!
+        komme “hjemom” en tur, før eller etter du har vært hos kunde.{" "}
+        <strong>Kontoret blir brukt mye</strong>. Når du er på hjemmebane kan du
+        slappe av med ping pong, spill, noe digg å drikke og godt selskap. I
+        tillegg til{" "}
+        <strong>
+          julelunsj, juletrefest, sommerfest, årsfest, lønningspilser og
+          internkonferansen CapraCon
+        </strong>
+        , så har vi mange sosiale initiativ som er startet av våre egne. Blant
+        annet er det flere som digger{" "}
+        <strong>
+          squash, toppturer, cageball, familieturer på teater, vinsmaking osv
+        </strong>
+        . Savner du noe? Det er åpent for nye initiativer!
       </ContentAndImageBox>
 
       <CallToActionBox
@@ -176,50 +180,31 @@ export default function BliEnAvOss() {
   );
 }
 
-interface JobListingsByDepartmentProps {
-  jobs: CapraJob[];
-  titleAs: "h2" | "h3" | "h4";
-  className?: string;
-}
-const JobListingsByDepartment = ({
-  jobs,
-  titleAs: TitleComponent,
-  className,
-}: JobListingsByDepartmentProps) => {
-  const departments = uniqueBy(
-    jobs.map((x) => x.department),
-    (x) => x,
-  );
+const JobListingsByDepartment: React.FC = () => {
+  const { jobs } = useLoaderData<typeof loader>();
+  const groups = groupBy(jobs, (it) => it.department);
   return (
-    <div className={`flex flex-col gap-8 ${className}`}>
-      {departments.map((department) => (
-        <div key={department} className="flex flex-col gap-4">
-          <TitleComponent className="text-2xl font-bold">
+    <div className="flex flex-col gap-8 w-11/12 max-w-4xl">
+      {Object.entries(groups).map(([department, jobs]) => (
+        <details
+          key={department}
+          className="[&>summary:after]:open:content-['▼']"
+          open
+        >
+          <summary className="text-2xl font-bold list-none cursor-pointer pb-2 mb-4 border-b border-b-[#ccc] flex justify-between after:self-center after:text-xs after:text-[#ccc] after:content-['►']">
             {department}
-          </TitleComponent>
-          <JobListings
-            key={department}
-            jobs={jobs.filter((job) => job.department === department)}
-          />
-        </div>
+          </summary>
+          <ul className="flex flex-col gap-4">
+            {jobs.map((x) => (
+              <li key={x.id}>
+                <CapraLink href={x.url} target="_blank" className="text-xl">
+                  {x.title}
+                </CapraLink>
+              </li>
+            ))}
+          </ul>
+        </details>
       ))}
     </div>
-  );
-};
-
-interface JobListingsProps {
-  jobs: CapraJob[];
-}
-const JobListings = ({ jobs }: JobListingsProps) => {
-  return (
-    <ul className="flex flex-col gap-2">
-      {jobs.map((x) => (
-        <li key={x.id}>
-          <CapraLink href={x.url} target="_blank" className="text-xl">
-            {x.title}
-          </CapraLink>
-        </li>
-      ))}
-    </ul>
   );
 };
