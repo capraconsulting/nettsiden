@@ -6,13 +6,15 @@ import type {
 } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
-import { Todo } from "~/components/todo";
+import { ProseableText } from "~/components/ProsableText";
 import {
   getSanitySitemapEntries,
   sanityClient,
 } from "~/sanity/sanity-client.server";
+import { getMainImageAlt } from "~/sanity/utils";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
+import { urlFor } from "~/utils/imageBuilder";
 
 export const handle: CapraHandle = {
   getSitemapEntries: () =>
@@ -46,23 +48,24 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => ({
 export default function DetteHarViGjortItem() {
   const { item } = useLoaderData<typeof loader>();
 
-  // Quick and dirty
-  // Extract some text from the BlockContent body
-  const texts = item.body
-    ?.map((x) => (x as any)?.children[0]?.text)
-    .filter(Boolean);
-
   return (
-    <Todo>
-      <h1>{item.helmetTitle}</h1>
-      <p>{item.helmetDescription}</p>
-      {texts?.map((x, i) => (
-        <p key={i}>{x}</p>
-      ))}
-      <details>
-        <summary>See JSON</summary>
-        <pre>{JSON.stringify(item, null, 2)}</pre>
-      </details>
-    </Todo>
+    <article className="w-[90%] max-w-2xl flex flex-col gap-5">
+      <h1 className="text-5xl font-bold text-header leading-[1.14]">
+        {item.titleLong}
+      </h1>
+      <ProseableText value={item.ingress!} className="text-brodtext text-2xl" />
+
+      <img
+        className="max-w-3xl"
+        // TODO: Crop to a square
+        src={urlFor(item.mainImage!).url()}
+        alt={getMainImageAlt(item)}
+      />
+
+      <ProseableText
+        value={item.body!}
+        className="color-brodtext text-xl font-light"
+      />
+    </article>
   );
 }

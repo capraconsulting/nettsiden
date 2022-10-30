@@ -7,7 +7,8 @@ import {
   getSanitySitemapEntries,
   sanityClient,
 } from "~/sanity/sanity-client.server";
-import type { Author, BlockContent, Blogg } from "~/sanity/schema";
+import type { Author, Blogg } from "~/sanity/schema";
+import { getMainImageAlt } from "~/sanity/utils";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { urlFor } from "~/utils/imageBuilder";
@@ -65,7 +66,7 @@ export default function BloggPost() {
       <img
         className="max-w-3xl"
         src={urlFor(item.mainImage!).url()}
-        alt={getMainImageAlt(item.mainImageAlt)}
+        alt={getMainImageAlt(item)}
       />
 
       <ProseableText
@@ -74,20 +75,4 @@ export default function BloggPost() {
       />
     </article>
   );
-}
-
-// https://www.sanity.io/docs/presenting-block-text#ac67a867dd69
-function getMainImageAlt(mainImageAlt: BlockContent | undefined): string {
-  return (mainImageAlt ?? [])
-    .map((block) => {
-      if (block._type !== "block" || !block.children) {
-        return null;
-      }
-
-      return block.children
-        .map((child: { text?: string }) => child.text)
-        .join("");
-    })
-    .filter(Boolean)
-    .join("\n\n");
 }
