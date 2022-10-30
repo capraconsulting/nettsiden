@@ -132,6 +132,10 @@ export default function BliEnAvOss() {
         image={undefined}
         height="40vw"
         color="lightBlue"
+        readMoreLink={{
+          linkText: "Hils på alle sammen",
+          to: "/ansatte",
+        }}
       >
         Er du happy og kunden happy, så er Capra happy!
       </ContentAndImageBox>
@@ -142,6 +146,10 @@ export default function BliEnAvOss() {
         height="40vw"
         direction="right"
         color="peach"
+        readMoreLink={{
+          linkText: "Se hva vi bruker",
+          to: "/dette-kan-vi#teknologier",
+        }}
       >
         Vi består av en gjeng som er over gjennomsnittet interessert i tech, og
         det reflekteres i fagmiljøet vårt.{" "}

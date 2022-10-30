@@ -1,15 +1,27 @@
+import { classNames } from "~/utils/misc";
+
 interface TitleAndTextProps {
   title: React.ReactNode;
   titleAs: "h1" | "h2" | "h3";
   children: React.ReactNode;
+  id?: string;
 }
 export const TitleAndText = ({
   title,
   titleAs: TitleComponent,
   children,
+  id,
 }: TitleAndTextProps) => {
   return (
-    <div className="w-full flex flex-col items-center gap-3 lg:gap-4 text-center">
+    <div
+      id={id}
+      className={classNames(
+        "w-full flex flex-col items-center gap-3 lg:gap-4 text-center",
+        {
+          "scroll-mt-nav-height": !!id,
+        },
+      )}
+    >
       <TitleComponent className="w-[95%] max-w-7xl font-bold text-3xl md:text-4xl lg:text-6xl text-secondary">
         {title}
       </TitleComponent>

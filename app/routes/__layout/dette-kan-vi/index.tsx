@@ -50,7 +50,7 @@ export default function DetteKanVi() {
       <LifligPitchAndSloganBox direction="left" images={images} />
       <KonsulenterPitchAndSloganBox direction="right" images={images} />
 
-      <TitleAndText title="Teknologier" titleAs="h2">
+      <TitleAndText id="teknologier" title="Teknologier" titleAs="h2">
         Vi i Capra er spesialister. Vi har tatt klare tekniske valg og blitt
         blant de beste innenfor våre fagfelt.
       </TitleAndText>
