@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "@remix-run/react";
 import type { RemixLinkProps } from "@remix-run/react/dist/components";
 
@@ -22,6 +23,12 @@ export const CapraLink = ({
   ...rest
 }: CapraLinkProps) => {
   const finalClassName = classNames("underline decoration-main", className);
+
+  if (!href) {
+    const id = React.Children.toArray(children)[0];
+    console.warn(`Missing href for link with text "${id}"`);
+    return <>{children}</>;
+  }
 
   // Naive protocol matcher
   if (href.match(/^\w+:/)) {
