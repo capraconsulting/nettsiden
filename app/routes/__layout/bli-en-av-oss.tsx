@@ -93,7 +93,7 @@ export const loader = async ({ context }: LoaderArgs) => {
   const jobs = jobsTeamTailor.data
     .filter((job) => !job.attributes.internal)
     .map<CapraJob | undefined>((job) => {
-      // Some Job's might not have an department set
+      // Some Job's might not have a department set
       // This should be fixed in Teamtailor UI
       const departmentId = job.relationships.department.data?.id;
       if (!departmentId) {
