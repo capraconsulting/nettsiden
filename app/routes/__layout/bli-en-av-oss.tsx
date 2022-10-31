@@ -8,7 +8,7 @@ import { CapraLink } from "~/components/capra-link";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { cacheControlHeaders } from "~/utils/cache-control";
-import { groupBy } from "~/utils/misc";
+import { groupBy, typedBoolean } from "~/utils/misc";
 
 /**
  * Team Tailor integration
@@ -28,9 +28,12 @@ interface TeamTailorJob {
   };
   relationships: {
     department: {
-      data: {
+      data?: {
         type: "departments";
         id: string;
+      };
+      links: {
+        related: string;
       };
     };
   };
@@ -89,14 +92,34 @@ export const loader = async ({ context }: LoaderArgs) => {
 
   const jobs = jobsTeamTailor.data
     .filter((job) => !job.attributes.internal)
-    .map<CapraJob>((job) => ({
-      id: job.id,
-      title: job.attributes.title,
-      url: job.links["careersite-job-url"],
-      department: departmentsTeamTailor.data.find(
-        (x) => x.id === job.relationships.department.data.id,
-      )!.attributes.name,
-    }));
+    .map<CapraJob | undefined>((job) => {
+      // Some Job's might not have an department set
+      // This should be fixed in Teamtailor UI
+      const departmentId = job.relationships.department.data?.id;
+      if (!departmentId) {
+        console.warn(
+          `Could not get departmentId from Job ${job.attributes.title} (${job.id})`,
+        );
+        return undefined;
+      }
+
+      const deparment = departmentsTeamTailor.data.find(
+        (x) => x.id === departmentId,
+      );
+      if (!deparment) {
+        throw new Error(
+          `Could not find coresponding department for "${job.attributes.title}" (${job.id}) with departmentId ${departmentId}`,
+        );
+      }
+
+      return {
+        id: job.id,
+        title: job.attributes.title,
+        url: job.links["careersite-job-url"],
+        department: deparment.attributes.name,
+      };
+    })
+    .filter(typedBoolean);
 
   return json({ jobs }, { headers: cacheControlHeaders });
 };
