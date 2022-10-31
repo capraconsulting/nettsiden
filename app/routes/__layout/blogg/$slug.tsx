@@ -2,6 +2,7 @@ import { useLoaderData } from "@remix-run/react";
 import type { HeadersFunction, LoaderArgs } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
+import { CapraImage } from "~/components/capra-image";
 import { ProseableText } from "~/components/ProsableText";
 import {
   getSanitySitemapEntries,
@@ -63,7 +64,7 @@ export default function BloggPost() {
         <time className="text-sm text-[#555]">{item.publishedAt}</time>
       </p>
 
-      <img
+      <CapraImage
         className="max-w-3xl"
         src={urlFor(item.mainImage!).url()}
         alt={getMainImageAlt(item)}

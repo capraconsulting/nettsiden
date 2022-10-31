@@ -1,5 +1,6 @@
 import { socialIcons } from "~/utils/constants";
 import { Badge } from "./badge";
+import { CapraImage } from "./capra-image";
 import { Card } from "./card";
 
 export const CardStories = () => {
@@ -8,7 +9,7 @@ export const CardStories = () => {
       <a href="#dette-har-vi-gjort">
         <Card
           image={
-            <img
+            <CapraImage
               alt=""
               src="https://cdn.sanity.io/images/3drrs17h/production/3caf38fa7022149f24f434951d4d126587c19837-800x449.png?w=800&h=449&auto=format"
             />
@@ -32,7 +33,7 @@ export const CardStories = () => {
       <a href="#Blogg">
         <Card
           image={
-            <img
+            <CapraImage
               src="https://cdn.sanity.io/images/3drrs17h/production/526b9fe08148af1a6c296a57013476b6d6071427-1920x1285.jpg?w=1366&h=914&auto=format"
               alt=""
             />
@@ -94,7 +95,7 @@ export const CardStories = () => {
       </Card>
       <Card
         image={
-          <img
+          <CapraImage
             alt=""
             src="https://cdn.sanity.io/images/3drrs17h/production/245fc89dfead5d9a4049b5fcf0e44238bac396ce-4500x3000.jpg?rect=750,0,3000,3000&w=1600&h=1600&auto=format"
           />

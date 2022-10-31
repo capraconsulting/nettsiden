@@ -6,6 +6,7 @@ import type {
 } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
+import { CapraImage } from "~/components/capra-image";
 import { Card } from "~/components/card";
 import { FilterRow } from "~/components/filter-row";
 import { TitleAndText } from "~/components/title-and-text";
@@ -100,7 +101,7 @@ export const BloggCard = ({ bloggEntry }: BloggCardProps) => {
       <Card
         image={
           <div className="relative pb-[50%]">
-            <img
+            <CapraImage
               className="absolute h-full w-full object-cover"
               alt="" // TODO
               src={urlFor(bloggEntry.mainImage!)

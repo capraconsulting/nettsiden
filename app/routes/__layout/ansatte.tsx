@@ -3,6 +3,7 @@ import type { HeadersFunction, LoaderArgs } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import { Badge } from "~/components/badge";
+import { CapraImage } from "~/components/capra-image";
 import { Card } from "~/components/card";
 import { FilterRow } from "~/components/filter-row";
 import { TitleAndText } from "~/components/title-and-text";
@@ -105,7 +106,7 @@ export const AnsattCard = ({ employee, icons }: AnsattCardProps) => {
     <Card
       image={
         <div className="relative pb-[66%] md:pb-[100%]">
-          <img
+          <CapraImage
             className="absolute h-full w-full object-cover"
             alt={`Bilde av ${employee.name}`}
             src={urlFor(employee.image!)
@@ -143,7 +144,7 @@ export const AnsattCard = ({ employee, icons }: AnsattCardProps) => {
       <div className="mt-auto flex gap-1">
         {employee.linkedIn && (
           <a href={employee.linkedIn}>
-            <img
+            <CapraImage
               alt="linkedin"
               className={classes.icon}
               src={icons["icon-linkedin"].imageUrl}
@@ -152,7 +153,7 @@ export const AnsattCard = ({ employee, icons }: AnsattCardProps) => {
         )}
         {employee.twitter && (
           <a href={employee.twitter}>
-            <img
+            <CapraImage
               alt="twitter"
               className={classes.icon}
               src={icons["icon-twitter"].imageUrl}
@@ -161,7 +162,7 @@ export const AnsattCard = ({ employee, icons }: AnsattCardProps) => {
         )}
         {employee.github && (
           <a href={employee.github}>
-            <img
+            <CapraImage
               alt="github"
               className={classes.icon}
               src={icons["icon-github"].imageUrl}
@@ -170,7 +171,7 @@ export const AnsattCard = ({ employee, icons }: AnsattCardProps) => {
         )}
         {employee.website && (
           <a href={employee.website}>
-            <img
+            <CapraImage
               alt="nettside"
               className={classes.icon}
               src={icons["icon-website"].imageUrl}

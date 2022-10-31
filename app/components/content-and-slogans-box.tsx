@@ -1,4 +1,5 @@
 import { classNames } from "~/utils/misc";
+import { CapraImage } from "./capra-image";
 import { CapraLink } from "./capra-link";
 
 interface Slogan {
@@ -86,11 +87,11 @@ export const ContentAndSlogansBox = ({
               "aspect-square",
             )}
           >
-            <img className="mt-[20%] w-[40%]" src={imageUrl} alt="" />
+            <CapraImage className="mt-[20%] w-[40%]" src={imageUrl} alt="" />
             <p className="font-bold absolute bottom-[20%]">{title}</p>
           </div>
         ))}
-        <img src={illustrationImageUrl} alt="" />
+        <CapraImage src={illustrationImageUrl} alt="" />
       </div>
     </div>
   );
