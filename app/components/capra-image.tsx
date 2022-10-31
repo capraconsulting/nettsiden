@@ -5,8 +5,12 @@ const DEFAULT: React.ComponentProps<"img"> = {
   // Very useful for pages showing lots of images, or when there are images at bottom
   loading: "lazy",
 
-  // This seems to be the default in most or all other img abstractions
-  decoding: "async",
+  // `decoding="async" seems to be the default in most or all other img abstractions
+  // Like Next 13
+  // But without placeholder tricks and such this causes a quick flash when first loading a page with images visible,
+  // not so nice.
+  // we can consider this at a later time, maybe it's an edge case and the tradeoff is worth it.
+  // decoding: "async",
 };
 
 // TODO:
