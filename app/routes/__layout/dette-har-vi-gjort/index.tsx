@@ -8,6 +8,7 @@ import { json } from "@remix-run/server-runtime";
 
 import { Badge } from "~/components/badge";
 import { CallToActionBox } from "~/components/call-to-action-box";
+import { CapraImage } from "~/components/capra-image";
 import { Card } from "~/components/card";
 import { FilterRow } from "~/components/filter-row";
 import { TitleAndText } from "~/components/title-and-text";
@@ -107,7 +108,7 @@ export const SelvskrytCard = ({ selvskryt }: SelvskrytCardProps) => {
       <Card
         image={
           <div className="relative pb-[66%] md:pb-[100%]">
-            <img
+            <CapraImage
               className="absolute h-full w-full object-cover"
               alt={selvskryt.mainImageAlt}
               src={urlFor(selvskryt.mainImage!)

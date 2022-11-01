@@ -6,6 +6,7 @@ import type {
 } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
+import { CapraImage } from "~/components/capra-image";
 import { ProseableText } from "~/components/ProsableText";
 import {
   getSanitySitemapEntries,
@@ -55,7 +56,7 @@ export default function DetteHarViGjortItem() {
       </h1>
       <ProseableText value={item.ingress!} className="text-brodtext text-2xl" />
 
-      <img
+      <CapraImage
         className="max-w-3xl"
         // TODO: Crop to a square
         src={urlFor(item.mainImage!).url()}

@@ -6,6 +6,7 @@ import { json } from "@remix-run/server-runtime";
 import { BubbleGrid } from "~/components/bubbles/bubble-grid";
 import { fetchEmployeeImages } from "~/components/bubbles/capra-helper.server";
 import { CallToActionBox } from "~/components/call-to-action-box";
+import { CapraImage } from "~/components/capra-image";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
@@ -62,7 +63,7 @@ export default function OmOss() {
         </TitleAndText>
         <BubbleGrid
           items={employeeImages.map((x) => (
-            <img key={x} src={x} alt="Ansatt i Capra" />
+            <CapraImage key={x} src={x} alt="Ansatt i Capra" />
           ))}
         />
       </section>

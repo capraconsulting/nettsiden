@@ -10,6 +10,7 @@ import {
 } from "~/utils/constants";
 import type { Images } from "~/utils/dataRetrieval";
 import { capitalize, formatPhoneNumber } from "~/utils/misc";
+import { CapraImage } from "./capra-image";
 
 interface FooterModuleProps {
   title: string;
@@ -152,7 +153,7 @@ export const Footer = ({ images }: FooterProps) => (
             rel="noopener noreferrer"
             title="EKT Rideskole og Husdyrpark"
           >
-            <img
+            <CapraImage
               className="p-1 w-20 rounded bg-white"
               src={images["logo-ekt"].imageUrl}
               alt={images["logo-ekt"].alt}
@@ -169,7 +170,7 @@ export const Footer = ({ images }: FooterProps) => (
               rel="noopener noreferrer"
               title="Capra er Miljøtårnsertifisert"
             >
-              <img
+              <CapraImage
                 className="p-1 w-20 rounded bg-white"
                 src={images["logo-miljofyrtaarn"].imageUrl}
                 alt={images["logo-miljofyrtaarn"].alt}
@@ -181,7 +182,7 @@ export const Footer = ({ images }: FooterProps) => (
               rel="noopener noreferrer"
               title="Capra er ISO-9001-sertifisert - trykk for å se sertifikat"
             >
-              <img
+              <CapraImage
                 className="p-1 w-20 rounded bg-white"
                 src={images["logo-quality-sys-cert-iso-9001"].imageUrl}
                 alt={images["logo-quality-sys-cert-iso-9001"].alt}

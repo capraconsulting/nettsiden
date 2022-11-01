@@ -2,6 +2,7 @@ import { useLoaderData } from "@remix-run/react";
 import type { HeadersFunction, MetaFunction } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
+import { CapraImage } from "~/components/capra-image";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { ContentAndSlogansBox } from "~/components/content-and-slogans-box";
 import { TitleAndText } from "~/components/title-and-text";
@@ -58,7 +59,7 @@ export default function DetteKanVi() {
       <ContentAndImageBox
         title="Sky"
         image={
-          <img
+          <CapraImage
             className="w-full h-full object-contain overflow-hidden"
             src={images.cloud.imageUrl}
             alt={images.cloud.alt}
@@ -77,7 +78,7 @@ export default function DetteKanVi() {
         title="Backend"
         direction="right"
         image={
-          <img
+          <CapraImage
             className="w-full h-full object-contain overflow-hidden"
             src={images.backend.imageUrl}
             alt={images.backend.alt}
@@ -95,7 +96,7 @@ export default function DetteKanVi() {
       <ContentAndImageBox
         title="Frontend"
         image={
-          <img
+          <CapraImage
             className="w-full h-full object-contain overflow-hidden"
             src={images.frontend.imageUrl}
             alt={images.frontend.alt}
@@ -114,7 +115,7 @@ export default function DetteKanVi() {
         title="Teknisk arkitektur"
         direction="right"
         image={
-          <img
+          <CapraImage
             className="w-full h-full object-contain overflow-hidden"
             src={images["tech-architecture"].imageUrl}
             alt={images["tech-architecture"].alt}
@@ -131,7 +132,7 @@ export default function DetteKanVi() {
       <ContentAndImageBox
         title="Team-, prosjektleder og smidig coach"
         image={
-          <img
+          <CapraImage
             className="w-full h-full object-contain overflow-hidden"
             src={images["project-lead"].imageUrl}
             alt={images["project-lead"].alt}

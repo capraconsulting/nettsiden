@@ -7,6 +7,7 @@ import type { SanityImageAsset, SanityReference } from "sanity-codegen";
 import { Button } from "~/components/button";
 import type { action as contactAction } from "~/routes/api.contact";
 import { urlFor } from "~/utils/imageBuilder";
+import { CapraImage } from "./capra-image";
 import { CapraLink } from "./capra-link";
 
 interface ContactFormProps {
@@ -113,7 +114,7 @@ const Representatives = ({ representatives }: RepresentativesProps) => {
     <div className="grid grid-flow-dense grid-cols-1 md:grid-cols-2 gap-y-5 gap-x-14 px-5">
       {representatives.map(({ name, email, image }) => (
         <div key={name} className="flex flex-col">
-          <img
+          <CapraImage
             className=""
             alt={`Bilde av ${name}`}
             src={urlFor(image).size(600, 600).url()}

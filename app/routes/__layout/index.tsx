@@ -5,6 +5,7 @@ import { json } from "@remix-run/server-runtime";
 import { BubbleSandwich } from "~/components/bubbles/bubble-sandwich";
 import { fetchEmployeeImages } from "~/components/bubbles/capra-helper.server";
 import { Button } from "~/components/button";
+import { CapraImage } from "~/components/capra-image";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { TypingText } from "~/components/typing-text";
@@ -119,7 +120,7 @@ export default function Index() {
 
       <ContentAndImageBox
         title="Vi er Advanced Tier Consulting Partner"
-        image={<img src={images.aws.imageUrl} alt={images.aws.alt} />}
+        image={<CapraImage src={images.aws.imageUrl} alt={images.aws.alt} />}
         height="32vw"
         color="peach"
       >
@@ -128,7 +129,7 @@ export default function Index() {
       <ContentAndImageBox
         title="Vi er spesialister"
         image={
-          <img
+          <CapraImage
             className="w-full h-full object-contain overflow-hidden"
             src={images.tech.imageUrl}
             alt={images.tech.alt}
@@ -144,7 +145,7 @@ export default function Index() {
 
       <BubbleSandwich
         items={employeeImages.map((x) => (
-          <img key={x} src={x} alt="Ansatt i Capra" />
+          <CapraImage key={x} src={x} alt="Ansatt i Capra" />
         ))}
       >
         <div className="flex flex-col items-center gap-8 sm:gap-[10vh]">
@@ -168,7 +169,7 @@ export default function Index() {
         <div className="grid grid-cols-2 max-w-xl mx-auto items-center">
           {companies.map(({ alt, imageUrl }) => (
             <div key={imageUrl} className="flex justify-center items-center">
-              <img src={imageUrl} alt={alt} />
+              <CapraImage src={imageUrl} alt={alt} />
             </div>
           ))}
         </div>

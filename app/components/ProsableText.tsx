@@ -8,6 +8,7 @@ import github from "prism-react-renderer/themes/github";
 import type { BlockContent } from "~/sanity/schema";
 import { urlFor } from "~/utils/imageBuilder";
 import { classNames } from "~/utils/misc";
+import { CapraImage } from "./capra-image";
 import { CapraLink } from "./capra-link";
 
 interface PrismProps {
@@ -43,7 +44,10 @@ function Image(props: PortableTextTypeComponentProps<any>) {
 
   return (
     <figure>
-      <img alt={props.value.alt ?? ""} src={urlFor(props.value.asset).url()} />
+      <CapraImage
+        alt={props.value.alt ?? ""}
+        src={urlFor(props.value.asset).url()}
+      />
       <figcaption>{props.value.caption}</figcaption>
     </figure>
   );
