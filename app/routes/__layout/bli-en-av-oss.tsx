@@ -143,10 +143,10 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     "Hos Capra Consulting får muligheten til å utvikle deg i et faglig og sosialt miljø. Nysgjerrig på hva Capra kan tilby? Les mer her";
   return {
     title,
-    ogTitle: title,
+    "og:title": title,
     description,
-    ogDescription: description,
-    ogImage: data.images["photo-sem-capracon"].imageUrl,
+    "og:description": description,
+    "og:image": data.images["photo-sem-capracon"].imageUrl,
   };
 };
 
