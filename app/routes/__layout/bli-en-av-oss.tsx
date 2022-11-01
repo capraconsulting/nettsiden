@@ -1,13 +1,19 @@
 import { useLoaderData } from "@remix-run/react";
-import type { HeadersFunction, LoaderArgs } from "@remix-run/server-runtime";
+import type {
+  HeadersFunction,
+  LoaderArgs,
+  MetaFunction,
+} from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import { Button } from "~/components/button";
 import { CallToActionBox } from "~/components/call-to-action-box";
+import { CapraImage } from "~/components/capra-image";
 import { CapraLink } from "~/components/capra-link";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { cacheControlHeaders } from "~/utils/cache-control";
+import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { groupBy, typedBoolean } from "~/utils/misc";
 
 /**
@@ -81,7 +87,12 @@ export const loader = async ({ context }: LoaderArgs) => {
   };
 
   // Fetch all job listings and their departments
-  const [jobsTeamTailor, departmentsTeamTailor] = await Promise.all([
+  const [images, jobsTeamTailor, departmentsTeamTailor] = await Promise.all([
+    fetchImageAssets([
+      "photo-mingling-capracon",
+      "photo-sem-capracon",
+      "photo-crowd-capracon",
+    ]),
     fetch("https://api.teamtailor.com/v1/jobs?include=department", {
       headers,
     }).then((x) => x.json<TeamTailorJobsResponse>()),
@@ -121,11 +132,26 @@ export const loader = async ({ context }: LoaderArgs) => {
     })
     .filter(typedBoolean);
 
-  return json({ jobs }, { headers: cacheControlHeaders });
+  return json({ images, jobs }, { headers: cacheControlHeaders });
 };
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  const title =
+    "Norges beste arbeidsplass søker IT-konsulent | Capra Consulting";
+  const description =
+    "Hos Capra Consulting får muligheten til å utvikle deg i et faglig og sosialt miljø. Nysgjerrig på hva Capra kan tilby? Les mer her";
+  return {
+    title,
+    ogTitle: title,
+    description,
+    ogDescription: description,
+    ogImage: data.images["photo-sem-capracon"].imageUrl,
+  };
+};
+
 export default function BliEnAvOss() {
+  const { images } = useLoaderData<typeof loader>();
   return (
     <>
       <div className="flex flex-col gap-12 w-full">
@@ -152,7 +178,12 @@ export default function BliEnAvOss() {
 
       <ContentAndImageBox
         title="TODO: Info om størrelse på selskapet"
-        image={undefined}
+        image={
+          <CapraImage
+            src={images["photo-sem-capracon"].imageUrl}
+            alt={images["photo-sem-capracon"].alt}
+          />
+        }
         height="40vw"
         color="lightBlue"
         readMoreLink={{
@@ -165,7 +196,12 @@ export default function BliEnAvOss() {
 
       <ContentAndImageBox
         title="Vi er stolte av fagmiljøet"
-        image={undefined}
+        image={
+          <CapraImage
+            src={images["photo-crowd-capracon"].imageUrl}
+            alt={images["photo-crowd-capracon"].alt}
+          />
+        }
         height="40vw"
         direction="right"
         color="peach"
@@ -181,7 +217,12 @@ export default function BliEnAvOss() {
 
       <ContentAndImageBox
         title="Vi liker å være sammen"
-        image={undefined}
+        image={
+          <CapraImage
+            src={images["photo-mingling-capracon"].imageUrl}
+            alt={images["photo-mingling-capracon"].alt}
+          />
+        }
         height="50vw"
         color="bordeaux"
       >
