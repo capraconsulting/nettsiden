@@ -140,7 +140,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   const title =
     "Norges beste arbeidsplass søker IT-konsulent | Capra Consulting";
   const description =
-    "Hos Capra Consulting får muligheten til å utvikle deg i et faglig og sosialt miljø. Nysgjerrig på hva Capra kan tilby? Les mer her";
+    "Hos Capra Consulting får du muligheten til å utvikle deg i et faglig og sosialt miljø. Nysgjerrig på hva Capra kan tilby? Les mer her";
   return {
     title,
     "og:title": title,
