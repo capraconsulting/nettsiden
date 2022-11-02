@@ -1,3 +1,5 @@
+import type { BrandColor } from "~/utils/constants";
+import { BRAND_BG_AND_FG_COLORS } from "~/utils/constants";
 import { classNames } from "~/utils/misc";
 import { CapraImage } from "./capra-image";
 import { CapraLink } from "./capra-link";
@@ -12,7 +14,7 @@ interface Props {
   titleAs: "h2" | "h3" | "h4";
   children: React.ReactNode;
 
-  sloganColor: SloganColor;
+  sloganColor: BrandColor;
   slogans: Slogan[];
   illustrationImageUrl: string;
 
@@ -83,7 +85,7 @@ export const ContentAndSlogansBox = ({
             className={classNames(
               "relative",
               "flex flex-col items-center rounded",
-              SLOGAN_COLORS[sloganColor],
+              BRAND_BG_AND_FG_COLORS[sloganColor],
               "aspect-square",
             )}
           >
@@ -95,12 +97,4 @@ export const ContentAndSlogansBox = ({
       </div>
     </div>
   );
-};
-
-export type SloganColor = "peach" | "lightBlue" | "bordeaux" | "darkBlue";
-const SLOGAN_COLORS: Record<SloganColor, string> = /*tw*/ {
-  peach: "bg-peach text-secondary",
-  lightBlue: "bg-light-blue text-secondary",
-  bordeaux: "bg-bordeaux text-white",
-  darkBlue: "bg-secondary-80 text-peach-20",
 };
