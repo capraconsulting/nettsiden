@@ -13,7 +13,10 @@ import { Todo } from "~/components/todo";
 import type { ValueProposition } from "~/components/value-wheel/value-wheel";
 import { ValueWheel } from "~/components/value-wheel/value-wheel";
 import { cacheControlHeaders } from "~/utils/cache-control";
+import type { BrandColor } from "~/utils/constants";
+import { BRAND_BG_AND_FG_COLORS } from "~/utils/constants";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
+import { classNames } from "~/utils/misc";
 
 export const loader = async () => {
   const [images, employeeImages] = await Promise.all([
@@ -145,22 +148,24 @@ export default function OmOss() {
         regler . Vi tror det inspirerer til løsninger litt utenfor boksen.
       </TitleAndText>
 
-      <Todo badge className="py-0 px-0 w-[550px]" title="">
-        <div className="w-full flex flex-col gap-8">
-          <Todo
-            size="small"
-            title="Vi jobber hvor vi vil, så lenge kunden er happy."
-          />
-          <Todo
-            size="small"
-            title="Vi styrer egne kompetanse- og hardwarebudsjetter."
-          />
-          <Todo
-            size="small"
-            title="Vi har ingen obligatoriske internaktiviteter - tiden vår styrer vi selv."
-          />
-        </div>
-      </Todo>
+      <div
+        className={classNames(
+          "w-11/12 max-w-xl flex flex-col gap-4",
+          // Make the boxes offset on bigger screens
+          "md:[&>*:nth-child(even)]:ml-5 md:[&>*:nth-child(odd)]:mr-5",
+        )}
+      >
+        <EmphasizedTextBox color="secondary">
+          Vi jobber hvor vi vil, så lenge kunden er happy.
+        </EmphasizedTextBox>
+        <EmphasizedTextBox color="lightBlue">
+          Vi styrer egne kompetanse- og hardwarebudsjetter.
+        </EmphasizedTextBox>
+        <EmphasizedTextBox color="peach">
+          Vi har ingen obligatoriske internaktiviteter - tiden vår styrer vi
+          selv.
+        </EmphasizedTextBox>
+      </div>
 
       <CallToActionBox
         title="Vi arrangerer en kick-ass konferanse"
@@ -204,6 +209,26 @@ const TeamCard = ({ title, children }: PropsWithChildren<TeamCardProps>) => {
     <div className="bg-white shadow-md py-3 px-4 text-sm">
       <div className="uppercase font-bold text-main">{title}</div>
       <div>{children}</div>
+    </div>
+  );
+};
+
+interface EmphasizedTextBoxProps {
+  color: BrandColor;
+}
+const EmphasizedTextBox = ({
+  color,
+  children,
+}: PropsWithChildren<EmphasizedTextBoxProps>) => {
+  return (
+    <div
+      className={classNames(
+        BRAND_BG_AND_FG_COLORS[color],
+        "font-bold",
+        "rounded py-4 px-5",
+      )}
+    >
+      {children}
     </div>
   );
 };
