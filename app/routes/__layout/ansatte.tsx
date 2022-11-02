@@ -96,27 +96,34 @@ interface AnsattCardProps {
   icons: Images<
     "icon-website" | "icon-twitter" | "icon-linkedin" | "icon-github"
   >;
+  hideImage?: boolean;
 }
 
-export const AnsattCard = ({ employee, icons }: AnsattCardProps) => {
+export const AnsattCard = ({
+  employee,
+  icons,
+  hideImage = false,
+}: AnsattCardProps) => {
   const classes = /*tw*/ {
     icon: "w-6 h-6 transition-all hover:invert",
   };
   return (
     <Card
       image={
-        <div className="relative pb-[66%] md:pb-[100%]">
-          <CapraImage
-            className="absolute h-full w-full object-cover"
-            alt={`Bilde av ${employee.name}`}
-            src={urlFor(employee.image!)
-              .size(4500 / 5, 3000 / 5)
-              .url()}
-          />
-        </div>
+        !hideImage && (
+          <div className="relative pb-[66%] md:pb-[100%]">
+            <CapraImage
+              className="absolute h-full w-full object-cover"
+              alt={`Bilde av ${employee.name}`}
+              src={urlFor(employee.image!)
+                .size(4500 / 5, 3000 / 5)
+                .url()}
+            />
+          </div>
+        )
       }
     >
-      <div>
+      <div className="flex flex-col">
         <p className="text-lg font-bold color-secondary¨">{employee.name}</p>
         <a href={`mailto:${employee.email}`} className="underline">
           {employee.email}

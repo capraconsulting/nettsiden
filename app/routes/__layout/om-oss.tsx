@@ -12,24 +12,44 @@ import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
 import type { ValueProposition } from "~/components/value-wheel/value-wheel";
 import { ValueWheel } from "~/components/value-wheel/value-wheel";
+import { sanityClient } from "~/sanity/sanity-client.server";
+import type { Author, JobCategory } from "~/sanity/schema";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import type { BrandColor } from "~/utils/constants";
 import { BRAND_BG_AND_FG_COLORS } from "~/utils/constants";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { classNames } from "~/utils/misc";
+import { AnsattCard } from "./ansatte";
 
+type AuthorExpanded = Omit<Author, "filter"> & { filter: JobCategory[] };
 export const loader = async () => {
-  const [images, employeeImages] = await Promise.all([
-    fetchImageAssets(["icon-graph-up", "icon-idea-bulb"]),
+  const [images, employeeImages, contactUsEmployees] = await Promise.all([
+    fetchImageAssets([
+      "icon-graph-up",
+      "icon-idea-bulb",
+
+      // For AnsattCard
+      "icon-website",
+      "icon-twitter",
+      "icon-linkedin",
+      "icon-github",
+    ]),
     fetchEmployeeImages(),
+    sanityClient.query<AuthorExpanded>(
+      `* [_type == "author" && employee == true && "contact-us" in placement] | order(name){ ..., filter[]-> }`,
+    ),
   ]);
 
-  return json({ images, employeeImages }, { headers: cacheControlHeaders });
+  return json(
+    { images, employeeImages, contactUsEmployees },
+    { headers: cacheControlHeaders },
+  );
 };
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
 export default function OmOss() {
-  const { images, employeeImages } = useLoaderData<typeof loader>();
+  const { images, employeeImages, contactUsEmployees } =
+    useLoaderData<typeof loader>();
   return (
     <>
       <TitleAndText title="Om oss" titleAs="h1">
@@ -173,12 +193,23 @@ export default function OmOss() {
         linkText="Les om CapraCon"
         href="https://capracon.no"
       />
+      <section className="w-11/12 max-w-6xl flex flex-col gap-12">
+        <TitleAndText title="Kontakt" titleAs="h2">
+          Vi vil gjerne høre fra deg!
+        </TitleAndText>
 
-      <TitleAndText title="Kontakt" titleAs="h2">
-        Vi vil gjerne høre fra deg!
-      </TitleAndText>
-
-      <Todo badge className="w-full" title="Kontakt oss kort" />
+        <ul className="flex flex-col sm:flex-row flex-wrap gap-8 sm:gap-10 justify-center">
+          {contactUsEmployees.map((x) => (
+            <li key={x._id} className="w-full sm:w-72 lg:w-80">
+              <AnsattCard
+                employee={x as AuthorExpanded}
+                hideImage
+                icons={images}
+              />
+            </li>
+          ))}
+        </ul>
+      </section>
     </>
   );
 }
