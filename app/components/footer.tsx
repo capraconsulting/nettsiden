@@ -105,7 +105,7 @@ interface FooterProps {
 }
 export const Footer = ({ images }: FooterProps) => (
   <footer className="bg-main border-none flex flex-col gap-10 py-7 items-center">
-    <section className="flex flex-col gap-10 md:gap-0 md:flex-row justify-evenly w-full max-w-6xl px-6 md:px-0">
+    <section className="flex flex-col items-start gap-10 md:gap-0 md:flex-row justify-evenly w-full max-w-6xl px-6 md:px-0">
       <div className="flex flex-col gap-6">
         <FooterModule title="Besøksadresse">
           <FooterLink

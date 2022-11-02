@@ -57,7 +57,7 @@ export const ContentAndImageBox: React.FC<Props> = ({
     >
       <div
         className={classNames(
-          "w-full md:w-[40vw] lg:w-[60w] md:min-w-[500px] flex flex-col justify-center p-6",
+          "w-full md:w-[40vw] lg:w-[60w] md:min-w-[500px] flex flex-col items-start justify-center p-6",
           boxClassName,
           {
             "md:pl-[40px] md:pr-[100px]": direction === "left",

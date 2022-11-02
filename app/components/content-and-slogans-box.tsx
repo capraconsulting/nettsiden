@@ -71,7 +71,7 @@ export const ContentAndSlogansBox = ({
           <CapraLink
             href={readMoreHref}
             prefetch="intent"
-            className="text-xl block mt-[10%] md:mt-[25%]"
+            className="text-xl inline-block mt-[10%] md:mt-[25%]"
           >
             Les mer
           </CapraLink>

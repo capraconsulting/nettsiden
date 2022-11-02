@@ -123,7 +123,7 @@ export const AnsattCard = ({
         )
       }
     >
-      <div className="flex flex-col">
+      <div className="flex flex-col items-start">
         <p className="text-lg font-bold color-secondary¨">{employee.name}</p>
         <a href={`mailto:${employee.email}`} className="underline">
           {employee.email}
