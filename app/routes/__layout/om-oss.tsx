@@ -163,29 +163,31 @@ export default function OmOss() {
         .
       </ContentAndImageBox>
 
-      <TitleAndText title="Tenk selv, fremfor å ha regler" titleAs="h2">
-        Kloke mennesker tar kloke valg! Vi vil tenke selv fremfor å ha mange
-        regler . Vi tror det inspirerer til løsninger litt utenfor boksen.
-      </TitleAndText>
+      <section className="flex flex-col gap-12 items-center">
+        <TitleAndText title="Tenk selv, fremfor å ha regler" titleAs="h2">
+          Kloke mennesker tar kloke valg! Vi vil tenke selv fremfor å ha mange
+          regler . Vi tror det inspirerer til løsninger litt utenfor boksen.
+        </TitleAndText>
 
-      <div
-        className={classNames(
-          "w-11/12 max-w-xl flex flex-col gap-4",
-          // Make the boxes offset on bigger screens
-          "md:[&>*:nth-child(even)]:ml-5 md:[&>*:nth-child(odd)]:mr-5",
-        )}
-      >
-        <EmphasizedTextBox color="secondary">
-          Vi jobber hvor vi vil, så lenge kunden er happy.
-        </EmphasizedTextBox>
-        <EmphasizedTextBox color="lightBlue">
-          Vi styrer egne kompetanse- og hardwarebudsjetter.
-        </EmphasizedTextBox>
-        <EmphasizedTextBox color="peach">
-          Vi har ingen obligatoriske internaktiviteter - tiden vår styrer vi
-          selv.
-        </EmphasizedTextBox>
-      </div>
+        <div
+          className={classNames(
+            "w-11/12 max-w-xl flex flex-col gap-4",
+            // Make the boxes offset on bigger screens
+            "md:[&>*:nth-child(even)]:ml-5 md:[&>*:nth-child(odd)]:mr-5",
+          )}
+        >
+          <EmphasizedTextBox color="secondary">
+            Vi jobber hvor vi vil, så lenge kunden er happy.
+          </EmphasizedTextBox>
+          <EmphasizedTextBox color="lightBlue">
+            Vi styrer egne kompetanse- og hardwarebudsjetter.
+          </EmphasizedTextBox>
+          <EmphasizedTextBox color="peach">
+            Vi har ingen obligatoriske internaktiviteter - tiden vår styrer vi
+            selv.
+          </EmphasizedTextBox>
+        </div>
+      </section>
 
       <CallToActionBox
         title="Vi arrangerer en kick-ass konferanse"
