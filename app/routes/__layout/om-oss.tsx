@@ -17,7 +17,7 @@ import { fetchImageAssets } from "~/utils/dataRetrieval";
 
 export const loader = async () => {
   const [images, employeeImages] = await Promise.all([
-    fetchImageAssets([]),
+    fetchImageAssets(["icon-graph-up", "icon-idea-bulb"]),
     fetchEmployeeImages(),
   ]);
 
@@ -26,7 +26,7 @@ export const loader = async () => {
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
 export default function OmOss() {
-  const { employeeImages } = useLoaderData<typeof loader>();
+  const { images, employeeImages } = useLoaderData<typeof loader>();
   return (
     <>
       <TitleAndText title="Om oss" titleAs="h1">
@@ -80,8 +80,6 @@ export default function OmOss() {
         ))}
       </section>
 
-      <Todo badge className="w-11/12 h-[400px]" title="Forskjelige teams" />
-
       <TitleAndText title="Visjoner for fremtiden" titleAs="h2">
         De neste årene skal vi fokusere på fire hovedområder som skal gjøre oss,
         våre ansatte og våre kunder bedre.
@@ -111,7 +109,12 @@ export default function OmOss() {
 
       <ContentAndImageBox
         title="Bratte læringskurver"
-        image={undefined}
+        image={
+          <CapraImage
+            src={images["icon-graph-up"].imageUrl}
+            alt={images["icon-graph-up"].alt}
+          />
+        }
         height="40vw"
         color="peach"
       >
@@ -121,7 +124,12 @@ export default function OmOss() {
 
       <ContentAndImageBox
         title="Du eier ideene dine"
-        image={undefined}
+        image={
+          <CapraImage
+            src={images["icon-idea-bulb"].imageUrl}
+            alt={images["icon-idea-bulb"].alt}
+          />
+        }
         height="40vw"
         direction="right"
         color="lightBlue"
