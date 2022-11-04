@@ -116,7 +116,7 @@ export const ContactForm = ({ title, representatives }: ContactFormProps) => {
               placeholder="Din e-post"
               errors={fetcher.data?.errors}
             />
-            <Button variant="solid" type="submit">
+            <Button variant="solid" type="submit" className="mx-auto lg:mx-0">
               Kontakt meg
             </Button>
           </fetcher.Form>
