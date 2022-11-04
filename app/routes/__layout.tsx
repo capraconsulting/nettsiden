@@ -11,8 +11,6 @@ import {
 import type { LoaderArgs, MetaFunction } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
-import type { ContactFormRepresentative } from "~/components/contact-form";
-import { ContactForm } from "~/components/contact-form";
 import { Footer } from "~/components/footer";
 import { Header } from "~/components/header";
 import { Todo } from "~/components/todo";
@@ -20,6 +18,8 @@ import { sanityClient } from "~/sanity/sanity-client.server";
 import type { CapraHandle } from "~/types";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { typedBoolean } from "~/utils/misc";
+import type { ContactFormRepresentative } from "./api.contact";
+import { ContactForm } from "./api.contact";
 
 export const loader = async ({ request }: LoaderArgs) => {
   // TODO: Consider conditionally fetching the contactFormRepresentatives based on the current route
