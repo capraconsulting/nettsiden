@@ -18,59 +18,61 @@ export const ContactForm = ({ title, representatives }: ContactFormProps) => {
   const fetcher = useFetcher<SerializeFrom<typeof contactAction>>();
   const isSuccess = fetcher.type === "done" && !fetcher.data;
   return (
-    <article className="bg-secondary flex flex-col items-center text-white w-full pt-[3vh] pb-[6vh] px-[100px] mx-auto">
-      <section className="text-center">
-        <p className="text-xl md:text-4xl font-bold text-peach">
-          {isSuccess ? "Takk for din interesse!" : title}
-        </p>
-        <p className="md:mt-5">
-          {isSuccess
-            ? "Vi tar kontakt med deg så snart som mulig."
-            : "Fyll ut skjemaet så kontakter vi deg!"}
-        </p>
-      </section>
-      <section className="grid grid-cols-1 lg:grid-cols-2 w-full max-w-7xl gap-12">
-        <fetcher.Form
-          method="post"
-          action="/api/contact"
-          className="w-full flex flex-col gap-[4vh]"
-          name="contact"
-          data-netlify="true"
-          data-netlify-honeypot="bot-field"
-        >
-          <input type="hidden" name="form-name" value="contact" />
-          <Input
-            id="name"
-            label="Navn"
-            required
-            placeholder="Ditt navn"
-            errors={fetcher.data?.errors}
-          />
-          <Input id="company" label="Bedrift" placeholder="Din bedrift" />
-          <Input
-            id="phoneNumber"
-            label="Telefon"
-            required
-            placeholder="Ditt telefonnummer"
-            errors={fetcher.data?.errors}
-          />
-          <Input
-            id="email"
-            label="E-post"
-            type="email"
-            required
-            placeholder="Din e-post"
-            errors={fetcher.data?.errors}
-          />
-          <Button variant="solid" type="submit">
-            Kontakt meg
-          </Button>
-        </fetcher.Form>
-        <div className="w-full">
-          <Representatives representatives={representatives} />
-        </div>
-      </section>
-    </article>
+    <div className="bg-secondary pt-[3vh] pb-[6vh]">
+      <article className="flex flex-col items-center text-white w-10/12 sm:w-9/12 md:11/12 mx-auto">
+        <section className="text-center">
+          <p className="text-xl md:text-4xl font-bold text-peach">
+            {isSuccess ? "Takk for din interesse!" : title}
+          </p>
+          <p className="md:mt-5">
+            {isSuccess
+              ? "Vi tar kontakt med deg så snart som mulig."
+              : "Fyll ut skjemaet så kontakter vi deg!"}
+          </p>
+        </section>
+        <section className="grid grid-cols-1 lg:grid-cols-2 w-full max-w-7xl gap-12">
+          <fetcher.Form
+            method="post"
+            action="/api/contact"
+            className="w-full flex flex-col gap-[4vh]"
+            name="contact"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <Input
+              id="name"
+              label="Navn"
+              required
+              placeholder="Ditt navn"
+              errors={fetcher.data?.errors}
+            />
+            <Input id="company" label="Bedrift" placeholder="Din bedrift" />
+            <Input
+              id="phoneNumber"
+              label="Telefon"
+              required
+              placeholder="Ditt telefonnummer"
+              errors={fetcher.data?.errors}
+            />
+            <Input
+              id="email"
+              label="E-post"
+              type="email"
+              required
+              placeholder="Din e-post"
+              errors={fetcher.data?.errors}
+            />
+            <Button variant="solid" type="submit">
+              Kontakt meg
+            </Button>
+          </fetcher.Form>
+          <div className="w-full">
+            <Representatives representatives={representatives} />
+          </div>
+        </section>
+      </article>
+    </div>
   );
 };
 
