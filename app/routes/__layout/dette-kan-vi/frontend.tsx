@@ -1,17 +1,29 @@
+import { useLoaderData } from "@remix-run/react";
 import type { HeadersFunction } from "@remix-run/server-runtime";
+import { json } from "@remix-run/server-runtime";
 
+import { CapraImage } from "~/components/capra-image";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
+import { fetchImageAssets } from "~/utils/dataRetrieval";
 
 export const handle: CapraHandle = {
   contactFormTitle: "Trenger du frontend spisskompetanse på ditt team?",
 };
 
-export const headers: HeadersFunction = () => cacheControlHeaders;
+export const loader = async () => {
+  const images = await fetchImageAssets([
+    "photo-laughing-sara",
+    "photo-mingling-capracon",
+  ]);
+  return json({ images }, { headers: cacheControlHeaders });
+};
+export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
 export default function Frontend() {
+  const { images } = useLoaderData<typeof loader>();
   return (
     <>
       <TitleAndText title="Hvorfor frontend?" titleAs="h1">
@@ -25,7 +37,12 @@ export default function Frontend() {
 
       <ContentAndImageBox
         title="Løsningen"
-        image={undefined}
+        image={
+          <CapraImage
+            src={images["photo-laughing-sara"].imageUrl}
+            alt={images["photo-laughing-sara"].alt}
+          />
+        }
         height="50vw"
         color="lightBlue"
       >
@@ -43,7 +60,12 @@ export default function Frontend() {
 
       <ContentAndImageBox
         title="Våre utviklere"
-        image={undefined}
+        image={
+          <CapraImage
+            src={images["photo-mingling-capracon"].imageUrl}
+            alt={images["photo-mingling-capracon"].alt}
+          />
+        }
         height="40vw"
         color="bordeaux"
         direction="right"
