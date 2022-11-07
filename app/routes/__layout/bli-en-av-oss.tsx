@@ -14,6 +14,7 @@ import { ContentAndImageBox } from "~/components/content-and-image-box/content-a
 import { TitleAndText } from "~/components/title-and-text";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
+import { getEnv } from "~/utils/env";
 import { groupBy, typedBoolean } from "~/utils/misc";
 
 /**
@@ -66,23 +67,15 @@ interface CapraJob {
 const TEAM_TAILOR_API_VERSION = "20210218";
 
 export const loader = async ({ context }: LoaderArgs) => {
-  // Env
-  let env = {} as Partial<Record<string, unknown>>;
-  if (typeof process !== "undefined") {
-    env = { ...env, ...process.env };
-  }
-  if (context) {
-    env = { ...env, ...context };
-  }
-
-  if (!env.TEAM_TAILOR_API_KEY) {
+  const { TEAM_TAILOR_API_KEY } = getEnv({ context });
+  if (!TEAM_TAILOR_API_KEY) {
     throw new Response(`TEAM_TAILOR_API_KEY needs to be set`, {
       status: 500,
     });
   }
 
-  const headers = {
-    Authorization: `Token token=${env.TEAM_TAILOR_API_KEY}`,
+  const teamTailorRequest = {
+    Authorization: `Token token=${TEAM_TAILOR_API_KEY}`,
     "X-Api-Version": TEAM_TAILOR_API_VERSION,
   };
 
@@ -94,10 +87,10 @@ export const loader = async ({ context }: LoaderArgs) => {
       "photo-crowd-capracon",
     ]),
     fetch("https://api.teamtailor.com/v1/jobs?include=department", {
-      headers,
+      headers: teamTailorRequest,
     }).then((x) => x.json<TeamTailorJobsResponse>()),
     fetch("https://api.teamtailor.com/v1/departments", {
-      headers,
+      headers: teamTailorRequest,
     }).then((x) => x.json<TeamTailorDepartmentsResponse>()),
   ]);
 

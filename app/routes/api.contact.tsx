@@ -1,6 +1,5 @@
 import type { HTMLInputTypeAttribute } from "react";
 import { useFetcher } from "@remix-run/react";
-import type { SerializeFrom } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 import type { DataFunctionArgs } from "@remix-run/server-runtime/dist/routeModules";
 
@@ -9,6 +8,7 @@ import type { SanityImageAsset, SanityReference } from "sanity-codegen";
 import { Button } from "~/components/button";
 import { CapraImage } from "~/components/capra-image";
 import { CapraLink } from "~/components/capra-link";
+import { getEnv } from "~/utils/env";
 import { urlFor } from "~/utils/imageBuilder";
 
 function validate(formData: FormData): Record<string, string> {
@@ -43,23 +43,67 @@ function validate(formData: FormData): Record<string, string> {
   return errors;
 }
 
-export const action = async ({ request }: DataFunctionArgs) => {
+export const action = async ({ request, context }: DataFunctionArgs) => {
   const formData = await request.formData();
 
   const errors = validate(formData);
-
   if (Object.keys(errors).length > 0) {
     return json({ errors }, 400);
   }
 
-  if (process.env.NODE_ENV === "production") {
-    // Send the form to Netlify for now
-    const url = new URL(request.url);
-    formData.set("sentFrom", url.pathname);
-    await fetch(`${url.origin}/`, {
-      method: "POST",
-      body: formData,
+  // Send using slack
+  // Unlike Netlify this does not have mechanisms to handle bot or abuse
+  // We should implement that in the long term, but for now, let's just see
+  const { SLACK_WEBHOOK_URL } = getEnv({ context });
+  if (!SLACK_WEBHOOK_URL) {
+    throw new Response(`SLACK_WEBHOOK_URL needs to be set`, {
+      status: 500,
     });
+  }
+  const referer = request.headers.get("Referer");
+  const path = referer ? new URL(referer).pathname : "";
+
+  const response = await fetch(SLACK_WEBHOOK_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      blocks: [
+        {
+          type: "header",
+          text: {
+            type: "plain_text",
+            text: "Kontakt forespørsel",
+            emoji: true,
+          },
+        },
+        ...[...formData.entries()].map(([key, value]) => ({
+          type: "section",
+          text: {
+            type: "plain_text",
+            text: `${key}: ${value}`,
+            emoji: false,
+          },
+        })),
+        {
+          type: "context",
+          elements: [
+            {
+              type: "plain_text",
+              text: `Page: ${path}`,
+              emoji: false,
+            },
+            {
+              type: "plain_text",
+              text: `ENV: ${process.env.NODE_ENV}`,
+              emoji: false,
+            },
+          ],
+        },
+      ],
+    }),
+    headers: { "Content-Type": "application/json" },
+  });
+  if (!response.ok) {
+    throw new Response("Could not submit form", { status: 500 });
   }
 
   return json(null, 201);
@@ -70,7 +114,7 @@ interface ContactFormProps {
   representatives: ContactFormRepresentative[];
 }
 export const ContactForm = ({ title, representatives }: ContactFormProps) => {
-  const fetcher = useFetcher<SerializeFrom<typeof action>>();
+  const fetcher = useFetcher<typeof action>();
   const isSuccess = fetcher.type === "done" && !fetcher.data;
   return (
     <div className="bg-secondary pt-[3vh] pb-[6vh]">
@@ -92,7 +136,6 @@ export const ContactForm = ({ title, representatives }: ContactFormProps) => {
             className="w-full flex flex-col gap-[4vh]"
             name="contact"
           >
-            <input type="hidden" name="form-name" value="contact" />
             <Input
               id="name"
               label="Navn"

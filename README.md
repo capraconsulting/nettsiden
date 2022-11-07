@@ -30,6 +30,11 @@ npm run dev
 
 Noen ruter trenger hemmelige API nøkkler disse finner du på [Notion](https://www.notion.so/capra/Tokens-og-s-nn-9f9b4683fefc4a0886967739754109f8), eller spør i [#team_capraweb](https://capra.slack.com/archives/C01A1QLRKJM). Men dette er ikke nødvendig for få repoet til å kjøre og gjøre endringer på de fleste sidene.
 
+```
+TEAM_TAILOR_API_KEY=<api-key-here>
+SLACK_WEBHOOK_URL=<webhook-url-here>
+```
+
 ### Ladle / Storybook
 
 Flere av felles komponentene utvikler og dokumenterer vi i [ladle](https://ladle.dev/)
