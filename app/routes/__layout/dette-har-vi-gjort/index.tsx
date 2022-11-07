@@ -107,7 +107,7 @@ export const SelvskrytCard = ({ selvskryt }: SelvskrytCardProps) => {
     <Link prefetch="intent" to={selvskryt.slug?.current!}>
       <Card
         image={
-          <div className="relative pb-[66%] md:pb-[100%]">
+          <div className="relative pb-[50%]">
             <CapraImage
               className="absolute h-full w-full object-cover"
               alt={selvskryt.mainImageAlt}
