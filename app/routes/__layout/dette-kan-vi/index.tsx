@@ -86,7 +86,8 @@ export default function DetteKanVi() {
         }
         height="40vw"
         color="darkBlue"
-        readMoreLink={{ to: "/dette-kan-vi/backend" }}
+        // Re-enable when the backend page is implemented
+        // readMoreLink={{ to: "/dette-kan-vi/backend" }}
       >
         {
           "På backend har vi valgt å satse på Java-plattformen og Kotlin for å løse de store og tunge prosessene i kulissene. \n\n Hvorfor det? Vi har valgt markedets største, modne og levende språk. Ved å velge de språkene som utvikler seg raskest sørger vi for at vi alltid vil kunne levere nye og smartere løsninger som vi vet fungerer."
