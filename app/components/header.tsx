@@ -27,7 +27,7 @@ export function Header() {
       )}
     >
       <div className="flex justify-between w-full desktop:w-auto">
-        <Link to="/" prefetch="render">
+        <Link to="/" prefetch="render" onClick={() => setExpanded(false)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 842 596"
