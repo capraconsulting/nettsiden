@@ -98,7 +98,7 @@ export default function Index() {
         >
           Bold statement? Absolutt.
         </TitleAndText>
-        <div className="flex gap-4 justify-center">
+        <div className="w-11/12 mx-auto flex gap-4 justify-center">
           <Button variant="outline" href="/dette-kan-vi">
             Bli kunde?
           </Button>
