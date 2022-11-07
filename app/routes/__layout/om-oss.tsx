@@ -93,8 +93,11 @@ export default function OmOss() {
 
       <TitleAndText title="Capra er organisert i team" titleAs="h2">
         Vi bryr oss ikke om titler eller hieraki.{" "}
-        <strong>Derfor har vi ingen ledergruppe, men heller team</strong> som
-        består av kollegaer som har frivillig meldt seg til å gjøre Capra bedre.
+        <strong className="font-bold">
+          Derfor har vi ingen ledergruppe, men heller team
+        </strong>{" "}
+        som består av kollegaer som har frivillig meldt seg til å gjøre Capra
+        bedre.
       </TitleAndText>
 
       <section className="grid grid-cols-2 sm:grid-cols-3 gap-3 w-[90%] max-w-3xl">
@@ -118,10 +121,15 @@ export default function OmOss() {
         title={`Hva betyr egentlig "Capra"?`}
         className="bg-light-blue-20"
       >
-        Navnet Capra betyr geit på latin. Geiter er naturlig nysgjerrige og
-        intelligente , og de lever gjerne i flokk , samtidig som de har evnen
-        til å være selvstendige . Det syns vi egentlig er ganske beskrivende for
-        de geitene som jobber i Capra.
+        Navnet Capra betyr geit på latin. Geiter er{" "}
+        <strong className="font-bold">
+          naturlig nysgjerrige og intelligente
+        </strong>
+        , og de <strong className="font-bold">lever gjerne i flokk</strong>,
+        samtidig som de har{" "}
+        <strong className="font-bold">evnen til å være selvstendige</strong>.
+        Det syns vi egentlig er ganske beskrivende for de geitene som jobber i
+        Capra.
       </InfoBox>
 
       <TitleAndText title="Vi dyrker innovasjon" titleAs="h2">
@@ -142,7 +150,8 @@ export default function OmOss() {
         color="peach"
       >
         For å bli de beste på våre fagområder, må vi kunne lære. Derfor setter
-        vi av tid til fagsamlinger og inviduell læring .
+        vi av tid til <strong className="font-bold">fagsamlinger</strong> og{" "}
+        <strong className="font-bold">inviduell læring.</strong>
       </ContentAndImageBox>
 
       <ContentAndImageBox
@@ -159,14 +168,20 @@ export default function OmOss() {
       >
         Vi vet at mange liker å holde på med hobby prosjekter. Så lenge
         prosjektet ikke faller under Capras anvendelsesområde så er ideen din.
-        Det betyr at den appen eller SaaS-løsningen du bygger er din og bare din
+        Det betyr at{" "}
+        <strong className="font-bold">
+          den appen eller SaaS-løsningen du bygger er din og bare din
+        </strong>
         .
       </ContentAndImageBox>
 
       <section className="flex flex-col gap-12 items-center">
         <TitleAndText title="Tenk selv, fremfor å ha regler" titleAs="h2">
-          Kloke mennesker tar kloke valg! Vi vil tenke selv fremfor å ha mange
-          regler . Vi tror det inspirerer til løsninger litt utenfor boksen.
+          Kloke mennesker tar kloke valg! Vi vil{" "}
+          <strong className="font-bold">
+            tenke selv fremfor å ha mange regler
+          </strong>
+          . Vi tror det inspirerer til løsninger litt utenfor boksen.
         </TitleAndText>
 
         <div
