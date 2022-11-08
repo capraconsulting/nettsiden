@@ -154,7 +154,7 @@ export default function BliEnAvOss() {
           ansvaret tar vi på største alvor.
         </TitleAndText>
 
-        <div className="flex gap-4 justify-center">
+        <div className="w-11/12 flex gap-4 justify-center">
           <Button
             variant="outline"
             href="https://capraconsulting.teamtailor.com/jobs"
