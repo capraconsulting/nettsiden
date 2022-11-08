@@ -19,7 +19,7 @@ export const Badge = ({
   return (
     <span
       className={classNames(
-        "py-1 px-2 border rounded font-semibold",
+        "rounded border py-1 px-2 font-semibold",
         {
           "text-xs": size === "xs",
           "text-sm": size === "sm",

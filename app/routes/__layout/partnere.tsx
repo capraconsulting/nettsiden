@@ -20,8 +20,8 @@ export default function Partnere() {
         kompetansemiljøene på AWS.
       </TitleAndText>
 
-      <Todo badge className="py-0 px-0 w-full" title="">
-        <div className="bg-peach-20 flex flex-row items-center py-[5%] px-[10%] ">
+      <Todo badge className="w-full py-0 px-0" title="">
+        <div className="flex flex-row items-center bg-peach-20 py-[5%] px-[10%] ">
           <div>
             Som{" "}
             <a
@@ -38,7 +38,7 @@ export default function Partnere() {
           </div>
           <Todo
             title="AWS partner network bilde"
-            className="w-[340px] h-[90px] py-0 px-0"
+            className="h-[90px] w-[340px] py-0 px-0"
           />
         </div>
       </Todo>
@@ -50,7 +50,7 @@ export default function Partnere() {
 
       <Todo
         badge
-        className="py-0 px-y h-[500px]"
+        className="px-y h-[500px] py-0"
         title="Kode 24 | Oslo Architect | Teknologihuset | Kongsvinger Tennisklubb"
       ></Todo>
 

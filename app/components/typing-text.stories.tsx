@@ -1,7 +1,7 @@
 import { TypingText } from "./typing-text";
 
 export const ViErNorgesBestePaa = () => (
-  <h1 className="font-bold text-3xl md:text-4xl lg:text-6xl">
+  <h1 className="text-3xl font-bold md:text-4xl lg:text-6xl">
     Vi er norges beste på{" "}
     <TypingText
       text={[

@@ -19,7 +19,7 @@ interface FooterModuleProps {
 
 const FooterModule: React.VFC<FooterModuleProps> = ({ title, children }) => (
   <div>
-    <h3 className="uppercase text-white font-bold text-lg mb-0.5">{title}</h3>
+    <h3 className="mb-0.5 text-lg font-bold uppercase text-white">{title}</h3>
     {children}
   </div>
 );
@@ -104,8 +104,8 @@ interface FooterProps {
   >;
 }
 export const Footer = ({ images }: FooterProps) => (
-  <footer className="bg-main border-none flex flex-col gap-10 py-7 items-center">
-    <section className="flex flex-col items-start gap-10 md:gap-0 md:flex-row justify-evenly w-full max-w-6xl px-6 md:px-0">
+  <footer className="flex flex-col items-center gap-10 border-none bg-main py-7">
+    <section className="flex w-full max-w-6xl flex-col items-start justify-evenly gap-10 px-6 md:flex-row md:gap-0 md:px-0">
       <div className="flex flex-col gap-6">
         <FooterModule title="Besøksadresse">
           <FooterLink
@@ -154,7 +154,7 @@ export const Footer = ({ images }: FooterProps) => (
             title="EKT Rideskole og Husdyrpark"
           >
             <CapraImage
-              className="p-1 w-20 rounded bg-white"
+              className="w-20 rounded bg-white p-1"
               src={images["logo-ekt"].imageUrl}
               alt={images["logo-ekt"].alt}
             />
@@ -171,7 +171,7 @@ export const Footer = ({ images }: FooterProps) => (
               title="Capra er Miljøtårnsertifisert"
             >
               <CapraImage
-                className="p-1 w-20 rounded bg-white"
+                className="w-20 rounded bg-white p-1"
                 src={images["logo-miljofyrtaarn"].imageUrl}
                 alt={images["logo-miljofyrtaarn"].alt}
               />
@@ -183,7 +183,7 @@ export const Footer = ({ images }: FooterProps) => (
               title="Capra er ISO-9001-sertifisert - trykk for å se sertifikat"
             >
               <CapraImage
-                className="p-1 w-20 rounded bg-white"
+                className="w-20 rounded bg-white p-1"
                 src={images["logo-quality-sys-cert-iso-9001"].imageUrl}
                 alt={images["logo-quality-sys-cert-iso-9001"].alt}
               />

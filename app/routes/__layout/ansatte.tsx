@@ -65,7 +65,7 @@ export default function Ansatte() {
   const data = useLoaderData<typeof loader>();
   const [search] = useSearchParams();
   return (
-    <div className="max-w-7xl w-full sm:w-11/12 flex flex-col gap-12">
+    <div className="flex w-full max-w-7xl flex-col gap-12 sm:w-11/12">
       <TitleAndText title="Kontakt oss i Capra" titleAs="h1">
         Vi vil gjerne høre fra deg.
       </TitleAndText>
@@ -79,7 +79,7 @@ export default function Ansatte() {
           />
         </Form>
 
-        <ul className="grid gap-12 sm:gap-10 md:gap-8 lg:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center">
+        <ul className="grid grid-cols-1 justify-center gap-12 sm:grid-cols-2 sm:gap-10 md:grid-cols-3 md:gap-8 lg:grid-cols-4 lg:gap-6">
           {data.items.map((x) => (
             <li key={x._id}>
               <AnsattCard employee={x as AuthorExpanded} icons={data.icons} />
@@ -124,7 +124,7 @@ export const AnsattCard = ({
       }
     >
       <div className="flex flex-col items-start">
-        <p className="text-lg font-bold color-secondary¨">{employee.name}</p>
+        <p className="color-secondary¨ text-lg font-bold">{employee.name}</p>
         <a href={`mailto:${employee.email}`} className="underline">
           {employee.email}
         </a>

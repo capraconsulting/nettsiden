@@ -22,7 +22,7 @@ export const BubbleGrid = ({
 
   const positions = createGridPositions(rect.width, rect.height, items.length);
   return (
-    <div className="min-h-[600px] max-w-4xl h-full w-full" ref={ref}>
+    <div className="h-full min-h-[600px] w-full max-w-4xl" ref={ref}>
       <BubbleContainer
         items={items}
         bubbleEffect={bubbleEffect}

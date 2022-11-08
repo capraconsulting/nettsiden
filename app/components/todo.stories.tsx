@@ -9,7 +9,7 @@ export const TodoStories = () => (
       badge
       size="small"
       display="inline-flex"
-      className="w-48 h-8"
+      className="h-8 w-48"
       title="Liten'ish"
     />
     <div>

@@ -19,7 +19,7 @@ export const Bubble = ({ position, children, ...rest }: BubbleProps) => {
   return (
     <div
       className={classNames(
-        "absolute rounded-full overflow-hidden select-none transition-[top,left,width,height] ease-in-out duration-500",
+        "absolute select-none overflow-hidden rounded-full transition-[top,left,width,height] duration-500 ease-in-out",
         "border border-light-blue",
         rest.onClick && "cursor-pointer hover:scale-105 active:scale-110",
       )}

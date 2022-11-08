@@ -60,7 +60,7 @@ export default function DetteKanVi() {
         title="Sky"
         image={
           <CapraImage
-            className="w-full h-full object-contain overflow-hidden"
+            className="h-full w-full overflow-hidden object-contain"
             src={images.cloud.imageUrl}
             alt={images.cloud.alt}
           />
@@ -79,7 +79,7 @@ export default function DetteKanVi() {
         direction="right"
         image={
           <CapraImage
-            className="w-full h-full object-contain overflow-hidden"
+            className="h-full w-full overflow-hidden object-contain"
             src={images.backend.imageUrl}
             alt={images.backend.alt}
           />
@@ -98,7 +98,7 @@ export default function DetteKanVi() {
         title="Frontend"
         image={
           <CapraImage
-            className="w-full h-full object-contain overflow-hidden"
+            className="h-full w-full overflow-hidden object-contain"
             src={images.frontend.imageUrl}
             alt={images.frontend.alt}
           />
@@ -117,7 +117,7 @@ export default function DetteKanVi() {
         direction="right"
         image={
           <CapraImage
-            className="w-full h-full object-contain overflow-hidden"
+            className="h-full w-full overflow-hidden object-contain"
             src={images["tech-architecture"].imageUrl}
             alt={images["tech-architecture"].alt}
           />
@@ -134,7 +134,7 @@ export default function DetteKanVi() {
         title="Team-, prosjektleder og smidig coach"
         image={
           <CapraImage
-            className="w-full h-full object-contain overflow-hidden"
+            className="h-full w-full overflow-hidden object-contain"
             src={images["project-lead"].imageUrl}
             alt={images["project-lead"].alt}
           />

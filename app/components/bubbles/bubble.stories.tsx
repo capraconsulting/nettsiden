@@ -12,7 +12,7 @@ export const GenericBubleSandwich: Story = (props) => {
         <EmojiBubble key={x} emoji={x} />
       ))}
     >
-      <div className="text-6xl w-full h-full flex gap-2 items-center justify-center">
+      <div className="flex h-full w-full items-center justify-center gap-2 text-6xl">
         👋
       </div>
     </BubbleSandwich>
@@ -47,7 +47,7 @@ GenericBubbleGrid.argTypes = {
 };
 
 const EmojiBubble = ({ emoji }: { emoji: string }) => (
-  <div className="bg-light-blue-50 bg-opacity-50 w-full h-full flex items-center justify-center text-3xl">
+  <div className="flex h-full w-full items-center justify-center bg-light-blue-50 bg-opacity-50 text-3xl">
     {emoji}
   </div>
 );

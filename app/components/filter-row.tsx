@@ -29,7 +29,7 @@ export const FilterRow = ({
   };
 
   return (
-    <div className="flex gap-3 flex-wrap">
+    <div className="flex flex-wrap gap-3">
       {filters.map((x) => (
         <label key={x} className="cursor-pointer">
           <input

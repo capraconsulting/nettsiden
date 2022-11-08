@@ -118,9 +118,9 @@ export const ContactForm = ({ title, representatives }: ContactFormProps) => {
   const isSuccess = fetcher.type === "done" && !fetcher.data;
   return (
     <div className="bg-secondary pt-[3vh] pb-[6vh]">
-      <article className="flex flex-col items-center text-white w-10/12 sm:w-9/12 md:11/12 mx-auto">
+      <article className="md:11/12 mx-auto flex w-10/12 flex-col items-center text-white sm:w-9/12">
         <section className="text-center">
-          <p className="text-xl md:text-4xl font-bold text-peach">
+          <p className="text-xl font-bold text-peach md:text-4xl">
             {isSuccess ? "Takk for din interesse!" : title}
           </p>
           <p className="md:mt-5">
@@ -129,11 +129,11 @@ export const ContactForm = ({ title, representatives }: ContactFormProps) => {
               : "Fyll ut skjemaet så kontakter vi deg!"}
           </p>
         </section>
-        <section className="grid grid-cols-1 lg:grid-cols-2 w-full max-w-7xl gap-12">
+        <section className="grid w-full max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2">
           <fetcher.Form
             method="post"
             action="/api/contact"
-            className="w-full flex flex-col gap-[4vh]"
+            className="flex w-full flex-col gap-[4vh]"
             name="contact"
           >
             <Input
@@ -209,7 +209,7 @@ interface RepresentativesProps {
 }
 const Representatives = ({ representatives }: RepresentativesProps) => {
   return (
-    <div className="grid grid-flow-dense grid-cols-1 md:grid-cols-2 gap-y-5 gap-x-14 px-5">
+    <div className="grid grid-flow-dense grid-cols-1 gap-y-5 gap-x-14 px-5 md:grid-cols-2">
       {representatives.map(({ name, email, image }) => (
         <div key={name} className="flex flex-col">
           <CapraImage

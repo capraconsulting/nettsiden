@@ -48,7 +48,7 @@ export const ContentAndImageBox: React.FC<Props> = ({
   return (
     <div
       className={classNames(
-        "flex-col-reverse flex w-full justify-center items-center",
+        "flex w-full flex-col-reverse items-center justify-center",
         {
           "md:flex-row": direction === "left",
           "md:flex-row-reverse": direction === "right",
@@ -57,7 +57,7 @@ export const ContentAndImageBox: React.FC<Props> = ({
     >
       <div
         className={classNames(
-          "w-full md:w-[40vw] lg:w-[60w] md:min-w-[500px] flex flex-col items-start justify-center p-6",
+          "flex w-full flex-col items-start justify-center p-6 md:w-[40vw] md:min-w-[500px] lg:w-[60w]",
           boxClassName,
           {
             "md:pl-[40px] md:pr-[100px]": direction === "left",
@@ -66,16 +66,16 @@ export const ContentAndImageBox: React.FC<Props> = ({
         )}
         style={{ minHeight: height }}
       >
-        <div className="p-[2vw] pb-0 text-2xl md:text-4xl font-bold">
+        <div className="p-[2vw] pb-0 text-2xl font-bold md:text-4xl">
           {title}
         </div>
-        <div className="p-[2vw] whitespace-pre-line text-md md:text-lg">
+        <div className="text-md whitespace-pre-line p-[2vw] md:text-lg">
           {children}
         </div>
         {readMoreLink && (
           <CapraLink
             href={readMoreLink.to}
-            className={`p-[2vw] text-md md:text-lg underline-offset-4 ${
+            className={`text-md p-[2vw] underline-offset-4 md:text-lg ${
               color === "bordeaux" || color === "darkBlue"
                 ? "text-white"
                 : "text-secondary"
@@ -88,7 +88,7 @@ export const ContentAndImageBox: React.FC<Props> = ({
 
       <div
         className={classNames(
-          "relative max-h-60 md:h-[30vw] md:max-h-96 aspect-square shadow-xl bg-white",
+          "relative aspect-square max-h-60 bg-white shadow-xl md:h-[30vw] md:max-h-96",
           {
             "md:-ml-[100px]": direction === "left",
             "md:-mr-[100px]": direction === "right",

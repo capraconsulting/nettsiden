@@ -73,7 +73,7 @@ export default function Index() {
 
   return (
     <>
-      <div className="flex flex-col gap-12 w-full">
+      <div className="flex w-full flex-col gap-12">
         <TitleAndText
           title={
             <>
@@ -98,7 +98,7 @@ export default function Index() {
         >
           Bold statement? Absolutt.
         </TitleAndText>
-        <div className="w-11/12 mx-auto flex gap-4 justify-center">
+        <div className="mx-auto flex w-11/12 justify-center gap-4">
           <Button variant="outline" href="/dette-kan-vi">
             Bli kunde?
           </Button>
@@ -130,7 +130,7 @@ export default function Index() {
         title="Vi er spesialister"
         image={
           <CapraImage
-            className="w-full h-full object-contain overflow-hidden"
+            className="h-full w-full overflow-hidden object-contain"
             src={images.tech.imageUrl}
             alt={images.tech.alt}
           />
@@ -166,9 +166,9 @@ export default function Index() {
           <strong className="font-bold">offentlig</strong> og{" "}
           <strong className="font-bold">privat</strong> virksomhet
         </TitleAndText>
-        <div className="grid grid-cols-2 w-11/12 max-w-xl mx-auto items-center">
+        <div className="mx-auto grid w-11/12 max-w-xl grid-cols-2 items-center">
           {companies.map(({ alt, imageUrl }) => (
-            <div key={imageUrl} className="flex justify-center items-center">
+            <div key={imageUrl} className="flex items-center justify-center">
               <CapraImage src={imageUrl} alt={alt} />
             </div>
           ))}

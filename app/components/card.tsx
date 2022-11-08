@@ -8,11 +8,11 @@ interface CardProps {
 export const Card = ({ children, image, className }: CardProps) => (
   <div
     className={classNames(
-      "flex flex-col w-full h-full border transition-all shadow hover:shadow-xl",
+      "flex h-full w-full flex-col border shadow transition-all hover:shadow-xl",
       className,
     )}
   >
     {image}
-    <div className="h-full px-3 py-4 flex flex-col gap-5">{children}</div>
+    <div className="flex h-full flex-col gap-5 px-3 py-4">{children}</div>
   </div>
 );

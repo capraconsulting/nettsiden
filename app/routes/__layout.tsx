@@ -69,7 +69,7 @@ export default function Layout() {
     <>
       <Header />
       <main className="overflow-x-hidden md:overflow-x-auto">
-        <div className="flex flex-col flex-grow items-center py-12 gap-12 md:gap-36">
+        <div className="flex flex-grow flex-col items-center gap-12 py-12 md:gap-36">
           <Outlet />
         </div>
         {contactFormTitle && (
@@ -102,7 +102,7 @@ export function UnusedCatchBoundary() {
       </head>
       <body>
         <Header />
-        <main className="flex flex-col h-screen">
+        <main className="flex h-screen flex-col">
           {caught.status === 404 && (
             <Todo badge className="h-full" title="404 - Siden ble ikke funnet">
               <Todo title="F.eks. bilde av en søt/forvirret geit" />
