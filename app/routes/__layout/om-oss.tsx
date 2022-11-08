@@ -8,6 +8,7 @@ import { fetchEmployeeImages } from "~/components/bubbles/capra-helper.server";
 import { CallToActionBox } from "~/components/call-to-action-box";
 import { CapraImage } from "~/components/capra-image";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
+import IconTitleAndTextBlock from "~/components/icon-title-and-text-block";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
 import type { ValueProposition } from "~/components/value-wheel/value-wheel";
@@ -33,6 +34,12 @@ export const loader = async () => {
       "icon-twitter",
       "icon-linkedin",
       "icon-github",
+
+      // Iconer til Visjoner
+      "icon-vision-competence",
+      "icon-vision-marketing",
+      "icon-vision-organization",
+      "icon-vision-development",
     ]),
     fetchEmployeeImages(),
     sanityClient.query<AuthorExpanded>(
@@ -84,6 +91,8 @@ export default function OmOss() {
           skal vi ikke bli fler enn 140 personer. Det er akkurat nok folk til å
           fylle det området under!
         </TitleAndText>
+        {/* TODO: Fix overflow on smaller screens */}
+        <Todo title="Bug: Fix overflow on smaller screens"></Todo>
         <BubbleGrid
           items={employeeImages.map((x) => (
             <CapraImage key={x} src={x} alt="Ansatt i Capra" />
@@ -110,6 +119,42 @@ export default function OmOss() {
         De neste årene skal vi fokusere på fire hovedområder som skal gjøre oss,
         våre ansatte og våre kunder bedre.
       </TitleAndText>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-20 max-w-4xl px-10">
+        <IconTitleAndTextBlock
+          title="Organisasjon"
+          img={images["icon-vision-organization"].imageUrl}
+          imgAlt={images["icon-vision-organization"].alt}
+        >
+          Vi skal tilpasse organisasjonsstrukturen for å <b>øke farten </b>
+          og <b>respondere</b> raskere med <b>enda høyere kvalitet.</b>
+        </IconTitleAndTextBlock>
+        <IconTitleAndTextBlock
+          title="Forretningsutvikling"
+          img={images["icon-vision-development"].imageUrl}
+          imgAlt={images["icon-vision-development"].imageUrl}
+        >
+          Vi skal <b>skape nye forretningsmuligheter</b> og
+          <b> videreutvikle de eksisterende</b> i skjønn harmoni.
+        </IconTitleAndTextBlock>
+        <IconTitleAndTextBlock
+          title="Markedsføring"
+          img={images["icon-vision-marketing"].imageUrl}
+          imgAlt={images["icon-vision-marketing"].alt}
+        >
+          Vi skal <b>inspirere og dele det vi kan og gjør</b> på nye måter. Vi
+          skal
+          <b> tørre å ta et standpunkt og være en tydelig stemme i bransjen.</b>
+        </IconTitleAndTextBlock>
+        <IconTitleAndTextBlock
+          title="Kompetanse"
+          img={images["icon-vision-competence"].imageUrl}
+          imgAlt={images["icon-vision-competence"].alt}
+        >
+          Vi skal bygge Norges sterkeste kompetansemiljø for våre faglige
+          satningsområder.
+        </IconTitleAndTextBlock>
+      </div>
 
       <Todo
         badge
