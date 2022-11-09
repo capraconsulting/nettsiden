@@ -1,18 +1,29 @@
+import { useLoaderData } from "@remix-run/react";
 import type { HeadersFunction } from "@remix-run/server-runtime";
+import { json } from "@remix-run/server-runtime";
 
 import { CallToActionBox } from "~/components/call-to-action-box";
+import { CapraImage } from "~/components/capra-image";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
+import { fetchImageAssets } from "~/utils/dataRetrieval";
 
 export const handle: CapraHandle = {
   contactFormTitle: "Hvordan kan vi hjelpe deg?",
 };
 
-export const headers: HeadersFunction = () => cacheControlHeaders;
+export const loader = async () => {
+  const images = await fetchImageAssets(["logo-oswa"]);
+
+  return json({ images }, { headers: cacheControlHeaders });
+};
+
+export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
 export default function Partnere() {
+  const { images } = useLoaderData<typeof loader>();
   return (
     <>
       <TitleAndText title="Amazon Web Services" titleAs="h1">
