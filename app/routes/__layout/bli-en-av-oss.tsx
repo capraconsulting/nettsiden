@@ -254,7 +254,7 @@ const JobListingsByDepartment: React.FC = () => {
       {Object.entries(groups).map(([department, jobs]) => (
         <details
           key={department}
-          className="[&>summary:after]:open:content-['▼']"
+          className="[&>summary:after]:open:content-['▼'] [&>summary::-webkit-details-marker]:hidden"
           open
         >
           <summary className="mb-4 flex cursor-pointer list-none justify-between border-b border-b-[#ccc] pb-2 text-2xl font-bold after:self-center after:text-xs after:text-[#ccc] after:content-['►']">
