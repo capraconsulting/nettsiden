@@ -123,6 +123,7 @@ export default function OmOss() {
       <div className="grid max-w-4xl grid-cols-1 gap-20 px-10 sm:grid-cols-2">
         <IconTitleAndTextBlock
           title="Organisasjon"
+          titleAs="h3"
           img={images["icon-vision-organization"].imageUrl}
           imgAlt={images["icon-vision-organization"].alt}
         >
@@ -131,6 +132,7 @@ export default function OmOss() {
         </IconTitleAndTextBlock>
         <IconTitleAndTextBlock
           title="Forretningsutvikling"
+          titleAs="h3"
           img={images["icon-vision-development"].imageUrl}
           imgAlt={images["icon-vision-development"].imageUrl}
         >
@@ -139,6 +141,7 @@ export default function OmOss() {
         </IconTitleAndTextBlock>
         <IconTitleAndTextBlock
           title="Markedsføring"
+          titleAs="h3"
           img={images["icon-vision-marketing"].imageUrl}
           imgAlt={images["icon-vision-marketing"].alt}
         >
@@ -148,6 +151,7 @@ export default function OmOss() {
         </IconTitleAndTextBlock>
         <IconTitleAndTextBlock
           title="Kompetanse"
+          titleAs="h3"
           img={images["icon-vision-competence"].imageUrl}
           imgAlt={images["icon-vision-competence"].alt}
         >
