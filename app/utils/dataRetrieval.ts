@@ -24,6 +24,7 @@ export const getImageObjectWithDefaultImages = <T extends readonly string[]>(
             [asset.title]: {
               imageUrl: urlFor(asset.image as SanityImageObject).url(),
               alt: asset.imageAlt ?? "",
+              description: asset.description,
             },
           }
         : images,
