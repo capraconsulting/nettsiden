@@ -4,10 +4,9 @@ import { sanityClient } from "~/sanity/sanity-client.server";
 import type { ImageAsset } from "~/sanity/schema";
 import { urlFor } from "./imageBuilder";
 
-export type Images<T extends string> = Record<
-  T,
-  { imageUrl: string; alt: string }
->;
+export type Image = { imageUrl: string; alt: string; description?: string };
+
+export type Images<T extends string> = Record<T, Image>;
 
 export const getImageObjectWithDefaultImages = <T extends readonly string[]>(
   imageNames: T,
