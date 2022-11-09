@@ -156,12 +156,6 @@ export default function OmOss() {
         </IconTitleAndTextBlock>
       </div>
 
-      <Todo
-        badge
-        className="w-11/12 h-[400px]"
-        title="Organisasjon | Forretningsutvikling | Markedsføring | Kompetanse"
-      />
-
       <InfoBox
         title={`Hva betyr egentlig "Capra"?`}
         className="bg-light-blue-20"
