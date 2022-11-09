@@ -74,7 +74,7 @@ export const loader = async ({ context }: LoaderArgs) => {
     });
   }
 
-  const teamTailorRequest = {
+  const teamTailorRequestHeaders = {
     Authorization: `Token token=${TEAM_TAILOR_API_KEY}`,
     "X-Api-Version": TEAM_TAILOR_API_VERSION,
   };
@@ -87,10 +87,10 @@ export const loader = async ({ context }: LoaderArgs) => {
       "photo-crowd-capracon",
     ]),
     fetch("https://api.teamtailor.com/v1/jobs?include=department", {
-      headers: teamTailorRequest,
+      headers: teamTailorRequestHeaders,
     }).then((x) => x.json<TeamTailorJobsResponse>()),
     fetch("https://api.teamtailor.com/v1/departments", {
-      headers: teamTailorRequest,
+      headers: teamTailorRequestHeaders,
     }).then((x) => x.json<TeamTailorDepartmentsResponse>()),
   ]);
 
@@ -154,7 +154,7 @@ export default function BliEnAvOss() {
           ansvaret tar vi på største alvor.
         </TitleAndText>
 
-        <div className="flex w-11/12 justify-center gap-4">
+        <div className="mx-auto flex w-11/12 justify-center gap-4">
           <Button
             variant="outline"
             href="https://capraconsulting.teamtailor.com/jobs"
