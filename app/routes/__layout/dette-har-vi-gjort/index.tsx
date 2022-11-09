@@ -110,7 +110,7 @@ export const SelvskrytCard = ({ selvskryt }: SelvskrytCardProps) => {
           <div className="relative pb-[50%]">
             <CapraImage
               className="absolute h-full w-full object-cover"
-              alt={selvskryt.mainImageAlt}
+              alt={selvskryt.mainImageAlt ?? ""}
               src={urlFor(selvskryt.mainImage!)
                 .size(4500 / 5, 3000 / 5)
                 .url()}

@@ -134,7 +134,7 @@ export default function OmOss() {
           title="Forretningsutvikling"
           titleAs="h3"
           img={images["icon-vision-development"].imageUrl}
-          imgAlt={images["icon-vision-development"].imageUrl}
+          imgAlt={images["icon-vision-development"].alt}
         >
           Vi skal <b>skape nye forretningsmuligheter</b> og
           <b> videreutvikle de eksisterende</b> i skjønn harmoni.
