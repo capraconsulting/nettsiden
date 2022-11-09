@@ -14,9 +14,9 @@ export const CallToActionBox = ({
   href,
 }: CallToActionBoxProps) => {
   return (
-    <div className="w-11/12 max-w-7xl py-24 px-6 bg-peach-20 flex flex-col items-center gap-7 text-secondary">
-      <div className="text-center flex flex-col gap-1">
-        <p className="font-bold text-xl">{title}</p>
+    <div className="flex w-11/12 max-w-7xl flex-col items-center gap-7 bg-peach-20 py-24 px-6 text-secondary">
+      <div className="flex flex-col gap-1 text-center">
+        <p className="text-xl font-bold">{title}</p>
         <p>{description}</p>
       </div>
       <Button variant="solid" href={href}>

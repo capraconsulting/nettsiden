@@ -16,16 +16,16 @@ export const TitleAndText = ({
     <div
       id={id}
       className={classNames(
-        "w-full flex flex-col items-center gap-3 lg:gap-4 text-center",
+        "flex w-full flex-col items-center gap-3 text-center lg:gap-4",
         {
           "scroll-mt-nav-height": !!id,
         },
       )}
     >
-      <TitleComponent className="w-[95%] max-w-7xl font-bold text-3xl md:text-4xl lg:text-6xl text-secondary">
+      <TitleComponent className="w-[95%] max-w-7xl text-3xl font-bold text-secondary md:text-4xl lg:text-6xl">
         {title}
       </TitleComponent>
-      <p className="w-[95%] max-w-4xl font-light text-lg md:text-xl lg:text-2xl text-secondary-80">
+      <p className="w-[95%] max-w-4xl text-lg font-light text-secondary-80 md:text-xl lg:text-2xl">
         {children}
       </p>
     </div>

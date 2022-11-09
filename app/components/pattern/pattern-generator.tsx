@@ -100,7 +100,7 @@ export const PatternGenerator: React.FC<Props> = ({
     <svg
       {...size}
       viewBox={`0 0 ${size.width} ${size.height}`}
-      className={classNames(color, "hidden md:block z-9 absolute")}
+      className={classNames(color, "z-9 absolute hidden md:block")}
       style={style}
     >
       {rects}

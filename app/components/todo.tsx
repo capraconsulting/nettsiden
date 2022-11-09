@@ -33,11 +33,11 @@ export const Todo = ({
   return (
     <div
       style={style}
-      className={`${display} relative flex-col justify-center items-center ${rootClassName} ${className}`}
+      className={`${display} relative flex-col items-center justify-center ${rootClassName} ${className}`}
     >
       {badge && (
         <span
-          className={`absolute font-bold bg-yellow border-black text-black rounded ${badgeClassName}`}
+          className={`absolute rounded border-black bg-yellow font-bold text-black ${badgeClassName}`}
         >
           TODO
         </span>

@@ -35,7 +35,7 @@ export const ContentAndSlogansBox = ({
   return (
     <div
       className={classNames(
-        "flex-col-reverse flex w-full",
+        "flex w-full flex-col-reverse",
         {
           "md:flex-row": direction === "left",
           "md:flex-row-reverse": direction === "right",
@@ -45,7 +45,7 @@ export const ContentAndSlogansBox = ({
     >
       <div
         className={classNames(
-          "w-full md:w-1/2 pt-[15%] px-[10%] text-secondary",
+          "w-full px-[10%] pt-[15%] text-secondary md:w-1/2",
         )}
       >
         <TitleComponent
@@ -71,14 +71,14 @@ export const ContentAndSlogansBox = ({
           <CapraLink
             href={readMoreHref}
             prefetch="intent"
-            className="text-xl inline-block mt-[10%] md:mt-[25%]"
+            className="mt-[10%] inline-block text-xl md:mt-[25%]"
           >
             Les mer
           </CapraLink>
         )}
       </div>
 
-      <div className="w-full md:w-1/2 grid grid-cols-2 gap-2.5 p-1">
+      <div className="grid w-full grid-cols-2 gap-2.5 p-1 md:w-1/2">
         {slogans.map(({ title, imageUrl }) => (
           <div
             key={title}
@@ -90,7 +90,7 @@ export const ContentAndSlogansBox = ({
             )}
           >
             <CapraImage className="mt-[20%] w-[40%]" src={imageUrl} alt="" />
-            <p className="font-bold absolute bottom-[20%]">{title}</p>
+            <p className="absolute bottom-[20%] font-bold">{title}</p>
           </div>
         ))}
         <CapraImage src={illustrationImageUrl} alt="" />

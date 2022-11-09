@@ -147,14 +147,14 @@ export default function BliEnAvOss() {
   const { images } = useLoaderData<typeof loader>();
   return (
     <>
-      <div className="flex flex-col gap-12 w-full">
+      <div className="flex w-full flex-col gap-12">
         <TitleAndText title="Bli en av oss!" titleAs="h1">
           Det skal være skikkelig bra å være ansatt i Capra. Vi vet nemlig at
           kick-ass ansatte er et resultat av en god arbeidsplass - og det
           ansvaret tar vi på største alvor.
         </TitleAndText>
 
-        <div className="w-11/12 flex gap-4 justify-center">
+        <div className="flex w-11/12 justify-center gap-4">
           <Button
             variant="outline"
             href="https://capraconsulting.teamtailor.com/jobs"
@@ -250,14 +250,14 @@ const JobListingsByDepartment: React.FC = () => {
   const { jobs } = useLoaderData<typeof loader>();
   const groups = groupBy(jobs, (it) => it.department);
   return (
-    <div className="flex flex-col gap-8 w-11/12 max-w-4xl">
+    <div className="flex w-11/12 max-w-4xl flex-col gap-8">
       {Object.entries(groups).map(([department, jobs]) => (
         <details
           key={department}
           className="[&>summary:after]:open:content-['▼']"
           open
         >
-          <summary className="text-2xl font-bold list-none cursor-pointer pb-2 mb-4 border-b border-b-[#ccc] flex justify-between after:self-center after:text-xs after:text-[#ccc] after:content-['►']">
+          <summary className="mb-4 flex cursor-pointer list-none justify-between border-b border-b-[#ccc] pb-2 text-2xl font-bold after:self-center after:text-xs after:text-[#ccc] after:content-['►']">
             {department}
           </summary>
           <ul className="flex flex-col gap-4">

@@ -16,24 +16,24 @@ export function Header() {
   return (
     <header
       className={classNames(
-        "flex desktop:justify-between px-6 desktop:px-8 items-center sticky top-0 bottom-0 z-10 transition-none border-solid border-b",
+        "sticky top-0 bottom-0 z-10 flex items-center border-b border-solid px-6 transition-none desktop:justify-between desktop:px-8",
         {
-          "bg-main h-screen flex-col text-white": expanded,
-          "bg-white border-b-[#ccc] max-h-nav-height":
+          "h-screen flex-col bg-main text-white": expanded,
+          "max-h-nav-height border-b-[#ccc] bg-white":
             !expanded && showBottomBorder,
-          "bg-background border-b-transparent max-h-nav-height":
+          "max-h-nav-height border-b-transparent bg-background":
             !expanded && !showBottomBorder,
         },
       )}
     >
-      <div className="flex justify-between w-full desktop:w-auto">
+      <div className="flex w-full justify-between desktop:w-auto">
         <Link to="/" prefetch="render" onClick={() => setExpanded(false)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 842 596"
             aria-label="Capra Consulting - Logo"
             className={classNames(
-              "h-nav-height w-auto inline-block",
+              "inline-block h-nav-height w-auto",
               expanded ? "fill-white" : "fill-black",
             )}
           >
@@ -48,7 +48,7 @@ export function Header() {
       </div>
       <nav
         className={classNames(
-          "flex-col items-center justify-center desktop:flex-row desktop:gap-5 text-3xl desktop:text-lg h-screen desktop:h-auto -mt-nav-height desktop:my-0",
+          "-mt-nav-height h-screen flex-col items-center justify-center text-3xl desktop:my-0 desktop:h-auto desktop:flex-row desktop:gap-5 desktop:text-lg",
           expanded ? "flex" : "hidden desktop:flex",
         )}
       >
@@ -88,7 +88,7 @@ const ToggleMenuButton: React.VFC<ToggleMenuButtonProps> = ({
   );
   return (
     <button
-      className={classNames("desktop:hidden w-8", {
+      className={classNames("w-8 desktop:hidden", {
         relative: isOpen,
       })}
       onClick={() => onToggle(!isOpen)}

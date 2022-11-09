@@ -109,7 +109,7 @@ export default function OmOss() {
         bedre.
       </TitleAndText>
 
-      <section className="grid grid-cols-2 sm:grid-cols-3 gap-3 w-[90%] max-w-3xl">
+      <section className="grid w-[90%] max-w-3xl grid-cols-2 gap-3 sm:grid-cols-3">
         {teams.map((props) => (
           <TeamCard key={props.title} {...props} />
         ))}
@@ -120,7 +120,7 @@ export default function OmOss() {
         våre ansatte og våre kunder bedre.
       </TitleAndText>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-20 max-w-4xl px-10">
+      <div className="grid max-w-4xl grid-cols-1 gap-20 px-10 sm:grid-cols-2">
         <IconTitleAndTextBlock
           title="Organisasjon"
           img={images["icon-vision-organization"].imageUrl}
@@ -214,7 +214,7 @@ export default function OmOss() {
         .
       </ContentAndImageBox>
 
-      <section className="flex flex-col gap-12 items-center">
+      <section className="flex flex-col items-center gap-12">
         <TitleAndText title="Tenk selv, fremfor å ha regler" titleAs="h2">
           Kloke mennesker tar kloke valg! Vi vil{" "}
           <strong className="font-bold">
@@ -225,7 +225,7 @@ export default function OmOss() {
 
         <div
           className={classNames(
-            "w-11/12 max-w-xl flex flex-col gap-4",
+            "flex w-11/12 max-w-xl flex-col gap-4",
             // Make the boxes offset on bigger screens
             "md:[&>*:nth-child(even)]:ml-5 md:[&>*:nth-child(odd)]:mr-5",
           )}
@@ -249,12 +249,12 @@ export default function OmOss() {
         linkText="Les om CapraCon"
         href="https://capracon.no"
       />
-      <section className="w-11/12 max-w-6xl flex flex-col gap-12">
+      <section className="flex w-11/12 max-w-6xl flex-col gap-12">
         <TitleAndText title="Kontakt" titleAs="h2">
           Vi vil gjerne høre fra deg!
         </TitleAndText>
 
-        <ul className="flex flex-col sm:flex-row flex-wrap gap-8 sm:gap-10 justify-center">
+        <ul className="flex flex-col flex-wrap justify-center gap-8 sm:flex-row sm:gap-10">
           {contactUsEmployees.map((x) => (
             <li key={x._id} className="w-full sm:w-72 lg:w-80">
               <AnsattCard
@@ -278,11 +278,11 @@ interface InfoBoxProps {
 const InfoBox = ({ title, children, className }: InfoBoxProps) => {
   return (
     <div
-      className={`border-none bg-peach-20 w-11/12 max-w-7xl py-7 px-6 flex flex-col gap-4 ${
+      className={`flex w-11/12 max-w-7xl flex-col gap-4 border-none bg-peach-20 py-7 px-6 ${
         className ?? ""
       }`}
     >
-      <div className="uppercase font-bold text-main">{title}</div>
+      <div className="font-bold uppercase text-main">{title}</div>
       <div>{children}</div>
     </div>
   );
@@ -293,8 +293,8 @@ interface TeamCardProps {
 }
 const TeamCard = ({ title, children }: PropsWithChildren<TeamCardProps>) => {
   return (
-    <div className="bg-white shadow-md py-3 px-4 text-sm">
-      <div className="uppercase font-bold text-main">{title}</div>
+    <div className="bg-white py-3 px-4 text-sm shadow-md">
+      <div className="font-bold uppercase text-main">{title}</div>
       <div>{children}</div>
     </div>
   );

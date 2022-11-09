@@ -5,7 +5,7 @@ import { Card } from "./card";
 
 export const CardStories = () => {
   return (
-    <div className="grid gap-12 sm:gap-10 md:gap-8 lg:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-center">
+    <div className="grid grid-cols-1 justify-center gap-12 sm:grid-cols-2 sm:gap-10 md:gap-8 lg:grid-cols-4 lg:gap-6">
       <a href="#dette-har-vi-gjort">
         <Card
           image={
@@ -55,7 +55,7 @@ export const CardStories = () => {
 
       <Card className="h-min">
         <div className="flex flex-col">
-          <p className="text-lg font-bold color-secondary¨">
+          <p className="color-secondary¨ text-lg font-bold">
             Hannah Synnestvedt Gallagher
           </p>
           <a href="mailto:hsg@capraconsulting.no" className="underline">
@@ -102,7 +102,7 @@ export const CardStories = () => {
         }
       >
         <div className="flex flex-col">
-          <p className="text-lg font-bold color-secondary¨">
+          <p className="color-secondary¨ text-lg font-bold">
             Hannah Synnestvedt Gallagher
           </p>
           <a href="mailto:hsg@capraconsulting.no" className="underline">

@@ -64,7 +64,7 @@ export default function DetteHarViGjort() {
   const [search] = useSearchParams();
   return (
     <>
-      <div className="max-w-7xl w-full sm:w-11/12 flex flex-col gap-12">
+      <div className="flex w-full max-w-7xl flex-col gap-12 sm:w-11/12">
         <TitleAndText title="Dette har vi gjort for andre" titleAs="h1">
           Vi skaper samfunsnytte for over 1 000 000 brukere hver eneste dag! Her
           har du noen få av tingene våre kick-ass folk gjør for kunder.
@@ -79,7 +79,7 @@ export default function DetteHarViGjort() {
             />
           </Form>
 
-          <ul className="grid gap-12 sm:gap-10 md:gap-8 lg:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center">
+          <ul className="grid grid-cols-1 justify-center gap-12 sm:grid-cols-2 sm:gap-10 md:grid-cols-3 md:gap-8 lg:grid-cols-4 lg:gap-6">
             {data.items.map((x) => (
               <li key={x._id}>
                 <SelvskrytCard key={x._id} selvskryt={x as SelvskrytExpanded} />
