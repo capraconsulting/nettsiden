@@ -24,11 +24,14 @@ type Props = {
       React.ButtonHTMLAttributes<HTMLButtonElement>,
       HTMLButtonElement
     >
-  | PropsWithChildren<{
+  | (React.DetailedHTMLProps<
+      React.AnchorHTMLAttributes<HTMLAnchorElement>,
+      HTMLAnchorElement
+    > & {
       href: string;
+      external?: boolean;
       prefetch?: RemixLinkProps["prefetch"];
-      target?: string;
-    }>
+    })
 );
 
 // TODO: The red color used in this button is not compliant with WCAG contrast requirements when used for text on our
@@ -38,7 +41,9 @@ export const Button: React.FC<Props> = ({ variant, ...props }) => {
 
   if (
     "href" in props &&
-    (props.href.startsWith("http://") || props.href.startsWith("https://"))
+    (props.external ||
+      props.href.startsWith("http://") ||
+      props.href.startsWith("https://"))
   ) {
     return (
       <a
