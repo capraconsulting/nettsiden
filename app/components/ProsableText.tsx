@@ -64,8 +64,8 @@ export const ProseableText = ({ value, className }: ProseableTextProps) => {
       className={classNames(
         "prose",
         className,
-        "[&>blockquote]:border-l-blue",
-        "[&>h2]:mb-0 [&>h2]:text-header",
+        "prose-blockquote:border-l-blue",
+        "prose-h2:mb-0 prose-h2:text-header",
       )}
     >
       <PortableText
