@@ -1,4 +1,3 @@
-import type { PropsWithChildren } from "react";
 import { Link } from "@remix-run/react";
 import type { RemixLinkProps } from "@remix-run/react/dist/components";
 
