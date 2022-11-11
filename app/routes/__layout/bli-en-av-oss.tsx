@@ -169,7 +169,8 @@ export default function BliEnAvOss() {
 
       <JobListingsByDepartment />
 
-      <ContentAndImageBox
+      {/* Fjernet i påvente av merkevarearkitekturen */}
+      {/* <ContentAndImageBox
         title="TODO: Info om størrelse på selskapet"
         image={
           <CapraImage
@@ -185,7 +186,7 @@ export default function BliEnAvOss() {
         }}
       >
         Er du happy og kunden happy, så er Capra happy!
-      </ContentAndImageBox>
+      </ContentAndImageBox> */}
 
       <ContentAndImageBox
         title="Vi er stolte av fagmiljøet"
