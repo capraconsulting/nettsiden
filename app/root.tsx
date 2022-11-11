@@ -52,6 +52,24 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+
+        {/* The old Gatsby site had a service worker, get rid of it */}
+        {/* https://stackoverflow.com/a/43251773 */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then(function (registrations) {
+    //returns installed service workers
+    if (registrations.length) {
+      for(let registration of registrations) {
+        registration.unregister();
+      }
+    }
+  });
+}
+`,
+          }}
+        />
       </body>
     </html>
   );
