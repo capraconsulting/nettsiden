@@ -13,7 +13,7 @@
     "ladle": "ladle serve",
     "dev-cloudflare": "run-p dev:css dev-cloudflare:*",
     "dev-cloudflare:remix": "remix watch",
-    "dev-cloudflare:wrangler": "cross-env NODE_ENV=development wrangler pages dev ./public",
+    "dev-cloudflare:wrangler": "cross-env NODE_ENV=development CLOUDFLARE_DEV=true wrangler pages dev ./public",
     "generate:css": "npx tailwindcss -o ./app/tailwind.css",
     "start": "cross-env NODE_ENV=production npm run dev-cloudflare:wrangler",
     "lint": "eslint \"./{app,studio}/**/*.{ts,tsx,js,jsx}\"",
