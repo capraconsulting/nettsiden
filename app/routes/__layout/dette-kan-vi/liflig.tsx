@@ -51,7 +51,7 @@ export default function Liflig() {
       <div className="grid max-w-4xl grid-cols-1 gap-20 px-10 sm:grid-cols-2">
         <IconTitleAndTextBlock
           title="Vi tar det tekniske"
-          titleAs="h3"
+          titleAs="h2"
           img={images["icon-graph-up"].imageUrl}
           imgAlt={images["icon-graph-up"].alt}
         >
@@ -62,7 +62,7 @@ export default function Liflig() {
         </IconTitleAndTextBlock>
         <IconTitleAndTextBlock
           title="Kort oppstartstid"
-          titleAs="h3"
+          titleAs="h2"
           img={images["icon-graph-up"].imageUrl}
           imgAlt={images["icon-graph-up"].alt}
         >
@@ -72,7 +72,7 @@ export default function Liflig() {
 
         <IconTitleAndTextBlock
           title="Kompetanse på laget"
-          titleAs="h3"
+          titleAs="h2"
           img={images["icon-graph-up"].imageUrl}
           imgAlt={images["icon-graph-up"].alt}
         >
