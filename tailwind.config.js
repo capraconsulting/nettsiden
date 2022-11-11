@@ -4,6 +4,7 @@ module.exports = {
     fontFamily: {
       sans: ["'Source Sans Pro'", "sans-serif"],
       serif: ["'Source Sans Pro'", "serif"],
+      monospace: ["monospace"],
     },
     extend: {
       spacing: {
