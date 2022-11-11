@@ -91,13 +91,19 @@ export default function OmOss() {
           skal vi ikke bli fler enn 140 personer. Det er akkurat nok folk til å
           fylle det området under!
         </TitleAndText>
-        {/* TODO: Fix overflow on smaller screens */}
-        <Todo title="Bug: Fix overflow on smaller screens"></Todo>
+
         <BubbleGrid
           items={employeeImages.map((x) => (
             <CapraImage key={x} src={x} alt="Ansatt i Capra" />
           ))}
         />
+
+        {/* HACK: The Bubble grid above takes more vertical space than it's given */}
+        {/* Making the content overflow into the title below */}
+        {/* Perferably this should be fixed inside the component */}
+        {/* but for now, just offset the known overflow */}
+        {/* The gap from the flex is sufficent offset */}
+        <div className="md:hidden" />
       </section>
 
       <TitleAndText title="Capra er organisert i team" titleAs="h2">
