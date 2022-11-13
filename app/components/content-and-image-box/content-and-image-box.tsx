@@ -1,11 +1,12 @@
 import React from "react";
 
+import { CapraLink } from "~/components/capra-link";
 import { randomPattern } from "~/components/content-and-image-box/patterns";
 import type { BoxColor } from "~/components/content-and-image-box/utils";
 import { getBoxConfig } from "~/components/content-and-image-box/utils";
 import { Pattern } from "~/components/pattern/pattern";
+import { useHydrated } from "~/hooks/use-hydrated";
 import { classNames } from "~/utils/misc";
-import { CapraLink } from "../capra-link";
 
 /**
  * Notes:
@@ -45,6 +46,7 @@ export const ContentAndImageBox: React.FC<Props> = ({
   readMoreLink,
 }) => {
   const { boxClassName, patternClassName } = getBoxConfig(color);
+  const isHydrated = useHydrated();
   return (
     <div
       className={classNames(
@@ -95,7 +97,9 @@ export const ContentAndImageBox: React.FC<Props> = ({
           },
         )}
       >
-        <Pattern {...randomPattern(direction, patternClassName)} />
+        {isHydrated && (
+          <Pattern {...randomPattern(direction, patternClassName)} />
+        )}
         {image}
       </div>
     </div>
