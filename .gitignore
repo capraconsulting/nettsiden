@@ -8,6 +8,8 @@ node_modules
 .env
 .env.development
 .vscode/
+.idea/
+*.iml
 
 /app/tailwind.css
 
