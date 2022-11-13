@@ -13,6 +13,7 @@ import { getMainImageAlt } from "~/sanity/utils";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { urlFor } from "~/utils/imageBuilder";
+import { typedBoolean } from "~/utils/misc";
 import { assertItemFound } from "../dette-har-vi-gjort/$slug";
 
 export const handle: CapraHandle = {
@@ -41,7 +42,7 @@ export const loader = async ({ params }: LoaderArgs) => {
   const authors = new Intl.ListFormat("no-nb", {
     style: "long",
     type: "conjunction",
-  }).format(item.authors.map((x) => x.name));
+  }).format(item.authors.map((x) => x.name).filter(typedBoolean));
 
   return json(
     { ...item, authors, publishedAt },
