@@ -167,8 +167,11 @@ export default function Index() {
           <strong className="font-bold">privat</strong> virksomhet
         </TitleAndText>
         <div className="mx-auto grid w-11/12 max-w-xl grid-cols-2 items-center">
-          {companies.map(({ alt, imageUrl }) => (
-            <div key={imageUrl} className="flex items-center justify-center">
+          {companies.map(({ alt, imageUrl, key }) => (
+            <div
+              key={key ?? imageUrl}
+              className="flex items-center justify-center"
+            >
               <CapraImage src={imageUrl} alt={alt} />
             </div>
           ))}
