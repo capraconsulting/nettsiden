@@ -1,6 +1,19 @@
-type ImageProps = React.ComponentProps<"img"> & { alt: string };
+import type { Image } from "~/utils/dataRetrieval";
 
-const DEFAULT: React.ComponentProps<"img"> = {
+type ImgProps = React.ComponentProps<"img">;
+
+type ImageProps = Omit<ImgProps, "src" | "alt"> &
+  (
+    | {
+        alt: string;
+        src: string;
+      }
+    | {
+        image: Image;
+      }
+  );
+
+const DEFAULT: ImgProps = {
   // Makes the image not load before scrolling into view
   // Very useful for pages showing lots of images, or when there are images at bottom
   loading: "lazy",
@@ -19,5 +32,7 @@ const DEFAULT: React.ComponentProps<"img"> = {
 // - [] Generate srcset
 // - [] Placeholder
 export const CapraImage = (props: ImageProps) => {
-  return <img {...DEFAULT} {...props} alt={props.alt} />;
+  const { alt, src } = "image" in props ? props.image : props;
+
+  return <img {...DEFAULT} {...props} src={src} alt={alt} />;
 };

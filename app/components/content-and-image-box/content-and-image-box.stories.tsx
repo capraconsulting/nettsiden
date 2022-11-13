@@ -3,7 +3,10 @@ import { ContentAndImageBox } from "./content-and-image-box";
 export const ViErSpesialister = () => (
   <ContentAndImageBox
     title="Vi er spesialister"
-    image={<div>Image here!</div>}
+    image={{
+      src: "#",
+      alt: "Image here!",
+    }}
     height="35vw"
     direction="right"
     color="bordeaux"
@@ -16,7 +19,10 @@ export const ViErSpesialister = () => (
 export const BratteLaeringsKurver = () => (
   <ContentAndImageBox
     title="Bratte læringskurver"
-    image={<div>Image here!</div>}
+    image={{
+      src: "#",
+      alt: "Image here!",
+    }}
     height="35vw"
     color="peach"
   >

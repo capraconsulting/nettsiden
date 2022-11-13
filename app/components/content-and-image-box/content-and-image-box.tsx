@@ -1,11 +1,13 @@
 import React from "react";
 
+import { CapraImage } from "~/components/capra-image";
 import { CapraLink } from "~/components/capra-link";
 import { randomPattern } from "~/components/content-and-image-box/patterns";
 import type { BoxColor } from "~/components/content-and-image-box/utils";
 import { getBoxConfig } from "~/components/content-and-image-box/utils";
 import { Pattern } from "~/components/pattern/pattern";
 import { useHydrated } from "~/hooks/use-hydrated";
+import type { Image } from "~/utils/dataRetrieval";
 import { classNames } from "~/utils/misc";
 
 /**
@@ -25,7 +27,7 @@ type ReadMoreLink = {
 interface Props {
   title: React.ReactNode;
   children: React.ReactNode;
-  image: React.ReactNode;
+  image: Image;
 
   color: BoxColor;
 
@@ -50,7 +52,7 @@ export const ContentAndImageBox: React.FC<Props> = ({
   return (
     <div
       className={classNames(
-        "flex w-full flex-col-reverse items-center justify-center",
+        "flex w-full max-w-[95%] flex-col-reverse items-center justify-center",
         {
           "md:flex-row": direction === "left",
           "md:flex-row-reverse": direction === "right",
@@ -89,18 +91,18 @@ export const ContentAndImageBox: React.FC<Props> = ({
       </div>
 
       <div
-        className={classNames(
-          "relative aspect-square max-h-60 bg-white shadow-xl md:h-[30vw] md:max-h-96",
-          {
-            "md:-ml-[100px]": direction === "left",
-            "md:-mr-[100px]": direction === "right",
-          },
-        )}
+        className={classNames("relative bg-white shadow-xl md:h-[30vw]", {
+          "md:-ml-[100px]": direction === "left",
+          "md:-mr-[100px]": direction === "right",
+        })}
       >
         {isHydrated && (
           <Pattern {...randomPattern(direction, patternClassName)} />
         )}
-        {image}
+        <CapraImage
+          image={image}
+          className="h-full w-full overflow-hidden object-contain"
+        />
       </div>
     </div>
   );

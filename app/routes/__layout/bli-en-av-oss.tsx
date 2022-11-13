@@ -8,7 +8,6 @@ import { json } from "@remix-run/server-runtime";
 
 import { Button } from "~/components/button";
 import { CallToActionBox } from "~/components/call-to-action-box";
-import { CapraImage } from "~/components/capra-image";
 import { CapraLink } from "~/components/capra-link";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
@@ -107,10 +106,10 @@ export const loader = async ({ context }: LoaderArgs) => {
         return undefined;
       }
 
-      const deparment = departmentsTeamTailor.data.find(
+      const department = departmentsTeamTailor.data.find(
         (x) => x.id === departmentId,
       );
-      if (!deparment) {
+      if (!department) {
         throw new Error(
           `Could not find coresponding department for "${job.attributes.title}" (${job.id}) with departmentId ${departmentId}`,
         );
@@ -120,7 +119,7 @@ export const loader = async ({ context }: LoaderArgs) => {
         id: job.id,
         title: job.attributes.title,
         url: job.links["careersite-job-url"],
-        department: deparment.attributes.name,
+        department: department.attributes.name,
       };
     })
     .filter(typedBoolean);
@@ -139,7 +138,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     "og:title": title,
     description,
     "og:description": description,
-    "og:image": data.images["photo-sem-capracon"].imageUrl,
+    "og:image": data.images["photo-sem-capracon"].src,
   };
 };
 
@@ -172,12 +171,7 @@ export default function BliEnAvOss() {
       {/* Fjernet i påvente av merkevarearkitekturen */}
       {/* <ContentAndImageBox
         title="TODO: Info om størrelse på selskapet"
-        image={
-          <CapraImage
-            src={images["photo-sem-capracon"].imageUrl}
-            alt={images["photo-sem-capracon"].alt}
-          />
-        }
+        image={images["photo-sem-capracon"]}
         height="40vw"
         color="lightBlue"
         readMoreLink={{
@@ -190,12 +184,7 @@ export default function BliEnAvOss() {
 
       <ContentAndImageBox
         title="Vi er stolte av fagmiljøet"
-        image={
-          <CapraImage
-            src={images["photo-crowd-capracon"].imageUrl}
-            alt={images["photo-crowd-capracon"].alt}
-          />
-        }
+        image={images["photo-crowd-capracon"]}
         height="40vw"
         direction="right"
         color="peach"
@@ -211,12 +200,7 @@ export default function BliEnAvOss() {
 
       <ContentAndImageBox
         title="Vi liker å være sammen"
-        image={
-          <CapraImage
-            src={images["photo-mingling-capracon"].imageUrl}
-            alt={images["photo-mingling-capracon"].alt}
-          />
-        }
+        image={images["photo-mingling-capracon"]}
         height="50vw"
         color="bordeaux"
       >

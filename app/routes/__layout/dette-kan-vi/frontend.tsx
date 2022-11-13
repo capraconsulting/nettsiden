@@ -2,7 +2,6 @@ import { useLoaderData } from "@remix-run/react";
 import type { HeadersFunction } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
-import { CapraImage } from "~/components/capra-image";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { TitleAndText } from "~/components/title-and-text";
 import type { CapraHandle } from "~/types";
@@ -37,12 +36,7 @@ export default function Frontend() {
 
       <ContentAndImageBox
         title="Løsningen"
-        image={
-          <CapraImage
-            src={images["photo-laughing-sara"].imageUrl}
-            alt={images["photo-laughing-sara"].alt}
-          />
-        }
+        image={images["photo-laughing-sara"]}
         height="50vw"
         color="lightBlue"
       >
@@ -60,12 +54,7 @@ export default function Frontend() {
 
       <ContentAndImageBox
         title="Våre utviklere"
-        image={
-          <CapraImage
-            src={images["photo-mingling-capracon"].imageUrl}
-            alt={images["photo-mingling-capracon"].alt}
-          />
-        }
+        image={images["photo-mingling-capracon"]}
         height="40vw"
         color="bordeaux"
         direction="right"

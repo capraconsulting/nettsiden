@@ -1,4 +1,5 @@
 import type { Blogg, Selvskryt } from "~/sanity/schema";
+import { typedBoolean } from "~/utils/misc";
 
 // https://www.sanity.io/docs/presenting-block-text#ac67a867dd69
 export function getMainImageAlt({
@@ -18,6 +19,6 @@ export function getMainImageAlt({
         .map((child: { text?: string }) => child.text)
         .join("");
     })
-    .filter(Boolean)
+    .filter(typedBoolean)
     .join("\n\n");
 }

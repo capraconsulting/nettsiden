@@ -2,7 +2,6 @@ import { useLoaderData } from "@remix-run/react";
 import type { HeadersFunction } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
-import { CapraImage } from "~/components/capra-image";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import IconTitleAndTextBlock from "~/components/icon-title-and-text-block";
 import { TitleAndText } from "~/components/title-and-text";
@@ -52,8 +51,7 @@ export default function Liflig() {
         <IconTitleAndTextBlock
           title="Vi tar det tekniske"
           titleAs="h2"
-          img={images["icon-graph-up"].imageUrl}
-          imgAlt={images["icon-graph-up"].alt}
+          image={images["icon-graph-up"]}
         >
           Du slipper tekniske valg og kan fokusere på det du er god på.{" "}
           <strong>
@@ -63,8 +61,7 @@ export default function Liflig() {
         <IconTitleAndTextBlock
           title="Kort oppstartstid"
           titleAs="h2"
-          img={images["icon-graph-up"].imageUrl}
-          imgAlt={images["icon-graph-up"].alt}
+          image={images["icon-graph-up"]}
         >
           Vi har ferdig utviklet infrastruktur som gjør at{" "}
           <strong>vi kan begynne å skrive kode fra dag 1.</strong>
@@ -73,8 +70,7 @@ export default function Liflig() {
         <IconTitleAndTextBlock
           title="Kompetanse på laget"
           titleAs="h2"
-          img={images["icon-graph-up"].imageUrl}
-          imgAlt={images["icon-graph-up"].alt}
+          image={images["icon-graph-up"]}
         >
           Modellen til Liflig gjør at{" "}
           <strong>
@@ -91,12 +87,7 @@ export default function Liflig() {
 
       <ContentAndImageBox
         title="Alltid tilgjengelig"
-        image={
-          <CapraImage
-            src={images["icon-graph-up"].imageUrl}
-            alt={images["icon-graph-up"].alt}
-          />
-        }
+        image={images["icon-graph-up"]}
         color="peach"
         height="40vw"
       >

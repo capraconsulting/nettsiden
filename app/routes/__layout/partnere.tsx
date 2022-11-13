@@ -54,8 +54,7 @@ export default function Partnere() {
         </div>
         <CapraImage
           className="h-[90px] w-[340px] py-0 px-0"
-          src={images["logo-aws-partner"].imageUrl}
-          alt={images["logo-aws-partner"].alt}
+          image={images["logo-aws-partner"]}
         />
       </div>
 
@@ -89,11 +88,7 @@ const PartnerCard: React.FC<{ image: Image }> = ({ image }) => {
         <div className="font-bold text-[#03173E]">{image.description}</div>
       )}
       <div className="block text-center">
-        <CapraImage
-          className="inline-block"
-          src={image.imageUrl}
-          alt={image.alt}
-        />
+        <CapraImage className="inline-block" image={image} />
       </div>
     </div>
   );

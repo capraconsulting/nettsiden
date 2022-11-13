@@ -103,6 +103,7 @@ interface FooterProps {
     "logo-quality-sys-cert-iso-9001" | "logo-miljofyrtaarn" | "logo-ekt"
   >;
 }
+
 export const Footer = ({ images }: FooterProps) => (
   <footer className="flex flex-col items-center gap-10 border-none bg-main py-7">
     <section className="flex w-full max-w-6xl flex-col items-start justify-evenly gap-10 px-6 md:flex-row md:gap-0 md:px-0">
@@ -155,8 +156,7 @@ export const Footer = ({ images }: FooterProps) => (
           >
             <CapraImage
               className="w-20 rounded bg-white p-1"
-              src={images["logo-ekt"].imageUrl}
-              alt={images["logo-ekt"].alt}
+              image={images["logo-ekt"]}
             />
           </a>
         </FooterModule>
@@ -172,8 +172,7 @@ export const Footer = ({ images }: FooterProps) => (
             >
               <CapraImage
                 className="w-20 rounded bg-white p-1"
-                src={images["logo-miljofyrtaarn"].imageUrl}
-                alt={images["logo-miljofyrtaarn"].alt}
+                image={images["logo-miljofyrtaarn"]}
               />
             </a>
             <a
@@ -184,8 +183,7 @@ export const Footer = ({ images }: FooterProps) => (
             >
               <CapraImage
                 className="w-20 rounded bg-white p-1"
-                src={images["logo-quality-sys-cert-iso-9001"].imageUrl}
-                alt={images["logo-quality-sys-cert-iso-9001"].alt}
+                image={images["logo-quality-sys-cert-iso-9001"]}
               />
             </a>
           </div>

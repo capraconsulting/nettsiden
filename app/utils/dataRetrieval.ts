@@ -5,7 +5,7 @@ import type { ImageAsset } from "~/sanity/schema";
 import { urlFor } from "./imageBuilder";
 
 export type Image = {
-  imageUrl: string;
+  src: string;
   alt: string;
   key?: string;
   description?: string;
@@ -27,7 +27,7 @@ export const getImageObjectWithDefaultImages = <T extends readonly string[]>(
         ? {
             ...images,
             [asset.title]: {
-              imageUrl: urlFor(asset.image as SanityImageObject).url(),
+              src: urlFor(asset.image as SanityImageObject).url(),
               alt: asset.imageAlt ?? "",
               description: asset.description,
             },
@@ -44,7 +44,7 @@ export const getImageObjectWithDefaultImages = <T extends readonly string[]>(
       [imageName]:
         imageName in retrievedImages
           ? retrievedImages[imageName as ArrayElement]
-          : { imageUrl: "", alt: "", key: `${++key}` }, // TODO: Supply default image
+          : { src: "", alt: "", key: `${++key}` }, // TODO: Supply default image
     }),
     {} as ReturnType,
   );
