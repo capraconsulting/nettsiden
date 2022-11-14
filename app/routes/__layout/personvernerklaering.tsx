@@ -217,21 +217,15 @@ export default function Personvernerklæring() {
         <br />
         <a href="mailto:post@capraconsulting.no">post@capraconsulting.no</a>
       </p>
-      <Todo title="Putt pdf'en på sanity, notion, eller google drive">
-        {/* Vi ønsker ikke å ha den i repoet, right? */}
-        {/* Eller kanskje ikke det er så ille, den er ikke så stor... 57kb */}
-        {/* Men vi trenger uansett et sted å ha thecapraway.pdf, den er på 6mb. */}
-        <Button
-          variant="outline"
-          href="/personvernerklaering.pdf"
-          title="Last ned Personvernerklæring som PDF"
-          download="personvernerklaering.pdf"
-          rel="noopener noreferrer"
-          external
-        >
-          Last ned PDF
-        </Button>
-      </Todo>
+      <Button
+        variant="outline"
+        href="/personvernerklaering.pdf?dl"
+        title="Last ned Personvernerklæring som PDF"
+        rel="noopener noreferrer"
+        external
+      >
+        Last ned PDF
+      </Button>
     </article>
   );
 }
