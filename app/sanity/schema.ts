@@ -1,20 +1,20 @@
 import type {
+  SanityReference,
+  SanityKeyedReference,
   SanityAsset,
-  SanityBlock,
-  SanityDocument,
+  SanityImage,
   SanityFile,
   SanityGeoPoint,
-  SanityImage,
-  SanityImageAsset,
+  SanityBlock,
+  SanityDocument,
   SanityImageCrop,
-  SanityImageDimensions,
   SanityImageHotspot,
+  SanityKeyed,
+  SanityImageAsset,
   SanityImageMetadata,
+  SanityImageDimensions,
   SanityImagePalette,
   SanityImagePaletteSwatch,
-  SanityKeyed,
-  SanityKeyedReference,
-  SanityReference,
 } from "sanity-codegen";
 
 export type {
@@ -344,6 +344,29 @@ export interface Factbox extends SanityDocument {
 }
 
 /**
+ * Filresurser
+ *
+ *
+ */
+export interface FileAsset extends SanityDocument {
+  _type: "fileAsset";
+
+  /**
+   * Tittel — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Asset — `file`
+   *
+   *
+   */
+  file?: { _type: "file"; asset: SanityReference<any> };
+}
+
+/**
  * Bilderessurser
  *
  *
@@ -645,6 +668,7 @@ export type Documents =
   | Bloggfilter
   | Category
   | Factbox
+  | FileAsset
   | ImageAsset
   | JobCategory
   | Selvskryt
