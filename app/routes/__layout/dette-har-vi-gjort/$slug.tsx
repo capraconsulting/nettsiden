@@ -16,19 +16,12 @@ import { getMainImageAlt } from "~/sanity/utils";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { urlFor } from "~/utils/imageBuilder";
+import { assertItemFound } from "~/utils/misc";
 
 export const handle: CapraHandle = {
   getSitemapEntries: () =>
     getSanitySitemapEntries("selvskryt", "/dette-har-vi-gjort"),
 };
-
-// TODO: I propose to move this function to a shared utility/common file
-export function assertItemFound<T>(item: T | undefined): asserts item is T {
-  if (item === undefined)
-    throw new Response("Not Found", {
-      status: 404,
-    });
-}
 
 export const loader = async ({ params }: LoaderArgs) => {
   const query = (slug: string) =>

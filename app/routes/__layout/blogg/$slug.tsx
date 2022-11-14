@@ -13,8 +13,7 @@ import { getMainImageAlt } from "~/sanity/utils";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { urlFor } from "~/utils/imageBuilder";
-import { typedBoolean } from "~/utils/misc";
-import { assertItemFound } from "../dette-har-vi-gjort/$slug";
+import { assertItemFound, typedBoolean } from "~/utils/misc";
 
 export const handle: CapraHandle = {
   getSitemapEntries: () => getSanitySitemapEntries("blogg", "/blogg"),
