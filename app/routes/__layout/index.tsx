@@ -120,7 +120,7 @@ export default function Index() {
 
       <ContentAndImageBox
         title="Vi er Advanced Tier Consulting Partner"
-        image={<CapraImage src={images.aws.imageUrl} alt={images.aws.alt} />}
+        image={images.aws}
         height="32vw"
         color="peach"
       >
@@ -128,13 +128,7 @@ export default function Index() {
       </ContentAndImageBox>
       <ContentAndImageBox
         title="Vi er spesialister"
-        image={
-          <CapraImage
-            className="h-full w-full overflow-hidden object-contain"
-            src={images.tech.imageUrl}
-            alt={images.tech.alt}
-          />
-        }
+        image={images.tech}
         height="35vw"
         direction="right"
         color="lightBlue"
@@ -167,9 +161,12 @@ export default function Index() {
           <strong className="font-bold">privat</strong> virksomhet
         </TitleAndText>
         <div className="mx-auto grid w-11/12 max-w-xl grid-cols-2 items-center">
-          {companies.map(({ alt, imageUrl }) => (
-            <div key={imageUrl} className="flex items-center justify-center">
-              <CapraImage src={imageUrl} alt={alt} />
+          {companies.map((image) => (
+            <div
+              key={image.key ?? image.src}
+              className="flex items-center justify-center"
+            >
+              <CapraImage image={image} />
             </div>
           ))}
         </div>

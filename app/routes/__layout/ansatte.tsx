@@ -152,36 +152,29 @@ export const AnsattCard = ({
         {employee.linkedIn && (
           <a href={employee.linkedIn}>
             <CapraImage
-              alt="linkedin"
               className={classes.icon}
-              src={icons["icon-linkedin"].imageUrl}
+              image={icons["icon-linkedin"]}
             />
           </a>
         )}
         {employee.twitter && (
           <a href={employee.twitter}>
             <CapraImage
-              alt="twitter"
               className={classes.icon}
-              src={icons["icon-twitter"].imageUrl}
+              image={icons["icon-twitter"]}
             />
           </a>
         )}
         {employee.github && (
           <a href={employee.github}>
-            <CapraImage
-              alt="github"
-              className={classes.icon}
-              src={icons["icon-github"].imageUrl}
-            />
+            <CapraImage className={classes.icon} image={icons["icon-github"]} />
           </a>
         )}
         {employee.website && (
           <a href={employee.website}>
             <CapraImage
-              alt="nettside"
               className={classes.icon}
-              src={icons["icon-website"].imageUrl}
+              image={icons["icon-website"]}
             />
           </a>
         )}

@@ -4,7 +4,12 @@ import { sanityClient } from "~/sanity/sanity-client.server";
 import type { ImageAsset } from "~/sanity/schema";
 import { urlFor } from "./imageBuilder";
 
-export type Image = { imageUrl: string; alt: string; description?: string };
+export type Image = {
+  src: string;
+  alt: string;
+  key?: string;
+  description?: string;
+};
 
 export type Images<T extends string> = Record<T, Image>;
 
@@ -22,7 +27,7 @@ export const getImageObjectWithDefaultImages = <T extends readonly string[]>(
         ? {
             ...images,
             [asset.title]: {
-              imageUrl: urlFor(asset.image as SanityImageObject).url(),
+              src: urlFor(asset.image as SanityImageObject).url(),
               alt: asset.imageAlt ?? "",
               description: asset.description,
             },
@@ -31,13 +36,15 @@ export const getImageObjectWithDefaultImages = <T extends readonly string[]>(
     {} as ReturnType,
   );
 
+  let key = 0;
+
   return imageNames.reduce<ReturnType>(
     (images, imageName) => ({
       ...images,
       [imageName]:
         imageName in retrievedImages
           ? retrievedImages[imageName as ArrayElement]
-          : { imageUrl: "", alt: "" }, // TODO: Supply default image
+          : { src: "", alt: "", key: `${++key}` }, // TODO: Supply default image
     }),
     {} as ReturnType,
   );

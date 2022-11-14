@@ -2,7 +2,6 @@ import { useLoaderData } from "@remix-run/react";
 import type { HeadersFunction, MetaFunction } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
-import { CapraImage } from "~/components/capra-image";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { ContentAndSlogansBox } from "~/components/content-and-slogans-box";
 import { TitleAndText } from "~/components/title-and-text";
@@ -58,13 +57,7 @@ export default function DetteKanVi() {
 
       <ContentAndImageBox
         title="Sky"
-        image={
-          <CapraImage
-            className="h-full w-full overflow-hidden object-contain"
-            src={images.cloud.imageUrl}
-            alt={images.cloud.alt}
-          />
-        }
+        image={images.cloud}
         height="40vw"
         color="peach"
       >
@@ -77,13 +70,7 @@ export default function DetteKanVi() {
       <ContentAndImageBox
         title="Backend"
         direction="right"
-        image={
-          <CapraImage
-            className="h-full w-full overflow-hidden object-contain"
-            src={images.backend.imageUrl}
-            alt={images.backend.alt}
-          />
-        }
+        image={images.backend}
         height="40vw"
         color="darkBlue"
         // Re-enable when the backend page is implemented
@@ -96,13 +83,7 @@ export default function DetteKanVi() {
 
       <ContentAndImageBox
         title="Frontend"
-        image={
-          <CapraImage
-            className="h-full w-full overflow-hidden object-contain"
-            src={images.frontend.imageUrl}
-            alt={images.frontend.alt}
-          />
-        }
+        image={images.frontend}
         height="40vw"
         color="lightBlue"
         readMoreLink={{ to: "/dette-kan-vi/frontend" }}
@@ -115,13 +96,7 @@ export default function DetteKanVi() {
       <ContentAndImageBox
         title="Teknisk arkitektur"
         direction="right"
-        image={
-          <CapraImage
-            className="h-full w-full overflow-hidden object-contain"
-            src={images["tech-architecture"].imageUrl}
-            alt={images["tech-architecture"].alt}
-          />
-        }
+        image={images["tech-architecture"]}
         height="40vw"
         color="bordeaux"
       >
@@ -132,13 +107,7 @@ export default function DetteKanVi() {
 
       <ContentAndImageBox
         title="Team-, prosjektleder og smidig coach"
-        image={
-          <CapraImage
-            className="h-full w-full overflow-hidden object-contain"
-            src={images["project-lead"].imageUrl}
-            alt={images["project-lead"].alt}
-          />
-        }
+        image={images["project-lead"]}
         height="40vw"
         color="peach"
       >
@@ -168,18 +137,18 @@ export const LifligPitchAndSloganBox = ({
       slogans={[
         {
           title: "Vi tar det tekniske",
-          imageUrl: images["icon-tech"].imageUrl,
+          imageUrl: images["icon-tech"].src,
         },
         {
           title: "Kompetanse på laget",
-          imageUrl: images["icon-brain"].imageUrl,
+          imageUrl: images["icon-brain"].src,
         },
         {
           title: "Kort oppstartstid",
-          imageUrl: images["icon-time"].imageUrl,
+          imageUrl: images["icon-time"].src,
         },
       ]}
-      illustrationImageUrl={images["illustration-square-dots"].imageUrl}
+      illustrationImageUrl={images["illustration-square-dots"].src}
       readMoreHref="/dette-kan-vi/liflig"
     >
       Du har ideene - la vårt inhouse team bygge og forvalte hele tjenesten for
@@ -206,18 +175,18 @@ export const KonsulenterPitchAndSloganBox = ({
       slogans={[
         {
           title: "Opp i skyen",
-          imageUrl: images["icon-cloud"].imageUrl,
+          imageUrl: images["icon-cloud"].src,
         },
         {
           title: "Vi tør å rådgi",
-          imageUrl: images["icon-counsel"].imageUrl,
+          imageUrl: images["icon-counsel"].src,
         },
         {
           title: "Faglig sterke",
-          imageUrl: images["icon-book"].imageUrl,
+          imageUrl: images["icon-book"].src,
         },
       ]}
-      illustrationImageUrl={images["illustration-square-dots2"].imageUrl}
+      illustrationImageUrl={images["illustration-square-dots2"].src}
       readMoreHref="/dette-kan-vi/it-konsulenter"
     >
       Trenger du flere gode hoder på teamet ditt? Vi gir deg IT-konsulenter med

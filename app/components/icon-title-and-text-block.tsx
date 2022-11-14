@@ -1,19 +1,21 @@
 import type { PropsWithChildren } from "react";
 import React from "react";
 
+import { CapraImage } from "~/components/capra-image";
+import type { Image } from "~/utils/dataRetrieval";
+
 type IconTitleAndTextBlockProps = {
   title: string;
   titleAs: "h1" | "h2" | "h3" | "h4";
-  img: string;
-  imgAlt: string;
+  image: Image;
 };
 
 const IconTitleAndTextBlock: React.FC<
   PropsWithChildren<IconTitleAndTextBlockProps>
-> = ({ title, titleAs: TitleComponent, children, img, imgAlt }) => {
+> = ({ title, titleAs: TitleComponent, children, image }) => {
   return (
     <div className="flex flex-col gap-3 text-center">
-      <img src={img} alt={imgAlt} className="max-h-28 sm:max-h-32" />
+      <CapraImage image={image} className="max-h-28 sm:max-h-32" />
       <TitleComponent className="text-2xl font-bold md:text-3xl">
         {title}
       </TitleComponent>

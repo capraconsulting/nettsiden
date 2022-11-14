@@ -129,8 +129,7 @@ export default function OmOss() {
         <IconTitleAndTextBlock
           title="Organisasjon"
           titleAs="h3"
-          img={images["icon-vision-organization"].imageUrl}
-          imgAlt={images["icon-vision-organization"].alt}
+          image={images["icon-vision-organization"]}
         >
           Vi skal tilpasse organisasjonsstrukturen for å <b>øke farten </b>
           og <b>respondere</b> raskere med <b>enda høyere kvalitet.</b>
@@ -138,8 +137,7 @@ export default function OmOss() {
         <IconTitleAndTextBlock
           title="Forretningsutvikling"
           titleAs="h3"
-          img={images["icon-vision-development"].imageUrl}
-          imgAlt={images["icon-vision-development"].alt}
+          image={images["icon-vision-development"]}
         >
           Vi skal <b>skape nye forretningsmuligheter</b> og
           <b> videreutvikle de eksisterende</b> i skjønn harmoni.
@@ -147,8 +145,7 @@ export default function OmOss() {
         <IconTitleAndTextBlock
           title="Markedsføring"
           titleAs="h3"
-          img={images["icon-vision-marketing"].imageUrl}
-          imgAlt={images["icon-vision-marketing"].alt}
+          image={images["icon-vision-marketing"]}
         >
           Vi skal <b>inspirere og dele det vi kan og gjør</b> på nye måter. Vi
           skal
@@ -157,8 +154,7 @@ export default function OmOss() {
         <IconTitleAndTextBlock
           title="Kompetanse"
           titleAs="h3"
-          img={images["icon-vision-competence"].imageUrl}
-          imgAlt={images["icon-vision-competence"].alt}
+          image={images["icon-vision-competence"]}
         >
           Vi skal bygge Norges sterkeste kompetansemiljø for våre faglige
           satningsområder.
@@ -188,12 +184,7 @@ export default function OmOss() {
 
       <ContentAndImageBox
         title="Bratte læringskurver"
-        image={
-          <CapraImage
-            src={images["icon-graph-up"].imageUrl}
-            alt={images["icon-graph-up"].alt}
-          />
-        }
+        image={images["icon-graph-up"]}
         height="40vw"
         color="peach"
       >
@@ -204,12 +195,7 @@ export default function OmOss() {
 
       <ContentAndImageBox
         title="Du eier ideene dine"
-        image={
-          <CapraImage
-            src={images["icon-idea-bulb"].imageUrl}
-            alt={images["icon-idea-bulb"].alt}
-          />
-        }
+        image={images["icon-idea-bulb"]}
         height="40vw"
         direction="right"
         color="lightBlue"
@@ -284,6 +270,7 @@ interface InfoBoxProps {
   children: React.ReactNode;
   className?: string;
 }
+
 const InfoBox = ({ title, children, className }: InfoBoxProps) => {
   return (
     <div
@@ -300,6 +287,7 @@ const InfoBox = ({ title, children, className }: InfoBoxProps) => {
 interface TeamCardProps {
   title: string;
 }
+
 const TeamCard = ({ title, children }: PropsWithChildren<TeamCardProps>) => {
   return (
     <div className="bg-white py-3 px-4 text-sm shadow-md">
@@ -312,6 +300,7 @@ const TeamCard = ({ title, children }: PropsWithChildren<TeamCardProps>) => {
 interface EmphasizedTextBoxProps {
   color: BrandColor;
 }
+
 const EmphasizedTextBox = ({
   color,
   children,
