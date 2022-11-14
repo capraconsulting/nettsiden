@@ -1,5 +1,6 @@
 import { useRef } from "react";
 
+import { useHydrated } from "~/hooks/use-hydrated";
 import { useWindowWidth } from "~/hooks/use-window-width";
 import type { BubbleContent, BubbleEffect, Position } from "./bubble";
 import { BubbleContainer } from "./bubble";
@@ -21,13 +22,17 @@ export const BubbleGrid = ({
   };
 
   const positions = createGridPositions(rect.width, rect.height, items.length);
+
+  const isHydrated = useHydrated();
   return (
     <div className="h-full min-h-[600px] w-full max-w-4xl" ref={ref}>
-      <BubbleContainer
-        items={items}
-        bubbleEffect={bubbleEffect}
-        positions={positions}
-      />
+      {(isHydrated || bubbleEffect !== "shuffle") && (
+        <BubbleContainer
+          items={items}
+          bubbleEffect={bubbleEffect}
+          positions={positions}
+        />
+      )}
     </div>
   );
 };
