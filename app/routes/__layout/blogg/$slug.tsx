@@ -65,12 +65,13 @@ export default function BloggPost() {
         <time className="text-sm text-[#555]">{item.publishedAt}</time>
       </p>
 
-      <CapraImage
-        className="max-w-3xl"
-        src={urlFor(item.mainImage!).url()}
-        alt={getMainImageAlt(item)}
-        loading="eager"
-      />
+      <div className="relative left-[50%] ml-[-50vw] w-screen max-w-3xl md:left-0 md:ml-0 md:w-full">
+        <CapraImage
+          src={urlFor(item.mainImage!).url()}
+          alt={getMainImageAlt(item)}
+          loading="eager"
+        />
+      </div>
 
       <ProseableText
         value={item.body!}

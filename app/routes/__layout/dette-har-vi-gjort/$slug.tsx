@@ -56,13 +56,14 @@ export default function DetteHarViGjortItem() {
       </h1>
       <ProseableText value={item.ingress!} className="text-2xl text-brodtext" />
 
-      <CapraImage
-        className="max-w-3xl"
-        // TODO: Crop to a square
-        src={urlFor(item.mainImage!).url()}
-        alt={getMainImageAlt(item)}
-        loading="eager"
-      />
+      <div className="relative left-[50%] ml-[-50vw] w-screen max-w-3xl md:left-0 md:ml-0 md:w-full">
+        <CapraImage
+          // TODO: Crop to a square
+          src={urlFor(item.mainImage!).url()}
+          alt={getMainImageAlt(item)}
+          loading="eager"
+        />
+      </div>
 
       <ProseableText
         value={item.body!}
