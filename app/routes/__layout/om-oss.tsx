@@ -252,11 +252,7 @@ export default function OmOss() {
         <ul className="flex flex-col flex-wrap justify-center gap-8 sm:flex-row sm:gap-10">
           {contactUsEmployees.map((x) => (
             <li key={x._id} className="w-full sm:w-72 lg:w-80">
-              <AnsattCard
-                employee={x as AuthorExpanded}
-                hideImage
-                icons={images}
-              />
+              <AnsattCard employee={x} hideImage icons={images} />
             </li>
           ))}
         </ul>

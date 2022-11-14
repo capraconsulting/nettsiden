@@ -110,7 +110,7 @@ export default function Liflig() {
       <ul className="grid grid-cols-1 justify-center gap-12 sm:grid-cols-2 sm:gap-10 md:grid-cols-3 md:gap-8 lg:grid-cols-4 lg:gap-6">
         {items.map((x) => (
           <li key={x._id}>
-            <SelvskrytCard key={x._id} selvskryt={x as SelvskrytExpanded} />
+            <SelvskrytCard key={x._id} selvskryt={x} />
           </li>
         ))}
       </ul>
