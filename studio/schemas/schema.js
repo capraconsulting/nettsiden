@@ -7,6 +7,7 @@ import author from "./documents/author";
 import blogg from "./documents/blogg";
 import bloggFilter from "./documents/bloggFilter";
 import category from "./documents/category";
+import fileAsset from "./documents/fileAsset";
 import imageAsset from "./documents/imageAsset";
 import jobCategory from "./documents/jobCategory";
 import richText from "./documents/richText";
@@ -34,6 +35,7 @@ export default createSchema({
     bloggFilter,
     category,
     factbox,
+    fileAsset,
     imageAsset,
     jobCategory,
     mainImage,
