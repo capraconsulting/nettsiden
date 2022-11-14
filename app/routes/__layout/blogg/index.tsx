@@ -80,9 +80,13 @@ export default function BloggIndex() {
           </Form>
 
           <ul className="grid grid-cols-1 justify-center gap-12 sm:grid-cols-2 sm:gap-10 md:grid-cols-3 md:gap-8 lg:grid-cols-4 lg:gap-6">
-            {data.items.map((x) => (
+            {data.items.map((x, i) => (
               <li key={x._id}>
-                <BloggCard key={x._id} bloggEntry={x} />
+                <BloggCard
+                  key={x._id}
+                  bloggEntry={x}
+                  imageProps={{ loading: i >= 4 ? "lazy" : "eager" }}
+                />
               </li>
             ))}
           </ul>
@@ -94,8 +98,9 @@ export default function BloggIndex() {
 
 interface BloggCardProps {
   bloggEntry: BloggExpanded;
+  imageProps?: React.ComponentProps<"img">;
 }
-export const BloggCard = ({ bloggEntry }: BloggCardProps) => {
+export const BloggCard = ({ bloggEntry, imageProps }: BloggCardProps) => {
   return (
     <Link prefetch="intent" to={bloggEntry.slug?.current!}>
       <Card
@@ -107,6 +112,7 @@ export const BloggCard = ({ bloggEntry }: BloggCardProps) => {
               src={urlFor(bloggEntry.mainImage!)
                 .size(4500 / 5, 3000 / 5)
                 .url()}
+              {...imageProps}
             />
           </div>
         }

@@ -61,6 +61,7 @@ export default function DetteHarViGjortItem() {
         // TODO: Crop to a square
         src={urlFor(item.mainImage!).url()}
         alt={getMainImageAlt(item)}
+        loading="eager"
       />
 
       <ProseableText

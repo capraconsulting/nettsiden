@@ -69,6 +69,7 @@ export default function BloggPost() {
         className="max-w-3xl"
         src={urlFor(item.mainImage!).url()}
         alt={getMainImageAlt(item)}
+        loading="eager"
       />
 
       <ProseableText

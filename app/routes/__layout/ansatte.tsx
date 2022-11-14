@@ -80,9 +80,13 @@ export default function Ansatte() {
         </Form>
 
         <ul className="grid grid-cols-1 justify-center gap-12 sm:grid-cols-2 sm:gap-10 md:grid-cols-3 md:gap-8 lg:grid-cols-4 lg:gap-6">
-          {data.items.map((x) => (
+          {data.items.map((x, i) => (
             <li key={x._id}>
-              <AnsattCard employee={x} icons={data.icons} />
+              <AnsattCard
+                employee={x}
+                icons={data.icons}
+                imageProps={{ loading: i >= 4 ? "lazy" : "eager" }}
+              />
             </li>
           ))}
         </ul>
@@ -97,12 +101,14 @@ interface AnsattCardProps {
     "icon-website" | "icon-twitter" | "icon-linkedin" | "icon-github"
   >;
   hideImage?: boolean;
+  imageProps?: React.ComponentProps<"img">;
 }
 
 export const AnsattCard = ({
   employee,
   icons,
   hideImage = false,
+  imageProps,
 }: AnsattCardProps) => {
   const classes = /*tw*/ {
     icon: "w-6 h-6 transition-all hover:invert",
@@ -118,6 +124,7 @@ export const AnsattCard = ({
               src={urlFor(employee.image!)
                 .size(4500 / 5, 3000 / 5)
                 .url()}
+              {...imageProps}
             />
           </div>
         )
