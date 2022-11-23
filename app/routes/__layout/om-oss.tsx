@@ -122,7 +122,7 @@ export default function OmOss() {
         bedre.
       </TitleAndText>
 
-      <section className="grid w-[90%] max-w-3xl grid-cols-2 gap-3 sm:grid-cols-3">
+      <section className="grid w-[90%] max-w-5xl grid-cols-1 sm:grid-cols-2 gap-3 md:grid-cols-3">
         {teams.map((props) => (
           <TeamCard key={props.title} {...props} />
         ))}
@@ -293,9 +293,9 @@ interface TeamCardProps {
 
 const TeamCard = ({ title, children }: PropsWithChildren<TeamCardProps>) => {
   return (
-    <div className="bg-white py-3 px-4 text-sm shadow-md">
-      <div className="font-bold uppercase text-main">{title}</div>
-      <div>{children}</div>
+    <div className="bg-white p-4 sm:p-8 text-sm ">
+      <div className="font-bold uppercase text-main text-base mb-1 border-b-2 border-secondary inline-block">{title}</div>
+      <div className="text-base">{children}</div>
     </div>
   );
 };
