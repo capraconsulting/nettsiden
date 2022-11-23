@@ -1,14 +1,13 @@
 import type { HeadersFunction } from "@remix-run/server-runtime";
 
 import { Button } from "~/components/button";
-import { Todo } from "~/components/todo";
 import { cacheControlHeaders } from "~/utils/cache-control";
 
 export const headers: HeadersFunction = () => cacheControlHeaders;
 
 export default function Personvernerklæring() {
   return (
-    <article className="prose">
+    <article className="prose w-11/12">
       <h1>Personvernerklæring</h1>
 
       <p className="lead">
