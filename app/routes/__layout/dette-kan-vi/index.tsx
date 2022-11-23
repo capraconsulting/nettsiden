@@ -157,8 +157,8 @@ export const LifligPitchAndSloganBox = ({
       illustrationImageUrl={images["illustration-square-dots"].src}
       readMoreHref="/dette-kan-vi/liflig"
     >
-      Du har ideene - la vårt inhouse team bygge og forvalte hele tjenesten for
-      deg
+      Du har ideene - la vårt <span lang="en">in house team</span> bygge og
+      forvalte hele tjenesten for deg
     </ContentAndSlogansBox>
   );
 };

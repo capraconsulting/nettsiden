@@ -107,13 +107,14 @@ export default function Liflig() {
         color="peach"
         height="40vw"
       >
-        Liflig-teamet sitter inhouse på Capra sitt hovedkontor i Oslo, du og din
-        bedrift kan sitte akkurat hvor dere vil i landet. Du som kunde skriver
-        rett og slett direkte til teamet hva du ønsker skal lages eller hva du
-        opplever som feil. Første ledige i teamet vil raskt plukke oppgavene og
-        løse de for deg. Hvordan oppgavene skal prioriteres velger du, men vi
-        vil alltid rådgi deg om hva som er viktig f.eks. med tanke på sikkerhet.
-        Du skal få lov til å drømme, mens vi tar oss av resten!
+        Liflig-teamet sitter <span lang="en">in house</span> på Capra sitt
+        hovedkontor i Oslo, du og din bedrift kan sitte akkurat hvor dere vil i
+        landet. Du som kunde skriver rett og slett direkte til teamet hva du
+        ønsker skal lages eller hva du opplever som feil. Første ledige i teamet
+        vil raskt plukke oppgavene og løse de for deg. Hvordan oppgavene skal
+        prioriteres velger du, men vi vil alltid rådgi deg om hva som er viktig
+        f.eks. med tanke på sikkerhet. Du skal få lov til å drømme, mens vi tar
+        oss av resten!
       </ContentAndImageBox>
 
       {/* TODO: The other ones */}

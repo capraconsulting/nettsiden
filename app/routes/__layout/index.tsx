@@ -99,7 +99,7 @@ export default function Index() {
           }
           titleAs="h1"
         >
-          Bold statement? Absolutt.
+          <span lang="en">Bold statement?</span> Absolutt.
         </TitleAndText>
         <div className="mx-auto flex w-11/12 justify-center gap-4">
           <Button variant="outline" href="/dette-kan-vi">
