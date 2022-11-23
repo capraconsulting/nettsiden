@@ -52,7 +52,7 @@ export const ContentAndImageBox: React.FC<Props> = ({
   return (
     <div
       className={classNames(
-        "flex w-full max-w-[95%] flex-col-reverse items-center justify-center",
+        "flex w-11/12 flex-col-reverse items-center justify-center",
         {
           "md:flex-row": direction === "left",
           "md:flex-row-reverse": direction === "right",
@@ -70,7 +70,7 @@ export const ContentAndImageBox: React.FC<Props> = ({
         )}
         style={{ minHeight: height }}
       >
-        <div className="p-[2vw] pb-0 text-2xl font-bold md:text-4xl">
+        <div className="p-[2vw] pb-0 text-2xl font-bold md:text-3xl">
           {title}
         </div>
         <div className="text-md whitespace-pre-line p-[2vw] md:text-lg">
@@ -91,7 +91,7 @@ export const ContentAndImageBox: React.FC<Props> = ({
       </div>
 
       <div
-        className={classNames("relative bg-white shadow-xl md:h-[30vw]", {
+        className={classNames("relative bg-white md:h-[30vw]", {
           "md:-ml-[100px]": direction === "left",
           "md:-mr-[100px]": direction === "right",
         })}
@@ -101,7 +101,7 @@ export const ContentAndImageBox: React.FC<Props> = ({
         )}
         <CapraImage
           image={image}
-          className="h-full w-full overflow-hidden object-contain"
+          className="hidden md:inline-block h-full w-full overflow-hidden object-contain"
         />
       </div>
     </div>
