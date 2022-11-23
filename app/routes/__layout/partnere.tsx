@@ -1,5 +1,5 @@
 import { useLoaderData } from "@remix-run/react";
-import type { HeadersFunction } from "@remix-run/server-runtime";
+import type { HeadersFunction, MetaFunction } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import { CallToActionBox } from "~/components/call-to-action-box";
@@ -9,10 +9,16 @@ import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import type { Image } from "~/utils/dataRetrieval";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
+import { metaTags } from "~/utils/meta-tags";
 
 export const handle: CapraHandle = {
   contactFormTitle: "Hvordan kan vi hjelpe deg?",
 };
+
+export const meta: MetaFunction = () =>
+  metaTags({
+    title: "Leverandør av AWS - Les mer om skytjenesten her",
+  });
 
 export const loader = async () => {
   const images = await fetchImageAssets([

@@ -16,6 +16,7 @@ import { sanityClient } from "~/sanity/sanity-client.server";
 import type { Selvskryt, Selvskrytfilter } from "~/sanity/schema";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { urlFor } from "~/utils/imageBuilder";
+import { metaTags } from "~/utils/meta-tags";
 import { uniqueBy } from "~/utils/misc";
 
 type SelvskrytExpanded = Omit<Selvskryt, "filter"> & {
@@ -53,11 +54,12 @@ export const loader = async ({ request }: LoaderArgs) => {
 };
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
-export const meta: MetaFunction = () => ({
-  title: "Vi er stolte av arbeidet vi gjør - Se caser her | Capra Consulting",
-  description:
-    "Det er viktig å løfte frem godt arbeid! Vi syns også det er helt nødvendig å vise frem det flotte vi i Capra får til sammen med våre kunder. Se caser her.",
-});
+export const meta: MetaFunction = () =>
+  metaTags({
+    title: "Vi er stolte av arbeidet vi gjør - Se caser her",
+    description:
+      "Det er viktig å løfte frem godt arbeid! Vi syns også det er helt nødvendig å vise frem det flotte vi i Capra får til sammen med våre kunder. Se caser her.",
+  });
 
 export default function DetteHarViGjort() {
   const data = useLoaderData<typeof loader>();

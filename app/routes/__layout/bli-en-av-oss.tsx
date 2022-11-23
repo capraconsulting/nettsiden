@@ -14,6 +14,7 @@ import { TitleAndText } from "~/components/title-and-text";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { getEnv } from "~/utils/env";
+import { metaTags } from "~/utils/meta-tags";
 import { groupBy, typedBoolean } from "~/utils/misc";
 
 /**
@@ -128,19 +129,13 @@ export const loader = async ({ context }: LoaderArgs) => {
 };
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  const title =
-    "Norges beste arbeidsplass søker IT-konsulent | Capra Consulting";
-  const description =
-    "Hos Capra Consulting får du muligheten til å utvikle deg i et faglig og sosialt miljø. Nysgjerrig på hva Capra kan tilby? Les mer her";
-  return {
-    title,
-    "og:title": title,
-    description,
-    "og:description": description,
-    "og:image": data.images["photo-sem-capracon"].src,
-  };
-};
+export const meta: MetaFunction<typeof loader> = ({ data }) =>
+  metaTags({
+    title: "Norges beste arbeidsplass søker IT-konsulent",
+    description:
+      "Hos Capra Consulting får du muligheten til å utvikle deg i et faglig og sosialt miljø. Nysgjerrig på hva Capra kan tilby? Les mer her",
+    image: data.images["photo-sem-capracon"].src,
+  });
 
 export default function BliEnAvOss() {
   const { images } = useLoaderData<typeof loader>();

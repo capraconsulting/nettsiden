@@ -14,6 +14,7 @@ import { sanityClient } from "~/sanity/sanity-client.server";
 import type { Author, Blogg, Bloggfilter } from "~/sanity/schema";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { urlFor } from "~/utils/imageBuilder";
+import { metaTags } from "~/utils/meta-tags";
 import { uniqueBy } from "~/utils/misc";
 
 type BloggExpanded = Omit<Blogg, "filter" | "authors"> & {
@@ -53,11 +54,12 @@ export const loader = async ({ request }: LoaderArgs) => {
 };
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
-export const meta: MetaFunction = () => ({
-  title: "Les hva som rører seg i IT-bransjen - Blogg | Capra Consulting",
-  description:
-    "På bloggen vår kan du lese om hva som skjer i IT-bransjen. Vi vil dele tips, råd og mye snacks! Spesielt relevant for deg som skal starte å jobbe med IT.",
-});
+export const meta: MetaFunction = () =>
+  metaTags({
+    title: "Les hva som rører seg i IT-bransjen - Blogg",
+    description:
+      "På bloggen vår kan du lese om hva som skjer i IT-bransjen. Vi vil dele tips, råd og mye snacks! Spesielt relevant for deg som skal starte å jobbe med IT.",
+  });
 
 export default function BloggIndex() {
   const data = useLoaderData<typeof loader>();

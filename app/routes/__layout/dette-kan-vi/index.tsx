@@ -8,8 +8,14 @@ import { TitleAndText } from "~/components/title-and-text";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import type { Images } from "~/utils/dataRetrieval";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
+import { metaTags } from "~/utils/meta-tags";
 
-export const meta: MetaFunction = () => ({});
+export const meta: MetaFunction = () =>
+  metaTags({
+    title: "IT-konsulenter, sikkerhet og skreddersøm",
+    description:
+      "Våre tjenester spenner seg fra utvikling av IT-løsninger, sikkerhet, ledelse av tekniske prosjekter og rådgivning. Les mer om hva vi kan tilby her.",
+  });
 
 export const loader = async () => {
   const images = await fetchImageAssets([

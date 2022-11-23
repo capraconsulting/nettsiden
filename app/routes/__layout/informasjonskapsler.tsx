@@ -1,8 +1,14 @@
-import type { HeadersFunction } from "@remix-run/server-runtime";
+import type { HeadersFunction, MetaFunction } from "@remix-run/server-runtime";
 
 import { cacheControlHeaders } from "~/utils/cache-control";
+import { metaTags } from "~/utils/meta-tags";
 
 export const headers: HeadersFunction = () => cacheControlHeaders;
+
+export const meta: MetaFunction = () =>
+  metaTags({
+    title: "Informasjonskapsler",
+  });
 
 export default function Informasjonskapsler() {
   return (

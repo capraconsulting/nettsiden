@@ -1,9 +1,16 @@
 import type { HeadersFunction } from "@remix-run/server-runtime";
+import type { MetaFunction } from "@remix-run/server-runtime";
 
 import { Button } from "~/components/button";
 import { cacheControlHeaders } from "~/utils/cache-control";
+import { metaTags } from "~/utils/meta-tags";
 
 export const headers: HeadersFunction = () => cacheControlHeaders;
+
+export const meta: MetaFunction = () =>
+  metaTags({
+    title: "Personvernerklæring",
+  });
 
 export default function Personvernerklæring() {
   return (
