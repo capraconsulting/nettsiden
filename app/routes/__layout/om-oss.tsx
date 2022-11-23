@@ -266,16 +266,15 @@ interface InfoBoxProps {
   children: React.ReactNode;
   className?: string;
 }
-
 const InfoBox = ({ title, children, className }: InfoBoxProps) => {
   return (
     <div
-      className={`flex w-11/12 max-w-7xl flex-col gap-4 border-none bg-peach-20 py-7 px-6 ${
+      className={`flex w-full sm:w-11/12 md:max-w-2xl flex-col gap-4 border-none bg-peach-20 py-7 px-6 md:p-12 ${
         className ?? ""
       }`}
     >
-      <div className="font-bold uppercase text-main">{title}</div>
-      <div>{children}</div>
+      <div className="font-bold uppercase text-lg text-main">{title}</div>
+      <div className="text-lg leading-16">{children}</div>
     </div>
   );
 };
