@@ -14,7 +14,7 @@ export const CallToActionBox = ({
   href,
 }: CallToActionBoxProps) => {
   return (
-    <div className="flex w-11/12 max-w-7xl flex-col items-center gap-7 bg-peach-20 py-24 px-6 text-secondary">
+    <div className="relative flex w-screen max-w-7xl flex-col items-center gap-7 bg-peach-20 py-24 px-6 text-secondary lg:w-11/12">
       <div className="flex flex-col gap-1 text-center">
         <p className="text-xl font-bold">{title}</p>
         <p>{description}</p>

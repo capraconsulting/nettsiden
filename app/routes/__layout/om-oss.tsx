@@ -122,7 +122,7 @@ export default function OmOss() {
         bedre.
       </TitleAndText>
 
-      <section className="grid w-[90%] max-w-5xl grid-cols-1 sm:grid-cols-2 gap-3 md:grid-cols-3">
+      <section className="grid w-[90%] max-w-5xl grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
         {teams.map((props) => (
           <TeamCard key={props.title} {...props} />
         ))}
@@ -277,12 +277,12 @@ interface InfoBoxProps {
 const InfoBox = ({ title, children, className }: InfoBoxProps) => {
   return (
     <div
-      className={`flex w-full sm:w-11/12 md:max-w-2xl flex-col gap-4 border-none bg-peach-20 py-7 px-6 md:p-12 ${
+      className={`flex w-full flex-col gap-4 border-none bg-peach-20 py-7 px-6 sm:w-11/12 md:max-w-2xl md:p-12 ${
         className ?? ""
       }`}
     >
-      <div className="font-bold uppercase text-lg text-main">{title}</div>
-      <div className="text-lg leading-16">{children}</div>
+      <div className="text-lg font-bold uppercase text-main">{title}</div>
+      <div className="leading-16 text-lg">{children}</div>
     </div>
   );
 };
@@ -293,8 +293,10 @@ interface TeamCardProps {
 
 const TeamCard = ({ title, children }: PropsWithChildren<TeamCardProps>) => {
   return (
-    <div className="bg-white p-4 sm:p-8 text-sm ">
-      <div className="font-bold uppercase text-main text-base mb-1 border-b-2 border-secondary inline-block">{title}</div>
+    <div className="bg-white p-4 text-sm sm:p-8 ">
+      <div className="mb-1 inline-block border-b-2 border-secondary text-base font-bold uppercase text-main">
+        {title}
+      </div>
       <div className="text-base">{children}</div>
     </div>
   );

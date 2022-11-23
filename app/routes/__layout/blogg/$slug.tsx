@@ -53,13 +53,16 @@ export const loader = async ({ params }: LoaderArgs) => {
     { headers: cacheControlHeaders },
   );
 };
+
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
 export const meta: MetaFunction<typeof loader> = ({ data }) =>
   metaTags({
-    title: data.title!,
-    description: getRawStringContent(data.ingress) || data.title,
+    title: data.helmetTitle ?? data.title!,
+    description: data.helmetDescription ?? getRawStringContent(data.ingress),
     image: urlFor(data.mainImage!).url(),
+    author: data.authors,
+    card: "summary_large_image",
   });
 
 export default function BloggPost() {

@@ -17,6 +17,7 @@ import { Todo } from "~/components/todo";
 import { sanityClient } from "~/sanity/sanity-client.server";
 import type { CapraHandle } from "~/types";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
+import { metaTags } from "~/utils/meta-tags";
 import { typedBoolean } from "~/utils/misc";
 import type { ContactFormRepresentative } from "./api.contact";
 import { ContactForm } from "./api.contact";
@@ -56,9 +57,10 @@ export const loader = async ({ request }: LoaderArgs) => {
 // https://remix.run/docs/en/v1/api/conventions#never-reloading-the-root
 export const unstable_shouldReload: ShouldReloadFunction = () => false;
 
-export const meta: MetaFunction = () => ({
-  title: "Capra Consulting: IT-konsulenter med ekspertise i software",
-});
+export const meta: MetaFunction = () =>
+  metaTags({
+    title: "IT-konsulenter med ekspertise i software",
+  });
 
 export default function Layout() {
   const data = useLoaderData<typeof loader>();
