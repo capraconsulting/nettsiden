@@ -43,25 +43,27 @@ export default function Partnere() {
         kompetansemiljøene på AWS.
       </TitleAndText>
 
-      <div className="flex flex-col items-center gap-10 bg-peach-20 py-[5%] px-[10%] lg:flex-row">
-        <div>
-          Som{" "}
-          <a
-            href="https://aws.amazon.com/blogs/apn/"
-            className="font-bold underline"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            APN Advanced Tier Consulting Partner
-          </a>{" "}
-          med over 40 sertifiserte medarbeidere og dyp erfaring fra noen av de
-          mest innovative implementeringene i Norge, gjør vi overgangen til sky
-          til et smertefritt paradigmeskifte.
+      <div className="flex w-full justify-center bg-peach-20 py-[5%] px-[10%]">
+        <div className="algin-center flex max-w-3xl flex-col items-center gap-10 lg:flex-row">
+          <p className="text-center text-lg lg:text-left">
+            Som{" "}
+            <a
+              href="https://aws.amazon.com/blogs/apn/"
+              className="font-bold underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              APN Advanced Tier Consulting Partner
+            </a>{" "}
+            med over 40 sertifiserte medarbeidere og dyp erfaring fra noen av de
+            mest innovative implementeringene i Norge, gjør vi overgangen til
+            sky til et smertefritt paradigmeskifte.
+          </p>
+          <CapraImage
+            className="h-[90px] w-[340px] py-0 px-0"
+            image={images["logo-aws-partner"]}
+          />
         </div>
-        <CapraImage
-          className="h-[90px] w-[340px] py-0 px-0"
-          image={images["logo-aws-partner"]}
-        />
       </div>
 
       <TitleAndText title="Andre partnere" titleAs="h2">
