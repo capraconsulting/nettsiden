@@ -187,6 +187,7 @@ export default function BliEnAvOss() {
           linkText: "Se hva vi bruker",
           to: "/dette-kan-vi#teknologier",
         }}
+        hideMobileImage={false}
       >
         Vi består av en gjeng som er over gjennomsnittet interessert i tech, og
         det reflekteres i fagmiljøet vårt.{" "}
@@ -198,6 +199,7 @@ export default function BliEnAvOss() {
         image={images["photo-mingling-capracon"]}
         height="50vw"
         color="bordeaux"
+        hideMobileImage={false}
       >
         Kontoret til Capra ligger midt på Jernbanetorget sånn at du enkelt kan
         komme “hjemom” en tur, før eller etter du har vært hos kunde.{" "}

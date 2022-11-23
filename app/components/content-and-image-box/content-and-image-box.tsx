@@ -34,6 +34,7 @@ interface Props {
   height: `${number}vw`;
   direction?: "left" | "right";
   readMoreLink?: ReadMoreLink;
+  hideMobileImage?: boolean;
 }
 
 export const ContentAndImageBox: React.FC<Props> = ({
@@ -46,6 +47,7 @@ export const ContentAndImageBox: React.FC<Props> = ({
   height,
   direction = "left",
   readMoreLink,
+  hideMobileImage = true,
 }) => {
   const { boxClassName, patternClassName } = getBoxConfig(color);
   const isHydrated = useHydrated();
@@ -101,7 +103,12 @@ export const ContentAndImageBox: React.FC<Props> = ({
         )}
         <CapraImage
           image={image}
-          className="hidden md:inline-block h-full w-full overflow-hidden object-contain"
+          className={classNames(
+            "h-full w-full overflow-hidden object-contain md:inline-block",
+            {
+              hidden: hideMobileImage,
+            },
+          )}
         />
       </div>
     </div>
