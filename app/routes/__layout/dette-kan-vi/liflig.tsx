@@ -19,7 +19,15 @@ type SelvskrytExpanded = Omit<Selvskryt, "filter"> & {
 export const loader = async () => {
   // TODO: Use the actual images
   const [images, items] = await Promise.all([
-    fetchImageAssets(["icon-graph-up", "icon-idea-bulb"]),
+    fetchImageAssets([
+      "icon-competence-red",
+      "icon-technical-red",
+      "icon-time-red",
+      "photo-money",
+      "photo-money-spire",
+      "photo-kontor-gjensidige",
+      "photo-kontor-nrk",
+    ]),
     sanityClient.query<SelvskrytExpanded>(
       `* [_type == "selvskryt"] { ..., filter[]-> }`,
     ),
@@ -45,10 +53,9 @@ export const meta: MetaFunction = () =>
 export default function Liflig() {
   const { images, items } = useLoaderData<typeof loader>();
   return (
-    <div className="flex w-full flex-col gap-12">
+    <>
       <TitleAndText
-        title="Liflig - Skreddersydde IT-løsninger for bedriften din
-"
+        title="Liflig - Skreddersydde IT-løsninger for bedriften din"
         titleAs="h1"
       >
         Nye utviklingsmodeller krever nye arbeidsmåter. Liflig er til for at du
@@ -56,11 +63,11 @@ export default function Liflig() {
         tekniske valg. Det er vår jobb!
       </TitleAndText>
 
-      <div className="grid max-w-4xl grid-cols-1 gap-20 px-10 sm:grid-cols-2">
+      <div className="grid max-w-4xl grid-cols-1 gap-10 px-10 md:grid-cols-3">
         <IconTitleAndTextBlock
           title="Vi tar det tekniske"
           titleAs="h2"
-          image={images["icon-graph-up"]}
+          image={images["icon-technical-red"]}
         >
           Du slipper tekniske valg og kan fokusere på det du er god på.{" "}
           <strong>
@@ -70,7 +77,7 @@ export default function Liflig() {
         <IconTitleAndTextBlock
           title="Kort oppstartstid"
           titleAs="h2"
-          image={images["icon-graph-up"]}
+          image={images["icon-time-red"]}
         >
           Vi har ferdig utviklet infrastruktur som gjør at{" "}
           <strong>vi kan begynne å skrive kode fra dag 1.</strong>
@@ -79,7 +86,7 @@ export default function Liflig() {
         <IconTitleAndTextBlock
           title="Kompetanse på laget"
           titleAs="h2"
-          image={images["icon-graph-up"]}
+          image={images["icon-competence-red"]}
         >
           Modellen til Liflig gjør at{" "}
           <strong>
@@ -96,7 +103,7 @@ export default function Liflig() {
 
       <ContentAndImageBox
         title="Alltid tilgjengelig"
-        image={images["icon-graph-up"]}
+        image={images["icon-technical-red"]}
         color="peach"
         height="40vw"
       >
@@ -123,6 +130,6 @@ export default function Liflig() {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 }

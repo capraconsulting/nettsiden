@@ -15,8 +15,8 @@ const IconTitleAndTextBlock: React.FC<
 > = ({ title, titleAs: TitleComponent, children, image }) => {
   return (
     <div className="flex flex-col gap-3 text-center">
-      <CapraImage image={image} className="max-h-28 sm:max-h-32" />
-      <TitleComponent className="text-2xl font-bold md:text-3xl">
+      <CapraImage image={image} className="max-h-28 sm:max-h-24" />
+      <TitleComponent className="text-2xl font-bold lg:text-3xl">
         {title}
       </TitleComponent>
       <p>{children}</p>
