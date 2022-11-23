@@ -53,7 +53,7 @@ export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 export default function BloggPost() {
   const item = useLoaderData<typeof loader>();
   return (
-    <article className="flex w-[90%] max-w-2xl flex-col gap-5">
+    <article className="flex w-11/12 max-w-2xl flex-col gap-5">
       <h1 className="text-5xl font-bold leading-[1.14] text-header">
         {item.titleLong}
       </h1>
