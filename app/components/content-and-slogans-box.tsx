@@ -35,17 +35,18 @@ export const ContentAndSlogansBox = ({
   return (
     <div
       className={classNames(
-        "flex w-full flex-col-reverse",
+        "flex w-full max-w-lg flex-col-reverse ",
         {
           "md:flex-row": direction === "left",
           "md:flex-row-reverse": direction === "right",
         },
-        "w-[95%] max-w-4xl",
+        "w-[95%] md:max-w-4xl",
+        "justify-center",
       )}
     >
       <div
         className={classNames(
-          "w-full px-[10%] pt-[15%] text-secondary md:w-1/2",
+          "flex w-full flex-col justify-center pt-10 text-secondary md:px-[10%] md:pt-0",
         )}
       >
         <TitleComponent
@@ -65,7 +66,7 @@ export const ContentAndSlogansBox = ({
           {title}
         </TitleComponent>
 
-        <div className="mt-[4vh]">{children}</div>
+        <div className="mt-[4vh] text-lg">{children}</div>
 
         {readMoreHref && (
           <CapraLink
@@ -78,7 +79,7 @@ export const ContentAndSlogansBox = ({
         )}
       </div>
 
-      <div className="grid w-full grid-cols-2 gap-2.5 p-1 md:w-1/2">
+      <div className="grid w-full grid-cols-2 gap-2.5 md:p-1">
         {slogans.map(({ title, imageUrl }) => (
           <div
             key={title}
