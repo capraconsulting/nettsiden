@@ -60,6 +60,8 @@ export const meta: MetaFunction<typeof loader> = ({ data }) =>
     title: data.title!,
     description: getRawStringContent(data.ingress) || data.title,
     image: urlFor(data.mainImage!).url(),
+    author: data.authors,
+    card: "summary_large_image",
   });
 
 export default function BloggPost() {
