@@ -193,6 +193,7 @@ const Input: React.FC<{
         type={type}
         placeholder={placeholder}
         className="w-full p-[1vh] text-black"
+        data-lpignore="true"
       />
       {fieldErrors && <div className="text-red">{fieldErrors}</div>}
     </div>

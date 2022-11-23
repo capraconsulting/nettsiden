@@ -1,5 +1,6 @@
 import { useEffect, useReducer, useState } from "react";
 
+import { useHydrated } from "~/hooks/use-hydrated";
 import { classNames } from "~/utils/misc";
 
 interface Timing {
@@ -66,6 +67,12 @@ export const TypingText: React.FC<Props> = ({
     // I know better than eslint here tbh. This will trigger more often than necessary if we listen to all changes they want us to.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, erasing, typing]);
+
+  const isHydrated = useHydrated();
+
+  if (!isHydrated) {
+    return <span>{typeof text === "string" ? text : text[0]}</span>;
+  }
 
   return (
     <span>

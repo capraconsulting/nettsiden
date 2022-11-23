@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { useHydrated } from "~/hooks/use-hydrated";
 import { classNames, shiftedBy } from "~/utils/misc";
 import { shuffled } from "~/utils/random";
 
@@ -16,12 +17,16 @@ type BubbleProps = {
   children: React.ReactNode;
 } & React.HTMLProps<HTMLDivElement>;
 export const Bubble = ({ position, children, ...rest }: BubbleProps) => {
+  const isHydrated = useHydrated();
   return (
     <div
       className={classNames(
         "absolute select-none overflow-hidden rounded-full transition-[top,left,width,height] duration-500 ease-in-out",
         "border border-light-blue",
-        rest.onClick && "cursor-pointer hover:scale-105 active:scale-110",
+        {
+          "cursor-pointer hover:scale-105 active:scale-110":
+            !!rest.onClick && isHydrated,
+        },
       )}
       style={{ ...position }}
       {...rest}
