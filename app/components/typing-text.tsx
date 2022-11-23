@@ -75,7 +75,11 @@ export const TypingText: React.FC<Props> = ({
   }
 
   return (
-    <span>
+    <span
+      aria-label={new Intl.ListFormat().format(
+        typeof text === "string" ? [text] : text,
+      )}
+    >
       {displayText}
       <Cursor />
     </span>
@@ -145,6 +149,7 @@ const Cursor: React.FC = () => {
 
   return (
     <span
+      aria-hidden={true}
       className={classNames(
         "inline-block transition-opacity duration-500",
         show ? "opacity-1" : "opacity-0",
