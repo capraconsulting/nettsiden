@@ -146,7 +146,14 @@ export default function Index() {
         ))}
       >
         <div className="flex flex-col items-center gap-8 sm:gap-[10vh]">
-          <TitleAndText title="Vi har kickass folk" titleAs="h2">
+          <TitleAndText
+            title={
+              <>
+                Vi har <span lang="en">kickass</span> folk
+              </>
+            }
+            titleAs="h2"
+          >
             I Capra setter vi menneskene først. Vi vet at fornøyde og motiverte
             folk skaper den beste arbeidsplassen.
           </TitleAndText>
