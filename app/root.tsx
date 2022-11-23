@@ -40,13 +40,25 @@ export const meta: MetaFunction = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 
+const Head: React.FC = () => {
+  if (globalThis.document?.head) {
+    return (
+      <head dangerouslySetInnerHTML={{ __html: document.head.innerHTML }} />
+    );
+  }
+
+  return (
+    <head>
+      <Meta />
+      <Links />
+    </head>
+  );
+};
+
 export default function App() {
   return (
     <html lang="no">
-      <head>
-        <Meta />
-        <Links />
-      </head>
+      <Head />
       <body className="flex h-full flex-col">
         <Outlet />
         <ScrollRestoration />
