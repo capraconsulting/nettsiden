@@ -6,7 +6,7 @@ export const headers: HeadersFunction = () => cacheControlHeaders;
 
 export default function Informasjonskapsler() {
   return (
-    <article className="prose">
+    <article className="prose w-11/12">
       <h1> Hva er informasjonskapsler?</h1>
       <p className="lead">
         «Informasjonskapsler» eller «cookies» er noe nesten alle nettsider
