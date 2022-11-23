@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 import { useLoaderData } from "@remix-run/react";
-import type { HeadersFunction } from "@remix-run/server-runtime";
+import type { HeadersFunction, MetaFunction } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import { BubbleGrid } from "~/components/bubbles/bubble-grid";
@@ -18,10 +18,12 @@ import { cacheControlHeaders } from "~/utils/cache-control";
 import type { BrandColor } from "~/utils/constants";
 import { BRAND_BG_AND_FG_COLORS } from "~/utils/constants";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
+import { metaTags } from "~/utils/meta-tags";
 import { classNames } from "~/utils/misc";
 import { AnsattCard } from "./ansatte";
 
 type AuthorExpanded = Omit<Author, "filter"> & { filter: JobCategory[] };
+
 export const loader = async () => {
   const [images, employeeImages, contactUsEmployees] = await Promise.all([
     fetchImageAssets([
@@ -51,7 +53,13 @@ export const loader = async () => {
     { headers: cacheControlHeaders },
   );
 };
+
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
+
+export const meta: MetaFunction = () =>
+  metaTags({
+    title: "Innovasjon og teknologi i fokus - Om oss",
+  });
 
 export default function OmOss() {
   const { images, employeeImages, contactUsEmployees } =

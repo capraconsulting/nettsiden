@@ -1,5 +1,5 @@
 import { useLoaderData } from "@remix-run/react";
-import type { HeadersFunction } from "@remix-run/server-runtime";
+import type { HeadersFunction, MetaFunction } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
@@ -9,6 +9,7 @@ import { sanityClient } from "~/sanity/sanity-client.server";
 import type { Selvskryt, Selvskrytfilter } from "~/sanity/schema";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
+import { metaTags } from "~/utils/meta-tags";
 import { SelvskrytCard } from "../dette-har-vi-gjort";
 
 type SelvskrytExpanded = Omit<Selvskryt, "filter"> & {
@@ -31,7 +32,15 @@ export const loader = async () => {
     ),
   });
 };
+
 export const headers: HeadersFunction = () => cacheControlHeaders;
+
+export const meta: MetaFunction = () =>
+  metaTags({
+    title: "Skreddersydde IT-løsninger for bedriften din",
+    description:
+      "Du velger hva som skal bygges, vi vet hvordan! Hos oss får du en skreddersydd softwaretjeneste som alltid er oppdatert via en løpende kontrakt. Les mer >>",
+  });
 
 export default function Liflig() {
   const { images, items } = useLoaderData<typeof loader>();

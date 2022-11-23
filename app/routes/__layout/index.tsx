@@ -12,18 +12,19 @@ import { TypingText } from "~/components/typing-text";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
+import { metaTags } from "~/utils/meta-tags";
 import { shuffled } from "~/utils/random";
 import {
   KonsulenterPitchAndSloganBox,
   LifligPitchAndSloganBox,
 } from "./dette-kan-vi";
 
-export const meta: MetaFunction = () => ({
-  title: "Capra Consulting: IT-konsulenter med ekspertise i software",
-  "og:title": "Capra Consulting: IT-konsulenter med ekspertise i software",
-  description:
-    "Vi er IT-konsulenter innen softwareutvikling og Norges beste på sky. I Capra har vi høy kvalitet på våre ansatte, og det vil vi fortsette med. Bli med oss!",
-});
+export const meta: MetaFunction = () =>
+  metaTags({
+    title: "Capra Consulting: IT-konsulenter med ekspertise i software",
+    description:
+      "Vi er IT-konsulenter innen softwareutvikling og Norges beste på sky. I Capra har vi høy kvalitet på våre ansatte, og det vil vi fortsette med. Bli med oss!",
+  });
 
 export const loader = async () => {
   const [images, employeeImages] = await Promise.all([
@@ -50,6 +51,7 @@ export const loader = async () => {
       .then(shuffled)
       .then((l) => l.slice(0, 13)),
   ]);
+
   return json(
     {
       images,
@@ -62,6 +64,7 @@ export const loader = async () => {
     { headers: cacheControlHeaders },
   );
 };
+
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
 export const handle: CapraHandle = {

@@ -1,5 +1,9 @@
 import { useLoaderData } from "@remix-run/react";
-import type { HeadersFunction, LoaderArgs } from "@remix-run/server-runtime";
+import type {
+  HeadersFunction,
+  LoaderArgs,
+  MetaFunction,
+} from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import { CapraImage } from "~/components/capra-image";
@@ -9,10 +13,11 @@ import {
   sanityClient,
 } from "~/sanity/sanity-client.server";
 import type { Author, Blogg } from "~/sanity/schema";
-import { getMainImageAlt } from "~/sanity/utils";
+import { getMainImageAlt, getRawStringContent } from "~/sanity/utils";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { urlFor } from "~/utils/imageBuilder";
+import { metaTags } from "~/utils/meta-tags";
 import { assertItemFound, typedBoolean } from "~/utils/misc";
 
 export const handle: CapraHandle = {
@@ -49,6 +54,13 @@ export const loader = async ({ params }: LoaderArgs) => {
   );
 };
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
+
+export const meta: MetaFunction<typeof loader> = ({ data }) =>
+  metaTags({
+    title: data.title!,
+    description: getRawStringContent(data.ingress) || data.title,
+    image: urlFor(data.mainImage!).url(),
+  });
 
 export default function BloggPost() {
   const item = useLoaderData<typeof loader>();

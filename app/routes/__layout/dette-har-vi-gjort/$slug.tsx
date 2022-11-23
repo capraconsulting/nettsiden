@@ -16,6 +16,7 @@ import { getMainImageAlt } from "~/sanity/utils";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { urlFor } from "~/utils/imageBuilder";
+import { metaTags } from "~/utils/meta-tags";
 import { assertItemFound } from "~/utils/misc";
 
 export const handle: CapraHandle = {
@@ -34,10 +35,11 @@ export const loader = async ({ params }: LoaderArgs) => {
 };
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
-export const meta: MetaFunction<typeof loader> = ({ data }) => ({
-  title: data.item.helmetTitle,
-  description: data.item.helmetDescription,
-});
+export const meta: MetaFunction<typeof loader> = ({ data }) =>
+  metaTags({
+    title: data.item.helmetTitle!,
+    description: data.item.helmetDescription!,
+  });
 
 export default function DetteHarViGjortItem() {
   const { item } = useLoaderData<typeof loader>();

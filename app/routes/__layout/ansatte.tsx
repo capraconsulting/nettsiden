@@ -1,5 +1,9 @@
 import { Form, useLoaderData, useSearchParams } from "@remix-run/react";
-import type { HeadersFunction, LoaderArgs } from "@remix-run/server-runtime";
+import type {
+  HeadersFunction,
+  LoaderArgs,
+  MetaFunction,
+} from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import { Badge } from "~/components/badge";
@@ -14,6 +18,7 @@ import { cacheControlHeaders } from "~/utils/cache-control";
 import type { Images } from "~/utils/dataRetrieval";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { urlFor } from "~/utils/imageBuilder";
+import { metaTags } from "~/utils/meta-tags";
 import { uniqueBy } from "~/utils/misc";
 
 type AuthorExpanded = Omit<Author, "filter"> & { filter: JobCategory[] };
@@ -60,6 +65,13 @@ export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 export const handle: CapraHandle = {
   contactFormTitle: "Snakk med oss om dine IT-utfordringer!",
 };
+
+export const meta: MetaFunction = () =>
+  metaTags({
+    title: "Capra Consulting: IT-konsulenter med ekspertise i software",
+    description:
+      "Vi er IT-konsulenter innen softwareutvikling og Norges beste på sky. I Capra har vi høy kvalitet på våre ansatte, og det vil vi fortsette med. Bli med oss!",
+  });
 
 export default function Ansatte() {
   const data = useLoaderData<typeof loader>();

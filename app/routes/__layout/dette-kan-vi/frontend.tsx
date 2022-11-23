@@ -1,5 +1,5 @@
 import { useLoaderData } from "@remix-run/react";
-import type { HeadersFunction } from "@remix-run/server-runtime";
+import type { HeadersFunction, MetaFunction } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
@@ -7,10 +7,18 @@ import { TitleAndText } from "~/components/title-and-text";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
+import { metaTags } from "~/utils/meta-tags";
 
 export const handle: CapraHandle = {
   contactFormTitle: "Trenger du frontend spisskompetanse på ditt team?",
 };
+
+export const meta: MetaFunction = () =>
+  metaTags({
+    title: "Frontendutvikling - Hva er det?",
+    description:
+      "Frontend-området er i rask utvikling!  Derfor er samspill mellom rammeverk, fremtidsrettet, modulær og testet kode sentralt i frontendutvikling. Se mer >>",
+  });
 
 export const loader = async () => {
   const images = await fetchImageAssets([
