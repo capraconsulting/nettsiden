@@ -117,13 +117,13 @@ export const ContactForm = ({ title, representatives }: ContactFormProps) => {
   const fetcher = useFetcher<typeof action>();
   const isSuccess = fetcher.type === "done" && !fetcher.data;
   return (
-    <div className="bg-secondary pt-[3vh] pb-[6vh]">
+    <div className="bg-secondary pt-12 pb-[6vh]">
       <article className="md:11/12 mx-auto flex w-10/12 flex-col items-center text-white sm:w-9/12">
         <section className="text-center">
-          <p className="text-xl font-bold text-peach md:text-4xl">
+          <p className="text-xl font-bold text-peach md:text-4xl pb-4">
             {isSuccess ? "Takk for din interesse!" : title}
           </p>
-          <p className="md:mt-5">
+          <p className="md:mb-8">
             {isSuccess
               ? "Vi tar kontakt med deg så snart som mulig."
               : "Fyll ut skjemaet så kontakter vi deg!"}
