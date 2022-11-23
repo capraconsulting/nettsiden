@@ -77,7 +77,7 @@ export default function Index() {
         <TitleAndText
           title={
             <>
-              Vi er norges beste på{" "}
+              Vi er Norges beste på{" "}
               <span className="block sm:inline-block">
                 <TypingText
                   text={[
