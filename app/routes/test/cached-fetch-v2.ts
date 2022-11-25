@@ -41,6 +41,7 @@ export const loader = async ({ request }: LoaderArgs) => {
     cacheTtl,
     now: new Date(),
     age: catFact.headers.get("age"),
+    cacheControl: catFact.headers.get("Cache-Control"),
     "cf-cache-status": catFact.headers.get("cf-cache-status"),
     fact: catFactJson.fact,
   });
