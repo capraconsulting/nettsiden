@@ -8,7 +8,7 @@ export const loader = async ({ request }: LoaderArgs) => {
 
   const catFact = await fetch("https://catfact.ninja/fact?test=123", {
     cf: {
-      cacheEverything: true,
+      cacheEverything: purge ? false : true,
       cacheTtl: purge ? 0 : cacheTtl,
     },
   });
@@ -18,6 +18,7 @@ export const loader = async ({ request }: LoaderArgs) => {
     purged: purge,
     cacheTtl,
     now: new Date(),
+    headers: [...catFact.headers.entries()],
     fact: catFactJson.fact,
   });
 };
