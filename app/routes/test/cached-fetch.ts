@@ -6,9 +6,10 @@ export const loader = async ({ request }: LoaderArgs) => {
   const cacheTtl = Number.parseInt(searchParams.get("cacheTtl") ?? "") || 10;
   const purge = searchParams.get("purge") === "true";
 
-  // Just purge everything!
-  // const cacheKeys = await caches.keys();
-  // (await caches.keys()).forEach((key) => caches.delete(key));
+  const defaultCache = caches.default;
+  const f = await caches.open("");
+  const cacheKeys = f?.keys?.();
+  const defaultCacheKeys = defaultCache?.keys?.();
 
   const catFact = await fetch("https://catfact.ninja/fact?test=123", {
     cf: {
@@ -20,7 +21,9 @@ export const loader = async ({ request }: LoaderArgs) => {
   const catFactJson = await catFact.json<{ fact: string; length: number }>();
   return json({
     caches,
-    cachesFunctions: typeof caches.open,
+    cacheKeys,
+    defaultCache,
+    defaultCacheKeys,
     purged: purge,
     cacheTtl,
     now: new Date(),
