@@ -7,9 +7,9 @@ export const loader = async ({ request }: LoaderArgs) => {
   const purge = searchParams.get("purge") === "true";
 
   const defaultCache = (caches as any).default as Cache;
-  const f = await caches.open("");
-  const cacheKeys = await f?.keys?.();
-  const defaultCacheKeys = await defaultCache?.keys?.();
+  const f = await caches.open("default");
+  // const cacheKeys = await f?.keys?.();
+  // const defaultCacheKeys = await defaultCache?.keys?.();
   const keysFunction = typeof defaultCache?.keys;
   const catFact = await fetch("https://catfact.ninja/fact?test=123", {
     cf: {
@@ -21,9 +21,9 @@ export const loader = async ({ request }: LoaderArgs) => {
   const catFactJson = await catFact.json<{ fact: string; length: number }>();
   return json({
     caches,
-    cacheKeys,
+    // cacheKeys,
     defaultCache,
-    defaultCacheKeys,
+    // defaultCacheKeys,
     keysFunction,
 
     purged: purge,
