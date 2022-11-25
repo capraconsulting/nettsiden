@@ -18,7 +18,8 @@ export const loader = async ({ request }: LoaderArgs) => {
     purged: purge,
     cacheTtl,
     now: new Date(),
-    headers: [...catFact.headers.entries()],
+    age: catFact.headers.get("age"),
+    "cf-cache-status": catFact.headers.get("cf-cache-status"),
     fact: catFactJson.fact,
   });
 };
