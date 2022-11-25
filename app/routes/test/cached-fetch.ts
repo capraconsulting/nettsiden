@@ -7,17 +7,17 @@ export const loader = async ({ request }: LoaderArgs) => {
   const purge = searchParams.get("purge") === "true";
 
   const defaultCache = (caches as any).default as Cache;
-  const thirdPartyRequest = new Request("https://catfact.ninja/fact?test=123");
-  if (purge) {
-    defaultCache.delete(thirdPartyRequest);
-  }
-
-  const catFact = await fetch(thirdPartyRequest, {
+  const thirdPartyRequest = new Request("https://catfact.ninja/fact?test=123", {
     cf: {
       cacheEverything: true,
       cacheTtl,
     },
   });
+  if (purge) {
+    defaultCache.delete(thirdPartyRequest);
+  }
+
+  const catFact = await fetch(thirdPartyRequest);
 
   const catFactJson = await catFact.json<{ fact: string; length: number }>();
   return json({
