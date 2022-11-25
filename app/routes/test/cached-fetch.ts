@@ -14,7 +14,7 @@ export const loader = async ({ request }: LoaderArgs) => {
     },
   });
   if (purge) {
-    defaultCache.delete(thirdPartyRequest);
+    await defaultCache.delete(thirdPartyRequest);
   }
 
   const catFact = await fetch(thirdPartyRequest);
