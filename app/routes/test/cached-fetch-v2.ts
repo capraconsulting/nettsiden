@@ -50,6 +50,7 @@ export const loader = async ({ request }: LoaderArgs) => {
     age: catFact.headers.get("age"),
     cacheControl: catFact.headers.get("Cache-Control"),
     "cf-cache-status": catFact.headers.get("cf-cache-status"),
+    headers: [...catFact.headers.entries()],
     fact: catFactJson.fact,
   });
 };
