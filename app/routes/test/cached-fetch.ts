@@ -6,7 +6,7 @@ export const loader = async ({ request }: LoaderArgs) => {
   const cacheTtl = Number.parseInt(searchParams.get("cacheTtl") ?? "") || 10;
   const purge = searchParams.get("purge") === "true";
 
-  const catFact = await fetch("https://catfact.ninja/fact", {
+  const catFact = await fetch("https://catfact.ninja/fact?test=123", {
     cf: {
       cacheEverything: true,
       cacheTtl: purge ? 0 : cacheTtl,
