@@ -13,9 +13,15 @@ export const loader = async ({ request }: LoaderArgs) => {
       cacheTtl,
     },
   });
-  let deleted = false;
+  let deleted = {} as any;
   if (purge) {
-    deleted = await defaultCache.delete(thirdPartyRequest);
+    deleted[0] = await defaultCache.delete(
+      "https://catfact.ninja/fact?test=123",
+    );
+    deleted[1] = await defaultCache.delete(
+      new Request("https://catfact.ninja/fact?test=123"),
+    );
+    deleted[2] = await defaultCache.delete(thirdPartyRequest);
   }
 
   const catFact = await fetch(thirdPartyRequest);
