@@ -26,19 +26,22 @@ export const loader = async ({ request }: LoaderArgs) => {
   const cacheTtl = Number.parseInt(searchParams.get("cacheTtl") ?? "") || 10;
   const purge = searchParams.get("purge") === "true";
 
-  const catFactResponse = await cloudflareCachedFetch(
+  const catFact = await cloudflareCachedFetch(
     "https://catfact.ninja/fact?test=1234",
     { cacheTtl, purge },
   );
 
-  const catFactJson = await catFactResponse.json<{
+  const catFactJson = await catFact.json<{
     fact: string;
     length: number;
   }>();
   return json({
+    caches,
     purged: purge,
     cacheTtl,
     now: new Date(),
+    age: catFact.headers.get("age"),
+    "cf-cache-status": catFact.headers.get("cf-cache-status"),
     fact: catFactJson.fact,
   });
 };
