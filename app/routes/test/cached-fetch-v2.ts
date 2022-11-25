@@ -1,24 +1,40 @@
 import type { LoaderArgs } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
+const cloudflareCachedFetch = async (
+  request: string | Request,
+  options: { cacheTtl: number; purge: boolean } = { cacheTtl: 0, purge: false },
+) => {
+  const defaultCache = (caches as any).default as Cache;
+  if (options.purge) {
+    await defaultCache.delete(request);
+  }
+  let response = await defaultCache.match(request);
+  if (!response) {
+    response = await fetch(request);
+    response = new Response(response.body, response);
+    response.headers.append("Cache-Control", `s-maxage=${options.cacheTtl}`);
+
+    await defaultCache.put(request, response.clone());
+  }
+
+  return response;
+};
+
 export const loader = async ({ request }: LoaderArgs) => {
   const searchParams = new URL(request.url).searchParams;
   const cacheTtl = Number.parseInt(searchParams.get("cacheTtl") ?? "") || 10;
   const purge = searchParams.get("purge") === "true";
 
-  // Invalidate the fetch cache by doing a fetch it out caching
-  // And then in the second fetch call underneath actually cache it.
-  // Ideally we should only need one fetch, but I don't know if it that is possbile currently 🤷
-  if (purge) await fetch("https://catfact.ninja/fact?test=1234");
+  const catFactResponse = await cloudflareCachedFetch(
+    "https://catfact.ninja/fact?test=1234",
+    { cacheTtl, purge },
+  );
 
-  const catFact = await fetch("https://catfact.ninja/fact?test=1234", {
-    cf: {
-      cacheEverything: true,
-      cacheTtl,
-    },
-  });
-
-  const catFactJson = await catFact.json<{ fact: string; length: number }>();
+  const catFactJson = await catFactResponse.json<{
+    fact: string;
+    length: number;
+  }>();
   return json({
     purged: purge,
     cacheTtl,
