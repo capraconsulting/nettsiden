@@ -19,6 +19,7 @@ const cloudflareCachedFetch = async (
   if (!response) {
     response = await fetch(_request);
     response = new Response(response.body, response);
+    response.headers.delete("Cache-Control");
     response.headers.append("Cache-Control", `s-maxage=${options.cacheTtl}`);
 
     await defaultCache.put(cacheKey, response.clone());
