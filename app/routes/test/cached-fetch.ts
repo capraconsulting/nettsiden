@@ -13,8 +13,9 @@ export const loader = async ({ request }: LoaderArgs) => {
       cacheTtl,
     },
   });
+  let deleted = false;
   if (purge) {
-    await defaultCache.delete(thirdPartyRequest);
+    deleted = await defaultCache.delete(thirdPartyRequest);
   }
 
   const catFact = await fetch(thirdPartyRequest);
@@ -23,6 +24,7 @@ export const loader = async ({ request }: LoaderArgs) => {
   return json({
     caches,
     purged: purge,
+    deleted,
     cacheTtl,
     now: new Date(),
     age: catFact.headers.get("age"),
