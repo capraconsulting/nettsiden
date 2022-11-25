@@ -9,6 +9,10 @@ export const loader = async ({ request, context }: LoaderArgs) => {
   // Just purge everything!
   // const cacheKeys = await caches.keys();
   // (await caches.keys()).forEach((key) => caches.delete(key));
+  const getMethods = (obj: any) =>
+    Object.getOwnPropertyNames(obj).filter(
+      (item) => typeof obj[item] === "function",
+    );
 
   const catFact = await fetch("https://catfact.ninja/fact?test=123", {
     cf: {
@@ -20,6 +24,9 @@ export const loader = async ({ request, context }: LoaderArgs) => {
   const catFactJson = await catFact.json<{ fact: string; length: number }>();
   return json({
     caches,
+    cachesFromContext: context,
+    cachesFunctions: getMethods(caches),
+    cachesFromContextFunctions: getMethods(caches),
     purged: purge,
     cacheTtl,
     now: new Date(),

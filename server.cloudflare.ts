@@ -5,7 +5,7 @@ import { createPagesFunctionHandler } from "./cloudflare-pages-worker";
 const handleRequest = createPagesFunctionHandler({
   build,
   mode: process.env.NODE_ENV,
-  getLoadContext: (context) => context.env,
+  getLoadContext: (context) => ({ ...context.env, yolo: "", caches }),
 });
 
 export function onRequest(context: any) {
