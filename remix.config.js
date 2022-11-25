@@ -6,7 +6,8 @@ module.exports = {
       ? "cloudflare-pages"
       : undefined,
   server:
-    process.env.NODE_ENV === "production"
+    process.env.NODE_ENV === "production" ||
+    process.env.CLOUDFLARE_DEV !== undefined
       ? "./server.cloudflare.ts"
       : undefined,
   devServerBroadcastDelay: 1000,
