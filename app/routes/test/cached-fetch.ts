@@ -1,7 +1,7 @@
 import type { LoaderArgs } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
-export const loader = async ({ request, context }: LoaderArgs) => {
+export const loader = async ({ request }: LoaderArgs) => {
   const searchParams = new URL(request.url).searchParams;
   const cacheTtl = Number.parseInt(searchParams.get("cacheTtl") ?? "") || 10;
   const purge = searchParams.get("purge") === "true";
@@ -9,10 +9,6 @@ export const loader = async ({ request, context }: LoaderArgs) => {
   // Just purge everything!
   // const cacheKeys = await caches.keys();
   // (await caches.keys()).forEach((key) => caches.delete(key));
-  const getMethods = (obj: any) =>
-    Object.getOwnPropertyNames(obj).filter(
-      (item) => typeof obj[item] === "function",
-    );
 
   const catFact = await fetch("https://catfact.ninja/fact?test=123", {
     cf: {
@@ -24,9 +20,7 @@ export const loader = async ({ request, context }: LoaderArgs) => {
   const catFactJson = await catFact.json<{ fact: string; length: number }>();
   return json({
     caches,
-    cachesFromContext: context,
-    cachesFunctions: getMethods(caches),
-    cachesFromContextFunctions: getMethods(caches),
+    cachesFunctions: typeof caches.open,
     purged: purge,
     cacheTtl,
     now: new Date(),
