@@ -2,20 +2,26 @@ import type { LoaderArgs } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 const cloudflareCachedFetch = async (
-  request: string | Request,
+  initialRequest: string | Request,
   options: { cacheTtl: number; purge: boolean } = { cacheTtl: 0, purge: false },
 ) => {
   const defaultCache = (caches as any).default as Cache;
+
+  let _request = initialRequest;
+  if (typeof _request === "string") _request = new Request(_request);
+  const cacheUrl = new URL(_request.url);
+  const cacheKey = new Request(cacheUrl.toString(), _request);
+
   if (options.purge) {
-    await defaultCache.delete(request);
+    await defaultCache.delete(cacheKey);
   }
-  let response = await defaultCache.match(request);
+  let response = await defaultCache.match(cacheKey);
   if (!response) {
-    response = await fetch(request);
+    response = await fetch(_request);
     response = new Response(response.body, response);
     response.headers.append("Cache-Control", `s-maxage=${options.cacheTtl}`);
 
-    await defaultCache.put(request, response.clone());
+    await defaultCache.put(cacheKey, response.clone());
   }
 
   return response;
