@@ -17,7 +17,6 @@ type SelvskrytExpanded = Omit<Selvskryt, "filter"> & {
 };
 
 export const loader = async () => {
-  // TODO: Use the actual images
   const [images, items] = await Promise.all([
     fetchImageAssets([
       "icon-cloud-red",

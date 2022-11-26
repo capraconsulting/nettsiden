@@ -114,7 +114,10 @@ export const SelvskrytCard = ({
   imageProps,
 }: SelvskrytCardProps) => {
   return (
-    <Link prefetch="intent" to={selvskryt.slug?.current!}>
+    <Link
+      prefetch="intent"
+      to={`/dette-har-vi-gjort/${selvskryt.slug?.current}`}
+    >
       <Card
         image={
           <div className="relative pb-[50%]">
