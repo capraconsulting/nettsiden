@@ -16,10 +16,10 @@ const IconTitleAndTextBlock: React.FC<
   return (
     <div className="flex flex-col gap-3 text-center">
       <CapraImage image={image} className="max-h-28 sm:max-h-24" />
-      <TitleComponent className="text-2xl font-bold lg:text-3xl">
+      <TitleComponent className="text-2xl font-bold text-secondary">
         {title}
       </TitleComponent>
-      <p>{children}</p>
+      <p className="text-secondary-80">{children}</p>
     </div>
   );
 };
