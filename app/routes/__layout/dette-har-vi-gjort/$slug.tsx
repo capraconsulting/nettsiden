@@ -7,7 +7,7 @@ import type {
 import { json } from "@remix-run/server-runtime";
 
 import { CapraImage } from "~/components/capra-image";
-import { ProseableText } from "~/components/ProsableText";
+import { ProseableText } from "~/components/prosable-text";
 import {
   getSanitySitemapEntries,
   sanityClient,
