@@ -56,7 +56,11 @@ export const Button: React.FC<Props> = ({ variant, ...props }) => {
     );
   } else if ("href" in props) {
     return (
-      <Link to={props.href} prefetch={props.prefetch} className={className}>
+      <Link
+        to={props.href}
+        prefetch={props.prefetch ?? "intent"}
+        className={className}
+      >
         {props.children}
       </Link>
     );
