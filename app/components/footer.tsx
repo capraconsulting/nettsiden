@@ -17,9 +17,9 @@ interface FooterModuleProps {
   children: React.ReactNode;
 }
 
-const FooterModule: React.VFC<FooterModuleProps> = ({ title, children }) => (
+const FooterModule: React.FC<FooterModuleProps> = ({ title, children }) => (
   <div>
-    <h3 className="mb-0.5 text-lg font-bold uppercase text-white">{title}</h3>
+    <h2 className="mb-0.5 text-lg font-bold uppercase text-white">{title}</h2>
     {children}
   </div>
 );
