@@ -19,7 +19,7 @@ const IconTitleAndTextBlock: React.FC<
       <TitleComponent className="text-2xl font-bold text-secondary">
         {title}
       </TitleComponent>
-      <p className="text-secondary-80">{children}</p>
+      <p className="text-secondary">{children}</p>
     </div>
   );
 };
