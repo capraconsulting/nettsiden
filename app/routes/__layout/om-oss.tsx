@@ -99,11 +99,13 @@ export default function OmOss() {
           fylle det området under!
         </TitleAndText>
 
-        <BubbleGrid
-          items={employeeImages.map((x) => (
-            <CapraImage key={x} src={x} alt="Ansatt i Capra" />
-          ))}
-        />
+        <div className="relative left-[50%] ml-[-50vw] w-screen max-w-3xl md:left-0 md:ml-0 md:w-full">
+          <BubbleGrid
+            items={employeeImages.map((x) => (
+              <CapraImage key={x} src={x} alt="Ansatt i Capra" />
+            ))}
+          />
+        </div>
 
         {/* HACK: The Bubble grid above takes more vertical space than it's given */}
         {/* Making the content overflow into the title below */}
@@ -293,8 +295,8 @@ interface TeamCardProps {
 
 const TeamCard = ({ title, children }: PropsWithChildren<TeamCardProps>) => {
   return (
-    <div className="bg-white p-4 text-sm sm:p-8 ">
-      <div className="mb-1 inline-block border-b-2 border-secondary text-base font-bold uppercase text-main">
+    <div className="border bg-white p-4 text-sm shadow sm:p-8">
+      <div className="mb-1 inline-block border-b-2 border-secondary-80 text-base font-bold uppercase text-main">
         {title}
       </div>
       <div className="text-base">{children}</div>
