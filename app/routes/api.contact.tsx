@@ -120,7 +120,7 @@ export const ContactForm = ({ title, representatives }: ContactFormProps) => {
     <div className="bg-secondary pt-12 pb-[6vh]">
       <article className="md:11/12 mx-auto flex w-10/12 flex-col items-center text-white sm:w-9/12">
         <section className="text-center">
-          <p className="text-xl font-bold text-peach md:text-4xl pb-4">
+          <p className="pb-4 text-xl font-bold text-peach md:text-4xl">
             {isSuccess ? "Takk for din interesse!" : title}
           </p>
           <p className="md:mb-8">
