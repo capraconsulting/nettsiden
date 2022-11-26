@@ -13,7 +13,7 @@ import { ContentAndImageBox } from "~/components/content-and-image-box/content-a
 import { TitleAndText } from "~/components/title-and-text";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
-import { getEnv } from "~/utils/env";
+import { getEnvVariableOrThrow } from "~/utils/env";
 import { metaTags } from "~/utils/meta-tags";
 import { groupBy, typedBoolean } from "~/utils/misc";
 
@@ -67,12 +67,10 @@ interface CapraJob {
 const TEAM_TAILOR_API_VERSION = "20210218";
 
 export const loader = async ({ context }: LoaderArgs) => {
-  const { TEAM_TAILOR_API_KEY } = getEnv({ context });
-  if (!TEAM_TAILOR_API_KEY) {
-    throw new Response(`TEAM_TAILOR_API_KEY needs to be set`, {
-      status: 500,
-    });
-  }
+  const TEAM_TAILOR_API_KEY = getEnvVariableOrThrow(
+    "TEAM_TAILOR_API_KEY",
+    context,
+  );
 
   const teamTailorRequestHeaders = {
     Authorization: `Token token=${TEAM_TAILOR_API_KEY}`,

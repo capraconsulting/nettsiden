@@ -5,12 +5,18 @@ import { json } from "@remix-run/server-runtime";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import IconTitleAndTextBlock from "~/components/icon-title-and-text-block";
 import { TitleAndText } from "~/components/title-and-text";
+import { CallMeForm } from "~/routes/api.call-me";
 import { sanityClient } from "~/sanity/sanity-client.server";
 import type { Selvskryt, Selvskrytfilter } from "~/sanity/schema";
+import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { metaTags } from "~/utils/meta-tags";
 import { DetteHarViGjortCard } from "../dette-har-vi-gjort";
+
+export const handle: CapraHandle = {
+  contactFormTitle: "Vil din bedrift prøve fremtidens leveransemodell?",
+};
 
 type SelvskrytExpanded = Omit<Selvskryt, "filter"> & {
   filter: Selvskrytfilter[];
@@ -96,7 +102,6 @@ export default function Liflig() {
           </IconTitleAndTextBlock>
         </div>
       </section>
-
       <section className="flex w-full max-w-7xl flex-col items-center gap-12 sm:w-11/12 md:gap-20">
         <TitleAndText title="Vi vil gjøre din jobb lettere!" titleAs="h2">
           Visste du at Liflig betyr behagelig og noe man finner glede i? Liflig
@@ -174,7 +179,6 @@ export default function Liflig() {
           gå smidig.
         </ContentAndImageBox>
       </section>
-
       <section className="flex w-full max-w-7xl flex-col gap-12 sm:w-11/12">
         <TitleAndText title="Kundehistorier" titleAs="h2">
           Liflig leverer kontinuerlig verdi for kundene våre. Her har du noen
@@ -189,6 +193,8 @@ export default function Liflig() {
           ))}
         </ul>
       </section>
+      <CallMeForm titleAs="h2" />
+      <div /> {/* Add some whitespace */}
     </>
   );
 }

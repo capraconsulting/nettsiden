@@ -18,7 +18,7 @@ interface Env {
  * When running on cloudflare `process.env` is undefined,
  * and instead environment variables are passed down in the AppLoadContext
  */
-export const getEnv = ({ context }: { context: AppLoadContext }) => {
+export const getEnv = (context: AppLoadContext) => {
   let env = {} as Partial<Record<string, unknown>>;
   if (typeof process !== "undefined") {
     env = { ...env, ...process.env };
@@ -27,4 +27,17 @@ export const getEnv = ({ context }: { context: AppLoadContext }) => {
     env = { ...env, ...context };
   }
   return env as Env;
+};
+
+export const getEnvVariableOrThrow = (
+  key: keyof Env,
+  context: AppLoadContext,
+) => {
+  const value = getEnv(context)[key];
+  if (!value) {
+    throw new Response(`${key} needs to be set`, {
+      status: 500,
+    });
+  }
+  return value;
 };

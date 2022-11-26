@@ -1,4 +1,5 @@
 import type { HTMLInputTypeAttribute } from "react";
+import { useId } from "react";
 import { useFetcher } from "@remix-run/react";
 import { json } from "@remix-run/server-runtime";
 import type { DataFunctionArgs } from "@remix-run/server-runtime/dist/routeModules";
@@ -8,8 +9,22 @@ import type { SanityImageAsset, SanityReference } from "sanity-codegen";
 import { Button } from "~/components/button";
 import { CapraImage } from "~/components/capra-image";
 import { CapraLink } from "~/components/capra-link";
-import { getEnv } from "~/utils/env";
+import { getEnvVariableOrThrow } from "~/utils/env";
 import { urlFor } from "~/utils/imageBuilder";
+
+export function validatePhoneNumber(phoneNumber: FormDataEntryValue | null) {
+  const errorMessage = "Vi trenger et gyldig telefonnummer.";
+  if (typeof phoneNumber !== "string" || phoneNumber.trim().length === 0) {
+    return errorMessage;
+  } else {
+    // Simple check that the number only includes digits after removing spaces, dashes and pluses
+    const trimmedPhoneNumber = phoneNumber.replace(/[- +]/g, "");
+    if (!/^\d+$/.test(trimmedPhoneNumber)) {
+      return errorMessage;
+    }
+  }
+  return undefined;
+}
 
 function validate(formData: FormData): Record<string, string> {
   const errors: Record<string, string> = {};
@@ -19,14 +34,9 @@ function validate(formData: FormData): Record<string, string> {
   }
 
   const phoneNumber = formData.get("phoneNumber");
-  if (typeof phoneNumber !== "string" || phoneNumber.trim().length === 0) {
-    errors.phoneNumber = "Vi trenger et gyldig telefonnummer.";
-  } else {
-    // Simple check that the number only includes digits after removing spaces, dashes and pluses
-    const trimmedPhoneNumber = phoneNumber.replace(/[- +]/g, "");
-    if (!/^\d+$/.test(trimmedPhoneNumber)) {
-      errors.phoneNumber = "Vi trenger et gyldig telefonnummer.";
-    }
+  const phoneNumberError = validatePhoneNumber(phoneNumber);
+  if (phoneNumberError) {
+    errors.phoneNumber = phoneNumberError;
   }
 
   const email = formData.get("email");
@@ -54,12 +64,8 @@ export const action = async ({ request, context }: DataFunctionArgs) => {
   // Send using slack
   // Unlike Netlify this does not have mechanisms to handle bot or abuse
   // We should implement that in the long term, but for now, let's just see
-  const { SLACK_WEBHOOK_URL } = getEnv({ context });
-  if (!SLACK_WEBHOOK_URL) {
-    throw new Response(`SLACK_WEBHOOK_URL needs to be set`, {
-      status: 500,
-    });
-  }
+  const SLACK_WEBHOOK_URL = getEnvVariableOrThrow("SLACK_WEBHOOK_URL", context);
+
   const referer = request.headers.get("Referer");
   const path = referer ? new URL(referer).pathname : "";
 
@@ -181,6 +187,7 @@ const Input: React.FC<{
   errors?: Record<string, string>;
 }> = ({ id, label, required, placeholder, type = "text", errors }) => {
   const fieldErrors = errors?.[id];
+  const errorId = useId();
   return (
     <div>
       <label htmlFor={id} className="block" aria-required={required}>
@@ -191,12 +198,18 @@ const Input: React.FC<{
         id={id}
         name={id}
         type={type}
+        aria-invalid={Boolean(fieldErrors)}
+        aria-describedby={errorId}
         placeholder={placeholder}
         className="w-full p-[1vh] text-black"
         data-lpignore="true" // Disable LastPass autofill
         data-form-type="other" // Disable Dashlane autofill
       />
-      {fieldErrors && <div className="text-red">{fieldErrors}</div>}
+      {fieldErrors && (
+        <div id={errorId} className="text-red">
+          {fieldErrors}
+        </div>
+      )}
     </div>
   );
 };

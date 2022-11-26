@@ -5,12 +5,18 @@ import { json } from "@remix-run/server-runtime";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import IconTitleAndTextBlock from "~/components/icon-title-and-text-block";
 import { TitleAndText } from "~/components/title-and-text";
+import { CallMeForm } from "~/routes/api.call-me";
 import { sanityClient } from "~/sanity/sanity-client.server";
 import type { Selvskryt, Selvskrytfilter } from "~/sanity/schema";
+import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { metaTags } from "~/utils/meta-tags";
 import { DetteHarViGjortCard } from "../dette-har-vi-gjort";
+
+export const handle: CapraHandle = {
+  contactFormTitle: "Trenger din bedrift kompetanse på laget?",
+};
 
 type SelvskrytExpanded = Omit<Selvskryt, "filter"> & {
   filter: Selvskrytfilter[];
@@ -94,7 +100,6 @@ export default function ItKonsulenter() {
           </IconTitleAndTextBlock>
         </div>
       </section>
-
       <section className="flex w-full max-w-7xl flex-col items-center gap-12 sm:w-11/12 md:gap-20">
         <TitleAndText title="Få kompetanse med på laget!" titleAs="h2">
           Vi mener konsulenttjenester bør være mye mer enn bare kapasitet. En
@@ -167,7 +172,6 @@ export default function ItKonsulenter() {
           hverandre best.
         </ContentAndImageBox>
       </section>
-
       <section className="flex w-full max-w-7xl flex-col gap-12 sm:w-11/12">
         <TitleAndText title="Kundehistorier" titleAs="h2">
           Våre konsulenter bygger mange spennende tjenester. Under kan du lese
@@ -182,6 +186,8 @@ export default function ItKonsulenter() {
           ))}
         </ul>
       </section>
+      <CallMeForm titleAs="h2" />
+      <div /> {/* Add some whitespace */}
     </>
   );
 }
