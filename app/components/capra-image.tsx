@@ -1,6 +1,10 @@
 import type { Image } from "~/utils/dataRetrieval";
 
-type ImgProps = React.ComponentProps<"img">;
+type ImgProps = React.ComponentProps<"img"> & {
+  // https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/fetchPriority
+  // https://addyosmani.com/blog/fetch-priority/
+  fetchpriority?: "high" | "low" | "auto";
+};
 
 type ImageProps = Omit<ImgProps, "src" | "alt"> &
   (

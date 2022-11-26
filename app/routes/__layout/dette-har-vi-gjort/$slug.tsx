@@ -53,12 +53,12 @@ export default function DetteHarViGjortItem() {
 
       <div className="relative left-[50%] ml-[-50vw] w-screen max-w-3xl md:left-0 md:ml-0 md:w-full">
         <CapraImage
-          // TODO: Crop to a square
           src={urlFor(item.mainImage!)
             .width(714 * 2)
             .url()}
           alt={getMainImageAlt(item)}
           loading="eager"
+          fetchpriority="high"
         />
       </div>
 

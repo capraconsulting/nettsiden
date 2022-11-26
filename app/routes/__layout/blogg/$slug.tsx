@@ -86,6 +86,7 @@ export default function BloggPost() {
             .url()}
           alt={getMainImageAlt(item)}
           loading="eager"
+          fetchpriority="high"
         />
       </div>
 
