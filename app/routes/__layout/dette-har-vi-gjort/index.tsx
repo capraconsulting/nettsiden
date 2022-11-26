@@ -84,7 +84,7 @@ export default function DetteHarViGjort() {
           <ul className="grid grid-cols-1 justify-center gap-12 sm:grid-cols-2 sm:gap-10 md:grid-cols-3 md:gap-8 lg:grid-cols-4 lg:gap-6">
             {data.items.map((x, i) => (
               <li key={x._id}>
-                <SelvskrytCard
+                <DetteHarViGjortCard
                   key={x._id}
                   selvskryt={x}
                   imageProps={{ loading: i >= 4 ? "lazy" : "eager" }}
@@ -105,14 +105,14 @@ export default function DetteHarViGjort() {
   );
 }
 
-interface SelvskrytCardProps {
+interface DetteHarViGjortCardCardProps {
   selvskryt: SelvskrytExpanded;
   imageProps?: React.ComponentProps<"img">;
 }
-export const SelvskrytCard = ({
+export const DetteHarViGjortCard = ({
   selvskryt,
   imageProps,
-}: SelvskrytCardProps) => {
+}: DetteHarViGjortCardCardProps) => {
   return (
     <Link
       prefetch="intent"
