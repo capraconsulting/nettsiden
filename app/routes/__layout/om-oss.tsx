@@ -204,6 +204,7 @@ export default function OmOss() {
 
         <ContentAndImageBox
           title="Bratte læringskurver"
+          titleAs="h3"
           image={images["icon-graph-up"]}
           height="40vw"
           color="peach"
@@ -215,6 +216,7 @@ export default function OmOss() {
 
         <ContentAndImageBox
           title="Du eier ideene dine"
+          titleAs="h3"
           image={images["icon-idea-bulb"]}
           height="40vw"
           direction="right"

@@ -112,6 +112,7 @@ export default function Liflig() {
 
         <ContentAndImageBox
           title="Alltid tilgjengelig"
+          titleAs="h3"
           image={images["photo-kontor-gjensidige"]}
           color="peach"
           height="40vw"
@@ -129,6 +130,7 @@ export default function Liflig() {
 
         <ContentAndImageBox
           title="Betal kun for det du trenger"
+          titleAs="h3"
           image={images["photo-money-spire"]}
           color="lightBlue"
           height="40vw"
@@ -147,6 +149,7 @@ export default function Liflig() {
 
         <ContentAndImageBox
           title="Ingen uforutsette kostnader!"
+          titleAs="h3"
           image={images["photo-money"]}
           color="darkBlue"
           height="60vw"
@@ -166,6 +169,7 @@ export default function Liflig() {
 
         <ContentAndImageBox
           title="Raskere utvikling"
+          titleAs="h3"
           image={images["photo-kontor-nrk"]}
           color="bordeaux"
           height="40vw"

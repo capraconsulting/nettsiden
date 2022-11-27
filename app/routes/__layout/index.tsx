@@ -124,6 +124,7 @@ export default function Index() {
 
       <ContentAndImageBox
         title="Vi er Advanced Tier Consulting Partner"
+        titleAs="h2"
         image={images.aws}
         height="32vw"
         color="peach"
@@ -132,6 +133,7 @@ export default function Index() {
       </ContentAndImageBox>
       <ContentAndImageBox
         title="Vi er spesialister"
+        titleAs="h2"
         image={images.tech}
         height="35vw"
         direction="right"

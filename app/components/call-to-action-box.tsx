@@ -2,7 +2,7 @@ import { Button } from "~/components/button";
 
 interface CallToActionBoxProps {
   title: React.ReactNode;
-  titleAs?: "h2" | "h3" | "h4" | "p";
+  titleAs: "h2" | "h3" | "h4" | "p";
   description: React.ReactNode;
   linkText: React.ReactNode;
   href: string;
@@ -10,7 +10,7 @@ interface CallToActionBoxProps {
 
 export const CallToActionBox = ({
   title,
-  titleAs: TitleComponent = "p",
+  titleAs: TitleComponent,
   description,
   linkText,
   href,

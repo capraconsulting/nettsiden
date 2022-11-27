@@ -109,6 +109,7 @@ export default function ItKonsulenter() {
 
         <ContentAndImageBox
           title="Løsninger for ditt domene"
+          titleAs="h3"
           image={images["photo-capracon-aca"]}
           color="bordeaux"
           height="40vw"
@@ -127,6 +128,7 @@ export default function ItKonsulenter() {
 
         <ContentAndImageBox
           title="Vi tar ansvar"
+          titleAs="h3"
           image={images["photo-monitors-and-person"]}
           color="peach"
           height="40vw"
@@ -143,6 +145,7 @@ export default function ItKonsulenter() {
 
         <ContentAndImageBox
           title="Vi vil gjøre deg bedre"
+          titleAs="h3"
           image={images["photo-whiteboard-and-person"]}
           color="lightBlue"
           height="40vw"
@@ -159,6 +162,7 @@ export default function ItKonsulenter() {
 
         <ContentAndImageBox
           title="Blant i beste i bransjen"
+          titleAs="h3"
           image={images["photo-kontor-ten"]}
           color="darkBlue"
           height="40vw"
