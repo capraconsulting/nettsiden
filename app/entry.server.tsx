@@ -14,6 +14,10 @@ export default function handleRequest(
 
   responseHeaders.set("Content-Type", "text/html");
 
+  // Preemptively kill the previous service worker
+  // see the `_headers` file
+  responseHeaders.set("Clear-Site-Data", "storage");
+
   return new Response("<!DOCTYPE html>" + markup, {
     status: responseStatusCode,
     headers: responseHeaders,
