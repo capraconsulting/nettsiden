@@ -54,11 +54,13 @@ export default function App() {
         <LiveReload />
 
         {/* Cloudflare Web Analytics */}
-        <script
-          defer
-          src="https://static.cloudflareinsights.com/beacon.min.js"
-          data-cf-beacon='{"token": "144efc4bcac246e2acd9d9e779d0cc8a"}'
-        />
+        {process.env.NODE_ENV === "production" && (
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "144efc4bcac246e2acd9d9e779d0cc8a"}'
+          />
+        )}
 
         {/* Kill Service Worker */}
         <script
