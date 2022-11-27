@@ -26,6 +26,7 @@ type ReadMoreLink = {
 
 interface Props {
   title: React.ReactNode;
+  titleAs?: "h2" | "h3" | "h4" | "p";
   children: React.ReactNode;
   image: Image;
 
@@ -39,6 +40,7 @@ interface Props {
 
 export const ContentAndImageBox: React.FC<Props> = ({
   title,
+  titleAs: TitleComponent = "p",
   children,
   image,
 
@@ -72,9 +74,9 @@ export const ContentAndImageBox: React.FC<Props> = ({
         )}
         style={{ minHeight: height }}
       >
-        <div className="p-[2vw] pb-0 text-2xl font-bold md:text-3xl">
+        <TitleComponent className="p-[2vw] pb-0 text-2xl font-bold md:text-3xl">
           {title}
-        </div>
+        </TitleComponent>
         <div className="text-md whitespace-pre-line p-[2vw] md:text-lg">
           {children}
         </div>
