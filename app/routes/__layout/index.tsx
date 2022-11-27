@@ -7,6 +7,7 @@ import { fetchEmployeeImages } from "~/components/bubbles/capra-helper.server";
 import { Button } from "~/components/button";
 import { CapraImage } from "~/components/capra-image";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
+import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import { TypingText } from "~/components/typing-text";
 import type { CapraHandle } from "~/types";
@@ -145,7 +146,7 @@ export default function Index() {
           <CapraImage key={x} src={x} alt="Ansatt i Capra" />
         ))}
       >
-        <div className="flex flex-col items-center gap-8 sm:gap-[10vh]">
+        <Section className="gap-8 sm:gap-[10vh]">
           <TitleAndText
             title={
               <>
@@ -160,10 +161,10 @@ export default function Index() {
           <Button href="/ansatte" variant="solid">
             Se våre ansatte
           </Button>
-        </div>
+        </Section>
       </BubbleSandwich>
 
-      <section className="flex flex-col gap-12">
+      <Section>
         <TitleAndText title="Vi jobber med store aktører i Norge" titleAs="h2">
           Capra leverer kompetanse til prosjekter over hele landet. Som
           bransjeuavhengig er vi åpne for både{" "}
@@ -180,7 +181,7 @@ export default function Index() {
             </div>
           ))}
         </div>
-      </section>
+      </Section>
     </>
   );
 }

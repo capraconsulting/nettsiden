@@ -4,6 +4,7 @@ import { json } from "@remix-run/server-runtime";
 
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { ContentAndSlogansBox } from "~/components/content-and-slogans-box";
+import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import type { Images } from "~/utils/dataRetrieval";
@@ -56,71 +57,78 @@ export default function DetteKanVi() {
       <LifligPitchAndSloganBox direction="left" images={images} />
       <KonsulenterPitchAndSloganBox direction="right" images={images} />
 
-      <TitleAndText id="teknologier" title="Teknologier" titleAs="h2">
-        Vi i Capra er spesialister. Vi har tatt klare tekniske valg og blitt
-        blant de beste innenfor våre fagfelt.
-      </TitleAndText>
+      <Section className="md:gap-20">
+        <TitleAndText id="teknologier" title="Teknologier" titleAs="h2">
+          Vi i Capra er spesialister. Vi har tatt klare tekniske valg og blitt
+          blant de beste innenfor våre fagfelt.
+        </TitleAndText>
 
-      <ContentAndImageBox
-        title="Sky"
-        image={images.cloud}
-        height="40vw"
-        color="peach"
-      >
-        I Capra spesialiserer vi oss innenfor Amazon Web Services og er én av
-        fire bedrifter som er advanced tier consulting partnere i Norge. Vår
-        dybdekunnskap på sky gjør at vi kan vi hjelpe deg på din reise opp i
-        skyen, også om du bruker Microsoft Azure og Google Cloud.
-      </ContentAndImageBox>
+        <ContentAndImageBox
+          title="Sky"
+          titleAs="h3"
+          image={images.cloud}
+          height="40vw"
+          color="peach"
+        >
+          I Capra spesialiserer vi oss innenfor Amazon Web Services og er én av
+          fire bedrifter som er advanced tier consulting partnere i Norge. Vår
+          dybdekunnskap på sky gjør at vi kan vi hjelpe deg på din reise opp i
+          skyen, også om du bruker Microsoft Azure og Google Cloud.
+        </ContentAndImageBox>
 
-      <ContentAndImageBox
-        title="Backend"
-        direction="right"
-        image={images.backend}
-        height="40vw"
-        color="darkBlue"
-        // Re-enable when the backend page is implemented
-        // readMoreLink={{ to: "/dette-kan-vi/backend" }}
-      >
-        {
-          "På backend har vi valgt å satse på Java-plattformen og Kotlin for å løse de store og tunge prosessene i kulissene. \n\n Hvorfor det? Vi har valgt markedets største, modne og levende språk. Ved å velge de språkene som utvikler seg raskest sørger vi for at vi alltid vil kunne levere nye og smartere løsninger som vi vet fungerer."
-        }
-      </ContentAndImageBox>
+        <ContentAndImageBox
+          title="Backend"
+          titleAs="h3"
+          direction="right"
+          image={images.backend}
+          height="40vw"
+          color="darkBlue"
+          // Re-enable when the backend page is implemented
+          // readMoreLink={{ to: "/dette-kan-vi/backend" }}
+        >
+          {
+            "På backend har vi valgt å satse på Java-plattformen og Kotlin for å løse de store og tunge prosessene i kulissene. \n\n Hvorfor det? Vi har valgt markedets største, modne og levende språk. Ved å velge de språkene som utvikler seg raskest sørger vi for at vi alltid vil kunne levere nye og smartere løsninger som vi vet fungerer."
+          }
+        </ContentAndImageBox>
 
-      <ContentAndImageBox
-        title="Frontend"
-        image={images.frontend}
-        height="40vw"
-        color="lightBlue"
-        readMoreLink={{ to: "/dette-kan-vi/frontend" }}
-      >
-        {
-          "På frontend satser vi blant annet på TypeScript, JavaScript, React og Vue. \n\n Riktig bruk av rammeverk og fokus på framtidsrettet og testet kode, mener vi er   suksessfaktorer. Med rette applikasjoner som raskt kan endres og som er enkle å vedlikeholde, skaper vi brukeropplevelser i verdensklasse."
-        }
-      </ContentAndImageBox>
+        <ContentAndImageBox
+          title="Frontend"
+          titleAs="h3"
+          image={images.frontend}
+          height="40vw"
+          color="lightBlue"
+          readMoreLink={{ to: "/dette-kan-vi/frontend" }}
+        >
+          {
+            "På frontend satser vi blant annet på TypeScript, JavaScript, React og Vue. \n\n Riktig bruk av rammeverk og fokus på framtidsrettet og testet kode, mener vi er   suksessfaktorer. Med rette applikasjoner som raskt kan endres og som er enkle å vedlikeholde, skaper vi brukeropplevelser i verdensklasse."
+          }
+        </ContentAndImageBox>
 
-      <ContentAndImageBox
-        title="Teknisk arkitektur"
-        direction="right"
-        image={images["tech-architecture"]}
-        height="40vw"
-        color="bordeaux"
-      >
-        {
-          "Det er viktig å benytte riktig metodikk for å komme frem til en god arkitektur og god teknologi. Kodenære arkitekter kan teste ut funksjoner for å sikre at løsningene lar seg realisere og at rammene for en god implementasjon er der for utviklerne. \n\n Sentralt her er CI/CD, DevOps/NoOps, Microservices, IaC, DDD, Terraform og AWS. "
-        }
-      </ContentAndImageBox>
+        <ContentAndImageBox
+          title="Teknisk arkitektur"
+          titleAs="h3"
+          direction="right"
+          image={images["tech-architecture"]}
+          height="40vw"
+          color="bordeaux"
+        >
+          {
+            "Det er viktig å benytte riktig metodikk for å komme frem til en god arkitektur og god teknologi. Kodenære arkitekter kan teste ut funksjoner for å sikre at løsningene lar seg realisere og at rammene for en god implementasjon er der for utviklerne. \n\n Sentralt her er CI/CD, DevOps/NoOps, Microservices, IaC, DDD, Terraform og AWS."
+          }
+        </ContentAndImageBox>
 
-      <ContentAndImageBox
-        title="Team-, prosjektleder og smidig coach"
-        image={images["project-lead"]}
-        height="40vw"
-        color="peach"
-      >
-        {
-          "For å skape verdi raskt bør man bruke metodikker som sørger for at man fokuserer på de rette oppgavene, målene og skaper selvgående autonome team. Vi hjelper våre kunder med teamledelse, prosjektledelse, produktutvikling, smidig coaching, og organisasjonsutvikling. \n\n Stikkord her er Agile, Team Topologies, DDD, Accelerate, 5 Dysfunctions of a Team og Empowered."
-        }
-      </ContentAndImageBox>
+        <ContentAndImageBox
+          title="Team-, prosjektleder og smidig coach"
+          titleAs="h3"
+          image={images["project-lead"]}
+          height="40vw"
+          color="peach"
+        >
+          {
+            "For å skape verdi raskt bør man bruke metodikker som sørger for at man fokuserer på de rette oppgavene, målene og skaper selvgående autonome team. Vi hjelper våre kunder med teamledelse, prosjektledelse, produktutvikling, smidig coaching, og organisasjonsutvikling. \n\n Stikkord her er Agile, Team Topologies, DDD, Accelerate, 5 Dysfunctions of a Team og Empowered."
+          }
+        </ContentAndImageBox>
+      </Section>
     </>
   );
 }

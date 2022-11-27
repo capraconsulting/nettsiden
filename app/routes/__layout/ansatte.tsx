@@ -10,6 +10,7 @@ import { Badge } from "~/components/badge";
 import { CapraImage } from "~/components/capra-image";
 import { Card } from "~/components/card";
 import { FilterRow } from "~/components/filter-row";
+import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import { sanityClient } from "~/sanity/sanity-client.server";
 import type { Author, JobCategory } from "~/sanity/schema";
@@ -77,7 +78,7 @@ export default function Ansatte() {
   const data = useLoaderData<typeof loader>();
   const [search] = useSearchParams();
   return (
-    <div className="flex w-full max-w-7xl flex-col gap-12 sm:w-11/12">
+    <Section>
       <TitleAndText title="Kontakt oss i Capra" titleAs="h1">
         Vi vil gjerne høre fra deg.
       </TitleAndText>
@@ -103,7 +104,7 @@ export default function Ansatte() {
           ))}
         </ul>
       </div>
-    </div>
+    </Section>
   );
 }
 

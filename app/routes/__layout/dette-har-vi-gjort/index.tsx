@@ -11,6 +11,7 @@ import { CallToActionBox } from "~/components/call-to-action-box";
 import { CapraImage } from "~/components/capra-image";
 import { Card } from "~/components/card";
 import { FilterRow } from "~/components/filter-row";
+import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import { sanityClient } from "~/sanity/sanity-client.server";
 import type { Selvskryt, Selvskrytfilter } from "~/sanity/schema";
@@ -66,7 +67,7 @@ export default function DetteHarViGjort() {
   const [search] = useSearchParams();
   return (
     <>
-      <div className="flex w-full max-w-7xl flex-col gap-12 sm:w-11/12">
+      <Section>
         <TitleAndText title="Dette har vi gjort for andre" titleAs="h1">
           Vi skaper samfunsnytte for over 1 000 000 brukere hver eneste dag! Her
           har du noen få av tingene våre kick-ass folk gjør for kunder.
@@ -93,10 +94,11 @@ export default function DetteHarViGjort() {
             ))}
           </ul>
         </div>
-      </div>
+      </Section>
 
       <CallToActionBox
         title="Er du nysgjerrig på om du og Capra er en match?"
+        titleAs="h2"
         description="Ta en titt på stillingene våre da vel!"
         linkText="Se stillinger"
         href="https://capraconsulting.teamtailor.com/jobs"
@@ -125,7 +127,7 @@ export const DetteHarViGjortCard = ({
               className="absolute h-full w-full object-cover"
               alt={selvskryt.mainImageAlt ?? ""}
               src={urlFor(selvskryt.mainImage!)
-                .size(4500 / 5, 3000 / 5)
+                .width(600 * 2)
                 .url()}
               {...imageProps}
             />

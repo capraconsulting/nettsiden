@@ -4,6 +4,7 @@ import type { DataFunctionArgs } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import { Button } from "~/components/button";
+import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import { getEnvVariableOrThrow } from "~/utils/env";
 import { validatePhoneNumber } from "./api.contact";
@@ -106,7 +107,7 @@ export const CallMeForm = ({ titleAs }: CallMeFormProps) => {
   }, [isSuccess]);
 
   return (
-    <section className="flex w-full max-w-7xl flex-col gap-12 sm:w-11/12">
+    <Section>
       {!isSuccess && (
         <TitleAndText title="Kontakt" titleAs={titleAs}>
           Vi kan ringe deg. Legg igjen nummeret ditt så tar vi opp kontakten.
@@ -150,6 +151,6 @@ export const CallMeForm = ({ titleAs }: CallMeFormProps) => {
           Ring meg
         </Button>
       </fetcher.Form>
-    </section>
+    </Section>
   );
 };

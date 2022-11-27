@@ -9,6 +9,7 @@ import { json } from "@remix-run/server-runtime";
 import { CapraImage } from "~/components/capra-image";
 import { Card } from "~/components/card";
 import { FilterRow } from "~/components/filter-row";
+import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import { sanityClient } from "~/sanity/sanity-client.server";
 import type { Author, Blogg, Bloggfilter } from "~/sanity/schema";
@@ -66,7 +67,7 @@ export default function BloggIndex() {
   const [search] = useSearchParams();
   return (
     <>
-      <div className="flex w-full max-w-7xl flex-col gap-12 sm:w-11/12">
+      <Section>
         <TitleAndText title="Blogg" titleAs="h1">
           Her på bloggen skriver vi om det som interesserer oss av tech, ting
           som skjer der ute i bransjen vår og andre happenings i Capra.
@@ -93,7 +94,7 @@ export default function BloggIndex() {
             ))}
           </ul>
         </div>
-      </div>
+      </Section>
     </>
   );
 }
@@ -112,7 +113,7 @@ export const BloggCard = ({ bloggEntry, imageProps }: BloggCardProps) => {
               className="absolute h-full w-full object-cover"
               alt="" // TODO
               src={urlFor(bloggEntry.mainImage!)
-                .size(4500 / 5, 3000 / 5)
+                .width(600 * 2)
                 .url()}
               {...imageProps}
             />

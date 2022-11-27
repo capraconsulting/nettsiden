@@ -5,8 +5,13 @@ import { typedBoolean } from "~/utils/misc";
 
 export async function fetchEmployeeImages() {
   const employees = await sanityClient.query<Author>(
-    // Equivalent to query in gatsby repo
-    `* [_type == "author" && employee == true && image.hotspot.x != null] | order(name)`,
+    `* [_type == "author" && employee == true] | order(name)`,
+
+    // TODO: Enable filtering on for when hotspot is set
+    // As of 27.11.2022 the difference is 121 without hotspot vs 44 with
+    // The real solution is to set hotspot every image, but for now
+    // hiding all the employees is not good. Looks bad, and is missleading.
+    // `* [_type == "author" && employee == true && image.hotspot.x != null] | order(name)`,
   );
 
   return employees

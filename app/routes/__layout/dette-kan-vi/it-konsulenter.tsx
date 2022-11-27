@@ -4,6 +4,7 @@ import { json } from "@remix-run/server-runtime";
 
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import IconTitleAndTextBlock from "~/components/icon-title-and-text-block";
+import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import { CallMeForm } from "~/routes/api.call-me";
 import { sanityClient } from "~/sanity/sanity-client.server";
@@ -60,7 +61,7 @@ export default function ItKonsulenter() {
 
   return (
     <>
-      <section className="flex w-full max-w-7xl flex-col items-center gap-12 sm:w-11/12">
+      <Section>
         <TitleAndText title="IT-Konsulenter" titleAs="h1">
           En Capra-konsulent er alltid forberedt og oppdatert på de nyeste
           metodene og teknologiene.
@@ -99,8 +100,8 @@ export default function ItKonsulenter() {
             påvirkningskraft
           </IconTitleAndTextBlock>
         </div>
-      </section>
-      <section className="flex w-full max-w-7xl flex-col items-center gap-12 sm:w-11/12 md:gap-20">
+      </Section>
+      <Section className="md:gap-20">
         <TitleAndText title="Få kompetanse med på laget!" titleAs="h2">
           Vi mener konsulenttjenester bør være mye mer enn bare kapasitet. En
           IT-konsulent fra oss gir deg mer enn du forventer.
@@ -171,8 +172,8 @@ export default function ItKonsulenter() {
           ved å sørge for den bratteste læringskurven fortsetter vi å gjøre
           hverandre best.
         </ContentAndImageBox>
-      </section>
-      <section className="flex w-full max-w-7xl flex-col gap-12 sm:w-11/12">
+      </Section>
+      <Section>
         <TitleAndText title="Kundehistorier" titleAs="h2">
           Våre konsulenter bygger mange spennende tjenester. Under kan du lese
           noen av dem.
@@ -185,7 +186,7 @@ export default function ItKonsulenter() {
             </li>
           ))}
         </ul>
-      </section>
+      </Section>
       <CallMeForm titleAs="h2" />
       <div /> {/* Add some whitespace */}
     </>

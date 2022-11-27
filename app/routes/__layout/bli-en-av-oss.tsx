@@ -10,6 +10,7 @@ import { Button } from "~/components/button";
 import { CallToActionBox } from "~/components/call-to-action-box";
 import { CapraLink } from "~/components/capra-link";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
+import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
@@ -139,7 +140,7 @@ export default function BliEnAvOss() {
   const { images } = useLoaderData<typeof loader>();
   return (
     <>
-      <div className="flex w-full flex-col gap-12">
+      <Section>
         <TitleAndText title="Bli en av oss!" titleAs="h1">
           Det skal være skikkelig bra å være ansatt i Capra. Vi vet nemlig at
           kick-ass ansatte er et resultat av en god arbeidsplass - og det
@@ -157,7 +158,7 @@ export default function BliEnAvOss() {
             Se de ansatte
           </Button>
         </div>
-      </div>
+      </Section>
 
       <JobListingsByDepartment />
 
@@ -177,6 +178,7 @@ export default function BliEnAvOss() {
 
       <ContentAndImageBox
         title="Vi er stolte av fagmiljøet"
+        titleAs="h2"
         image={images["photo-crowd-capracon"]}
         height="40vw"
         direction="right"
@@ -194,6 +196,7 @@ export default function BliEnAvOss() {
 
       <ContentAndImageBox
         title="Vi liker å være sammen"
+        titleAs="h2"
         image={images["photo-mingling-capracon"]}
         height="50vw"
         color="bordeaux"
@@ -218,6 +221,7 @@ export default function BliEnAvOss() {
 
       <CallToActionBox
         title="Er du nysgjerrig på om du og Capra er en match?"
+        titleAs="h2"
         description="Ta en titt på stillingene våre da vel!"
         linkText="Se stillinger"
         href="https://capraconsulting.teamtailor.com/jobs"

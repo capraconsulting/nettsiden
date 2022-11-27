@@ -9,6 +9,7 @@ import { CallToActionBox } from "~/components/call-to-action-box";
 import { CapraImage } from "~/components/capra-image";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import IconTitleAndTextBlock from "~/components/icon-title-and-text-block";
+import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import type { ValueProposition } from "~/components/value-wheel/value-wheel";
 import { ValueWheel } from "~/components/value-wheel/value-wheel";
@@ -71,7 +72,7 @@ export default function OmOss() {
         jobber vi like fullt med hjertet som med hjernen.
       </TitleAndText>
 
-      <InfoBox title="Hvem er vi?">
+      <InfoBox title="Hvem er vi?" titleAs="h2">
         Capra ble <strong>startet i 2005</strong> og er i dag fremdeles et{" "}
         <strong>uavhengig og heleid norskt selskap</strong>. Vår rolle er å
         inspirere gjennom innovativ teknologi og løsninger, ikke bare for
@@ -79,7 +80,7 @@ export default function OmOss() {
         kunnskap og løsninger for oss selv og for kundene våre.
       </InfoBox>
 
-      <section className="flex flex-col gap-12">
+      <Section>
         <TitleAndText title="Verdier driver oss i riktig retning" titleAs="h2">
           Verdiene er egenskaper som vi setter pris på hos våre kollegaer. Vi
           bruker verdiene når vi tar beslutninger, hver eneste dag!
@@ -89,7 +90,7 @@ export default function OmOss() {
           title="Våre Verdier"
           valuePropositions={valuePropositions}
         />
-      </section>
+      </Section>
 
       <section className="flex flex-col gap-12">
         <TitleAndText title="Vi skal bli passe store" titleAs="h2">
@@ -99,7 +100,7 @@ export default function OmOss() {
           fylle det området under!
         </TitleAndText>
 
-        <div className="relative left-[50%] ml-[-50vw] w-screen max-w-3xl md:left-0 md:ml-0 md:w-full">
+        <div className="relative left-[50%] ml-[-50vw] w-screen md:left-0 md:ml-0 md:w-full">
           <BubbleGrid
             items={employeeImages.map((x) => (
               <CapraImage key={x} src={x} alt="Ansatt i Capra" />
@@ -115,64 +116,72 @@ export default function OmOss() {
         <div className="md:hidden" />
       </section>
 
-      <TitleAndText title="Capra er organisert i team" titleAs="h2">
-        Vi bryr oss ikke om titler eller hieraki.{" "}
-        <strong className="font-bold">
-          Derfor har vi ingen ledergruppe, men heller team
-        </strong>{" "}
-        som består av kollegaer som har frivillig meldt seg til å gjøre Capra
-        bedre.
-      </TitleAndText>
+      <Section>
+        <TitleAndText title="Capra er organisert i team" titleAs="h2">
+          Vi bryr oss ikke om titler eller hieraki.{" "}
+          <strong className="font-bold">
+            Derfor har vi ingen ledergruppe, men heller team
+          </strong>{" "}
+          som består av kollegaer som har frivillig meldt seg til å gjøre Capra
+          bedre.
+        </TitleAndText>
 
-      <section className="grid w-[90%] max-w-5xl grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
-        {teams.map((props) => (
-          <TeamCard key={props.title} {...props} />
-        ))}
-      </section>
+        <div className="grid w-[90%] max-w-5xl grid-cols-1 gap-3 sm:w-full sm:grid-cols-2 md:grid-cols-3">
+          {teams.map((props) => (
+            <TeamCard key={props.title} {...props} />
+          ))}
+        </div>
+      </Section>
 
-      <TitleAndText title="Visjoner for fremtiden" titleAs="h2">
-        De neste årene skal vi fokusere på fire hovedområder som skal gjøre oss,
-        våre ansatte og våre kunder bedre.
-      </TitleAndText>
+      <Section>
+        <TitleAndText title="Visjoner for fremtiden" titleAs="h2">
+          De neste årene skal vi fokusere på fire hovedområder som skal gjøre
+          oss, våre ansatte og våre kunder bedre.
+        </TitleAndText>
 
-      <div className="grid max-w-4xl grid-cols-1 gap-20 px-10 sm:grid-cols-2">
-        <IconTitleAndTextBlock
-          title="Organisasjon"
-          titleAs="h3"
-          image={images["icon-vision-organization"]}
-        >
-          Vi skal tilpasse organisasjonsstrukturen for å <b>øke farten </b>
-          og <b>respondere</b> raskere med <b>enda høyere kvalitet.</b>
-        </IconTitleAndTextBlock>
-        <IconTitleAndTextBlock
-          title="Forretningsutvikling"
-          titleAs="h3"
-          image={images["icon-vision-development"]}
-        >
-          Vi skal <b>skape nye forretningsmuligheter</b> og
-          <b> videreutvikle de eksisterende</b> i skjønn harmoni.
-        </IconTitleAndTextBlock>
-        <IconTitleAndTextBlock
-          title="Markedsføring"
-          titleAs="h3"
-          image={images["icon-vision-marketing"]}
-        >
-          Vi skal <b>inspirere og dele det vi kan og gjør</b> på nye måter. Vi
-          skal
-          <b> tørre å ta et standpunkt og være en tydelig stemme i bransjen.</b>
-        </IconTitleAndTextBlock>
-        <IconTitleAndTextBlock
-          title="Kompetanse"
-          titleAs="h3"
-          image={images["icon-vision-competence"]}
-        >
-          Vi skal bygge Norges sterkeste kompetansemiljø for våre faglige
-          satningsområder.
-        </IconTitleAndTextBlock>
-      </div>
+        <div className="grid max-w-4xl grid-cols-1 gap-20 px-4 sm:grid-cols-2">
+          <IconTitleAndTextBlock
+            title="Organisasjon"
+            titleAs="h3"
+            image={images["icon-vision-organization"]}
+          >
+            Vi skal tilpasse organisasjonsstrukturen for å <b>øke farten </b>
+            og <b>respondere</b> raskere med <b>enda høyere kvalitet.</b>
+          </IconTitleAndTextBlock>
+          <IconTitleAndTextBlock
+            title="Forretningsutvikling"
+            titleAs="h3"
+            image={images["icon-vision-development"]}
+          >
+            Vi skal <b>skape nye forretningsmuligheter</b> og
+            <b> videreutvikle de eksisterende</b> i skjønn harmoni.
+          </IconTitleAndTextBlock>
+          <IconTitleAndTextBlock
+            title="Markedsføring"
+            titleAs="h3"
+            image={images["icon-vision-marketing"]}
+          >
+            Vi skal <b>inspirere og dele det vi kan og gjør</b> på nye måter. Vi
+            skal
+            <b>
+              {" "}
+              tørre å ta et standpunkt og være en tydelig stemme i bransjen.
+            </b>
+          </IconTitleAndTextBlock>
+          <IconTitleAndTextBlock
+            title="Kompetanse"
+            titleAs="h3"
+            image={images["icon-vision-competence"]}
+          >
+            Vi skal bygge Norges sterkeste kompetansemiljø for våre faglige
+            satningsområder.
+          </IconTitleAndTextBlock>
+        </div>
+      </Section>
 
       <InfoBox
         title={`Hva betyr egentlig "Capra"?`}
+        titleAs="h2"
         className="bg-light-blue-20"
       >
         Navnet Capra betyr geit på latin. Geiter er{" "}
@@ -186,40 +195,42 @@ export default function OmOss() {
         Capra.
       </InfoBox>
 
-      <TitleAndText title="Vi dyrker innovasjon" titleAs="h2">
-        Det å lære og utvikle oss, sammen med frihet til å prøve ut ideer, gir
-        grobunn for nyskapning og forandring. Det er noe av det viktigste vi
-        gjør i Capra.
-      </TitleAndText>
+      <Section className="md:gap-20">
+        <TitleAndText title="Vi dyrker innovasjon" titleAs="h2">
+          Det å lære og utvikle oss, sammen med frihet til å prøve ut ideer, gir
+          grobunn for nyskapning og forandring. Det er noe av det viktigste vi
+          gjør i Capra.
+        </TitleAndText>
 
-      <ContentAndImageBox
-        title="Bratte læringskurver"
-        image={images["icon-graph-up"]}
-        height="40vw"
-        color="peach"
-      >
-        For å bli de beste på våre fagområder, må vi kunne lære. Derfor setter
-        vi av tid til <strong className="font-bold">fagsamlinger</strong> og{" "}
-        <strong className="font-bold">inviduell læring.</strong>
-      </ContentAndImageBox>
+        <ContentAndImageBox
+          title="Bratte læringskurver"
+          image={images["icon-graph-up"]}
+          height="40vw"
+          color="peach"
+        >
+          For å bli de beste på våre fagområder, må vi kunne lære. Derfor setter
+          vi av tid til <strong className="font-bold">fagsamlinger</strong> og{" "}
+          <strong className="font-bold">inviduell læring.</strong>
+        </ContentAndImageBox>
 
-      <ContentAndImageBox
-        title="Du eier ideene dine"
-        image={images["icon-idea-bulb"]}
-        height="40vw"
-        direction="right"
-        color="lightBlue"
-      >
-        Vi vet at mange liker å holde på med hobby prosjekter. Så lenge
-        prosjektet ikke faller under Capras anvendelsesområde så er ideen din.
-        Det betyr at{" "}
-        <strong className="font-bold">
-          den appen eller SaaS-løsningen du bygger er din og bare din
-        </strong>
-        .
-      </ContentAndImageBox>
+        <ContentAndImageBox
+          title="Du eier ideene dine"
+          image={images["icon-idea-bulb"]}
+          height="40vw"
+          direction="right"
+          color="lightBlue"
+        >
+          Vi vet at mange liker å holde på med hobby prosjekter. Så lenge
+          prosjektet ikke faller under Capras anvendelsesområde så er ideen din.
+          Det betyr at{" "}
+          <strong className="font-bold">
+            den appen eller SaaS-løsningen du bygger er din og bare din
+          </strong>
+          .
+        </ContentAndImageBox>
+      </Section>
 
-      <section className="flex flex-col items-center gap-12">
+      <Section>
         <TitleAndText title="Tenk selv, fremfor å ha regler" titleAs="h2">
           Kloke mennesker tar kloke valg! Vi vil{" "}
           <strong className="font-bold">
@@ -246,15 +257,17 @@ export default function OmOss() {
             selv.
           </EmphasizedTextBox>
         </div>
-      </section>
+      </Section>
 
       <CallToActionBox
         title="Vi arrangerer en kick-ass konferanse"
+        titleAs="h2"
         description="Vi elsker å lære bort det vi kan. Derfor arrangerer vi internkonferanse hvert år!"
         linkText="Les om CapraCon"
         href="https://capracon.no"
       />
-      <section className="flex w-11/12 max-w-6xl flex-col gap-12">
+
+      <Section>
         <TitleAndText title="Kontakt" titleAs="h2">
           Vi vil gjerne høre fra deg!
         </TitleAndText>
@@ -266,25 +279,33 @@ export default function OmOss() {
             </li>
           ))}
         </ul>
-      </section>
+      </Section>
     </>
   );
 }
 
 interface InfoBoxProps {
   title: React.ReactNode;
+  titleAs: "h2" | "h3" | "p";
   children: React.ReactNode;
   className?: string;
 }
-const InfoBox = ({ title, children, className }: InfoBoxProps) => {
+const InfoBox = ({
+  title,
+  titleAs: TitleComponent,
+  children,
+  className,
+}: InfoBoxProps) => {
   return (
     <div
       className={`flex w-full flex-col gap-4 border-none bg-peach-20 py-7 px-6 sm:w-11/12 md:max-w-2xl md:p-12 ${
         className ?? ""
       }`}
     >
-      <div className="text-lg font-bold uppercase text-main">{title}</div>
-      <div className="leading-16 text-lg">{children}</div>
+      <TitleComponent className="text-lg font-bold uppercase text-main">
+        {title}
+      </TitleComponent>
+      <p className="leading-16 text-lg">{children}</p>
     </div>
   );
 };

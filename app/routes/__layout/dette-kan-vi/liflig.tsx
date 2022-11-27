@@ -4,6 +4,7 @@ import { json } from "@remix-run/server-runtime";
 
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import IconTitleAndTextBlock from "~/components/icon-title-and-text-block";
+import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import { CallMeForm } from "~/routes/api.call-me";
 import { sanityClient } from "~/sanity/sanity-client.server";
@@ -59,7 +60,7 @@ export default function Liflig() {
   const { images, items } = useLoaderData<typeof loader>();
   return (
     <>
-      <section className="flex w-full max-w-7xl flex-col items-center gap-12 sm:w-11/12">
+      <Section>
         <TitleAndText
           title="Liflig - Skreddersydde IT-løsninger for bedriften din"
           titleAs="h1"
@@ -101,8 +102,8 @@ export default function Liflig() {
             </strong>
           </IconTitleAndTextBlock>
         </div>
-      </section>
-      <section className="flex w-full max-w-7xl flex-col items-center gap-12 sm:w-11/12 md:gap-20">
+      </Section>
+      <Section className="md:gap-20">
         <TitleAndText title="Vi vil gjøre din jobb lettere!" titleAs="h2">
           Visste du at Liflig betyr behagelig og noe man finner glede i? Liflig
           er med andre ord følelsen når alle IT-systemer bare fungerer som det
@@ -178,8 +179,8 @@ export default function Liflig() {
           mulig. Vi har gode metoder for dokumentering, slik at en handover vil
           gå smidig.
         </ContentAndImageBox>
-      </section>
-      <section className="flex w-full max-w-7xl flex-col gap-12 sm:w-11/12">
+      </Section>
+      <Section>
         <TitleAndText title="Kundehistorier" titleAs="h2">
           Liflig leverer kontinuerlig verdi for kundene våre. Her har du noen
           eksempler på hva Liflig har hjulpet andre med.
@@ -192,7 +193,7 @@ export default function Liflig() {
             </li>
           ))}
         </ul>
-      </section>
+      </Section>
       <CallMeForm titleAs="h2" />
       <div /> {/* Add some whitespace */}
     </>
