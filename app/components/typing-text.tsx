@@ -75,14 +75,16 @@ export const TypingText: React.FC<Props> = ({
   }
 
   return (
-    <span
-      aria-label={new Intl.ListFormat().format(
-        typeof text === "string" ? [text] : text,
-      )}
-    >
-      {displayText}
-      <Cursor />
-    </span>
+    <>
+      {/* uses tailwind sr-only class, if this component is without tailwind or this class the text will be shown. */}
+      <span className="sr-only">
+        {new Intl.ListFormat().format(typeof text === "string" ? [text] : text)}
+      </span>
+      <span aria-hidden>
+        {displayText}
+        <Cursor />
+      </span>
+    </>
   );
 };
 
@@ -149,7 +151,6 @@ const Cursor: React.FC = () => {
 
   return (
     <span
-      aria-hidden={true}
       className={classNames(
         "inline-block transition-opacity duration-500",
         show ? "opacity-1" : "opacity-0",
