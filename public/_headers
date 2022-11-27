@@ -18,3 +18,12 @@
   Cache-Control: public, max-age=2592000
 /manifest.webmanifest
   Cache-Control: public, max-age=2592000
+
+# Preemptively kill the previous service worker
+#
+# this works on all browsers, except safari.
+# So the users on iPhone still needs to rely on the killswitch `sw.js` and embeded kill code
+# `Clear-Site-Data: "storage"` removes all storage from the browser, but not cache and cookies
+# Since we don't use localStorage (as of writing), this is fine.
+/*
+  Clear-Site-Data: "storage"

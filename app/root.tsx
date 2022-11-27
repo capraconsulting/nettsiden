@@ -59,6 +59,19 @@ export default function App() {
           src="https://static.cloudflareinsights.com/beacon.min.js"
           data-cf-beacon='{"token": "144efc4bcac246e2acd9d9e779d0cc8a"}'
         />
+
+        {/* Kill Service Worker */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            navigator.serviceWorker.getRegistrations().then(function (registrations) {
+              for (let registration of registrations) {
+                registration.unregister();
+              }
+            });
+        `,
+          }}
+        />
       </body>
     </html>
   );
