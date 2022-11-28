@@ -1,3 +1,4 @@
+import type { PropsWithChildren } from "react";
 import {
   Links,
   LiveReload,
@@ -9,6 +10,7 @@ import {
 import type { LinksFunction, MetaFunction } from "@remix-run/server-runtime";
 
 import globalStyles from "./global.css";
+import { useHydrated } from "./hooks/use-hydrated";
 import tailwindStyles from "./tailwind.css";
 
 export const links: LinksFunction = () => [
@@ -59,6 +61,24 @@ export default function App() {
             defer
             src="https://static.cloudflareinsights.com/beacon.min.js"
             data-cf-beacon='{"token": "144efc4bcac246e2acd9d9e779d0cc8a"}'
+          />
+        )}
+
+        {/* Google Tag Manager */}
+        {process.env.NODE_ENV === "production" && (
+          // Copied from the Google Tag Manager dashboard tagmanager.google.com
+          // This script manipulates the DOM, causing hydration errors
+          // Use this neat trick I found on the Remix discord to lett react load first
+          // conditionally rendering the script tag after hydration did not work.
+          <script
+            ref={(ref) => {
+              if (!ref) return;
+              ref.innerHTML = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-T6XK756');`;
+            }}
           />
         )}
 
