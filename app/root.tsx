@@ -1,4 +1,3 @@
-import type { PropsWithChildren } from "react";
 import {
   Links,
   LiveReload,
@@ -10,7 +9,6 @@ import {
 import type { LinksFunction, MetaFunction } from "@remix-run/server-runtime";
 
 import globalStyles from "./global.css";
-import { useHydrated } from "./hooks/use-hydrated";
 import tailwindStyles from "./tailwind.css";
 
 export const links: LinksFunction = () => [
