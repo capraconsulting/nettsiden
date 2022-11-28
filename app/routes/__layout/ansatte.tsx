@@ -12,7 +12,7 @@ import { Card } from "~/components/card";
 import { FilterRow } from "~/components/filter-row";
 import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
-import { sanityClient } from "~/sanity/sanity-client.server";
+import { getSanityClient } from "~/sanity/sanity-client.server";
 import type { Author, JobCategory } from "~/sanity/schema";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
@@ -27,7 +27,7 @@ type AuthorExpanded = Omit<Author, "filter"> & { filter: JobCategory[] };
 const URL_FILTER_KEY = "kategori";
 export const loader = async ({ request }: LoaderArgs) => {
   const [allItems, icons] = await Promise.all([
-    sanityClient.query<AuthorExpanded>(
+    getSanityClient().query<AuthorExpanded>(
       `* [_type == "author" && employee == true] | order(name){ ..., filter[]-> }`,
     ),
     fetchImageAssets([

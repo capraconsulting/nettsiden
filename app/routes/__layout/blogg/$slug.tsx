@@ -9,11 +9,15 @@ import { json } from "@remix-run/server-runtime";
 import { CapraImage } from "~/components/capra-image";
 import { ProseableText } from "~/components/prosable-text";
 import {
+  getSanityClient,
   getSanitySitemapEntries,
-  sanityClient,
 } from "~/sanity/sanity-client.server";
 import type { Author, Blogg } from "~/sanity/schema";
-import { getMainImageAlt, getRawStringContent } from "~/sanity/utils";
+import {
+  getMainImageAlt,
+  getRawStringContent,
+  isInPreviewMode,
+} from "~/sanity/utils";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { urlFor } from "~/utils/imageBuilder";
@@ -28,70 +32,79 @@ type BloggExpanded = Omit<Blogg, "authors"> & {
   authors: Author[];
 };
 
-export const loader = async ({ params }: LoaderArgs) => {
-  const query = (slug: string) =>
-    sanityClient.query<BloggExpanded>(
-      `* [_type == "blogg" && slug.current == "${slug}"]|{ ..., authors[]-> }`,
-    );
+export const loader = async ({ params, request }: LoaderArgs) => {
+  const isPreviewMode = isInPreviewMode(request);
+  const query = `* [_type == "blogg" && slug.current == "${params.slug}"]|{ ..., authors[]-> }`;
+  const blogPost = (
+    await getSanityClient(request).query<BloggExpanded>(query)
+  )[0];
 
-  const item = (await query(params.slug ?? ""))[0];
-  assertItemFound(item);
+  assertItemFound(blogPost);
 
   const publishedAt = new Intl.DateTimeFormat("no-nb", {
     day: "numeric",
     month: "long",
     year: "numeric",
-  }).format(new Date(item.publishedAt!));
+  }).format(new Date(blogPost.publishedAt!));
 
   const authors = new Intl.ListFormat("no-nb", {
     style: "long",
     type: "conjunction",
-  }).format(item.authors.map((x) => x.name).filter(typedBoolean));
+  }).format(blogPost.authors.map((x) => x.name).filter(typedBoolean));
 
   return json(
-    { ...item, authors, publishedAt },
+    {
+      blogPost: { ...blogPost, authors, publishedAt },
+      isPreviewMode,
+    },
     { headers: cacheControlHeaders },
   );
 };
 
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
-export const meta: MetaFunction<typeof loader> = ({ data }) =>
+export const meta: MetaFunction<typeof loader> = ({ data: { blogPost } }) =>
   metaTags({
-    title: data.helmetTitle ?? data.title!,
-    description: data.helmetDescription ?? getRawStringContent(data.ingress),
-    image: urlFor(data.mainImage!).url(),
-    author: data.authors,
+    title: blogPost.helmetTitle ?? blogPost.title!,
+    description:
+      blogPost.helmetDescription ?? getRawStringContent(blogPost.ingress),
+    image: urlFor(blogPost.mainImage!).url(),
+    author: blogPost.authors,
     card: "summary_large_image",
   });
 
 export default function BloggPost() {
-  const item = useLoaderData<typeof loader>();
+  const { blogPost, isPreviewMode } = useLoaderData<typeof loader>();
+
   return (
     <article className="flex w-11/12 max-w-2xl flex-col gap-5">
+      {isPreviewMode && <div>Preview mode</div>}
       <h1 className="text-5xl font-bold leading-[1.14] text-header">
-        {item.titleLong}
+        {blogPost.titleLong}
       </h1>
-      <ProseableText value={item.ingress!} className="text-2xl text-brodtext" />
+      <ProseableText
+        value={blogPost.ingress!}
+        className="text-2xl text-brodtext"
+      />
 
       <p>
-        <span className="text-md block">{item.authors}</span>
-        <time className="text-sm text-[#555]">{item.publishedAt}</time>
+        <span className="text-md block">{blogPost.authors}</span>
+        <time className="text-sm text-[#555]">{blogPost.publishedAt}</time>
       </p>
 
       <div className="relative left-[50%] ml-[-50vw] w-screen max-w-3xl md:left-0 md:ml-0 md:w-full">
         <CapraImage
-          src={urlFor(item.mainImage!)
+          src={urlFor(blogPost.mainImage!)
             .width(714 * 2)
             .url()}
-          alt={getMainImageAlt(item)}
+          alt={getMainImageAlt(blogPost)}
           loading="eager"
           fetchpriority="high"
         />
       </div>
 
       <ProseableText
-        value={item.body!}
+        value={blogPost.body!}
         className="color-brodtext text-xl font-light"
       />
     </article>

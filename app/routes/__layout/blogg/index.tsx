@@ -11,7 +11,7 @@ import { Card } from "~/components/card";
 import { FilterRow } from "~/components/filter-row";
 import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
-import { sanityClient } from "~/sanity/sanity-client.server";
+import { getSanityClient } from "~/sanity/sanity-client.server";
 import type { Author, Blogg, Bloggfilter } from "~/sanity/schema";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { urlFor } from "~/utils/imageBuilder";
@@ -25,7 +25,7 @@ type BloggExpanded = Omit<Blogg, "filter" | "authors"> & {
 
 const URL_FILTER_KEY = "kategori";
 export const loader = async ({ request }: LoaderArgs) => {
-  const allItems = await sanityClient.query<BloggExpanded>(
+  const allItems = await getSanityClient().query<BloggExpanded>(
     `* [_type == "blogg"]|order(publishedAt desc) { ..., filter[]->, authors[]-> }`,
   );
 

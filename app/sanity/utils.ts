@@ -25,3 +25,11 @@ export function getRawStringContent(block: BlockContent | undefined): string {
     .filter(typedBoolean)
     .join("\n\n");
 }
+
+export const isInPreviewMode = (request: Request): boolean => {
+  const requestUrl = new URL(request.url);
+  return (
+    requestUrl?.searchParams?.get("preview") ===
+    process.env.SANITY_PREVIEW_SECRET
+  );
+};

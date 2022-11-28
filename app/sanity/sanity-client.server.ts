@@ -4,19 +4,25 @@ import type { SitemapEntry } from "~/types";
 import { typedBoolean } from "~/utils/misc";
 import { config } from "./config";
 import type { Documents } from "./schema";
+import { isInPreviewMode } from "./utils";
 
-export const sanityClient = createClient<Documents>({
-  ...config,
-  previewMode: false,
+export const getSanityClient = (request?: Request) => {
+  const previewMode = request ? isInPreviewMode(request) : false;
 
-  // Avoid "ReferenceError - fetch is not defined"
-  // By wrapping it in a lambda function we defer the initilisation
-  // of fetch until after remix has put fetch into the global scope.
-  //
-  // Ideally this should not be needed, fetch should be in the global scope
-  // when this is parsed. It worked in previous commits 🤷
-  fetch: (...args) => fetch(...args),
-});
+  return createClient<Documents>({
+    ...config,
+    previewMode,
+    token: process.env.SANITY_TOKEN ?? "",
+
+    // Avoid "ReferenceError - fetch is not defined"
+    // By wrapping it in a lambda function we defer the initilisation
+    // of fetch until after remix has put fetch into the global scope.
+    //
+    // Ideally this should not be needed, fetch should be in the global scope
+    // when this is parsed. It worked in previous commits 🤷
+    fetch: (...args) => fetch(...args),
+  });
+};
 
 export async function getSanitySitemapEntries(
   type: Documents["_type"],
@@ -29,7 +35,7 @@ export async function getSanitySitemapEntries(
     slug?: {
       current: string;
     }; // FIXME: This should probably be a getAll, but I can't get it to work with the fields filter..
-  }> = await sanityClient.query(
+  }> = await getSanityClient().query(
     `*[_type == "${type}"]{ _id, _updatedAt, slug }`,
   );
 

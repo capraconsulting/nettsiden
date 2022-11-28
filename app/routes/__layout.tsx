@@ -14,7 +14,7 @@ import { json } from "@remix-run/server-runtime";
 import { Footer } from "~/components/footer";
 import { Header } from "~/components/header";
 import { Todo } from "~/components/todo";
-import { sanityClient } from "~/sanity/sanity-client.server";
+import { getSanityClient } from "~/sanity/sanity-client.server";
 import type { CapraHandle } from "~/types";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { metaTags } from "~/utils/meta-tags";
@@ -30,7 +30,7 @@ export const loader = async ({ request }: LoaderArgs) => {
   // const contactFormTitle = getContactFormTitle(matches.map((it) => it.module));
 
   const [contactFormRepresentatives, images] = await Promise.all([
-    sanityClient
+    getSanityClient()
       .getAll("author", `employee == true && "contact-form" in placement`)
       .then((it) =>
         it.map(

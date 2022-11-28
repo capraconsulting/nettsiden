@@ -9,8 +9,8 @@ import { json } from "@remix-run/server-runtime";
 import { CapraImage } from "~/components/capra-image";
 import { ProseableText } from "~/components/prosable-text";
 import {
+  getSanityClient,
   getSanitySitemapEntries,
-  sanityClient,
 } from "~/sanity/sanity-client.server";
 import { getMainImageAlt } from "~/sanity/utils";
 import type { CapraHandle } from "~/types";
@@ -26,7 +26,7 @@ export const handle: CapraHandle = {
 
 export const loader = async ({ params }: LoaderArgs) => {
   const query = (slug: string) =>
-    sanityClient.getAll("selvskryt", `slug.current == "${slug}"`);
+    getSanityClient().getAll("selvskryt", `slug.current == "${slug}"`);
 
   const item = (await query(params.slug ?? ""))[0];
   assertItemFound(item);

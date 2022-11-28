@@ -2,7 +2,7 @@ import type { LoaderArgs } from "@remix-run/server-runtime";
 
 import type { SanityDocument } from "sanity-codegen";
 
-import { sanityClient } from "~/sanity/sanity-client.server";
+import { getSanityClient } from "~/sanity/sanity-client.server";
 import { assertItemFound } from "~/utils/misc";
 
 interface ShallowSanityFileAsset extends SanityDocument {
@@ -21,7 +21,7 @@ export const loader = async ({ params, request }: LoaderArgs) => {
   const dl = new URL(request.url).searchParams.get("dl");
 
   const item = (
-    await sanityClient.query<ShallowSanityFileAsset>(
+    await getSanityClient().query<ShallowSanityFileAsset>(
       `* [_type == "fileAsset" && title == "${filename}"]{ ...file{...asset->} }`,
     )
   )[0];
