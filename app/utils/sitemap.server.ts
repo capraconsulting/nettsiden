@@ -14,11 +14,7 @@ export async function getSiteMapEntries(
 ): Promise<SitemapEntry[]> {
   const entries = await Promise.all(
     Object.entries(routeModules).map(async ([id, mod]) => {
-      if (
-        id === "root" ||
-        // id.startsWith("routes/_") ||
-        id.startsWith("routes/test")
-      ) {
+      if (id === "root" || id.startsWith("routes/test")) {
         return;
       }
 
@@ -56,16 +52,17 @@ export async function getSiteMapEntries(
         parent = parentId ? manifest.routes[parentId] : null;
       }
 
-      // Quick-fix: removing double leading slashes
-      if (path.startsWith("//")) path = path.slice(0, 1);
+      // Quick-fix: removing double slashes
+      path = path.replace("//", "/");
 
       // we can't handle dynamic routes, so if the handle doesn't have a
-      // getSitemapEntries function, we just
+      // getSitemapEntries function, we just don't include it
       if (path.includes(":")) {
         return;
       }
 
       const entry: SitemapEntry = { route: removeTrailingSlash(path) };
+      console.log(path, entry);
       return entry;
     }),
   );
