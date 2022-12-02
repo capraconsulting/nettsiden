@@ -7,6 +7,8 @@ import type { AppLoadContext } from "@remix-run/server-runtime";
 interface Env {
   TEAM_TAILOR_API_KEY?: string;
   SLACK_WEBHOOK_URL?: string;
+  SANITY_PREVIEW_SECRET?: string;
+  SANITY_TOKEN?: string;
 }
 
 /**

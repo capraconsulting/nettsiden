@@ -1,18 +1,24 @@
+import type { AppLoadContext } from "@remix-run/server-runtime";
+
 import { createClient } from "sanity-codegen";
 
 import type { SitemapEntry } from "~/types";
+import { getEnv } from "~/utils/env";
 import { typedBoolean } from "~/utils/misc";
 import { config } from "./config";
 import type { Documents } from "./schema";
 import { isInPreviewMode } from "./utils";
 
-export const getSanityClient = (request?: Request) => {
-  const previewMode = request ? isInPreviewMode(request) : false;
+export const getSanityClient = (
+  request?: Request,
+  context?: AppLoadContext,
+) => {
+  const previewMode = request && context && isInPreviewMode(request, context);
 
   return createClient<Documents>({
     ...config,
     previewMode,
-    token: process.env.SANITY_TOKEN ?? "",
+    token: (context && getEnv(context).SANITY_TOKEN) || "",
 
     // Avoid "ReferenceError - fetch is not defined"
     // By wrapping it in a lambda function we defer the initilisation
