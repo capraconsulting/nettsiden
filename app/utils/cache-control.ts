@@ -4,3 +4,7 @@ export const cacheControlHeaders = {
     60 * 10
   }, stale-while-revalidate=${MONTH_IN_SECONDS}`,
 };
+
+export const noStoreCacheControlHeaders = {
+  "Cache-Control": "max-age=0, no-store",
+};

@@ -19,7 +19,10 @@ import {
   isInPreviewMode,
 } from "~/sanity/utils";
 import type { CapraHandle } from "~/types";
-import { cacheControlHeaders } from "~/utils/cache-control";
+import {
+  cacheControlHeaders,
+  noStoreCacheControlHeaders,
+} from "~/utils/cache-control";
 import { urlFor } from "~/utils/imageBuilder";
 import { metaTags } from "~/utils/meta-tags";
 import { assertItemFound, typedBoolean } from "~/utils/misc";
@@ -57,7 +60,9 @@ export const loader = async ({ params, request, context }: LoaderArgs) => {
       blogPost: { ...blogPost, authors, publishedAt },
       isPreviewMode,
     },
-    { headers: cacheControlHeaders },
+    {
+      headers: isPreviewMode ? noStoreCacheControlHeaders : cacheControlHeaders,
+    },
   );
 };
 
