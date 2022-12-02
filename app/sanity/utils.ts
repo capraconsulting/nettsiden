@@ -29,13 +29,16 @@ export function getRawStringContent(block: BlockContent | undefined): string {
     .join("\n\n");
 }
 
-export const isInPreviewMode = (
-  request: Request,
-  context: AppLoadContext,
-): boolean => {
+export const isInPreviewMode = ({
+  request,
+  context,
+}: {
+  request: Request;
+  context: AppLoadContext;
+}): boolean => {
   const requestUrl = new URL(request.url);
   return (
-    requestUrl?.searchParams?.get("preview") ===
+    requestUrl.searchParams.get("preview") ===
     getEnv(context).SANITY_PREVIEW_SECRET
   );
 };

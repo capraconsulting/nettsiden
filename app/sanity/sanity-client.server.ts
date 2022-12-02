@@ -9,16 +9,18 @@ import { config } from "./config";
 import type { Documents } from "./schema";
 import { isInPreviewMode } from "./utils";
 
-export const getSanityClient = (
-  request?: Request,
-  context?: AppLoadContext,
-) => {
-  const previewMode = request && context && isInPreviewMode(request, context);
+export const getSanityClient = (requestAndContext?: {
+  request: Request;
+  context: AppLoadContext;
+}) => {
+  const previewMode = requestAndContext && isInPreviewMode(requestAndContext);
+  const token =
+    requestAndContext && getEnv(requestAndContext.context).SANITY_TOKEN;
 
   return createClient<Documents>({
     ...config,
     previewMode,
-    token: (context && getEnv(context).SANITY_TOKEN) || "",
+    token,
 
     // Avoid "ReferenceError - fetch is not defined"
     // By wrapping it in a lambda function we defer the initilisation

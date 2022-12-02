@@ -36,10 +36,10 @@ type BloggExpanded = Omit<Blogg, "authors"> & {
 };
 
 export const loader = async ({ params, request, context }: LoaderArgs) => {
-  const isPreviewMode = isInPreviewMode(request, context);
+  const isPreviewMode = isInPreviewMode({ request, context });
   const query = `* [_type == "blogg" && slug.current == "${params.slug}"]|{ ..., authors[]-> }`;
   const blogPost = (
-    await getSanityClient(request).query<BloggExpanded>(query)
+    await getSanityClient({ request, context }).query<BloggExpanded>(query)
   )[0];
 
   assertItemFound(blogPost);
