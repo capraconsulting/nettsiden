@@ -7,7 +7,7 @@
     "build:css": "npm run generate:css -- --minify",
     "build:remix": "remix build",
     "build:ladle": "ladle build",
-    "dev": "npm-run-all generate:css --parallel dev:*",
+    "dev": "npm-run-all generate:css --parallel \"dev:*\"",
     "dev:css": "npm run generate:css -- --watch",
     "dev:remix": "remix dev",
     "ladle": "ladle serve",
