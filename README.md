@@ -1,6 +1,6 @@
 # Capra Nettsiden
 
-> [https://nettsiden.pages.dev](https://nettsiden.pages.dev)
+> [https://www.capraconsulting.no](https://www.capraconsulting.no)
 
 - UI med [React](https://reactjs.org/)
 - Server side rendering med [Remix](https://remix.run/)
