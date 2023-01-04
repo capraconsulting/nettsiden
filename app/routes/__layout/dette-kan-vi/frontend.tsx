@@ -35,7 +35,7 @@ export default function Frontend() {
   return (
     <>
       <Section className="md:gap-20">
-        <TitleAndText title="Hvorfor frontend?" titleAs="h1">
+        <TitleAndText title="Frontend er best" titleAs="h1">
           Frontend er det vanlige folk har mest forhold til. Det er her de store
           brukeropplevelsene skapes. Om det gjelder et internsystem, hjemmeside
           eller nettbutikk, er frontend absolutt noe alle selskaper bør
