@@ -69,7 +69,7 @@ export default function DetteKanVi() {
           direction="right"
           image={images["project-lead"]}
           height="40vw"
-          color="bordeaux"
+          color="peach"
         >
           {
             "For å skape verdi raskt bør man bruke metodikker som sørger for at man fokuserer på de rette oppgavene, målene og skaper selvgående autonome team. Vi hjelper våre kunder med teamledelse, prosjektledelse, produktutvikling, smidig coaching, og organisasjonsutvikling. \n\n Stikkord her er Agile, Team Topologies, DDD, Accelerate, 5 Dysfunctions of a Team og Empowered."
@@ -81,7 +81,7 @@ export default function DetteKanVi() {
           titleAs="h3"
           image={images.cloud}
           height="40vw"
-          color="peach"
+          color="darkBlue"
         >
           I Capra spesialiserer vi oss innenfor Amazon Web Services og er én av
           fire bedrifter som er advanced tier consulting partnere i Norge. Vår
@@ -95,7 +95,7 @@ export default function DetteKanVi() {
           direction="right"
           image={images.backend}
           height="40vw"
-          color="darkBlue"
+          color="lightBlue"
           // Re-enable when the backend page is implemented
           // readMoreLink={{ to: "/dette-kan-vi/backend" }}
         >
@@ -109,7 +109,7 @@ export default function DetteKanVi() {
           titleAs="h3"
           image={images.frontend}
           height="40vw"
-          color="lightBlue"
+          color="bordeaux"
           readMoreLink={{ to: "/dette-kan-vi/frontend" }}
         >
           {
@@ -123,7 +123,7 @@ export default function DetteKanVi() {
           direction="right"
           image={images["tech-architecture"]}
           height="40vw"
-          color="bordeaux"
+          color="peach"
         >
           {
             "Det er viktig å benytte riktig metodikk for å komme frem til en god arkitektur og god teknologi. Kodenære arkitekter kan teste ut funksjoner for å sikre at løsningene lar seg realisere og at rammene for en god implementasjon er der for utviklerne. \n\n Sentralt her er CI/CD, DevOps/NoOps, Microservices, IaC, DDD, Terraform og AWS."
