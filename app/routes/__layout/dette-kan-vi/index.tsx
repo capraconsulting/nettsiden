@@ -63,6 +63,7 @@ export default function DetteKanVi() {
           blant de beste innenfor våre fagfelt.
         </TitleAndText>
 
+          color="bordeaux"
         <ContentAndImageBox
           title="Sky"
           titleAs="h3"
@@ -122,7 +123,6 @@ export default function DetteKanVi() {
           titleAs="h3"
           image={images["project-lead"]}
           height="40vw"
-          color="peach"
         >
           {
             "For å skape verdi raskt bør man bruke metodikker som sørger for at man fokuserer på de rette oppgavene, målene og skaper selvgående autonome team. Vi hjelper våre kunder med teamledelse, prosjektledelse, produktutvikling, smidig coaching, og organisasjonsutvikling. \n\n Stikkord her er Agile, Team Topologies, DDD, Accelerate, 5 Dysfunctions of a Team og Empowered."
