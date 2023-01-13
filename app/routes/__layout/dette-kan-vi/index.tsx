@@ -63,7 +63,19 @@ export default function DetteKanVi() {
           blant de beste innenfor våre fagfelt.
         </TitleAndText>
 
+        <ContentAndImageBox
+          title="Team-, prosjektleder og smidig coach"
+          titleAs="h3"
+          direction="right"
+          image={images["project-lead"]}
+          height="40vw"
           color="bordeaux"
+        >
+          {
+            "For å skape verdi raskt bør man bruke metodikker som sørger for at man fokuserer på de rette oppgavene, målene og skaper selvgående autonome team. Vi hjelper våre kunder med teamledelse, prosjektledelse, produktutvikling, smidig coaching, og organisasjonsutvikling. \n\n Stikkord her er Agile, Team Topologies, DDD, Accelerate, 5 Dysfunctions of a Team og Empowered."
+          }
+        </ContentAndImageBox>
+
         <ContentAndImageBox
           title="Sky"
           titleAs="h3"
@@ -118,16 +130,6 @@ export default function DetteKanVi() {
           }
         </ContentAndImageBox>
 
-        <ContentAndImageBox
-          title="Team-, prosjektleder og smidig coach"
-          titleAs="h3"
-          image={images["project-lead"]}
-          height="40vw"
-        >
-          {
-            "For å skape verdi raskt bør man bruke metodikker som sørger for at man fokuserer på de rette oppgavene, målene og skaper selvgående autonome team. Vi hjelper våre kunder med teamledelse, prosjektledelse, produktutvikling, smidig coaching, og organisasjonsutvikling. \n\n Stikkord her er Agile, Team Topologies, DDD, Accelerate, 5 Dysfunctions of a Team og Empowered."
-          }
-        </ContentAndImageBox>
       </Section>
     </>
   );
