@@ -58,7 +58,7 @@ export default function DetteKanVi() {
       <KonsulenterPitchAndSloganBox direction="right" images={images} />
 
       <Section className="md:gap-20">
-        <TitleAndText id="teknologier" title="Teknologier" titleAs="h2">
+        <TitleAndText id="teknologier" title="Våre ekspertiseområder" titleAs="h2">
           Vi i Capra er spesialister. Vi har tatt klare tekniske valg og blitt
           blant de beste innenfor våre fagfelt.
         </TitleAndText>
