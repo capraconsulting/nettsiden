@@ -38,20 +38,24 @@ export async function loader() {
     ),
   ]);
 
-  console.log(contacts);
-
-  return json({
-    images,
-    contact: contacts[0]
-      ? {
-          name: contacts[0].name,
-          phone: contacts[0].phone,
-          email: contacts[0].email,
-          image:
-            contacts[0].image && urlFor(contacts[0].image).size(210, 160).url(),
-        }
-      : undefined,
-  });
+  return json(
+    {
+      images,
+      contact: contacts[0]
+        ? {
+            name: contacts[0].name,
+            phone: contacts[0].phone,
+            email: contacts[0].email,
+            image:
+              contacts[0].image &&
+              urlFor(contacts[0].image).size(210, 160).url(),
+          }
+        : undefined,
+    },
+    {
+      headers: cacheControlHeaders,
+    },
+  );
 }
 
 export const headers: HeadersFunction = () => cacheControlHeaders;
