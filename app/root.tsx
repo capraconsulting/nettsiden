@@ -5,11 +5,15 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
+  useLocation,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/server-runtime";
+import { json } from "@remix-run/server-runtime";
 
 import sourceSansStyles from "@fontsource/source-sans-pro/latin.css";
 
+import { projectDetails } from "~/sanity/config";
 import globalStyles from "./global.css";
 import tailwindStyles from "./tailwind.css";
 
@@ -38,7 +42,21 @@ export const links: LinksFunction = () => [
   },
 ];
 
+export function loader() {
+  return json({
+    ENV: {
+      SANITY_PUBLIC_PROJECT_ID: projectDetails.projectId,
+      SANITY_PUBLIC_DATASET: projectDetails.dataset,
+      SANITY_PUBLIC_API_VERSION: projectDetails.apiVersion,
+    },
+  });
+}
+
 export default function App() {
+  const { ENV } = useLoaderData<typeof loader>();
+
+  const { pathname } = useLocation();
+  const isStudioRoute = pathname.startsWith("/studio");
   return (
     <html lang="no">
       <head>
@@ -46,10 +64,16 @@ export default function App() {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
+        {isStudioRoute && typeof document === "undefined" ? "__STYLES__" : null}
       </head>
       <body className="flex h-full flex-col">
         <Outlet />
         <ScrollRestoration />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(ENV)}`,
+          }}
+        />
         <Scripts />
         <LiveReload />
 
