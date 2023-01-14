@@ -1,12 +1,13 @@
-export default {
+import { s } from "sanity-typed-schema-builder";
+
+export const bloggfilter = s.document({
   name: "bloggfilter",
   title: "Blogg filter",
-  type: "document",
   fields: [
     {
       name: "title",
       title: "Tittel",
-      type: "string",
+      type: s.string(),
     },
   ],
-};
+});

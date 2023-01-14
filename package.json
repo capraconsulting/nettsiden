@@ -17,8 +17,7 @@
     "generate:css": "npx tailwindcss -o ./app/tailwind.css",
     "start": "cross-env NODE_ENV=production npm run dev-cloudflare:wrangler",
     "lint": "eslint \"./{app,studio}/**/*.{ts,tsx,js,jsx}\"",
-    "lint:fix": "npm run lint -- --fix",
-    "sanity-codegen": "sanity-codegen"
+    "lint:fix": "npm run lint -- --fix"
   },
   "prettier": {
     "trailingComma": "all"
@@ -42,8 +41,8 @@
     "react-youtube": "10.1.0",
     "remix-utils": "6.0.0",
     "sanity": "3.2.3",
-    "sanity-codegen": "0.9.8",
     "sanity-plugin-dashboard-widget-document-list": "1.0.1",
+    "sanity-typed-schema-builder": "2.1.0",
     "styled-components": "5.3.6"
   },
   "devDependencies": {

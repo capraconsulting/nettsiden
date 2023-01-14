@@ -37,7 +37,7 @@ export const loader = async () => {
       "photo-kontor-gjensidige",
       "photo-kontor-nrk",
     ]),
-    getSanityClient().query<SelvskrytExpanded>(
+    getSanityClient().fetch<SelvskrytExpanded[]>(
       `* [_type == "selvskryt"] { ..., filter[]-> }`,
     ),
   ]);

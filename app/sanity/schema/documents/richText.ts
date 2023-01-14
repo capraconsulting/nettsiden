@@ -1,14 +1,15 @@
-import { defineType } from "sanity";
+import { s } from "sanity-typed-schema-builder";
 
-export default defineType({
+import { richTextImage } from "~/sanity/schema/objects/richTextImage";
+import { youtube } from "~/sanity/schema/objects/youtube";
+
+export const richText = s.array({
   name: "richText",
   title: "Riktekst",
-  type: "array",
   of: [
-    {
-      type: "block",
-    },
-    { type: "richTextImage", title: "Bilde" },
+    s.block(),
+    richTextImage,
+    /* FIXME
     {
       title: "Code",
       type: "code",
@@ -27,13 +28,9 @@ export default defineType({
         ],
       },
     },
-    {
-      title: "YouTube",
-      type: "youtube",
-    },
-    {
-      title: "Bilde (deprecated)",
-      type: "image",
-    },
+
+     */
+    youtube,
+    s.image(),
   ],
 });

@@ -1,5 +1,6 @@
-export default {
-  type: "image",
+import { s } from "sanity-typed-schema-builder";
+
+export const richTextImage = s.image({
   name: "richTextImage",
   title: "Bilde",
   options: {
@@ -8,14 +9,11 @@ export default {
   fields: [
     {
       name: "caption",
-      type: "string",
+      type: s.string(),
       title: "Caption text",
-      options: {
-        isHighlighted: true,
-      },
     },
     {
-      type: "text",
+      type: s.text(),
       name: "alt",
       title: "Alternative text",
       description: `Some of your visitors cannot see images,
@@ -23,9 +21,6 @@ export default {
             alternative text is of great help for those
             people that can rely on it to have a good idea of
             what's on your page.`,
-      options: {
-        isHighlighted: true,
-      },
     },
   ],
-};
+});

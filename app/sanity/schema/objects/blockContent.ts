@@ -1,4 +1,6 @@
-import { defineType } from "sanity";
+import { s } from "sanity-typed-schema-builder";
+
+import { mainImage } from "~/sanity/schema/objects/mainImage";
 
 /**
  * This is the schema definition for the rich text fields used for
@@ -10,14 +12,11 @@ import { defineType } from "sanity";
  *    type: 'blockContent'
  *  }
  */
-export default defineType({
-  title: "Block Content",
+export const blockContent = s.array({
   name: "blockContent",
-  type: "array",
+  title: "Block Content",
   of: [
-    {
-      title: "Block",
-      type: "block",
+    s.block({
       // Styles let you set what your user can mark up blocks with. These
       // corrensponds with HTML tags, but you can set any title or value
       // you want and decide how you want to deal with it where you want to
@@ -57,13 +56,7 @@ export default defineType({
           },
         ],
       },
-    },
-    // You can add additional types here. Note that you can't use
-    // primitive types such as 'string' and 'number' in the same array
-    // as a block type.
-    {
-      type: "mainImage",
-      options: { hotspot: true },
-    },
+    }),
+    mainImage,
   ],
 });

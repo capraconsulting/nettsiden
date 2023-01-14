@@ -27,7 +27,7 @@ type AuthorExpanded = Omit<Author, "filter"> & { filter: JobCategory[] };
 const URL_FILTER_KEY = "kategori";
 export const loader = async ({ request }: LoaderArgs) => {
   const [allItems, icons] = await Promise.all([
-    getSanityClient().query<AuthorExpanded>(
+    getSanityClient().fetch<AuthorExpanded[]>(
       `* [_type == "author" && employee == true] | order(name){ ..., filter[]-> }`,
     ),
     fetchImageAssets([

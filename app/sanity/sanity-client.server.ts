@@ -1,6 +1,6 @@
 import type { AppLoadContext } from "@remix-run/server-runtime";
 
-import { createClient } from "sanity-codegen";
+import SanityClient from "@sanity/client";
 
 import type { SitemapEntry } from "~/types";
 import { getEnv } from "~/utils/env";
@@ -13,23 +13,15 @@ export const getSanityClient = (requestAndContext?: {
   request: Request;
   context: AppLoadContext;
 }) => {
+  // FIXME
   const previewMode = requestAndContext && isInPreviewMode(requestAndContext);
   const token =
     requestAndContext && getEnv(requestAndContext.context).SANITY_TOKEN;
 
-  return createClient<Documents>({
+  return new SanityClient({
     ...projectDetails,
     useCdn: false,
-    previewMode,
     token,
-
-    // Avoid "ReferenceError - fetch is not defined"
-    // By wrapping it in a lambda function we defer the initilisation
-    // of fetch until after remix has put fetch into the global scope.
-    //
-    // Ideally this should not be needed, fetch should be in the global scope
-    // when this is parsed. It worked in previous commits 🤷
-    fetch: (...args) => fetch(...args),
   });
 };
 
@@ -43,8 +35,8 @@ export async function getSanitySitemapEntries(
     _updatedAt?: string;
     slug?: {
       current: string;
-    }; // FIXME: This should probably be a getAll, but I can't get it to work with the fields filter..
-  }> = await getSanityClient().query(
+    };
+  }> = await getSanityClient().fetch(
     `*[_type == "${type}"]{ _id, _updatedAt, slug }`,
   );
 

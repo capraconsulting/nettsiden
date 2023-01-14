@@ -25,7 +25,7 @@ type BloggExpanded = Omit<Blogg, "filter" | "authors"> & {
 
 const URL_FILTER_KEY = "kategori";
 export const loader = async ({ request }: LoaderArgs) => {
-  const allItems = await getSanityClient().query<BloggExpanded>(
+  const allItems = await getSanityClient().fetch<BloggExpanded[]>(
     `* [_type == "blogg"]|order(publishedAt desc) { ..., filter[]->, authors[]-> }`,
   );
 

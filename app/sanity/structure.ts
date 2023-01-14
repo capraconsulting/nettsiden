@@ -1,6 +1,8 @@
 import type { StructureResolver } from "sanity/desk";
 import type { ListItemBuilder } from "sanity/desk";
 
+import { author } from "~/sanity/schema/documents/author";
+
 function hiddenDocTypes(listItem: ListItemBuilder) {
   const id = listItem.getId();
   return !id || !["category", "author", "post"].includes(id);
@@ -12,24 +14,24 @@ export const structure: StructureResolver = (S) =>
     .items([
       S.listItem()
         .title("Ansatte")
-        .schemaType("author")
+        .schemaType(author.name)
         .child(
-          S.documentTypeList("author")
+          S.documentTypeList(author.name)
             .title("Ansatte")
             .filter("employee == true"),
         ),
       S.listItem()
         .title("Ikke ansatte")
-        .schemaType("author")
+        .schemaType(author.name)
         .child(
-          S.documentTypeList("author")
+          S.documentTypeList(author.name)
             .title("Ikke ansatte")
             .filter("employee == false"),
         ),
       S.listItem()
         .title("Alle personer")
-        .schemaType("author")
-        .child(S.documentTypeList("author").title("Personer")),
+        .schemaType(author.name)
+        .child(S.documentTypeList(author.name).title("Personer")),
       S.listItem()
         .title("Categories")
         .schemaType("category")

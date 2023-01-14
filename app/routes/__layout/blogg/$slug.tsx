@@ -39,7 +39,7 @@ export const loader = async ({ params, request, context }: LoaderArgs) => {
   const isPreviewMode = isInPreviewMode({ request, context });
   const query = `* [_type == "blogg" && slug.current == "${params.slug}"]|{ ..., authors[]-> }`;
   const blogPost = (
-    await getSanityClient({ request, context }).query<BloggExpanded>(query)
+    await getSanityClient({ request, context }).fetch<BloggExpanded[]>(query)
   )[0];
 
   assertItemFound(blogPost);
@@ -109,7 +109,7 @@ export default function BloggPost() {
       </div>
 
       <ProseableText
-        value={blogPost.body!}
+        value={blogPost.body}
         className="color-brodtext text-xl font-light"
       />
     </article>

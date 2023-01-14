@@ -21,9 +21,7 @@ export function getRawStringContent(block: BlockContent | undefined): string {
       if (block._type !== "block" || !block.children) {
         return null;
       }
-      return block.children
-        .map((child: { text?: string }) => child.text)
-        .join("");
+      return block.children.map((child) => child.text).join("");
     })
     .filter(typedBoolean)
     .join("\n\n");

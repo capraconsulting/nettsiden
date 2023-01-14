@@ -1,44 +1,51 @@
-export default {
+import { s } from "sanity-typed-schema-builder";
+
+import { services } from "~/sanity/schema/objects/services";
+
+export const factbox = s.document({
   name: "factbox",
   title: "Faktaboks",
-  type: "document",
   fields: [
     {
       name: "title",
       title: "Navn i venstrekolonne her inne",
       description: "Brukes aldri utenfor Sanity studio",
-      type: "string",
+      type: s.string(),
     },
     {
       name: "titleLong",
       title: "Overskrift",
-      type: "string",
+      type: s.string(),
     },
     {
       name: "description",
       title: "Beskrivelse",
-      type: "text",
+      type: s.text(),
+      optional: true,
     },
     {
       name: "servicesName",
       title: "Tjenester fra",
-      type: "string",
+      type: s.string(),
+      optional: true,
     },
     {
       name: "servicesUrl",
       title: "Tjenester fra (url)",
-      type: "url",
+      type: s.url(),
+      optional: true,
     },
     {
       name: "servicesList",
       title: "Tjenesteliste",
-      type: "array",
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "services" }],
-        },
-      ],
+      type: s.array({
+        of: [
+          s.reference({
+            to: [services],
+          }),
+        ],
+        min: 0,
+      }),
     },
   ],
-};
+});

@@ -1,12 +1,13 @@
-export default {
+import { s } from "sanity-typed-schema-builder";
+
+export const selvskrytfilter = s.document({
   name: "selvskrytfilter",
   title: "Selvskryt filter",
-  type: "document",
   fields: [
     {
       name: "title",
       title: "Tittel",
-      type: "string",
+      type: s.string(),
     },
   ],
-};
+});

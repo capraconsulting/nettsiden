@@ -12,6 +12,7 @@ import {
   getSanityClient,
   getSanitySitemapEntries,
 } from "~/sanity/sanity-client.server";
+import type { Selvskryt } from "~/sanity/schema";
 import { getMainImageAlt } from "~/sanity/utils";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
@@ -26,7 +27,9 @@ export const handle: CapraHandle = {
 
 export const loader = async ({ params }: LoaderArgs) => {
   const query = (slug: string) =>
-    getSanityClient().getAll("selvskryt", `slug.current == "${slug}"`);
+    getSanityClient().fetch<Selvskryt[]>(
+      `* [_type == "selvskryt" && slug.current == "${slug}"]`,
+    );
 
   const item = (await query(params.slug ?? ""))[0];
   assertItemFound(item);

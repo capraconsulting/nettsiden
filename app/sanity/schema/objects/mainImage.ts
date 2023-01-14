@@ -1,26 +1,28 @@
-import { defineField, defineType } from "sanity";
+import { s } from "sanity-typed-schema-builder";
 
-export default defineType({
+export const mainImage = s.image({
   name: "mainImage",
-  type: "image",
   title: "Image",
   options: {
     hotspot: true,
   },
   fields: [
-    defineField({
+    {
       name: "caption",
-      type: "string",
+      type: s.string(),
       title: "Caption",
-    }),
-    defineField({
+    },
+    {
       name: "alt",
-      type: "string",
+      type: s.string(),
       title: "Alternative text",
       description: "Important for SEO and accessiblity.",
+      /* FIXME
       validation: (Rule) =>
         Rule.error("You have to fill out the alternative text.").required(),
-    }),
+
+       */
+    },
   ],
   preview: {
     select: {

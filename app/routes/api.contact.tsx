@@ -4,11 +4,10 @@ import { useFetcher } from "@remix-run/react";
 import { json } from "@remix-run/server-runtime";
 import type { DataFunctionArgs } from "@remix-run/server-runtime/dist/routeModules";
 
-import type { SanityImageAsset, SanityReference } from "sanity-codegen";
-
 import { Button } from "~/components/button";
 import { CapraImage } from "~/components/capra-image";
 import { CapraLink } from "~/components/capra-link";
+import type { ImageAsset } from "~/sanity/schema";
 import { getEnvVariableOrThrow } from "~/utils/env";
 import { urlFor } from "~/utils/imageBuilder";
 
@@ -119,6 +118,7 @@ interface ContactFormProps {
   title: React.ReactNode;
   representatives: ContactFormRepresentative[];
 }
+
 export const ContactForm = ({ title, representatives }: ContactFormProps) => {
   const fetcher = useFetcher<typeof action>();
   const isSuccess = fetcher.type === "done" && !fetcher.data;
@@ -218,11 +218,13 @@ const Input: React.FC<{
 export interface ContactFormRepresentative {
   name: string;
   email: string;
-  image: SanityImageAsset | SanityReference<SanityImageAsset>;
+  image: ImageAsset;
 }
+
 interface RepresentativesProps {
   representatives: ContactFormRepresentative[];
 }
+
 const Representatives = ({ representatives }: RepresentativesProps) => {
   return (
     <div className="grid grid-flow-dense grid-cols-1 gap-y-5 gap-x-14 px-5 md:grid-cols-2">

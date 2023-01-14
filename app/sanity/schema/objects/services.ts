@@ -1,20 +1,20 @@
-import { defineField, defineType } from "sanity";
+import { s } from "sanity-typed-schema-builder";
 
-export default defineType({
+export const services = s.document({
   name: "services",
   title: "Tjenester",
-  type: "document",
   fields: [
-    defineField({
+    {
       name: "title",
       title: "Title",
-      type: "string",
-    }),
-    defineField({
+      type: s.string(),
+    },
+    {
       name: "description",
       title: "Description",
       description: "Brukes pt ikke, men er tenkt som supplerende info",
-      type: "text",
-    }),
+      type: s.text(),
+      optional: true,
+    },
   ],
 });

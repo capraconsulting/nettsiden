@@ -15,6 +15,7 @@ import { Footer } from "~/components/footer";
 import { Header } from "~/components/header";
 import { Todo } from "~/components/todo";
 import { getSanityClient } from "~/sanity/sanity-client.server";
+import type { Author } from "~/sanity/schema";
 import type { CapraHandle } from "~/types";
 import { typedBoolean } from "~/utils/misc";
 import { fetchImageAssets } from "~/utils/sanity-image";
@@ -30,7 +31,9 @@ export const loader = async ({ request }: LoaderArgs) => {
 
   const [contactFormRepresentatives, images] = await Promise.all([
     getSanityClient()
-      .getAll("author", `employee == true && "contact-form" in placement`)
+      .fetch<Author[]>(
+        `* [_type == "author" && employee == true && "contact-form" in placement]`,
+      )
       .then((it) =>
         it.map(
           (it2): ContactFormRepresentative => ({

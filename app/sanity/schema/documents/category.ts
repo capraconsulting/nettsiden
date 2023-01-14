@@ -1,17 +1,19 @@
-export default {
+import { s } from "sanity-typed-schema-builder";
+
+export const category = s.document({
   name: "category",
   title: "Kategori",
-  type: "document",
   fields: [
     {
       name: "title",
       title: "Tittel",
-      type: "string",
+      type: s.string(),
     },
     {
       name: "description",
       title: "Beskrivelse",
-      type: "text",
+      type: s.text(),
+      optional: true,
     },
   ],
-};
+});

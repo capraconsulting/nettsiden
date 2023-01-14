@@ -2,34 +2,25 @@ import React from "react";
 import { FaYoutube } from "react-icons/fa";
 import YouTube from "react-youtube";
 
-import { defineField, defineType } from "sanity";
+import { s } from "sanity-typed-schema-builder";
 
 function getYouTubeId(url: string) {
   return url; // TODO;
 }
 
-export default defineType({
+export const youtube = s.objectNamed({
   name: "youtube",
-  type: "object",
   title: "YouTube Embed",
   icon: FaYoutube,
   fields: [
-    defineField({
+    {
       name: "url",
-      type: "url",
+      type: s.url(),
       title: "YouTube video URL",
-    }),
-  ],
-  preview: {
-    select: {
-      url: "url",
     },
-  },
+  ],
   components: {
     preview(props) {
-      console.log(props);
-      // FIXME
-      // @ts-expect-error
       const { url } = props;
       const id = getYouTubeId(url);
       return (
@@ -41,6 +32,11 @@ export default defineType({
           <YouTube videoId={id} />
         </div>
       );
+    },
+  },
+  preview: {
+    select: {
+      url: "url",
     },
   },
 });

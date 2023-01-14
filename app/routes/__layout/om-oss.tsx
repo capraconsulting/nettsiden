@@ -47,7 +47,7 @@ export const loader = async () => {
       "icon-vision-development",
     ]),
     fetchEmployeeImages(),
-    getSanityClient().query<AuthorExpanded>(
+    getSanityClient().fetch<AuthorExpanded[]>(
       `* [_type == "author" && employee == true && "contact-us" in placement] | order(name){ ..., filter[]-> }`,
     ),
   ]);

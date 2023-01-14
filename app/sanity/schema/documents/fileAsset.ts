@@ -1,17 +1,18 @@
-export default {
+import { s } from "sanity-typed-schema-builder";
+
+export const fileAsset = s.document({
   name: "fileAsset",
   title: "Filresurser",
-  type: "document",
   fields: [
     {
       name: "title",
       title: "Tittel",
-      type: "string",
+      type: s.string(),
     },
     {
       name: "file",
       title: "Asset",
-      type: "file",
+      type: s.file(),
     },
   ],
-};
+});

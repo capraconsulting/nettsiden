@@ -6,8 +6,8 @@ import { deskTool } from "sanity/desk";
 import { documentListWidget } from "sanity-plugin-dashboard-widget-document-list";
 
 import { projectStructureWidget } from "~/sanity/plugins/project-structure-widget";
-import schemaTypes from "~/sanity/schemas";
 import { structure } from "~/sanity/structure";
+import schema from "./schema";
 
 // This config is public, both in git and when compiled and bundled it might be served to the users
 // Do not put any secrets here, not secrets read from `process.env.*` either.
@@ -24,6 +24,10 @@ export const config = defineConfig({
   name: "capraconsulting-no",
   title: "Capra Consulting",
   basePath: "/studio",
+  schema: {
+    name: "default",
+    types: schema,
+  },
   plugins: [
     projectStructureWidget(),
     dashboardTool({
@@ -60,8 +64,4 @@ export const config = defineConfig({
     }),
     codeInput(),
   ],
-  schema: {
-    name: "default",
-    types: schemaTypes,
-  },
 });

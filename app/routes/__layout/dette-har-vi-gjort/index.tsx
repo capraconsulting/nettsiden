@@ -26,7 +26,7 @@ type SelvskrytExpanded = Omit<Selvskryt, "filter"> & {
 
 const URL_FILTER_KEY = "kategori";
 export const loader = async ({ request }: LoaderArgs) => {
-  const allItems = await getSanityClient().query<SelvskrytExpanded>(
+  const allItems = await getSanityClient().fetch<SelvskrytExpanded[]>(
     `* [_type == "selvskryt"] { ..., filter[]-> }`,
   );
 
