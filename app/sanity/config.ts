@@ -5,6 +5,7 @@ import { defineConfig } from "sanity";
 import { deskTool } from "sanity/desk";
 import { documentListWidget } from "sanity-plugin-dashboard-widget-document-list";
 
+import { projectStructureWidget } from "~/sanity/plugins/project-structure-widget";
 import schemaTypes from "~/sanity/schemas";
 import { structure } from "~/sanity/structure";
 
@@ -24,7 +25,7 @@ export const config = defineConfig({
   title: "Capra Consulting",
   basePath: "/studio",
   plugins: [
-    // TODO: Project structure widget
+    projectStructureWidget(),
     dashboardTool({
       widgets: [
         projectUsersWidget({
