@@ -5,7 +5,7 @@ import { createClient } from "sanity-codegen";
 import type { SitemapEntry } from "~/types";
 import { getEnv } from "~/utils/env";
 import { typedBoolean } from "~/utils/misc";
-import { config } from "./config";
+import { projectDetails } from "./config";
 import type { Documents } from "./schema";
 import { isInPreviewMode } from "./utils";
 
@@ -18,7 +18,8 @@ export const getSanityClient = (requestAndContext?: {
     requestAndContext && getEnv(requestAndContext.context).SANITY_TOKEN;
 
   return createClient<Documents>({
-    ...config,
+    ...projectDetails,
+    useCdn: false,
     previewMode,
     token,
 
