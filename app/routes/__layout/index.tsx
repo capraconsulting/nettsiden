@@ -21,6 +21,7 @@ import { shuffled } from "~/utils/random";
 import {
   KonsulenterPitchAndSloganBox,
   LifligPitchAndSloganBox,
+  TpuPitchAndSloganBox,
 } from "./dette-kan-vi";
 
 export const meta: V2_MetaFunction = () =>
@@ -124,6 +125,8 @@ export default function Index() {
       <LifligPitchAndSloganBox direction="left" images={images} />
 
       <KonsulenterPitchAndSloganBox direction="right" images={images} />
+
+      <TpuPitchAndSloganBox direction="left" images={images} />
 
       <ContentAndImageBox
         title="Vi er Advanced Tier Consulting Partner"
