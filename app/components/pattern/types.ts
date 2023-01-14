@@ -13,11 +13,11 @@ export const PATTERN_TYPES = [
   "l-solid",
 ] as const;
 
-export type PatternType = typeof PATTERN_TYPES[number];
+export type PatternType = (typeof PATTERN_TYPES)[number];
 
 export const SHAPES = ["rect", "l-like"] as const;
 
-export type Shape = typeof SHAPES[number];
+export type Shape = (typeof SHAPES)[number];
 
 export type RawSize = Pick<Size, "height" | "width">;
 
@@ -50,4 +50,4 @@ export const FILL_CLASSES = [
   "fill-peach",
 ] as const;
 
-export type FillClass = typeof FILL_CLASSES[number];
+export type FillClass = (typeof FILL_CLASSES)[number];

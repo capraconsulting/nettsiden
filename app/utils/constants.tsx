@@ -44,7 +44,7 @@ export const socialPlatforms = [
   "gitHub",
 ] as const;
 
-export type SocialPlatform = typeof socialPlatforms[number];
+export type SocialPlatform = (typeof socialPlatforms)[number];
 
 export const socialIcons: Record<SocialPlatform, React.ReactNode> = {
   facebook: (

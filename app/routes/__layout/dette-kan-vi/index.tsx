@@ -58,7 +58,11 @@ export default function DetteKanVi() {
       <KonsulenterPitchAndSloganBox direction="right" images={images} />
 
       <Section className="md:gap-20">
-        <TitleAndText id="teknologier" title="Våre ekspertiseområder" titleAs="h2">
+        <TitleAndText
+          id="teknologier"
+          title="Våre ekspertiseområder"
+          titleAs="h2"
+        >
           Vi i Capra er spesialister. Vi har tatt klare tekniske valg og blitt
           blant de beste innenfor våre fagfelt.
         </TitleAndText>
@@ -129,7 +133,6 @@ export default function DetteKanVi() {
             "Det er viktig å benytte riktig metodikk for å komme frem til en god arkitektur og god teknologi. Kodenære arkitekter kan teste ut funksjoner for å sikre at løsningene lar seg realisere og at rammene for en god implementasjon er der for utviklerne. \n\n Sentralt her er CI/CD, DevOps/NoOps, Microservices, IaC, DDD, Terraform og AWS."
           }
         </ContentAndImageBox>
-
       </Section>
     </>
   );
