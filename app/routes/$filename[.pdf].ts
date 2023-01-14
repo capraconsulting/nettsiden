@@ -1,3 +1,4 @@
+import { redirect } from "@remix-run/router";
 import type { LoaderArgs } from "@remix-run/server-runtime";
 
 import type { SanityDocument } from "sanity-codegen";
@@ -33,5 +34,5 @@ export const loader = async ({ params, request }: LoaderArgs) => {
   if (dl !== undefined) {
     responseUrl.searchParams.append("dl", item.originalFilename);
   }
-  return Response.redirect(responseUrl);
+  return redirect(responseUrl.toString());
 };
