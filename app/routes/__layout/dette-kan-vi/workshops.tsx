@@ -73,7 +73,7 @@ export default function Workshops() {
       <Section>
         <TitleAndText title="Kurs og rådgivning" titleAs="h1">
           Capra tilbyr en analyse av hvordan din organisasjon jobber i dag, og
-          baser på denne legger vi frem forslag til eksperimenter for å nå
+          basert på denne legger vi frem forslag til forbedringer for å nå
           selskapets mål oftere, få mer ut av teamene og de ansatte, samt øke
           trivselen på jobb.
         </TitleAndText>
@@ -100,7 +100,7 @@ export default function Workshops() {
             titleAs="h2"
             image={images["icon-competence-red"]}
           >
-            Et lite men sterkt fokusert fagmiljø, preget av åpenhet og deling,
+            Et lite, men sterkt fokusert fagmiljø, preget av åpenhet og deling,
             gir deg kortere vei til relevante erfaringer.
           </IconTitleAndTextBlock>
         </div>
