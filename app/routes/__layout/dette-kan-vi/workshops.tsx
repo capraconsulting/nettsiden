@@ -12,17 +12,14 @@ import { TitleAndText } from "~/components/title-and-text";
 import { getSanityClient } from "~/sanity/sanity-client.server";
 import type { Author } from "~/sanity/schema";
 import { cacheControlHeaders } from "~/utils/cache-control";
-import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { urlFor } from "~/utils/imageBuilder";
 import { metaTags } from "~/utils/meta-tags";
 import { formatPhoneNumber } from "~/utils/misc";
+import { fetchImageAssets } from "~/utils/sanity-image";
 
 function cropper(builder: ImageUrlBuilder): ImageUrlBuilder {
   return builder.crop("center").fit("crop").width(660).height(515);
 }
-
-// TODO: This should perhaps be done in Sanity somehow?
-const contactSlug = "stein-otto-svorstoel";
 
 export async function loader() {
   const [images, contacts] = await Promise.all([
@@ -34,7 +31,7 @@ export async function loader() {
       ["photo-whiteboard-hga-sba", cropper],
     ]),
     getSanityClient().query<Author>(
-      `* [_type == "author" && employee == true && slug.current == "${contactSlug}"] | order(name){ ..., filter[]-> }`,
+      `* [_type == "author" && employee == true && "tpu-contact-us" in placement] | order(name){ ..., filter[]-> }`,
     ),
   ]);
 
@@ -139,8 +136,14 @@ export default function Workshops() {
       {contact && (
         <Section>
           <div className="flex w-[710px] max-w-[90%] gap-7">
-            {contact.image && <CapraImage src={contact.image} alt="" />}
-            <div className="flex flex-col justify-between">
+            {contact.image && (
+              <CapraImage
+                src={contact.image}
+                alt=""
+                className="hidden sm:block"
+              />
+            )}
+            <div className="flex flex-col justify-between gap-4">
               <p>
                 Ta kontakt med oss for et uforpliktende møte hvor vi sammen
                 finner ut hva akkurat deres behov er:

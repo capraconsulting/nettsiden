@@ -7,8 +7,8 @@ import type { BoxColor } from "~/components/content-and-image-box/utils";
 import { getBoxConfig } from "~/components/content-and-image-box/utils";
 import { Pattern } from "~/components/pattern/pattern";
 import { useHydrated } from "~/hooks/use-hydrated";
-import type { Image } from "~/utils/dataRetrieval";
 import { classNames } from "~/utils/misc";
+import type { Image } from "~/utils/sanity-image";
 
 /**
  * Notes:

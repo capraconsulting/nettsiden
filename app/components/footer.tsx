@@ -8,8 +8,8 @@ import {
   socialIcons,
   socialPlatforms,
 } from "~/utils/constants";
-import type { Images } from "~/utils/dataRetrieval";
 import { capitalize, formatPhoneNumber } from "~/utils/misc";
+import type { Images } from "~/utils/sanity-image";
 import { CapraImage } from "./capra-image";
 
 interface FooterModuleProps {

@@ -16,11 +16,11 @@ import { getSanityClient } from "~/sanity/sanity-client.server";
 import type { Author, JobCategory } from "~/sanity/schema";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
-import type { Images } from "~/utils/dataRetrieval";
-import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { urlFor } from "~/utils/imageBuilder";
 import { metaTags } from "~/utils/meta-tags";
 import { uniqueBy } from "~/utils/misc";
+import type { Images } from "~/utils/sanity-image";
+import { fetchImageAssets } from "~/utils/sanity-image";
 
 type AuthorExpanded = Omit<Author, "filter"> & { filter: JobCategory[] };
 

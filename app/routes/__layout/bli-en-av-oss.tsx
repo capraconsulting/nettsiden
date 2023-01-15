@@ -13,10 +13,10 @@ import { ContentAndImageBox } from "~/components/content-and-image-box/content-a
 import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import { cacheControlHeaders } from "~/utils/cache-control";
-import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { getEnvVariableOrThrow } from "~/utils/env";
 import { metaTags } from "~/utils/meta-tags";
 import { groupBy, typedBoolean } from "~/utils/misc";
+import { fetchImageAssets } from "~/utils/sanity-image";
 
 /**
  * Team Tailor integration

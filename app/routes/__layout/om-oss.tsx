@@ -21,9 +21,9 @@ import type { Author, JobCategory } from "~/sanity/schema";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import type { BrandColor } from "~/utils/constants";
 import { BRAND_BG_AND_FG_COLORS } from "~/utils/constants";
-import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { metaTags } from "~/utils/meta-tags";
 import { classNames } from "~/utils/misc";
+import { fetchImageAssets } from "~/utils/sanity-image";
 import { AnsattCard } from "./ansatte";
 
 type AuthorExpanded = Omit<Author, "filter"> & { filter: JobCategory[] };

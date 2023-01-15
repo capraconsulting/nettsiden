@@ -15,9 +15,9 @@ import { TitleAndText } from "~/components/title-and-text";
 import { TypingText } from "~/components/typing-text";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
-import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { metaTags } from "~/utils/meta-tags";
 import { shuffled } from "~/utils/random";
+import { fetchImageAssets } from "~/utils/sanity-image";
 import {
   KonsulenterPitchAndSloganBox,
   LifligPitchAndSloganBox,

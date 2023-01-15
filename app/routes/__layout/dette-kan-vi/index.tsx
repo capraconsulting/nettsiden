@@ -11,8 +11,8 @@ import { ContentAndSlogansBox } from "~/components/content-and-slogans-box";
 import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import { cacheControlHeaders } from "~/utils/cache-control";
-import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { metaTags } from "~/utils/meta-tags";
+import { fetchImageAssets } from "~/utils/sanity-image";
 
 export const meta: V2_MetaFunction = () =>
   metaTags({
