@@ -190,7 +190,7 @@ const Input: React.FC<{
   const errorId = useId();
   return (
     <div>
-      <label htmlFor={id} className="block" aria-required={required}>
+      <label htmlFor={id} className="block">
         {label}
         {required && <span className="inline-block text-red">*</span>}
       </label>
@@ -200,6 +200,7 @@ const Input: React.FC<{
         type={type}
         aria-invalid={Boolean(fieldErrors)}
         aria-describedby={errorId}
+        aria-required={required}
         placeholder={placeholder}
         className="w-full p-[1vh] text-black"
         data-lpignore="true" // Disable LastPass autofill
@@ -228,7 +229,6 @@ const Representatives = ({ representatives }: RepresentativesProps) => {
       {representatives.map(({ name, email, image }) => (
         <div key={name} className="flex flex-col">
           <CapraImage
-            className=""
             alt={`Bilde av ${name}`}
             src={urlFor(image).size(600, 600).url()}
           />

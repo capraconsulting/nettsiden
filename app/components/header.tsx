@@ -92,6 +92,7 @@ const ToggleMenuButton: React.VFC<ToggleMenuButtonProps> = ({
         relative: isOpen,
       })}
       onClick={() => onToggle(!isOpen)}
+      aria-label={isOpen ? "Lukk meny" : "Åpne meny"}
     >
       <div
         className={classNames(lineClassName, {
