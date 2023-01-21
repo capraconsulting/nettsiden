@@ -37,7 +37,7 @@
     "sanity-codegen": "0.9.8"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "4.20221111.1",
+    "@cloudflare/workers-types": "3.19.0",
     "@ladle/react": "2.4.5",
     "@remix-run/dev": "1.11.1",
     "@remix-run/eslint-config": "1.11.1",
