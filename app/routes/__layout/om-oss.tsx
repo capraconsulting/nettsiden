@@ -1,6 +1,9 @@
 import type { PropsWithChildren } from "react";
 import { useLoaderData } from "@remix-run/react";
-import type { HeadersFunction, MetaFunction } from "@remix-run/server-runtime";
+import type {
+  HeadersFunction,
+  V2_MetaFunction,
+} from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import { BubbleGrid } from "~/components/bubbles/bubble-grid";
@@ -57,7 +60,7 @@ export const loader = async () => {
 
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
-export const meta: MetaFunction = () =>
+export const meta: V2_MetaFunction = () =>
   metaTags({
     title: "Innovasjon og teknologi i fokus - Om oss",
   });

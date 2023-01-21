@@ -1,5 +1,8 @@
 import { useLoaderData } from "@remix-run/react";
-import type { HeadersFunction, MetaFunction } from "@remix-run/server-runtime";
+import type {
+  HeadersFunction,
+  V2_MetaFunction,
+} from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import { BubbleSandwich } from "~/components/bubbles/bubble-sandwich";
@@ -20,7 +23,7 @@ import {
   LifligPitchAndSloganBox,
 } from "./dette-kan-vi";
 
-export const meta: MetaFunction = () =>
+export const meta: V2_MetaFunction = () =>
   metaTags({
     title: "IT-konsulenter med ekspertise i software",
     description:

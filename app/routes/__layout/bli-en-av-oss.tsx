@@ -2,7 +2,7 @@ import { useLoaderData } from "@remix-run/react";
 import type {
   HeadersFunction,
   LoaderArgs,
-  MetaFunction,
+  V2_MetaFunction,
 } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
@@ -128,7 +128,7 @@ export const loader = async ({ context }: LoaderArgs) => {
 };
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
-export const meta: MetaFunction<typeof loader> = ({ data }) =>
+export const meta: V2_MetaFunction<typeof loader> = ({ data }) =>
   metaTags({
     title: "Norges beste arbeidsplass søker IT-konsulent",
     description:

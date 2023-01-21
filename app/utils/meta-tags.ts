@@ -1,3 +1,5 @@
+import type { V2_HtmlMetaDescriptor } from "@remix-run/server-runtime";
+
 interface MetaTags {
   title: string;
   description?: string;
@@ -26,33 +28,35 @@ export function metaTags({
     title = [title, COMPANY_NAME].join(" | ");
   }
 
-  const tags: Record<string, string> = {
-    title,
-    description,
-    "og:title": title,
-    "og:description": description,
-  };
+  const tags: V2_HtmlMetaDescriptor[] = [
+    { title },
+    { name: "description", content: description },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+  ];
 
   if (author) {
-    tags.author = author;
+    tags.push({ name: "author", content: author });
   }
 
   if (image) {
-    tags["og:image"] = image;
+    tags.push({ property: "og:image", content: image });
   }
 
   if (card) {
-    tags["og:type"] = card;
-    tags["twitter:card"] = card;
-    tags["twitter:title"] = title;
-    tags["twitter:description"] = description;
+    tags.push(
+      { property: "og:type", content: card },
+      { property: "twitter:card", content: card },
+      { property: "twitter:title", content: title },
+      { property: "twitter:description", content: description },
+    );
 
     if (image) {
-      tags["twitter:image"] = image;
+      tags.push({ property: "twitter:image", content: image });
     }
 
     if (author) {
-      tags["twitter:creator"] = author;
+      tags.push({ property: "twitter:creator", content: author });
     }
   }
 

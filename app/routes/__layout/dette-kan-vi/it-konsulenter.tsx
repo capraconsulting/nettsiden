@@ -1,5 +1,8 @@
 import { useLoaderData } from "@remix-run/react";
-import type { HeadersFunction, MetaFunction } from "@remix-run/server-runtime";
+import type {
+  HeadersFunction,
+  V2_MetaFunction,
+} from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
@@ -51,7 +54,7 @@ export const loader = async () => {
 
 export const headers: HeadersFunction = () => cacheControlHeaders;
 
-export const meta: MetaFunction = () =>
+export const meta: V2_MetaFunction = () =>
   metaTags({
     title: "Utleie av konsulenter - IT-konsulenter",
   });

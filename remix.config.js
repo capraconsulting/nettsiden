@@ -1,5 +1,8 @@
 /** @type {import('@remix-run/dev').AppConfig} */
 module.exports = {
+  future: {
+    v2_meta: true,
+  },
   serverBuildTarget:
     process.env.NODE_ENV === "production" ||
     process.env.CLOUDFLARE_DEV !== undefined

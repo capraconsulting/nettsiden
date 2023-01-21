@@ -1,5 +1,8 @@
 import { useLoaderData } from "@remix-run/react";
-import type { HeadersFunction, MetaFunction } from "@remix-run/server-runtime";
+import type {
+  HeadersFunction,
+  V2_MetaFunction,
+} from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import { CallToActionBox } from "~/components/call-to-action-box";
@@ -16,7 +19,7 @@ export const handle: CapraHandle = {
   contactFormTitle: "Hvordan kan vi hjelpe deg?",
 };
 
-export const meta: MetaFunction = () =>
+export const meta: V2_MetaFunction = () =>
   metaTags({
     title: "Leverandør av AWS - Les mer om skytjenesten her",
   });

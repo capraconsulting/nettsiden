@@ -1,4 +1,4 @@
-import type { ShouldReloadFunction } from "@remix-run/react";
+import type { ShouldRevalidateFunction } from "@remix-run/react";
 import {
   Links,
   Meta,
@@ -8,7 +8,7 @@ import {
   useLoaderData,
   useMatches,
 } from "@remix-run/react";
-import type { LoaderArgs, MetaFunction } from "@remix-run/server-runtime";
+import type { LoaderArgs } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import { Footer } from "~/components/footer";
@@ -17,7 +17,6 @@ import { Todo } from "~/components/todo";
 import { getSanityClient } from "~/sanity/sanity-client.server";
 import type { CapraHandle } from "~/types";
 import { fetchImageAssets } from "~/utils/dataRetrieval";
-import { metaTags } from "~/utils/meta-tags";
 import { typedBoolean } from "~/utils/misc";
 import type { ContactFormRepresentative } from "./api.contact";
 import { ContactForm } from "./api.contact";
@@ -54,13 +53,8 @@ export const loader = async ({ request }: LoaderArgs) => {
   });
 };
 
-// https://remix.run/docs/en/v1/api/conventions#never-reloading-the-root
-export const unstable_shouldReload: ShouldReloadFunction = () => false;
-
-export const meta: MetaFunction = () =>
-  metaTags({
-    title: "IT-konsulenter med ekspertise i software",
-  });
+// https://remix.run/docs/en/v1/route/should-revalidate#never-reloading-the-root
+export const shouldRevalidate: ShouldRevalidateFunction = () => false;
 
 export default function Layout() {
   const data = useLoaderData<typeof loader>();
