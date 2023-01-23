@@ -8,6 +8,8 @@ import {
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/server-runtime";
 
+import sourceSansStyles from "@fontsource/source-sans-pro/latin.css";
+
 import globalStyles from "./global.css";
 import tailwindStyles from "./tailwind.css";
 
@@ -31,7 +33,8 @@ export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwindStyles },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900&display=swap",
+    href: sourceSansStyles,
+    // href: "https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900&display=swap",
   },
 ];
 
