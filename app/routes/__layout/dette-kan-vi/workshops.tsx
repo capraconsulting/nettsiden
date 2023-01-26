@@ -1,5 +1,9 @@
+import type { PropsWithChildren } from "react";
 import { useLoaderData } from "@remix-run/react";
-import type { HeadersFunction, MetaFunction } from "@remix-run/server-runtime";
+import type {
+  HeadersFunction,
+  V2_MetaFunction,
+} from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import type { ImageUrlBuilder } from "@sanity/image-url/lib/types/builder";
@@ -57,7 +61,7 @@ export async function loader() {
 
 export const headers: HeadersFunction = () => cacheControlHeaders;
 
-export const meta: MetaFunction = () =>
+export const meta: V2_MetaFunction = () =>
   metaTags({
     title: "TODO",
     description: "TODO",
@@ -102,11 +106,27 @@ export default function Workshops() {
           </IconTitleAndTextBlock>
         </div>
       </Section>
+      <Section className="gap-8">
+        <Text>
+          Vi tilbyr kurs og rådgiving som kjente, norske selskaper allerede har
+          benyttet seg av. Dette er basert på den nyeste forskningen, beste
+          praksis og erfaringer fra Capra og andre kunder.
+        </Text>
+        <Text>
+          Du sitter igjen med de beste forutsetningene for å lykkes med å bygge
+          psykologisk trygge team med høy leveransekraft, målstyring og gode
+          samarbeidsformer med andre.
+        </Text>
+        <Text>
+          Dette er ikke et generisk kurs om teamledelse eller smidige
+          transformasjoner. Vi skreddersyr ved å kombinere innsikt og forarbeid
+          for å forstå ditt selskap, sammen med vårt tunge fagmiljø sin erfaring
+          med beste praksis i markedet. Siden vi skreddersyr kurset må vi nesten
+          møte deg og bli bedre kjent først, men vi har også muligheten til å
+          tilpasse og skalere opp og ned.
+        </Text>
+      </Section>
       <Section className="gap-16">
-        <p className="w-[95%] max-w-md text-center text-lg font-light text-secondary-80 md:text-xl lg:max-w-lg lg:text-2xl">
-          Vi tilbyr workshopper og kurs som flere norske selskaper allerede har
-          benyttet seg av, med temaer som:
-        </p>
         <ContentAndImageBox
           title="Team"
           image={images["photo-people-and-dog"]}
@@ -115,7 +135,7 @@ export default function Workshops() {
           color="peach"
         >
           Hva må man tenke på dersom man ser behovet for et nytt team? Vi
-          fasiliterer en komplett prosess , med et sterkt fokus på å etablere
+          fasiliterer en komplett prosess, med et sterkt fokus på å etablere
           team med sterk psykologisk trygghet for langvarig og høy
           leveransekraft. Sammen med teamet etablerer vi en skikkelig
           teamkontrakt, et team-API og målstyring.
@@ -130,7 +150,7 @@ export default function Workshops() {
           Hvorfor skal man egentlig bry seg om <span lang="en">agility</span> og
           smidighet? Vi drar gjennom bakgrunnen, prinsippene og verdiene, hvor
           det passer og ikke passer, samt hvordan legge til rette for et{" "}
-          <span lang="en">growth mindset</span>.
+          <span lang="en">growth mindset</span> gjennom praktiske øvelser.
         </ContentAndImageBox>
       </Section>
       {contact && (
@@ -170,3 +190,11 @@ export default function Workshops() {
     </>
   );
 }
+
+const Text: React.FC<PropsWithChildren> = ({ children }) => {
+  return (
+    <p className="w-[95%] max-w-2xl text-center text-lg font-light text-secondary-80 md:text-xl lg:text-2xl">
+      {children}
+    </p>
+  );
+};
