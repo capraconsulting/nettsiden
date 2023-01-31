@@ -24,6 +24,7 @@
     "trailingComma": "all"
   },
   "dependencies": {
+    "@fontsource/source-sans-pro": "4.5.11",
     "@portabletext/react": "2.0.0",
     "@remix-run/cloudflare": "1.11.1",
     "@remix-run/react": "1.11.1",
