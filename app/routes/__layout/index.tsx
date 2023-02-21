@@ -15,12 +15,13 @@ import { TitleAndText } from "~/components/title-and-text";
 import { TypingText } from "~/components/typing-text";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
-import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { metaTags } from "~/utils/meta-tags";
 import { shuffled } from "~/utils/random";
+import { fetchImageAssets } from "~/utils/sanity-image";
 import {
   KonsulenterPitchAndSloganBox,
   LifligPitchAndSloganBox,
+  TpuPitchAndSloganBox,
 } from "./dette-kan-vi";
 
 export const meta: V2_MetaFunction = () =>
@@ -124,6 +125,8 @@ export default function Index() {
       <LifligPitchAndSloganBox direction="left" images={images} />
 
       <KonsulenterPitchAndSloganBox direction="right" images={images} />
+
+      <TpuPitchAndSloganBox direction="left" images={images} />
 
       <ContentAndImageBox
         title="Vi er Advanced Tier Consulting Partner"

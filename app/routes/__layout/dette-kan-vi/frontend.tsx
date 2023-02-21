@@ -10,8 +10,8 @@ import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
-import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { metaTags } from "~/utils/meta-tags";
+import { fetchImageAssets } from "~/utils/sanity-image";
 
 export const handle: CapraHandle = {
   contactFormTitle: "Trenger du frontend spisskompetanse på ditt team?",

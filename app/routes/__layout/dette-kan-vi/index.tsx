@@ -1,6 +1,7 @@
 import { useLoaderData } from "@remix-run/react";
 import type {
   HeadersFunction,
+  SerializeFrom,
   V2_MetaFunction,
 } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
@@ -10,9 +11,8 @@ import { ContentAndSlogansBox } from "~/components/content-and-slogans-box";
 import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import { cacheControlHeaders } from "~/utils/cache-control";
-import type { Images } from "~/utils/dataRetrieval";
-import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { metaTags } from "~/utils/meta-tags";
+import { fetchImageAssets } from "~/utils/sanity-image";
 
 export const meta: V2_MetaFunction = () =>
   metaTags({
@@ -48,8 +48,10 @@ export const loader = async () => {
 };
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
+type LoaderData = SerializeFrom<typeof loader>;
+
 export default function DetteKanVi() {
-  const { images } = useLoaderData<typeof loader>();
+  const { images } = useLoaderData<LoaderData>();
   return (
     <>
       <TitleAndText title="Våre tjenester og ekspertiser" titleAs="h1">
@@ -59,6 +61,7 @@ export default function DetteKanVi() {
 
       <LifligPitchAndSloganBox direction="left" images={images} />
       <KonsulenterPitchAndSloganBox direction="right" images={images} />
+      <TpuPitchAndSloganBox direction="left" images={images} />
 
       <Section className="md:gap-20">
         <TitleAndText
@@ -141,15 +144,14 @@ export default function DetteKanVi() {
   );
 }
 
-export const LifligPitchAndSloganBox = ({
-  direction,
-  images,
-}: {
+type SloganBox<Images extends keyof LoaderData["images"]> = React.FC<{
   direction: "left" | "right";
-  images: Images<
-    "icon-tech" | "icon-brain" | "icon-time" | "illustration-square-dots"
-  >;
-}) => {
+  images: Pick<LoaderData["images"], Images>;
+}>;
+
+export const LifligPitchAndSloganBox: SloganBox<
+  "icon-tech" | "icon-brain" | "icon-time" | "illustration-square-dots"
+> = ({ direction, images }) => {
   return (
     <ContentAndSlogansBox
       direction={direction}
@@ -179,15 +181,9 @@ export const LifligPitchAndSloganBox = ({
   );
 };
 
-export const KonsulenterPitchAndSloganBox = ({
-  direction,
-  images,
-}: {
-  direction: "left" | "right";
-  images: Images<
-    "icon-cloud" | "icon-counsel" | "icon-book" | "illustration-square-dots2"
-  >;
-}) => {
+export const KonsulenterPitchAndSloganBox: SloganBox<
+  "icon-cloud" | "icon-counsel" | "icon-book" | "illustration-square-dots2"
+> = ({ direction, images }) => {
   return (
     <ContentAndSlogansBox
       direction={direction}
@@ -213,6 +209,39 @@ export const KonsulenterPitchAndSloganBox = ({
     >
       Trenger du flere gode hoder på teamet ditt? Vi gir deg IT-konsulenter med
       spisskompetanse!
+    </ContentAndSlogansBox>
+  );
+};
+
+export const TpuPitchAndSloganBox: SloganBox<
+  "icon-tech" | "icon-brain" | "icon-time" | "illustration-square-dots"
+> = ({ direction, images }) => {
+  return (
+    <ContentAndSlogansBox
+      direction={direction}
+      title="Kurs og rådgivning"
+      titleAs="h2"
+      sloganColor="bordeaux"
+      slogans={[
+        {
+          title: "Smidig tankesett",
+          imageUrl: images["icon-tech"].src,
+        },
+        {
+          title: "Psykologisk trygghet",
+          imageUrl: images["icon-brain"].src,
+        },
+        {
+          title: "Kort oppstartstid",
+          imageUrl: images["icon-time"].src,
+        },
+      ]}
+      illustrationImageUrl={images["illustration-square-dots"].src}
+      readMoreHref="/dette-kan-vi/workshops"
+    >
+      Vi tilbyr rådgivning, skreddersydde workshopper og kursing for at
+      selskapet ditt skal nå målene deres oftere, og samtidig øke trivselen på
+      jobb.
     </ContentAndSlogansBox>
   );
 };

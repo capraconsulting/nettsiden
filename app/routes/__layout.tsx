@@ -16,8 +16,8 @@ import { Header } from "~/components/header";
 import { Todo } from "~/components/todo";
 import { getSanityClient } from "~/sanity/sanity-client.server";
 import type { CapraHandle } from "~/types";
-import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { typedBoolean } from "~/utils/misc";
+import { fetchImageAssets } from "~/utils/sanity-image";
 import type { ContactFormRepresentative } from "./api.contact";
 import { ContactForm } from "./api.contact";
 

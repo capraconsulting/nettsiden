@@ -2,7 +2,7 @@ import type { PropsWithChildren } from "react";
 import React from "react";
 
 import { CapraImage } from "~/components/capra-image";
-import type { Image } from "~/utils/dataRetrieval";
+import type { Image } from "~/utils/sanity-image";
 
 type IconTitleAndTextBlockProps = {
   title: string;

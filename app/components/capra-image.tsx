@@ -1,4 +1,4 @@
-import type { Image } from "~/utils/dataRetrieval";
+import type { Image } from "~/utils/sanity-image";
 
 type ImgProps = React.ComponentProps<"img"> & {
   // https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/fetchPriority

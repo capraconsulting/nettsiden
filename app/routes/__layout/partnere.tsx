@@ -11,9 +11,9 @@ import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
-import type { Image } from "~/utils/dataRetrieval";
-import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { metaTags } from "~/utils/meta-tags";
+import type { Image } from "~/utils/sanity-image";
+import { fetchImageAssets } from "~/utils/sanity-image";
 
 export const handle: CapraHandle = {
   contactFormTitle: "Hvordan kan vi hjelpe deg?",

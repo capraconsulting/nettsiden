@@ -14,8 +14,8 @@ import { getSanityClient } from "~/sanity/sanity-client.server";
 import type { Selvskryt, Selvskrytfilter } from "~/sanity/schema";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
-import { fetchImageAssets } from "~/utils/dataRetrieval";
 import { metaTags } from "~/utils/meta-tags";
+import { fetchImageAssets } from "~/utils/sanity-image";
 import { DetteHarViGjortCard } from "../dette-har-vi-gjort";
 
 export const handle: CapraHandle = {

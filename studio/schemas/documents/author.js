@@ -100,6 +100,11 @@ export default {
             title: "Ansatt",
             value: "employee",
           },
+          {
+            // found on TPU page, preferably only one person should have this placement
+            title: "Kontakt oss (TPU)",
+            value: "tpu-contact-us",
+          },
         ],
       },
     },
