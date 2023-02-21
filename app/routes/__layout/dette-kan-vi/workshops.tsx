@@ -63,8 +63,9 @@ export const headers: HeadersFunction = () => cacheControlHeaders;
 
 export const meta: V2_MetaFunction = () =>
   metaTags({
-    title: "TODO",
-    description: "TODO",
+    title: "Kurs og rådgivning",
+    description:
+      "Capra tilbyr en analyse av hvordan din organisasjon jobber i dag, og basert på denne legger vi frem forslag til forbedringer for å nå selskapets mål oftere, få mer ut av teamene og de ansatte, samt øke trivselen på jobb.",
   });
 
 export default function Workshops() {
