@@ -28,9 +28,9 @@ function cropper(builder: ImageUrlBuilder): ImageUrlBuilder {
 export async function loader() {
   const [images, contacts] = await Promise.all([
     fetchImageAssets([
-      "icon-competence-red",
-      "icon-technical-red",
-      "icon-time-red",
+      "icon-connected-people-red",
+      "icon-medal-red",
+      "icon-learning-light-bulb-red",
       ["photo-people-and-dog", cropper],
       ["photo-whiteboard-hga-sba", cropper],
     ]),
@@ -83,7 +83,7 @@ export default function Workshops() {
           <IconTitleAndTextBlock
             title="Beste praksis"
             titleAs="h2"
-            image={images["icon-technical-red"]}
+            image={images["icon-medal-red"]}
           >
             Vi oppdaterer oss kontinuerlig på beste praksis i markedet, og gir
             forslag basert på din kultur og domene.
@@ -91,7 +91,7 @@ export default function Workshops() {
           <IconTitleAndTextBlock
             title="Læring først"
             titleAs="h2"
-            image={images["icon-time-red"]}
+            image={images["icon-learning-light-bulb-red"]}
           >
             I Capra er vi veldig opptatte av kontinuerlig læring. Derfor tester
             vi alltid nye rammeverk og måter å jobbe på internt først.
@@ -100,7 +100,7 @@ export default function Workshops() {
           <IconTitleAndTextBlock
             title="Tett koblet fagmiljø"
             titleAs="h2"
-            image={images["icon-competence-red"]}
+            image={images["icon-connected-people-red"]}
           >
             Et lite, men sterkt fokusert fagmiljø, preget av åpenhet og deling,
             gir deg kortere vei til relevante erfaringer.
