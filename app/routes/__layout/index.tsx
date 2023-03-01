@@ -51,6 +51,9 @@ export const loader = async () => {
       "company-gjensidige",
       "company-kinnetik",
       "company-vy",
+
+      "icon-agile-white",
+      "icon-head-brain-white",
     ]),
     fetchEmployeeImages()
       .then(shuffled)
