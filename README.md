@@ -8,6 +8,7 @@
 - Hosted hos [Cloudflare Pages](https://pages.cloudflare.com/)
 - Innhold og bilder hos [Sanity](https://www.sanity.io/)
 - Komponent utvikling med [Ladle](https://ladle.dev/)
+- Ikoner fra [The Noun Project](https://thenounproject.com/)
 
 ## Utvikling
 
