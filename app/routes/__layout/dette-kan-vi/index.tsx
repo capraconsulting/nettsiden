@@ -38,6 +38,9 @@ export const loader = async () => {
     "icon-counsel",
     "icon-book",
     "illustration-square-dots2",
+
+    "icon-agile-white",
+    "icon-head-brain-white",
   ]);
   return json(
     {
@@ -214,22 +217,25 @@ export const KonsulenterPitchAndSloganBox: SloganBox<
 };
 
 export const TpuPitchAndSloganBox: SloganBox<
-  "icon-tech" | "icon-brain" | "icon-time" | "illustration-square-dots"
+  | "icon-agile-white"
+  | "icon-head-brain-white"
+  | "icon-time"
+  | "illustration-square-dots"
 > = ({ direction, images }) => {
   return (
     <ContentAndSlogansBox
       direction={direction}
       title="Kurs og rådgivning"
       titleAs="h2"
-      sloganColor="bordeaux"
+      sloganColor="darkBlue"
       slogans={[
         {
           title: "Smidig tankesett",
-          imageUrl: images["icon-tech"].src,
+          imageUrl: images["icon-agile-white"].src,
         },
         {
           title: "Psykologisk trygghet",
-          imageUrl: images["icon-brain"].src,
+          imageUrl: images["icon-head-brain-white"].src,
         },
         {
           title: "Kort oppstartstid",
