@@ -227,7 +227,7 @@ export const TpuPitchAndSloganBox: SloganBox<
       direction={direction}
       title="Kurs og rådgivning"
       titleAs="h2"
-      sloganColor="bordeaux"
+      sloganColor="darkBlue"
       slogans={[
         {
           title: "Smidig tankesett",
