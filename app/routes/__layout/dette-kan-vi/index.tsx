@@ -63,8 +63,9 @@ export default function DetteKanVi() {
       </TitleAndText>
 
       <LifligPitchAndSloganBox direction="left" images={images} />
-      <KonsulenterPitchAndSloganBox direction="right" images={images} />
-      <TpuPitchAndSloganBox direction="left" images={images} />
+      <FrydePitchAndSloganBox direction="right" images={images} />
+      <KonsulenterPitchAndSloganBox direction="left" images={images} />
+      <TpuPitchAndSloganBox direction="right" images={images} />
 
       <Section className="md:gap-20">
         <TitleAndText
@@ -180,6 +181,37 @@ export const LifligPitchAndSloganBox: SloganBox<
     >
       Du har ideene - la vårt <span lang="en">in house team</span> bygge og
       forvalte hele tjenesten for deg
+    </ContentAndSlogansBox>
+  );
+};
+
+export const FrydePitchAndSloganBox: SloganBox<
+  "icon-cloud" | "icon-counsel" | "icon-book" | "illustration-square-dots2"
+> = ({ direction, images }) => {
+  return (
+    <ContentAndSlogansBox
+      direction={direction}
+      title="Fryde"
+      titleAs="h2"
+      sloganColor="peach"
+      slogans={[
+        {
+          title: "Flere typer design",
+          imageUrl: images["icon-cloud"].src,
+        },
+        {
+          title: "Prototyping",
+          imageUrl: images["icon-counsel"].src,
+        },
+        {
+          title: "Brukersentrert",
+          imageUrl: images["icon-book"].src,
+        },
+      ]}
+      illustrationImageUrl={images["illustration-square-dots2"].src}
+      readMoreHref="https://www.fryde.no/"
+    >
+      Velg Fryde når du trenger design i produkt- og tjenesteutvikling, og organisasjonsutvikling.
     </ContentAndSlogansBox>
   );
 };
