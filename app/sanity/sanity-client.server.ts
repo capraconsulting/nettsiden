@@ -1,6 +1,6 @@
 import type { AppLoadContext } from "@remix-run/server-runtime";
 
-import SanityClient from "@sanity/client";
+import { createClient } from "@sanity/client";
 
 import type { SitemapEntry } from "~/types";
 import { getEnv } from "~/utils/env";
@@ -18,7 +18,7 @@ export const getSanityClient = (requestAndContext?: {
   const token =
     requestAndContext && getEnv(requestAndContext.context).SANITY_TOKEN;
 
-  return new SanityClient({
+  return createClient({
     ...projectDetails,
     useCdn: false,
     token,
