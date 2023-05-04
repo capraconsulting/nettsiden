@@ -1,3 +1,5 @@
+import type { ValueProposition } from "~/components/value-wheel/value-wheel";
+
 export const contactInfo = {
   email: "post@capraconsulting.no",
   phoneNumber: "45832632",
@@ -100,3 +102,46 @@ export const BRAND_BG_AND_FG_COLORS: Record<
   darkBlue: "bg-secondary-80 text-peach-20",
   secondary: "bg-secondary text-white",
 };
+
+export const valuePropositions: ValueProposition[] = [
+  {
+    id: "value-proposition-1",
+    textColor: "#03173E",
+    text: "fleksibel",
+    content: `Vi har fokus på frihet og er åpen for endringer.`,
+    color: "#F8D3BC",
+  },
+  {
+    id: "value-proposition-2",
+    textColor: "#03173E",
+    text: "stolt",
+    content: `Vi har yrkesstolthet og føler eierskap. 
+  Vi tar ansvar utover det som forventes av oss.`,
+    color: "#C1DCE5",
+  },
+  {
+    id: "value-proposition-3",
+    textColor: "#fff",
+    text: "lærende",
+    content: `Vi lærer mye og fort, og 
+  vi lærer bort. Vi søker forbedring og 
+  utfordrer etablerte sannheter.`,
+    color: "#EA5154",
+  },
+  {
+    id: "value-proposition-4",
+    textColor: "#fff",
+    text: "uselvisk",
+    content: `Vi er inkluderende og vi bryr oss. Vi unner og 
+  feirer andres suksess.`,
+    color: "#03173E",
+  },
+  {
+    id: "value-proposition-5",
+    textColor: "#fff",
+    text: "åpen",
+    content: `Vi er uformelle og ærlige. 
+  Vi deler alt, med mindre norsk lov sier at vi ikke kan.`,
+    color: "#5D2332",
+  },
+];

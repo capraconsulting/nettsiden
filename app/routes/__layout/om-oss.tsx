@@ -14,13 +14,12 @@ import { ContentAndImageBox } from "~/components/content-and-image-box/content-a
 import IconTitleAndTextBlock from "~/components/icon-title-and-text-block";
 import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
-import type { ValueProposition } from "~/components/value-wheel/value-wheel";
 import { ValueWheel } from "~/components/value-wheel/value-wheel";
 import { getSanityClient } from "~/sanity/sanity-client.server";
 import type { Author, JobCategory } from "~/sanity/schema";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import type { BrandColor } from "~/utils/constants";
-import { BRAND_BG_AND_FG_COLORS } from "~/utils/constants";
+import { BRAND_BG_AND_FG_COLORS, valuePropositions } from "~/utils/constants";
 import { metaTags } from "~/utils/meta-tags";
 import { classNames } from "~/utils/misc";
 import { fetchImageAssets } from "~/utils/sanity-image";
@@ -295,6 +294,7 @@ interface InfoBoxProps {
   children: React.ReactNode;
   className?: string;
 }
+
 const InfoBox = ({
   title,
   titleAs: TitleComponent,
@@ -350,49 +350,6 @@ const EmphasizedTextBox = ({
     </div>
   );
 };
-
-export const valuePropositions: ValueProposition[] = [
-  {
-    id: "value-proposition-1",
-    textColor: "#03173E",
-    text: "fleksibel",
-    content: `Vi har fokus på frihet og er åpen for endringer.`,
-    color: "#F8D3BC",
-  },
-  {
-    id: "value-proposition-2",
-    textColor: "#03173E",
-    text: "stolt",
-    content: `Vi har yrkesstolthet og føler eierskap. 
-  Vi tar ansvar utover det som forventes av oss.`,
-    color: "#C1DCE5",
-  },
-  {
-    id: "value-proposition-3",
-    textColor: "#fff",
-    text: "lærende",
-    content: `Vi lærer mye og fort, og 
-  vi lærer bort. Vi søker forbedring og 
-  utfordrer etablerte sannheter.`,
-    color: "#EA5154",
-  },
-  {
-    id: "value-proposition-4",
-    textColor: "#fff",
-    text: "uselvisk",
-    content: `Vi er inkluderende og vi bryr oss. Vi unner og 
-  feirer andres suksess.`,
-    color: "#03173E",
-  },
-  {
-    id: "value-proposition-5",
-    textColor: "#fff",
-    text: "åpen",
-    content: `Vi er uformelle og ærlige. 
-  Vi deler alt, med mindre norsk lov sier at vi ikke kan.`,
-    color: "#5D2332",
-  },
-];
 
 const teams: PropsWithChildren<TeamCardProps>[] = [
   {

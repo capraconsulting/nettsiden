@@ -1,10 +1,8 @@
-import { valuePropositions } from "~/routes/__layout/om-oss";
+import { valuePropositions } from "~/utils/constants";
 import { ValueWheel } from "./value-wheel";
 
 export const ValueWheelStories = () => {
   return (
-    <>
-      <ValueWheel title="Våre verdier" valuePropositions={valuePropositions} />
-    </>
+    <ValueWheel title="Våre verdier" valuePropositions={valuePropositions} />
   );
 };
