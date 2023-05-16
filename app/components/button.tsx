@@ -3,9 +3,13 @@ import type { RemixLinkProps } from "@remix-run/react/dist/components";
 
 import { classNames } from "~/utils/misc";
 
-function getClassNames(variant: Props["variant"]) {
+function getClassNames({ variant, size = "200" }: Props) {
   return classNames(
-    "w-[200px] rounded-md border-2 font-bold min-h-[40px] leading-snug block py-3 text-center transition ease-in-out",
+    "rounded-md border-2 font-bold min-h-[40px] leading-snug block py-3 text-center transition ease-in-out",
+    {
+      "w-[200px]": size === "200",
+      "w-full px-2": size === "full",
+    },
     {
       "bg-white border-main text-main hover:bg-main hover:text-white":
         variant === "outline",
@@ -17,6 +21,7 @@ function getClassNames(variant: Props["variant"]) {
 
 type Props = {
   variant: "solid" | "outline";
+  size?: "200" | "full";
   className?: string;
 } & (
   | React.DetailedHTMLProps<
@@ -35,8 +40,8 @@ type Props = {
 
 // TODO: The red color used in this button is not compliant with WCAG contrast requirements when used for text on our
 //       "almost white" background. Consider using something darker? It's fine as a button bg color.
-export const Button: React.FC<Props> = ({ variant, ...props }) => {
-  const className = classNames(getClassNames(variant), props.className);
+export const Button: React.FC<Props> = (props) => {
+  const className = classNames(getClassNames(props), props.className);
 
   if (
     "href" in props &&
