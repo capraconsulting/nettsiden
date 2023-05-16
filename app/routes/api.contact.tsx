@@ -128,7 +128,10 @@ export const ContactForm = ({
   const fetcher = useFetcher<typeof action>();
   const isSuccess = fetcher.type === "done" && !fetcher.data;
   return (
-    <div className="bg-secondary pt-12 pb-[6vh]">
+    <div
+      id="kontakt-skjema"
+      className="scroll-mt-12 scroll-smooth bg-secondary pt-12 pb-[6vh]"
+    >
       <article className="md:11/12 mx-auto flex w-10/12 flex-col items-center text-white sm:w-9/12">
         <section className="text-center">
           <p className="pb-4 text-xl font-bold text-peach md:text-4xl">

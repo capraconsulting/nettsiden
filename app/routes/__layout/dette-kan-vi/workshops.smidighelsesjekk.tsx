@@ -40,10 +40,13 @@ export async function loader() {
 
 export const headers: HeadersFunction = () => cacheControlHeaders;
 
-export const meta: V2_MetaFunction = () =>
+export const meta: V2_MetaFunction<typeof loader> = ({ data }) =>
   metaTags({
-    title: "TODO",
-    description: "TODO",
+    title:
+      "Skaper du faktisk forretningsverdi med teknologien i selskapet ditt?",
+    description:
+      "Få et øyeblikksbilde av hvor godt rigget virksomheten din er for fart, sammen med konkrete forslag til forbedring!",
+    image: data.images["photo-whiteboard-hga-sba"].src,
   });
 
 export default function Component() {
@@ -59,9 +62,11 @@ export default function Component() {
           vi gratis smidig helsesjekk slik at du kan finne ut hvordan dere
           ligger an og hva deres potensiale for å øke verdiskapningen er!
         </TitleAndText>
-        <Button variant="solid" href="#down-under">
-          Få en smidig helsesjekk her!
-        </Button>
+        <div className="scroll-smooth">
+          <Button variant="solid" href="#kontakt-skjema">
+            Få en smidig helsesjekk her!
+          </Button>
+        </div>
       </Section>
 
       <CapraImage
@@ -75,7 +80,7 @@ export default function Component() {
           virksomheten din er for fart, sammen med konkrete forslag til
           forbedring.
         </TitleAndText>
-        <Button variant="solid" href="#down-under">
+        <Button variant="solid" href="#kontakt-skjema">
           Book gratis smidig helsesjekk
         </Button>
       </Section>
