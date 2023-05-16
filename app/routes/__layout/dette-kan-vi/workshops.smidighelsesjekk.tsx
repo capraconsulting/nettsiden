@@ -63,7 +63,7 @@ export default function Component() {
           ligger an og hva deres potensiale for å øke verdiskapningen er!
         </TitleAndText>
         <div className="scroll-smooth">
-          <Button size="full" variant="solid" href="#kontakt-skjema">
+          <Button size="content" variant="solid" href="#kontakt-skjema">
             Få en smidig helsesjekk her!
           </Button>
         </div>
@@ -80,14 +80,14 @@ export default function Component() {
           virksomheten din er for fart, sammen med konkrete forslag til
           forbedring.
         </TitleAndText>
-        <Button size="full" variant="solid" href="#kontakt-skjema">
+        <Button size="content" variant="solid" href="#kontakt-skjema">
           Book gratis smidig helsesjekk
         </Button>
       </Section>
       <Todo badge size="large" title="Steg bokser" />
       <Section>
         <Todo title="boks" />
-        <Button size="full" variant="solid" href="/dette-kan-vi">
+        <Button size="content" variant="solid" href="/dette-kan-vi">
           Oversikt over alle tjenester
         </Button>
       </Section>

@@ -8,7 +8,7 @@ function getClassNames({ variant, size = "200" }: Props) {
     "rounded-md border-2 font-bold min-h-[40px] leading-snug block py-3 text-center transition ease-in-out",
     {
       "w-[200px]": size === "200",
-      "w-full px-2": size === "full",
+      "px-2": size === "content",
     },
     {
       "bg-white border-main text-main hover:bg-main hover:text-white":
@@ -21,7 +21,7 @@ function getClassNames({ variant, size = "200" }: Props) {
 
 type Props = {
   variant: "solid" | "outline";
-  size?: "200" | "full";
+  size?: "200" | "content";
   className?: string;
 } & (
   | React.DetailedHTMLProps<
