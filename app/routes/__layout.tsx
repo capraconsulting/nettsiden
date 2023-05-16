@@ -59,7 +59,15 @@ export const shouldRevalidate: ShouldRevalidateFunction = () => false;
 export default function Layout() {
   const data = useLoaderData<typeof loader>();
   const matches = useMatches();
-  const contactFormTitle = getContactFormTitle(matches);
+  const {
+    contactFormTitle,
+    contactFormDescription,
+    contactFormReprasentativesPrediacate = () => true,
+  } = getContactFormData(matches);
+
+  const contactFormRepresentatives = data.contactFormRepresentatives.filter(
+    contactFormReprasentativesPrediacate,
+  );
 
   return (
     <>
@@ -71,7 +79,8 @@ export default function Layout() {
         {contactFormTitle && (
           <ContactForm
             title={contactFormTitle}
-            representatives={data.contactFormRepresentatives}
+            description={contactFormDescription}
+            representatives={contactFormRepresentatives}
           />
         )}
       </main>
@@ -124,9 +133,20 @@ export function UnusedCatchBoundary() {
   );
 }
 
-const getContactFormTitle = (matches: { handle?: CapraHandle }[]) =>
-  matches
+const getContactFormData = (matches: { handle?: CapraHandle }[]) => {
+  const handleWithContactForm = matches
     .map((it) => it.handle)
     .filter(typedBoolean)
     .reverse()
-    .find((it) => it.contactFormTitle !== undefined)?.contactFormTitle;
+    .find((it) => it.contactFormTitle !== undefined);
+  const {
+    contactFormTitle,
+    contactFormDescription,
+    contactFormRepresentativesPredicate: contactFormReprasentativesPrediacate,
+  } = handleWithContactForm ?? {};
+  return {
+    contactFormTitle,
+    contactFormDescription,
+    contactFormReprasentativesPrediacate,
+  };
+};

@@ -117,9 +117,14 @@ export const action = async ({ request, context }: DataFunctionArgs) => {
 
 interface ContactFormProps {
   title: React.ReactNode;
+  description?: React.ReactNode;
   representatives: ContactFormRepresentative[];
 }
-export const ContactForm = ({ title, representatives }: ContactFormProps) => {
+export const ContactForm = ({
+  title,
+  description = "Fyll ut skjemaet så kontakter vi deg!",
+  representatives,
+}: ContactFormProps) => {
   const fetcher = useFetcher<typeof action>();
   const isSuccess = fetcher.type === "done" && !fetcher.data;
   return (
@@ -132,7 +137,7 @@ export const ContactForm = ({ title, representatives }: ContactFormProps) => {
           <p className="md:mb-8">
             {isSuccess
               ? "Vi tar kontakt med deg så snart som mulig."
-              : "Fyll ut skjemaet så kontakter vi deg!"}
+              : description}
           </p>
         </section>
         <section className="grid w-full max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2">
