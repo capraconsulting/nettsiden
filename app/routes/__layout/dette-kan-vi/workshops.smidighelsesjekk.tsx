@@ -72,11 +72,16 @@ export default function Component() {
           className="w-screen max-w-7xl"
           image={images["photo-whiteboard-hga-sba"]}
         />
-        <Todo size="large">
-          Capra har siden 2005 spesialisert seg på smidig utvikling,
-          transformasjon og ledelse i noen av Norges største virksomheter,
-          inkludert vår egen.
-        </Todo>
+
+        <div className="flex w-full justify-center bg-peach-20 py-[5%] px-[10%]">
+          <div className="algin-center flex max-w-3xl flex-col items-center gap-10 lg:flex-row">
+            <p className="text-center text-lg lg:text-left">
+              Capra har siden 2005 spesialisert seg på smidig utvikling,
+              transformasjon og ledelse i noen av Norges største virksomheter,
+              inkludert vår egen.
+            </p>
+          </div>
+        </div>
       </div>
 
       <Section>
