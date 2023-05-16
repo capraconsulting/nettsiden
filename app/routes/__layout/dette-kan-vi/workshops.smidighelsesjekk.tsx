@@ -62,11 +62,9 @@ export default function Component() {
           vi gratis smidig helsesjekk slik at du kan finne ut hvordan dere
           ligger an og hva deres potensiale for å øke verdiskapningen er!
         </TitleAndText>
-        <div className="scroll-smooth">
-          <Button size="content" variant="solid" href="#kontakt-skjema">
-            Få en smidig helsesjekk her!
-          </Button>
-        </div>
+        <Button size="content" variant="solid" href="#kontakt-skjema">
+          Få en smidig helsesjekk her!
+        </Button>
       </Section>
 
       <CapraImage
