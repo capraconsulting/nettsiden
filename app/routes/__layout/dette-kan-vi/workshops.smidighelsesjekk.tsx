@@ -62,15 +62,22 @@ export default function Component() {
           vi gratis smidig helsesjekk slik at du kan finne ut hvordan dere
           ligger an og hva deres potensiale for å øke verdiskapningen er!
         </TitleAndText>
-        <Button size="content" variant="solid" href="#kontakt-skjema">
+        <Button width="content" variant="solid" href="#kontakt-skjema">
           Få en smidig helsesjekk her!
         </Button>
       </Section>
 
-      <CapraImage
-        className="w-screen max-w-7xl"
-        image={images["photo-whiteboard-hga-sba"]}
-      />
+      <div>
+        <CapraImage
+          className="w-screen max-w-7xl"
+          image={images["photo-whiteboard-hga-sba"]}
+        />
+        <Todo size="large">
+          Capra har siden 2005 spesialisert seg på smidig utvikling,
+          transformasjon og ledelse i noen av Norges største virksomheter,
+          inkludert vår egen.
+        </Todo>
+      </div>
 
       <Section>
         <TitleAndText title="Hva er en smidig helsesjekk?" titleAs="h2">
@@ -78,14 +85,18 @@ export default function Component() {
           virksomheten din er for fart, sammen med konkrete forslag til
           forbedring.
         </TitleAndText>
-        <Button size="content" variant="solid" href="#kontakt-skjema">
+        <Button width="content" variant="solid" href="#kontakt-skjema">
           Book gratis smidig helsesjekk
         </Button>
       </Section>
-      <Todo badge size="large" title="Steg bokser" />
+      <Todo size="large" title="Steg bokser" />
       <Section>
-        <Todo title="boks" />
-        <Button size="content" variant="solid" href="/dette-kan-vi">
+        <Todo>
+          Med vår smidig helsesjekk følger det ingen forpliktelser. Det skal
+          sies at vi er såpass trygge på vår ekspertise at vi tror og håper dere
+          vil fortsette samarbeidet i dag eller i fremtiden.
+        </Todo>
+        <Button width="content" variant="solid" href="/dette-kan-vi">
           Oversikt over alle tjenester
         </Button>
       </Section>

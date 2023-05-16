@@ -3,12 +3,12 @@ import type { RemixLinkProps } from "@remix-run/react/dist/components";
 
 import { classNames } from "~/utils/misc";
 
-function getClassNames({ variant, size = "200" }: Props) {
+function getClassNames({ variant, width = "200" }: Props) {
   return classNames(
     "rounded-md border-2 font-bold min-h-[40px] leading-snug block py-3 text-center transition ease-in-out",
     {
-      "w-[200px]": size === "200",
-      "px-2": size === "content",
+      "w-[200px]": width === "200",
+      "px-2": width === "content",
     },
     {
       "bg-white border-main text-main hover:bg-main hover:text-white":
@@ -21,7 +21,7 @@ function getClassNames({ variant, size = "200" }: Props) {
 
 type Props = {
   variant: "solid" | "outline";
-  size?: "200" | "content";
+  width?: "200" | "content";
   className?: string;
 } & (
   | React.DetailedHTMLProps<
