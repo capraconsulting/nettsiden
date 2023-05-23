@@ -1,3 +1,4 @@
+import React from "react";
 import { useLoaderData } from "@remix-run/react";
 import type {
   HeadersFunction,
@@ -13,6 +14,7 @@ import { Todo } from "~/components/todo";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { metaTags } from "~/utils/meta-tags";
+import { classNames } from "~/utils/misc";
 import { fetchImageAssets } from "~/utils/sanity-image";
 
 export const handle: CapraHandle = {
@@ -47,6 +49,7 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) =>
     description:
       "Få et øyeblikksbilde av hvor godt rigget virksomheten din er for fart, sammen med konkrete forslag til forbedring!",
     image: data.images["photo-whiteboard-hga-sba"].src,
+    card: "summary_large_image",
   });
 
 export default function Component() {
@@ -67,22 +70,18 @@ export default function Component() {
         </Button>
       </Section>
 
-      <div>
+      <Section>
         <CapraImage
           className="w-screen max-w-7xl"
           image={images["photo-whiteboard-hga-sba"]}
         />
 
-        <div className="flex w-full justify-center bg-peach-20 py-[5%] px-[10%]">
-          <div className="algin-center flex max-w-3xl flex-col items-center gap-10 lg:flex-row">
-            <p className="text-center text-lg lg:text-left">
-              Capra har siden 2005 spesialisert seg på smidig utvikling,
-              transformasjon og ledelse i noen av Norges største virksomheter,
-              inkludert vår egen.
-            </p>
-          </div>
-        </div>
-      </div>
+        <InformationCard className="flex w-screen max-w-7xl flex-col items-center bg-light-blue-20">
+          Capra har siden 2005 spesialisert seg på smidig utvikling,
+          transformasjon og ledelse i noen av Norges største virksomheter,
+          inkludert vår egen.
+        </InformationCard>
+      </Section>
 
       <Section>
         <TitleAndText title="Hva er en smidig helsesjekk?" titleAs="h2">
@@ -96,11 +95,13 @@ export default function Component() {
       </Section>
       <Todo size="large" title="Steg bokser" />
       <Section>
-        <Todo>
-          Med vår smidig helsesjekk følger det ingen forpliktelser. Det skal
-          sies at vi er såpass trygge på vår ekspertise at vi tror og håper dere
-          vil fortsette samarbeidet i dag eller i fremtiden.
-        </Todo>
+        <InformationCard className="flex w-screen max-w-7xl flex-col items-center bg-peach-20">
+          Med vår smidig helsesjekk følger det{" "}
+          <strong className="font-bold text-red">ingen forpliktelser.</strong>{" "}
+          Det skal sies at vi er såpass trygge på vår ekspertise at vi tror og
+          håper dere vil fortsette samarbeidet i dag eller i fremtiden.
+        </InformationCard>
+
         <Button width="content" variant="solid" href="/dette-kan-vi">
           Oversikt over alle tjenester
         </Button>
@@ -108,3 +109,19 @@ export default function Component() {
     </>
   );
 }
+
+const InformationCard = ({
+  className,
+  children,
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) => {
+  return (
+    <div className={classNames(className, "py-16 px-6 text-secondary")}>
+      <div className="max-w-3xl">
+        <p className="text-center text-lg lg:text-left">{children}</p>
+      </div>
+    </div>
+  );
+};
