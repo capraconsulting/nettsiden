@@ -31,7 +31,10 @@ export async function loader() {
     [
       fetchImageAssets([
         "photo-whiteboard-hga-sba",
-        ["social-image-smidighelsesjekk", (builder) => builder.width(1200)],
+        [
+          "social-image-smidighelsesjekk",
+          (builder) => builder.width(1200).format("jpg"),
+        ],
       ]),
       fetchContactFormRepresentatives(),
       fetchCompanyImages(),
