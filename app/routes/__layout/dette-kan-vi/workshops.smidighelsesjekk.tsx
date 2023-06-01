@@ -11,28 +11,33 @@ import { CapraImage } from "~/components/capra-image";
 import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
-import type { CapraHandle } from "~/types";
+import {
+  fetchCompanyImages,
+  ViJobberMedStoreAktørerINorge,
+} from "~/routes/__layout/index";
+import {
+  ContactForm,
+  fetchContactFormRepresentatives,
+} from "~/routes/api.contact";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { metaTags } from "~/utils/meta-tags";
 import { classNames } from "~/utils/misc";
 import { fetchImageAssets } from "~/utils/sanity-image";
 
-export const handle: CapraHandle = {
-  contactFormTitle: "Ta kontakt!",
-  contactFormDescription:
-    "Fyll ut skjemaet så kontakter vi deg for en gratis smidig helsesjekk uten forpliktelser! Flere spørsmå? Ta kontakt med Tuva.",
-  contactFormRepresentativesPredicate: (representative) =>
-    representative.name.includes("Tuva"),
-};
-
 export async function loader() {
-  const [images] = await Promise.all([
-    fetchImageAssets(["photo-whiteboard-hga-sba"]),
-  ]);
+  const [images, contactFormRepresentatives, companyImages] = await Promise.all(
+    [
+      fetchImageAssets(["photo-whiteboard-hga-sba"]),
+      fetchContactFormRepresentatives(),
+      fetchCompanyImages(),
+    ],
+  );
 
   return json(
     {
       images,
+      contactFormRepresentatives,
+      companyImages,
     },
     {
       headers: cacheControlHeaders,
@@ -53,7 +58,8 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) =>
   });
 
 export default function Component() {
-  const { images } = useLoaderData<typeof loader>();
+  const { images, contactFormRepresentatives, companyImages } =
+    useLoaderData<typeof loader>();
   return (
     <>
       <Section>
@@ -105,6 +111,20 @@ export default function Component() {
         <Button width="content" variant="solid" href="/dette-kan-vi">
           Oversikt over alle tjenester
         </Button>
+      </Section>
+
+      <div className="w-screen">
+        <ContactForm
+          title="Ta kontakt!"
+          description="Fyll ut skjemaet så kontakter vi deg for en gratis smidig helsesjekk uten forpliktelser! Flere spørsmå? Ta kontakt med Tuva."
+          representatives={contactFormRepresentatives.filter((representative) =>
+            representative.name.includes("Tuva"),
+          )}
+        />
+      </div>
+
+      <Section>
+        <ViJobberMedStoreAktørerINorge companyImages={companyImages} />
       </Section>
     </>
   );

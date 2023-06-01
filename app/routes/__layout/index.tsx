@@ -17,6 +17,7 @@ import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { metaTags } from "~/utils/meta-tags";
 import { shuffled } from "~/utils/random";
+import type { Image } from "~/utils/sanity-image";
 import { fetchImageAssets } from "~/utils/sanity-image";
 import {
   KonsulenterPitchAndSloganBox,
@@ -32,7 +33,7 @@ export const meta: V2_MetaFunction = () =>
   });
 
 export const loader = async () => {
-  const [images, employeeImages] = await Promise.all([
+  const [images, companyImages, employeeImages] = await Promise.all([
     fetchImageAssets([
       "tech",
       "aws",
@@ -55,6 +56,7 @@ export const loader = async () => {
       "icon-agile-white",
       "icon-head-brain-white",
     ]),
+    fetchCompanyImages(),
     fetchEmployeeImages()
       .then(shuffled)
       .then((l) => l.slice(0, 13)),
@@ -64,10 +66,7 @@ export const loader = async () => {
     {
       images,
       employeeImages,
-
-      companies: Object.entries(images)
-        .filter(([name]) => name.startsWith("company-"))
-        .map(([_, image]) => image),
+      companyImages,
     },
     { headers: cacheControlHeaders },
   );
@@ -80,7 +79,8 @@ export const handle: CapraHandle = {
 };
 
 export default function Index() {
-  const { images, employeeImages, companies } = useLoaderData<typeof loader>();
+  const { images, employeeImages, companyImages } =
+    useLoaderData<typeof loader>();
 
   return (
     <>
@@ -176,23 +176,42 @@ export default function Index() {
       </BubbleSandwich>
 
       <Section>
-        <TitleAndText title="Vi jobber med store aktører i Norge" titleAs="h2">
-          Capra leverer kompetanse til prosjekter over hele landet. Som
-          bransjeuavhengig er vi åpne for både{" "}
-          <strong className="font-bold">offentlig</strong> og{" "}
-          <strong className="font-bold">privat</strong> virksomhet
-        </TitleAndText>
-        <div className="mx-auto grid w-11/12 max-w-xl grid-cols-2 items-center">
-          {companies.map((image) => (
-            <div
-              key={image.key ?? image.src}
-              className="flex items-center justify-center"
-            >
-              <CapraImage image={image} />
-            </div>
-          ))}
-        </div>
+        <ViJobberMedStoreAktørerINorge companyImages={companyImages} />
       </Section>
     </>
   );
 }
+
+export const fetchCompanyImages = () =>
+  fetchImageAssets([
+    "company-europris",
+    "company-gjensidige",
+    "company-kinnetik",
+    "company-vy",
+  ]).then(Object.values);
+
+interface ViJobberMedStoreAktørerINorgeProps {
+  companyImages: Image[];
+}
+export const ViJobberMedStoreAktørerINorge = ({
+  companyImages,
+}: ViJobberMedStoreAktørerINorgeProps) => (
+  <>
+    <TitleAndText title="Vi jobber med store aktører i Norge" titleAs="h2">
+      Capra leverer kompetanse til prosjekter over hele landet. Som
+      bransjeuavhengig er vi åpne for både{" "}
+      <strong className="font-bold">offentlig</strong> og{" "}
+      <strong className="font-bold">privat</strong> virksomhet
+    </TitleAndText>
+    <div className="mx-auto grid w-11/12 max-w-xl grid-cols-2 items-center">
+      {companyImages.map((image) => (
+        <div
+          key={image.key ?? image.src}
+          className="flex items-center justify-center"
+        >
+          <CapraImage image={image} />
+        </div>
+      ))}
+    </div>
+  </>
+);

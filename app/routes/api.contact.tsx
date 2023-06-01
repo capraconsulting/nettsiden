@@ -9,6 +9,7 @@ import type { SanityImageAsset, SanityReference } from "sanity-codegen";
 import { Button } from "~/components/button";
 import { CapraImage } from "~/components/capra-image";
 import { CapraLink } from "~/components/capra-link";
+import { getSanityClient } from "~/sanity/sanity-client.server";
 import { getEnvVariableOrThrow } from "~/utils/env";
 import { urlFor } from "~/utils/imageBuilder";
 
@@ -247,3 +248,16 @@ const Representatives = ({ representatives }: RepresentativesProps) => {
     </div>
   );
 };
+
+export const fetchContactFormRepresentatives = () =>
+  getSanityClient()
+    .getAll("author", `employee == true && "contact-form" in placement`)
+    .then((authors) =>
+      authors.map(
+        (author): ContactFormRepresentative => ({
+          name: author.name ?? "",
+          email: author.email ?? "",
+          image: author.image!.asset,
+        }),
+      ),
+    );
