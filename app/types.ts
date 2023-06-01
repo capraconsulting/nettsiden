@@ -1,5 +1,3 @@
-import type { ContactFormRepresentative } from "./routes/api.contact";
-
 export interface SitemapEntry {
   route: string;
   lastmod?: string;
@@ -19,9 +17,6 @@ type SiteMapEntries = Array<SitemapEntry | null> | null;
 export interface CapraHandle {
   contactFormTitle?: string;
   contactFormDescription?: string;
-  contactFormRepresentativesPredicate?: (
-    representative: ContactFormRepresentative,
-  ) => boolean;
   getSitemapEntries?: (
     request: Request,
   ) => Promise<SiteMapEntries> | SiteMapEntries;
