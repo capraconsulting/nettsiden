@@ -174,8 +174,8 @@ export default function Component() {
       </Section>
 
       <Section>
-        <div className="relative flex w-screen max-w-7xl flex-col items-center">
-          <InformationCard className="flex w-screen max-w-7xl flex-col items-center bg-peach-20">
+        <div className="relative flex w-11/12 max-w-7xl flex-col items-center">
+          <InformationCard className="flex w-full max-w-7xl flex-col items-center bg-peach-20">
             Med vår smidig helsesjekk følger det{" "}
             <strong className="font-bold text-red">ingen forpliktelser.</strong>{" "}
             Det skal sies at vi er såpass trygge på vår ekspertise at vi tror og
