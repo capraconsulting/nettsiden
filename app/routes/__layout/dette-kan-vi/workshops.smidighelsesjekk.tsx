@@ -27,7 +27,10 @@ import { fetchImageAssets } from "~/utils/sanity-image";
 export async function loader() {
   const [images, contactFormRepresentatives, companyImages] = await Promise.all(
     [
-      fetchImageAssets(["photo-whiteboard-hga-sba"]),
+      fetchImageAssets([
+        "photo-whiteboard-hga-sba",
+        "social-image-smidighelsesjekk",
+      ]),
       fetchContactFormRepresentatives(),
       fetchCompanyImages(),
     ],
@@ -53,7 +56,7 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) =>
       "Skaper du faktisk forretningsverdi med teknologien i selskapet ditt?",
     description:
       "Få et øyeblikksbilde av hvor godt rigget virksomheten din er for fart, sammen med konkrete forslag til forbedring!",
-    image: data.images["photo-whiteboard-hga-sba"].src,
+    image: data.images["social-image-smidighelsesjekk"].src,
     card: "summary_large_image",
   });
 
