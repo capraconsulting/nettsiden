@@ -8,10 +8,10 @@ import { json } from "@remix-run/server-runtime";
 
 import { Button } from "~/components/button";
 import { CapraImage } from "~/components/capra-image";
+import { Card } from "~/components/card";
 import { Pattern } from "~/components/pattern/pattern";
 import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
-import { Todo } from "~/components/todo";
 import { useHydrated } from "~/hooks/use-hydrated";
 import {
   fetchCompanyImages,
@@ -120,15 +120,87 @@ export default function Component() {
         <Button width="content" variant="solid" href="#kontakt-skjema">
           Book gratis smidig helsesjekk
         </Button>
+
+        <ol
+          className={classNames(
+            "flex w-11/12 max-w-3xl flex-col gap-8 lg:gap-12",
+            // TODO: Connect the steps with lines
+            // "[&>*]:before:self-stretch [&>*]:before:border [&>*]:before:border-main",
+          )}
+        >
+          <StepBox
+            titleAs="h3"
+            title="Steg 1: Avklaringer"
+            description="Første møte blir vi enige om"
+            items={[
+              "Hvilket område ved virksomheten som skal vurderes",
+              "Hvilke nøkkelpersoner som skal interjvues",
+              "Fremdriftsplan og møter",
+            ]}
+          />
+          <StepBox
+            titleAs="h3"
+            title="Steg 2: Innsiktsfase"
+            description="Vi henter informasjon ved"
+            items={[
+              "Gjennomføre 6 kvalitative intervjuer",
+              "Utsendelse av vår utarbeidede interne spørreundersøkelse",
+              "Innhenting av KPIer/målsetninger annen data",
+            ]}
+          />
+          <StepBox
+            titleAs="h3"
+            title="Steg 3: Bearbeidelse"
+            items={[
+              "Vi bruker innsikten og kalibrerer opp mot vårt referansemateriale basert på erfaring og metodikk som er godt forankret i forskning.",
+            ]}
+          />
+          <StepBox
+            titleAs="h3"
+            title="Steg 4: Sluttrapport"
+            description="Basert på stegene over leverer vi en rapport på følgende"
+            items={[
+              "Overordnet vurdering av smidighet",
+              "Anbefalte tiltak med prioritering",
+              "Kvalitativ kost/nytte-vurdering av tiltak",
+              "Beskrivelse av forretningseffekt av tiltakene",
+            ]}
+          />
+        </ol>
       </Section>
-      <Todo size="large" title="Steg bokser" />
+
       <Section>
-        <InformationCard className="flex w-screen max-w-7xl flex-col items-center bg-peach-20">
-          Med vår smidig helsesjekk følger det{" "}
-          <strong className="font-bold text-red">ingen forpliktelser.</strong>{" "}
-          Det skal sies at vi er såpass trygge på vår ekspertise at vi tror og
-          håper dere vil fortsette samarbeidet i dag eller i fremtiden.
-        </InformationCard>
+        <div className="relative flex w-screen max-w-7xl flex-col items-center">
+          <InformationCard className="flex w-screen max-w-7xl flex-col items-center bg-peach-20">
+            Med vår smidig helsesjekk følger det{" "}
+            <strong className="font-bold text-red">ingen forpliktelser.</strong>{" "}
+            Det skal sies at vi er såpass trygge på vår ekspertise at vi tror og
+            håper dere vil fortsette samarbeidet i dag eller i fremtiden.
+          </InformationCard>
+
+          {isHydrated && (
+            <>
+              <div className="absolute top-[-30px] left-[-30px]">
+                <Pattern
+                  width={100}
+                  height={100}
+                  color="fill-light-blue"
+                  pattern="offset-grid"
+                  shape="rect"
+                />
+              </div>
+              <div className="absolute bottom-[60px] right-[60px]">
+                <Pattern
+                  width={100}
+                  height={100}
+                  color="fill-bordeaux"
+                  pattern="offset-grid"
+                  shape="rect"
+                />
+              </div>
+            </>
+          )}
+        </div>
 
         <Button width="content" variant="solid" href="/dette-kan-vi">
           Oversikt over alle tjenester
@@ -172,3 +244,32 @@ const InformationCard = ({
     </div>
   );
 };
+
+interface StepBoxProps {
+  titleAs: "h2" | "h3" | "h4";
+  title: React.ReactNode;
+  description?: React.ReactNode;
+  items?: React.ReactNode[];
+}
+const StepBox = ({
+  titleAs: TitleComponent,
+  title,
+  description,
+  items,
+}: StepBoxProps) => (
+  <Card as="li">
+    <article>
+      <TitleComponent className="font-bold uppercase text-main">
+        {title}
+      </TitleComponent>
+      <div>
+        <p>{description}</p>
+        <ul style={{ paddingLeft: 28, listStyle: "disc" }}>
+          {items?.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      </div>
+    </article>
+  </Card>
+);
