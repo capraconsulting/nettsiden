@@ -8,9 +8,11 @@ import { json } from "@remix-run/server-runtime";
 
 import { Button } from "~/components/button";
 import { CapraImage } from "~/components/capra-image";
+import { Pattern } from "~/components/pattern/pattern";
 import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import { Todo } from "~/components/todo";
+import { useHydrated } from "~/hooks/use-hydrated";
 import {
   fetchCompanyImages,
   ViJobberMedStoreAktørerINorge,
@@ -63,6 +65,8 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) =>
 export default function Component() {
   const { images, contactFormRepresentatives, companyImages } =
     useLoaderData<typeof loader>();
+  const isHydrated = useHydrated();
+
   return (
     <>
       <Section>
@@ -74,22 +78,37 @@ export default function Component() {
           vi gratis smidig helsesjekk slik at du kan finne ut hvordan dere
           ligger an og hva deres potensiale for å øke verdiskapningen er!
         </TitleAndText>
+
         <Button width="content" variant="solid" href="#kontakt-skjema">
           Få en smidig helsesjekk her!
         </Button>
-      </Section>
 
-      <Section>
-        <CapraImage
-          className="w-screen max-w-7xl"
-          image={images["photo-whiteboard-hga-sba"]}
-        />
+        <div className="relative overflow-hidden">
+          <CapraImage
+            className="aspect-[3.8/2] w-screen max-w-7xl origin-bottom-right scale-[1.2] object-cover object-bottom"
+            image={images["photo-whiteboard-hga-sba"]}
+          />
 
-        <InformationCard className="flex w-screen max-w-7xl flex-col items-center bg-light-blue-20">
-          Capra har siden 2005 spesialisert seg på smidig utvikling,
-          transformasjon og ledelse i noen av Norges største virksomheter,
-          inkludert vår egen.
-        </InformationCard>
+          <div className="absolute right-12 bottom-16 w-[50%] lg:min-h-[200px] lg:w-[40%]">
+            <InformationCard className="bg-light-blue-20">
+              Capra har siden 2005 spesialisert seg på smidig utvikling,
+              transformasjon og ledelse i noen av Norges største virksomheter,
+              inkludert vår egen.
+            </InformationCard>
+
+            {isHydrated && (
+              <div className="absolute bottom-[60px] right-[60px]">
+                <Pattern
+                  width={100}
+                  height={100}
+                  color="fill-main"
+                  pattern="offset-grid"
+                  shape="rect"
+                />
+              </div>
+            )}
+          </div>
+        </div>
       </Section>
 
       <Section>
@@ -141,9 +160,14 @@ const InformationCard = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className={classNames(className, "py-16 px-6 text-secondary")}>
+    <div
+      className={classNames(
+        className,
+        "flex items-center justify-center py-16 px-16 text-secondary",
+      )}
+    >
       <div className="max-w-3xl">
-        <p className="text-center text-lg lg:text-left">{children}</p>
+        <p className="text-left">{children}</p>
       </div>
     </div>
   );
