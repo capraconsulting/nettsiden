@@ -21,10 +21,15 @@ import {
   ContactForm,
   fetchContactFormRepresentatives,
 } from "~/routes/api.contact";
+import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { metaTags } from "~/utils/meta-tags";
 import { classNames } from "~/utils/misc";
 import { fetchImageAssets } from "~/utils/sanity-image";
+
+export const handle: CapraHandle = {
+  scrollSmooth: true,
+};
 
 export async function loader() {
   const [images, contactFormRepresentatives, companyImages] = await Promise.all(

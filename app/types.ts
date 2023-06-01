@@ -15,6 +15,7 @@ export interface SitemapEntry {
 type SiteMapEntries = Array<SitemapEntry | null> | null;
 
 export interface CapraHandle {
+  scrollSmooth?: boolean;
   contactFormTitle?: string;
   contactFormDescription?: string;
   getSitemapEntries?: (
