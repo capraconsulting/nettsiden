@@ -31,7 +31,7 @@ export async function loader() {
     [
       fetchImageAssets([
         "photo-whiteboard-hga-sba",
-        "social-image-smidighelsesjekk",
+        ["social-image-smidighelsesjekk", (builder) => builder.width(1200)],
       ]),
       fetchContactFormRepresentatives(),
       fetchCompanyImages(),
@@ -58,6 +58,7 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) =>
       "Skaper du faktisk forretningsverdi med teknologien i selskapet ditt?",
     description:
       "Få et øyeblikksbilde av hvor godt rigget virksomheten din er for fart, sammen med konkrete forslag til forbedring!",
+
     image: data.images["social-image-smidighelsesjekk"].src,
     card: "summary_large_image",
   });
