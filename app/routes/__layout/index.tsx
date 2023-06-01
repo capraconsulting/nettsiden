@@ -213,5 +213,8 @@ export const ViJobberMedStoreAktørerINorge = ({
         </div>
       ))}
     </div>
+    <Button href="/dette-har-vi-gjort" variant="solid">
+      Dette har vi gjort
+    </Button>
   </>
 );
