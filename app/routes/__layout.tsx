@@ -14,11 +14,10 @@ import { json } from "@remix-run/server-runtime";
 import { Footer } from "~/components/footer";
 import { Header } from "~/components/header";
 import { Todo } from "~/components/todo";
-import { getSanityClient } from "~/sanity/sanity-client.server";
 import type { CapraHandle } from "~/types";
 import { typedBoolean } from "~/utils/misc";
 import { fetchImageAssets } from "~/utils/sanity-image";
-import type { ContactFormRepresentative } from "./api.contact";
+import { fetchContactFormRepresentatives } from "./api.contact";
 import { ContactForm } from "./api.contact";
 
 export const loader = async ({ request }: LoaderArgs) => {
@@ -29,17 +28,7 @@ export const loader = async ({ request }: LoaderArgs) => {
   // const contactFormTitle = getContactFormTitle(matches.map((it) => it.module));
 
   const [contactFormRepresentatives, images] = await Promise.all([
-    getSanityClient()
-      .getAll("author", `employee == true && "contact-form" in placement`)
-      .then((it) =>
-        it.map(
-          (it2): ContactFormRepresentative => ({
-            name: it2.name ?? "",
-            email: it2.email ?? "",
-            image: it2.image!.asset,
-          }),
-        ),
-      ),
+    fetchContactFormRepresentatives(),
     fetchImageAssets([
       "logo-quality-sys-cert-iso-9001",
       "logo-miljofyrtaarn",
@@ -59,7 +48,8 @@ export const shouldRevalidate: ShouldRevalidateFunction = () => false;
 export default function Layout() {
   const data = useLoaderData<typeof loader>();
   const matches = useMatches();
-  const contactFormTitle = getContactFormTitle(matches);
+  const { contactFormTitle, contactFormDescription } =
+    getContactFormData(matches);
 
   return (
     <>
@@ -71,6 +61,7 @@ export default function Layout() {
         {contactFormTitle && (
           <ContactForm
             title={contactFormTitle}
+            description={contactFormDescription}
             representatives={data.contactFormRepresentatives}
           />
         )}
@@ -124,9 +115,16 @@ export function UnusedCatchBoundary() {
   );
 }
 
-const getContactFormTitle = (matches: { handle?: CapraHandle }[]) =>
-  matches
+const getContactFormData = (matches: { handle?: CapraHandle }[]) => {
+  const handleWithContactForm = matches
     .map((it) => it.handle)
     .filter(typedBoolean)
     .reverse()
-    .find((it) => it.contactFormTitle !== undefined)?.contactFormTitle;
+    .find((it) => it.contactFormTitle !== undefined);
+  const { contactFormTitle, contactFormDescription } =
+    handleWithContactForm ?? {};
+  return {
+    contactFormTitle,
+    contactFormDescription,
+  };
+};

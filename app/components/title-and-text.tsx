@@ -16,7 +16,7 @@ export const TitleAndText = ({
     <div
       id={id}
       className={classNames(
-        "flex w-full flex-col items-center gap-3 text-center lg:gap-4",
+        "flex w-full flex-col items-center gap-14 text-center lg:gap-16",
         {
           "scroll-mt-nav-height": !!id,
         },

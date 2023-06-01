@@ -5,6 +5,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useMatches,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/server-runtime";
 
@@ -39,8 +40,13 @@ export const links: LinksFunction = () => [
 ];
 
 export default function App() {
+  const matches = useMatches();
+  const scrollSmooth = matches
+    .map((it) => it.handle)
+    .some((it) => it?.scrollSmooth);
+
   return (
-    <html lang="no">
+    <html lang="no" className={scrollSmooth ? "scroll-smooth" : ""}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />

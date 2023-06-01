@@ -9,34 +9,15 @@ import type { SanityImageAsset, SanityReference } from "sanity-codegen";
 import { Button } from "~/components/button";
 import { CapraImage } from "~/components/capra-image";
 import { CapraLink } from "~/components/capra-link";
+import { getSanityClient } from "~/sanity/sanity-client.server";
 import { getEnvVariableOrThrow } from "~/utils/env";
 import { urlFor } from "~/utils/imageBuilder";
-
-export function validatePhoneNumber(phoneNumber: FormDataEntryValue | null) {
-  const errorMessage = "Vi trenger et gyldig telefonnummer.";
-  if (typeof phoneNumber !== "string" || phoneNumber.trim().length === 0) {
-    return errorMessage;
-  } else {
-    // Simple check that the number only includes digits after removing spaces, dashes and pluses
-    const trimmedPhoneNumber = phoneNumber.replace(/[- +]/g, "");
-    if (!/^\d+$/.test(trimmedPhoneNumber)) {
-      return errorMessage;
-    }
-  }
-  return undefined;
-}
 
 function validate(formData: FormData): Record<string, string> {
   const errors: Record<string, string> = {};
   const name = formData.get("name");
   if (typeof name !== "string" || name.trim().length === 0) {
     errors.name = "Navn må være satt.";
-  }
-
-  const phoneNumber = formData.get("phoneNumber");
-  const phoneNumberError = validatePhoneNumber(phoneNumber);
-  if (phoneNumberError) {
-    errors.phoneNumber = phoneNumberError;
   }
 
   const email = formData.get("email");
@@ -117,13 +98,21 @@ export const action = async ({ request, context }: DataFunctionArgs) => {
 
 interface ContactFormProps {
   title: React.ReactNode;
+  description?: React.ReactNode;
   representatives: ContactFormRepresentative[];
 }
-export const ContactForm = ({ title, representatives }: ContactFormProps) => {
+export const ContactForm = ({
+  title,
+  description = "Fyll ut skjemaet så kontakter vi deg!",
+  representatives,
+}: ContactFormProps) => {
   const fetcher = useFetcher<typeof action>();
   const isSuccess = fetcher.type === "done" && !fetcher.data;
   return (
-    <div className="bg-secondary pt-12 pb-[6vh]">
+    <div
+      id="kontakt-skjema"
+      className="scroll-mt-12 bg-secondary pt-12 pb-[6vh]"
+    >
       <article className="md:11/12 mx-auto flex w-10/12 flex-col items-center text-white sm:w-9/12">
         <section className="text-center">
           <p className="pb-4 text-xl font-bold text-peach md:text-4xl">
@@ -132,7 +121,7 @@ export const ContactForm = ({ title, representatives }: ContactFormProps) => {
           <p className="md:mb-8">
             {isSuccess
               ? "Vi tar kontakt med deg så snart som mulig."
-              : "Fyll ut skjemaet så kontakter vi deg!"}
+              : description}
           </p>
         </section>
         <section className="grid w-full max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2">
@@ -150,13 +139,6 @@ export const ContactForm = ({ title, representatives }: ContactFormProps) => {
               errors={fetcher.data?.errors}
             />
             <Input id="company" label="Bedrift" placeholder="Din bedrift" />
-            <Input
-              id="phoneNumber"
-              label="Telefon"
-              required
-              placeholder="Ditt telefonnummer"
-              errors={fetcher.data?.errors}
-            />
             <Input
               id="email"
               label="E-post"
@@ -192,7 +174,6 @@ const Input: React.FC<{
     <div>
       <label htmlFor={id} className="block">
         {label}
-        {required && <span className="inline-block text-red">*</span>}
       </label>
       <input
         id={id}
@@ -239,3 +220,16 @@ const Representatives = ({ representatives }: RepresentativesProps) => {
     </div>
   );
 };
+
+export const fetchContactFormRepresentatives = () =>
+  getSanityClient()
+    .getAll("author", `employee == true && "contact-form" in placement`)
+    .then((authors) =>
+      authors.map(
+        (author): ContactFormRepresentative => ({
+          name: author.name ?? "",
+          email: author.email ?? "",
+          image: author.image!.asset,
+        }),
+      ),
+    );
