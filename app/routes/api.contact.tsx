@@ -13,31 +13,11 @@ import { getSanityClient } from "~/sanity/sanity-client.server";
 import { getEnvVariableOrThrow } from "~/utils/env";
 import { urlFor } from "~/utils/imageBuilder";
 
-export function validatePhoneNumber(phoneNumber: FormDataEntryValue | null) {
-  const errorMessage = "Vi trenger et gyldig telefonnummer.";
-  if (typeof phoneNumber !== "string" || phoneNumber.trim().length === 0) {
-    return errorMessage;
-  } else {
-    // Simple check that the number only includes digits after removing spaces, dashes and pluses
-    const trimmedPhoneNumber = phoneNumber.replace(/[- +]/g, "");
-    if (!/^\d+$/.test(trimmedPhoneNumber)) {
-      return errorMessage;
-    }
-  }
-  return undefined;
-}
-
 function validate(formData: FormData): Record<string, string> {
   const errors: Record<string, string> = {};
   const name = formData.get("name");
   if (typeof name !== "string" || name.trim().length === 0) {
     errors.name = "Navn må være satt.";
-  }
-
-  const phoneNumber = formData.get("phoneNumber");
-  const phoneNumberError = validatePhoneNumber(phoneNumber);
-  if (phoneNumberError) {
-    errors.phoneNumber = phoneNumberError;
   }
 
   const email = formData.get("email");
@@ -160,13 +140,6 @@ export const ContactForm = ({
             />
             <Input id="company" label="Bedrift" placeholder="Din bedrift" />
             <Input
-              id="phoneNumber"
-              label="Telefon"
-              required
-              placeholder="Ditt telefonnummer"
-              errors={fetcher.data?.errors}
-            />
-            <Input
               id="email"
               label="E-post"
               type="email"
@@ -201,7 +174,6 @@ const Input: React.FC<{
     <div>
       <label htmlFor={id} className="block">
         {label}
-        {required && <span className="inline-block text-red">*</span>}
       </label>
       <input
         id={id}

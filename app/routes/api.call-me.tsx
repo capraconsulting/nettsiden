@@ -7,7 +7,20 @@ import { Button } from "~/components/button";
 import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import { getEnvVariableOrThrow } from "~/utils/env";
-import { validatePhoneNumber } from "./api.contact";
+
+function validatePhoneNumber(phoneNumber: FormDataEntryValue | null) {
+  const errorMessage = "Vi trenger et gyldig telefonnummer.";
+  if (typeof phoneNumber !== "string" || phoneNumber.trim().length === 0) {
+    return errorMessage;
+  } else {
+    // Simple check that the number only includes digits after removing spaces, dashes and pluses
+    const trimmedPhoneNumber = phoneNumber.replace(/[- +]/g, "");
+    if (!/^\d+$/.test(trimmedPhoneNumber)) {
+      return errorMessage;
+    }
+  }
+  return undefined;
+}
 
 export const action = async ({ request, context }: DataFunctionArgs) => {
   const formData = await request.formData();
