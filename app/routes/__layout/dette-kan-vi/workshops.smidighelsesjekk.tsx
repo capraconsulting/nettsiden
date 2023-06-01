@@ -119,7 +119,7 @@ export default function Component() {
       <div className="w-screen">
         <ContactForm
           title="Ta kontakt!"
-          description="Fyll ut skjemaet så kontakter vi deg for en gratis smidig helsesjekk uten forpliktelser! Flere spørsmå? Ta kontakt med Tuva."
+          description="Fyll ut skjemaet så kontakter vi deg for en gratis smidig helsesjekk uten forpliktelser! Flere spørsmål? Ta kontakt med Tuva."
           representatives={contactFormRepresentatives.filter((representative) =>
             representative.name.includes("Tuva"),
           )}
