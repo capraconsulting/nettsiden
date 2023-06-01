@@ -85,11 +85,11 @@ export default function Component() {
 
         <div className="relative overflow-hidden">
           <CapraImage
-            className="aspect-[3.8/2] w-screen max-w-7xl origin-bottom-right scale-[1.2] object-cover object-bottom"
+            className="aspect-[3/2] w-screen max-w-7xl origin-bottom-right scale-[1.2] object-cover object-bottom lg:aspect-[3.8/2]"
             image={images["photo-whiteboard-hga-sba"]}
           />
 
-          <div className="absolute right-12 bottom-16 w-[50%] lg:min-h-[200px] lg:w-[40%]">
+          <div className="md:absolute md:right-12 md:bottom-16 md:w-[50%] lg:min-h-[200px] lg:w-[40%]">
             <InformationCard className="bg-light-blue-20">
               Capra har siden 2005 spesialisert seg på smidig utvikling,
               transformasjon og ledelse i noen av Norges største virksomheter,
