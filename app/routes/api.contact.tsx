@@ -110,7 +110,7 @@ export const ContactForm = ({
   const isSuccess = fetcher.type === "done" && !fetcher.data;
   return (
     <div
-      id="kontakt-skjema"
+      id="kontaktskjema"
       className="scroll-mt-12 bg-secondary pt-12 pb-[6vh]"
     >
       <article className="md:11/12 mx-auto flex w-10/12 flex-col items-center text-white sm:w-9/12">

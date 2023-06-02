@@ -88,7 +88,7 @@ export default function Component() {
           ligger an og hva deres potensiale for å øke verdiskapningen er!
         </TitleAndText>
 
-        <Button width="content" variant="solid" href="#kontakt-skjema">
+        <Button width="content" variant="solid" href="#kontaktskjema">
           Få en smidig helsesjekk her!
         </Button>
 
@@ -126,7 +126,7 @@ export default function Component() {
           virksomheten din er for fart, sammen med konkrete forslag til
           forbedring.
         </TitleAndText>
-        <Button width="content" variant="solid" href="#kontakt-skjema">
+        <Button width="content" variant="solid" href="#kontaktskjema">
           Book gratis smidig helsesjekk
         </Button>
 
