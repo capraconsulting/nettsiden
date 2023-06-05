@@ -143,7 +143,7 @@ export default function Component() {
             description="Første møte blir vi enige om"
             items={[
               "Hvilket område ved virksomheten som skal vurderes",
-              "Hvilke nøkkelpersoner som skal interjvues",
+              "Hvilke nøkkelpersoner som skal intervjues",
               "Fremdriftsplan og møter",
             ]}
           />
@@ -154,7 +154,7 @@ export default function Component() {
             items={[
               "Gjennomføre 6 kvalitative intervjuer",
               "Utsendelse av vår utarbeidede interne spørreundersøkelse",
-              "Innhenting av KPIer/målsetninger annen data",
+              "Innhenting av KPIer/målsetninger og annen data",
             ]}
           />
           <StepBox
