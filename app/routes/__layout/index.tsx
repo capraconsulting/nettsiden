@@ -1,3 +1,4 @@
+import React from "react";
 import { useLoaderData } from "@remix-run/react";
 import type {
   HeadersFunction,
@@ -176,7 +177,14 @@ export default function Index() {
       </BubbleSandwich>
 
       <Section>
-        <ViJobberMedStoreAktørerINorge companyImages={companyImages} />
+        <ViJobberMedStoreAktørerINorge
+          companyImages={companyImages}
+          actions={
+            <Button href="/dette-har-vi-gjort" variant="solid">
+              Dette har vi gjort
+            </Button>
+          }
+        />
       </Section>
     </>
   );
@@ -192,9 +200,11 @@ export const fetchCompanyImages = () =>
 
 interface ViJobberMedStoreAktørerINorgeProps {
   companyImages: Image[];
+  actions: React.ReactNode;
 }
 export const ViJobberMedStoreAktørerINorge = ({
   companyImages,
+  actions,
 }: ViJobberMedStoreAktørerINorgeProps) => (
   <>
     <TitleAndText title="Vi jobber med store aktører i Norge" titleAs="h2">
@@ -213,8 +223,6 @@ export const ViJobberMedStoreAktørerINorge = ({
         </div>
       ))}
     </div>
-    <Button href="/dette-har-vi-gjort" variant="solid">
-      Dette har vi gjort
-    </Button>
+    {actions}
   </>
 );

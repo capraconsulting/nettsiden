@@ -12,6 +12,7 @@ import { CapraLink } from "~/components/capra-link";
 import { getSanityClient } from "~/sanity/sanity-client.server";
 import { getEnvVariableOrThrow } from "~/utils/env";
 import { urlFor } from "~/utils/imageBuilder";
+import { formatPhoneNumber } from "~/utils/misc";
 
 function validate(formData: FormData): Record<string, string> {
   const errors: Record<string, string> = {};
@@ -199,6 +200,7 @@ const Input: React.FC<{
 export interface ContactFormRepresentative {
   name: string;
   email: string;
+  phoneNumber?: string;
   image: SanityImageAsset | SanityReference<SanityImageAsset>;
 }
 interface RepresentativesProps {
@@ -207,14 +209,19 @@ interface RepresentativesProps {
 const Representatives = ({ representatives }: RepresentativesProps) => {
   return (
     <div className="grid grid-flow-dense grid-cols-1 gap-y-5 gap-x-14 px-5 md:grid-cols-2">
-      {representatives.map(({ name, email, image }) => (
+      {representatives.map(({ name, email, phoneNumber, image }) => (
         <div key={name} className="flex flex-col">
           <CapraImage
             alt={`Bilde av ${name}`}
             src={urlFor(image).size(600, 600).url()}
           />
           <strong className="mt-5">{name}</strong>
-          <CapraLink href={`mailto:${email}`}>{email}</CapraLink>
+          {phoneNumber && (
+            <CapraLink href={`tel:${phoneNumber}`}>
+              {formatPhoneNumber(phoneNumber)}
+            </CapraLink>
+          )}
+          <CapraLink href={`mailto:${email}`}>Send mail</CapraLink>
         </div>
       ))}
     </div>
@@ -229,6 +236,7 @@ export const fetchContactFormRepresentatives = () =>
         (author): ContactFormRepresentative => ({
           name: author.name ?? "",
           email: author.email ?? "",
+          phoneNumber: author.phone,
           image: author.image!.asset,
         }),
       ),

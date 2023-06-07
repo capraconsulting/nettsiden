@@ -5,12 +5,14 @@ interface TitleAndTextProps {
   titleAs: "h1" | "h2" | "h3";
   children: React.ReactNode;
   id?: string;
+  className?: string;
 }
 export const TitleAndText = ({
   title,
   titleAs: TitleComponent,
   children,
   id,
+  className,
 }: TitleAndTextProps) => {
   return (
     <div
@@ -20,6 +22,7 @@ export const TitleAndText = ({
         {
           "scroll-mt-nav-height": !!id,
         },
+        className,
       )}
     >
       <TitleComponent className="w-[95%] max-w-7xl text-3xl font-bold text-secondary md:text-4xl lg:text-6xl">
