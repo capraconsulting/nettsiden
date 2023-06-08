@@ -7,8 +7,6 @@ import type {
 } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
-import type { ImageUrlBuilder } from "@sanity/image-url/lib/types/builder";
-
 import { Button } from "~/components/button";
 import { CapraLink } from "~/components/capra-link";
 import IconTitleAndTextBlock from "~/components/icon-title-and-text-block";
@@ -26,10 +24,6 @@ import { cacheControlHeaders } from "~/utils/cache-control";
 import { metaTags } from "~/utils/meta-tags";
 import { fetchImageAssets } from "~/utils/sanity-image";
 
-function cropper(builder: ImageUrlBuilder): ImageUrlBuilder {
-  return builder.crop("center").fit("crop").width(660).height(515);
-}
-
 export async function loader() {
   const [images, contactFormRepresentatives, companyImages] = await Promise.all(
     [
@@ -37,8 +31,6 @@ export async function loader() {
         "icon-connected-people-red",
         "icon-medal-red",
         "icon-learning-light-bulb-red",
-        ["photo-people-and-dog", cropper],
-        ["photo-whiteboard-hga-sba", cropper],
       ]),
       fetchContactFormRepresentatives(),
       fetchCompanyImages(),
