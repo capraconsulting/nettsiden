@@ -227,7 +227,14 @@ export default function Component() {
       </div>
 
       <Section>
-        <ViJobberMedStoreAktørerINorge companyImages={companyImages} />
+        <ViJobberMedStoreAktørerINorge
+          companyImages={companyImages}
+          actions={
+            <Button href="/dette-har-vi-gjort" variant="solid">
+              Dette har vi gjort
+            </Button>
+          }
+        />
       </Section>
     </>
   );
