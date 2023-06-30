@@ -143,6 +143,15 @@ export const Footer = ({ images }: FooterProps) => (
                 <FooterLink href={it.href}>{it.title}</FooterLink>
               </li>
             ))}
+            <li>
+              <FooterLink
+                external
+                title="Åpenhetsloven"
+                href="https://capra.notion.site/Redegj-relse-for-aktsomhetsvurderinger-2022-7f90df93409b4e509a6d0809c6aa7ba8?pvs=4"
+              >
+                Åpenhetsloven
+              </FooterLink>
+            </li>
           </ul>
         </FooterModule>
       </div>

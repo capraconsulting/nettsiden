@@ -22,7 +22,6 @@ export const menuItems: readonly MenuItem[] = [
   { title: "Partnere", href: "/partnere" },
   { title: "Om oss", href: "/om-oss" },
   { title: "Ansatte", href: "/ansatte" },
-  { title: "Åpenhetsloven", href: "https://capra.notion.site/Redegj-relse-for-aktsomhetsvurderinger-2022-7f90df93409b4e509a6d0809c6aa7ba8?pvs=4" },
 ];
 
 export const externalLinks = {
