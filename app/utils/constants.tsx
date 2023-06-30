@@ -14,6 +14,7 @@ interface MenuItem {
   href: string;
 }
 
+// Shared between header and footer
 export const menuItems: readonly MenuItem[] = [
   { title: "Dette kan vi", href: "/dette-kan-vi" },
   { title: "Dette har vi gjort", href: "/dette-har-vi-gjort" },
@@ -34,6 +35,8 @@ export const externalLinks = {
   gitHub: "https://github.com/capraconsulting",
   googleMaps:
     "https://google.com/maps/place/Capra+Consulting+AS/@59.9130579,10.7490986,17z/data=!3m1!4b1!4m5!3m4!1s0x46416e89e8977fa5:0x2cb9207380d3722e!8m2!3d59.9130579!4d10.7512872",
+  aapenhetsloven:
+    "https://capra.notion.site/Redegj-relse-for-aktsomhetsvurderinger-2022-7f90df93409b4e509a6d0809c6aa7ba8?pvs=4",
 } as const;
 
 export const socialPlatforms = [
