@@ -1,6 +1,6 @@
 import type {
   HeadersFunction,
-  V2_MetaFunction,
+  V2_ServerRuntimeMetaFunction,
 } from "@remix-run/server-runtime";
 
 import { Todo } from "~/components/todo";
@@ -9,7 +9,7 @@ import { metaTags } from "~/utils/meta-tags";
 
 export const headers: HeadersFunction = () => cacheControlHeaders;
 
-export const meta: V2_MetaFunction = () =>
+export const meta: V2_ServerRuntimeMetaFunction = () =>
   metaTags({
     title: "Backendutvikling - Hva er det?",
     description:

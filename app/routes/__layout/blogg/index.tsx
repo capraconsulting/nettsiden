@@ -2,7 +2,7 @@ import { Form, Link, useLoaderData, useSearchParams } from "@remix-run/react";
 import type {
   HeadersFunction,
   LoaderArgs,
-  V2_MetaFunction,
+  V2_ServerRuntimeMetaFunction,
 } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
@@ -55,7 +55,7 @@ export const loader = async ({ request }: LoaderArgs) => {
 };
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
-export const meta: V2_MetaFunction = () =>
+export const meta: V2_ServerRuntimeMetaFunction = () =>
   metaTags({
     title: "Les hva som rører seg i IT-bransjen - Blogg",
     description:

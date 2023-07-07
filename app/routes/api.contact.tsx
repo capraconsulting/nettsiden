@@ -1,8 +1,8 @@
 import type { HTMLInputTypeAttribute } from "react";
 import { useId } from "react";
 import { useFetcher } from "@remix-run/react";
+import type { DataFunctionArgs } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
-import type { DataFunctionArgs } from "@remix-run/server-runtime/dist/routeModules";
 
 import type { SanityImageAsset, SanityReference } from "sanity-codegen";
 
@@ -112,7 +112,7 @@ export const ContactForm = ({
   return (
     <div
       id="kontaktskjema"
-      className="scroll-mt-12 bg-secondary pt-12 pb-[6vh]"
+      className="scroll-mt-12 bg-secondary pb-[6vh] pt-12"
     >
       <article className="md:11/12 mx-auto flex w-10/12 flex-col items-center text-white sm:w-9/12">
         <section className="text-center">
@@ -208,7 +208,7 @@ interface RepresentativesProps {
 }
 const Representatives = ({ representatives }: RepresentativesProps) => {
   return (
-    <div className="grid grid-flow-dense grid-cols-1 gap-y-5 gap-x-14 px-5 md:grid-cols-2">
+    <div className="grid grid-flow-dense grid-cols-1 gap-x-14 gap-y-5 px-5 md:grid-cols-2">
       {representatives.map(({ name, email, phoneNumber, image }) => (
         <div key={name} className="flex flex-col">
           <CapraImage

@@ -17,7 +17,7 @@ interface ValueWheelProps {
 export const ValueWheel = (props: ValueWheelProps) => {
   const [active, setActive] = useState(-1);
   return (
-    <div className="my-0 mx-auto w-5/6 max-w-xl">
+    <div className="mx-auto my-0 w-5/6 max-w-xl">
       <Donut
         {...props}
         active={active}

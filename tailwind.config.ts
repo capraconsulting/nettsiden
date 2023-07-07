@@ -1,4 +1,6 @@
-module.exports = {
+import type { Config } from "tailwindcss";
+
+export default {
   content: ["./app/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
@@ -83,4 +85,4 @@ module.exports = {
     },
   },
   plugins: [require("@tailwindcss/typography")],
-};
+} satisfies Config;

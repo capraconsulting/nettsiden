@@ -1,4 +1,4 @@
-import type { V2_HtmlMetaDescriptor } from "@remix-run/server-runtime";
+import type { V2_ServerRuntimeMetaDescriptor } from "@remix-run/server-runtime";
 
 interface MetaTags {
   title: string;
@@ -28,7 +28,7 @@ export function metaTags({
     title = [title, COMPANY_NAME].join(" | ");
   }
 
-  const tags: V2_HtmlMetaDescriptor[] = [
+  const tags: V2_ServerRuntimeMetaDescriptor[] = [
     { title },
     { name: "description", content: description },
     { property: "og:title", content: title },

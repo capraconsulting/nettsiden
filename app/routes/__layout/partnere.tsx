@@ -1,7 +1,7 @@
 import { useLoaderData } from "@remix-run/react";
 import type {
   HeadersFunction,
-  V2_MetaFunction,
+  V2_ServerRuntimeMetaFunction,
 } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
@@ -19,7 +19,7 @@ export const handle: CapraHandle = {
   contactFormTitle: "Hvordan kan vi hjelpe deg?",
 };
 
-export const meta: V2_MetaFunction = () =>
+export const meta: V2_ServerRuntimeMetaFunction = () =>
   metaTags({
     title: "Leverandør av AWS - Les mer om skytjenesten her",
   });
@@ -48,7 +48,7 @@ export default function Partnere() {
           kompetansemiljøene på AWS.
         </TitleAndText>
 
-        <div className="flex w-full justify-center bg-peach-20 py-[5%] px-[10%]">
+        <div className="flex w-full justify-center bg-peach-20 px-[10%] py-[5%]">
           <div className="algin-center flex max-w-3xl flex-col items-center gap-10 lg:flex-row">
             <p className="text-center text-lg lg:text-left">
               Som{" "}
@@ -65,7 +65,7 @@ export default function Partnere() {
               til sky til et smertefritt paradigmeskifte.
             </p>
             <CapraImage
-              className="h-[90px] w-[340px] py-0 px-0"
+              className="h-[90px] w-[340px] px-0 py-0"
               image={images["logo-aws-partner"]}
             />
           </div>

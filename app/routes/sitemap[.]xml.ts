@@ -1,4 +1,4 @@
-import type { DataFunctionArgs } from "@remix-run/server-runtime/dist/routeModules";
+import type { DataFunctionArgs } from "@remix-run/server-runtime";
 
 import type { SitemapEntry } from "~/types";
 import { getDomainUrl } from "~/utils/misc";

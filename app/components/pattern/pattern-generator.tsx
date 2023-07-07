@@ -2,8 +2,7 @@ import type { SVGProps } from "react";
 import React from "react";
 
 import type { Size } from "~/components/pattern/size";
-import type { RectProps } from "~/components/pattern/types";
-import type { FillClass } from "~/components/pattern/types";
+import type { FillClass, RectProps } from "~/components/pattern/types";
 import { classNames } from "~/utils/misc";
 
 interface Props {

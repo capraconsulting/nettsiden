@@ -2,7 +2,7 @@ import type { PropsWithChildren } from "react";
 import { useLoaderData } from "@remix-run/react";
 import type {
   HeadersFunction,
-  V2_MetaFunction,
+  V2_ServerRuntimeMetaFunction,
 } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
@@ -60,7 +60,7 @@ export const loader = async () => {
 
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
-export const meta: V2_MetaFunction = () =>
+export const meta: V2_ServerRuntimeMetaFunction = () =>
   metaTags({
     title: "Innovasjon og teknologi i fokus - Om oss",
   });
@@ -303,7 +303,7 @@ const InfoBox = ({
 }: InfoBoxProps) => {
   return (
     <div
-      className={`flex w-full flex-col gap-4 border-none bg-peach-20 py-7 px-6 sm:w-11/12 md:max-w-2xl md:p-12 ${
+      className={`flex w-full flex-col gap-4 border-none bg-peach-20 px-6 py-7 sm:w-11/12 md:max-w-2xl md:p-12 ${
         className ?? ""
       }`}
     >
@@ -343,7 +343,7 @@ const EmphasizedTextBox = ({
       className={classNames(
         BRAND_BG_AND_FG_COLORS[color],
         "font-bold",
-        "rounded py-4 px-5",
+        "rounded px-5 py-4",
       )}
     >
       {children}

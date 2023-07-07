@@ -11,9 +11,8 @@ node_modules
 .idea/
 *.iml
 
-/app/tailwind.css
-
 .dev.vars
 /functions/\[\[path\]\].js
 /functions/\[\[path\]\].js.map
 /functions/
+/.wrangler/
