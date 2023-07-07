@@ -9,9 +9,9 @@ import { classNames } from "~/utils/misc";
 import { CapraImage } from "./capra-image";
 import { CapraLink } from "./capra-link";
 
-type Props = Pick<HighlightProps, "code" | "language">;
+type PrismProps = Pick<HighlightProps, "code" | "language">;
 
-function Prism({ code = "", language }: Props) {
+function Prism({ code = "", language }: PrismProps) {
   return (
     // TODO: Switch themes if we're not happy with GitHub
     <Highlight code={code} language={language} theme={themes.github}>
