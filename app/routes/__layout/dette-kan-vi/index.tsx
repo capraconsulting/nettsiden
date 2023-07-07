@@ -2,7 +2,7 @@ import { useLoaderData } from "@remix-run/react";
 import type {
   HeadersFunction,
   SerializeFrom,
-  V2_MetaFunction,
+  V2_ServerRuntimeMetaFunction,
 } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
@@ -14,7 +14,7 @@ import { cacheControlHeaders } from "~/utils/cache-control";
 import { metaTags } from "~/utils/meta-tags";
 import { fetchImageAssets } from "~/utils/sanity-image";
 
-export const meta: V2_MetaFunction = () =>
+export const meta: V2_ServerRuntimeMetaFunction = () =>
   metaTags({
     title: "IT-konsulenter, sikkerhet og skreddersøm",
     description:

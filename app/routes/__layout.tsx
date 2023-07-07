@@ -17,8 +17,7 @@ import { Todo } from "~/components/todo";
 import type { CapraHandle } from "~/types";
 import { typedBoolean } from "~/utils/misc";
 import { fetchImageAssets } from "~/utils/sanity-image";
-import { fetchContactFormRepresentatives } from "./api.contact";
-import { ContactForm } from "./api.contact";
+import { ContactForm, fetchContactFormRepresentatives } from "./api.contact";
 
 export const loader = async ({ request }: LoaderArgs) => {
   // TODO: Consider conditionally fetching the contactFormRepresentatives based on the current route

@@ -2,7 +2,7 @@ import { useLoaderData } from "@remix-run/react";
 import type {
   HeadersFunction,
   LoaderArgs,
-  V2_MetaFunction,
+  V2_ServerRuntimeMetaFunction,
 } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
@@ -67,7 +67,7 @@ interface CapraJob {
 
 const TEAM_TAILOR_API_VERSION = "20210218";
 
-export const loader = async ({ context }: LoaderArgs) => {
+export async function loader({ context }: LoaderArgs) {
   const TEAM_TAILOR_API_KEY = getEnvVariableOrThrow(
     "TEAM_TAILOR_API_KEY",
     context,
@@ -125,15 +125,16 @@ export const loader = async ({ context }: LoaderArgs) => {
     .filter(typedBoolean);
 
   return json({ images, jobs }, { headers: cacheControlHeaders });
-};
+}
+
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
-export const meta: V2_MetaFunction<typeof loader> = ({ data }) =>
+export const meta: V2_ServerRuntimeMetaFunction<typeof loader> = ({ data }) =>
   metaTags({
     title: "Norges beste arbeidsplass søker IT-konsulent",
     description:
       "Hos Capra Consulting får du muligheten til å utvikle deg i et faglig og sosialt miljø. Nysgjerrig på hva Capra kan tilby? Les mer her",
-    image: data.images["photo-sem-capracon"].src,
+    image: data?.images["photo-sem-capracon"].src,
   });
 
 export default function BliEnAvOss() {
@@ -238,7 +239,7 @@ const JobListingsByDepartment: React.FC = () => {
       {Object.entries(groups).map(([department, jobs]) => (
         <details
           key={department}
-          className="[&>summary:after]:open:content-['▼'] [&>summary::-webkit-details-marker]:hidden"
+          className="[&>summary::-webkit-details-marker]:hidden [&>summary:after]:open:content-['▼']"
           open
         >
           <summary className="mb-4 flex cursor-pointer list-none justify-between border-b border-b-[#ccc] pb-2 text-2xl font-bold after:self-center after:text-xs after:text-[#ccc] after:content-['►']">

@@ -2,7 +2,7 @@ import { useLoaderData } from "@remix-run/react";
 import type {
   HeadersFunction,
   LoaderArgs,
-  V2_MetaFunction,
+  V2_ServerRuntimeMetaFunction,
 } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
@@ -35,10 +35,10 @@ export const loader = async ({ params }: LoaderArgs) => {
 };
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
-export const meta: V2_MetaFunction<typeof loader> = ({ data }) =>
+export const meta: V2_ServerRuntimeMetaFunction<typeof loader> = ({ data }) =>
   metaTags({
-    title: data.item.helmetTitle!,
-    description: data.item.helmetDescription!,
+    title: data?.item.helmetTitle!,
+    description: data?.item.helmetDescription,
   });
 
 export default function DetteHarViGjortItem() {

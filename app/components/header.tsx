@@ -16,7 +16,7 @@ export function Header() {
   return (
     <header
       className={classNames(
-        "sticky top-0 bottom-0 z-10 flex items-center border-b border-solid px-6 transition-none desktop:justify-between desktop:px-8",
+        "sticky bottom-0 top-0 z-10 flex items-center border-b border-solid px-6 transition-none desktop:justify-between desktop:px-8",
         {
           "h-screen flex-col bg-main text-white": expanded,
           "max-h-nav-height border-b-[#ccc] bg-white":

@@ -1,7 +1,7 @@
 import { useLoaderData } from "@remix-run/react";
 import type {
   HeadersFunction,
-  V2_MetaFunction,
+  V2_ServerRuntimeMetaFunction,
 } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
@@ -17,7 +17,7 @@ export const handle: CapraHandle = {
   contactFormTitle: "Trenger du frontend spisskompetanse på ditt team?",
 };
 
-export const meta: V2_MetaFunction = () =>
+export const meta: V2_ServerRuntimeMetaFunction = () =>
   metaTags({
     title: "Frontendutvikling - Hva er det?",
     description:

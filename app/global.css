@@ -1,17 +1,17 @@
 html {
-    font-size: 106.25%;
+  font-size: 106.25%;
 }
 
 /* Remove default padding + list styles on ul, ol elements with a class attribute */
 ul[class],
 ol[class] {
-    padding: 0;
-    list-style: none;
+  padding: 0;
+  list-style: none;
 }
 
 ul,
 ol {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
 /* Remove default margin */
@@ -31,33 +31,33 @@ figcaption,
 blockquote,
 dl,
 dd {
-    margin: 0;
+  margin: 0;
 }
 
 /* Set core body defaults */
 body {
-    min-height: 100vh;
-    scroll-behavior: smooth;
-    text-rendering: optimizeSpeed;
-    line-height: 1.5;
-    background-color: #fdfdfc;
-    overflow-x: hidden;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  background-color: #fdfdfc;
+  overflow-x: hidden;
 }
 
 /* A elements that don't have a class get default styles */
 a:not([class]) {
-    text-decoration-skip-ink: auto;
+  text-decoration-skip-ink: auto;
 }
 
 /* Make images easier to work with */
 img {
-    max-width: 100%;
-    display: block;
+  max-width: 100%;
+  display: block;
 }
 
 /* Natural flow and rhythm in articles by default */
 article > * + * {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 /* Inherit fonts for inputs and buttons */
@@ -65,15 +65,15 @@ input,
 button,
 textarea,
 select {
-    font: inherit;
+  font: inherit;
 }
 
 /* Remove all animations and transitions for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

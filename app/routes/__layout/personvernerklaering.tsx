@@ -1,5 +1,7 @@
-import type { HeadersFunction } from "@remix-run/server-runtime";
-import type { V2_MetaFunction } from "@remix-run/server-runtime";
+import type {
+  HeadersFunction,
+  V2_ServerRuntimeMetaFunction,
+} from "@remix-run/server-runtime";
 
 import { Button } from "~/components/button";
 import { cacheControlHeaders } from "~/utils/cache-control";
@@ -7,7 +9,7 @@ import { metaTags } from "~/utils/meta-tags";
 
 export const headers: HeadersFunction = () => cacheControlHeaders;
 
-export const meta: V2_MetaFunction = () =>
+export const meta: V2_ServerRuntimeMetaFunction = () =>
   metaTags({
     title: "Personvernerklæring",
   });

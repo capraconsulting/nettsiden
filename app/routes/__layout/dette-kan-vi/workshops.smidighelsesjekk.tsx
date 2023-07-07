@@ -2,7 +2,7 @@ import React from "react";
 import { useLoaderData } from "@remix-run/react";
 import type {
   HeadersFunction,
-  V2_MetaFunction,
+  V2_ServerRuntimeMetaFunction,
 } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
@@ -60,14 +60,14 @@ export async function loader() {
 
 export const headers: HeadersFunction = () => cacheControlHeaders;
 
-export const meta: V2_MetaFunction<typeof loader> = ({ data }) =>
+export const meta: V2_ServerRuntimeMetaFunction<typeof loader> = ({ data }) =>
   metaTags({
     title:
       "Skaper du faktisk forretningsverdi med teknologien i selskapet ditt?",
     description:
       "Få et øyeblikksbilde av hvor godt rigget virksomheten din er for fart, sammen med konkrete forslag til forbedring!",
 
-    image: data.images["social-image-smidighelsesjekk"].src,
+    image: data?.images["social-image-smidighelsesjekk"].src,
     card: "summary_large_image",
   });
 
@@ -98,7 +98,7 @@ export default function Component() {
             image={images["photo-whiteboard-hga-sba"]}
           />
 
-          <div className="md:absolute md:right-12 md:bottom-16 md:w-[50%] lg:min-h-[200px] lg:w-[40%]">
+          <div className="md:absolute md:bottom-16 md:right-12 md:w-[50%] lg:min-h-[200px] lg:w-[40%]">
             <InformationCard className="bg-light-blue-20">
               Capra har siden 2005 spesialisert seg på smidig utvikling,
               transformasjon og ledelse i noen av Norges største virksomheter,
@@ -189,7 +189,7 @@ export default function Component() {
 
           {isHydrated && (
             <>
-              <div className="absolute top-[-30px] left-[-30px]">
+              <div className="absolute left-[-30px] top-[-30px]">
                 <Pattern
                   width={100}
                   height={100}
@@ -251,7 +251,7 @@ const InformationCard = ({
     <div
       className={classNames(
         className,
-        "flex items-center justify-center py-16 px-16 text-secondary",
+        "flex items-center justify-center px-16 py-16 text-secondary",
       )}
     >
       <div className="max-w-3xl">

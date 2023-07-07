@@ -2,7 +2,7 @@ import { Form, useLoaderData, useSearchParams } from "@remix-run/react";
 import type {
   HeadersFunction,
   LoaderArgs,
-  V2_MetaFunction,
+  V2_ServerRuntimeMetaFunction,
 } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
@@ -67,7 +67,7 @@ export const handle: CapraHandle = {
   contactFormTitle: "Snakk med oss om dine IT-utfordringer!",
 };
 
-export const meta: V2_MetaFunction = () =>
+export const meta: V2_ServerRuntimeMetaFunction = () =>
   metaTags({
     title: "IT-konsulenter med ekspertise i software",
     description:

@@ -2,7 +2,7 @@ import { useLoaderData } from "@remix-run/react";
 import type {
   HeadersFunction,
   LoaderArgs,
-  V2_MetaFunction,
+  V2_ServerRuntimeMetaFunction,
 } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
@@ -32,7 +32,7 @@ export const handle: CapraHandle = {
 };
 
 type BloggExpanded = Omit<Blogg, "authors"> & {
-  authors: Author[];
+  authors?: Author[];
 };
 
 export const loader = async ({ params, request, context }: LoaderArgs) => {
@@ -53,7 +53,7 @@ export const loader = async ({ params, request, context }: LoaderArgs) => {
   const authors = new Intl.ListFormat("no-nb", {
     style: "long",
     type: "conjunction",
-  }).format(blogPost.authors.map((x) => x.name).filter(typedBoolean));
+  }).format((blogPost.authors ?? []).map((x) => x.name).filter(typedBoolean));
 
   return json(
     {
@@ -68,13 +68,14 @@ export const loader = async ({ params, request, context }: LoaderArgs) => {
 
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
-export const meta: V2_MetaFunction<typeof loader> = ({ data: { blogPost } }) =>
+export const meta: V2_ServerRuntimeMetaFunction<typeof loader> = ({ data }) =>
   metaTags({
-    title: blogPost.helmetTitle ?? blogPost.title!,
+    title: data?.blogPost.helmetTitle ?? data?.blogPost.title!,
     description:
-      blogPost.helmetDescription ?? getRawStringContent(blogPost.ingress),
-    image: urlFor(blogPost.mainImage!).url(),
-    author: blogPost.authors,
+      data?.blogPost.helmetDescription ??
+      getRawStringContent(data?.blogPost.ingress),
+    image: urlFor(data?.blogPost.mainImage!).url(),
+    author: data?.blogPost.authors,
     card: "summary_large_image",
   });
 
