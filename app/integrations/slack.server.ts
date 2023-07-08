@@ -77,18 +77,18 @@ export function slackClient({ request, context }: ClientArgs) {
                 .map(([key, value]) => ({
                   type: "section",
                   text: {
-                    type: "plain_text",
+                    type: "mrkdwn",
                     text: `*${key}*: ${value}`,
-                    emoji: false,
                   },
                 })),
               {
                 type: "context",
-                elements: Object.entries(meta).map(([key, value]) => ({
-                  type: "plain_text",
-                  text: `${key}: *${value}*`,
-                  emoji: false,
-                })),
+                elements: Object.entries(meta)
+                  .filter(([, value]) => !!value)
+                  .map(([key, value]) => ({
+                    type: "mrkdwn",
+                    text: `${key}: *${value}*`,
+                  })),
               },
             ],
           }),
@@ -96,7 +96,7 @@ export function slackClient({ request, context }: ClientArgs) {
         });
 
         if (!response.ok) {
-          throw new Response("Could not submit form", { status: 500 });
+          throw new Response(response.body, { status: 500 });
         }
       }
 
