@@ -1,7 +1,5 @@
-import type { AppLoadContext } from "@remix-run/server-runtime";
-
+import type { ClientArgs } from "~/integrations/types";
 import type { BlockContent, Blogg, Selvskryt } from "~/sanity/schema";
-import { getEnv } from "~/utils/env";
 import { typedBoolean } from "~/utils/misc";
 
 export function getMainImageAlt({
@@ -29,16 +27,9 @@ export function getRawStringContent(block: BlockContent | undefined): string {
     .join("\n\n");
 }
 
-export const isInPreviewMode = ({
-  request,
-  context,
-}: {
-  request: Request;
-  context: AppLoadContext;
-}): boolean => {
+export function isInPreviewMode({ request, context }: ClientArgs): boolean {
   const requestUrl = new URL(request.url);
   return (
-    requestUrl.searchParams.get("preview") ===
-    getEnv(context).SANITY_PREVIEW_SECRET
+    requestUrl.searchParams.get("preview") === context.SANITY_PREVIEW_SECRET
   );
-};
+}

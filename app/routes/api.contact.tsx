@@ -2,100 +2,34 @@ import type { HTMLInputTypeAttribute } from "react";
 import { useId } from "react";
 import { useFetcher } from "@remix-run/react";
 import type { DataFunctionArgs } from "@remix-run/server-runtime";
-import { json } from "@remix-run/server-runtime";
 
 import type { SanityImageAsset, SanityReference } from "sanity-codegen";
+import { z } from "zod";
 
 import { Button } from "~/components/button";
 import { CapraImage } from "~/components/capra-image";
 import { CapraLink } from "~/components/capra-link";
+import { slackClient } from "~/integrations/slack.server";
 import { getSanityClient } from "~/sanity/sanity-client.server";
-import { getEnvVariableOrThrow } from "~/utils/env";
 import { urlFor } from "~/utils/imageBuilder";
 import { formatPhoneNumber } from "~/utils/misc";
 
-function validate(formData: FormData): Record<string, string> {
-  const errors: Record<string, string> = {};
-  const name = formData.get("name");
-  if (typeof name !== "string" || name.trim().length === 0) {
-    errors.name = "Navn må være satt.";
-  }
-
-  const email = formData.get("email");
-  if (typeof email !== "string" || email.trim().length === 0) {
-    errors.email = "Vi trenger en gyldig e-post.";
-  } else {
-    // We only do extremely simple sanity checks here, as correct email validation is not something we should bother trying
-    const parts = email.split("@");
-    if (parts.length < 2 || parts.some((p) => p.length === 0)) {
-      errors.email = "Vi trenger en gyldig e-post.";
-    }
-  }
-
-  return errors;
-}
-
-export const action = async ({ request, context }: DataFunctionArgs) => {
-  const formData = await request.formData();
-
-  const errors = validate(formData);
-  if (Object.keys(errors).length > 0) {
-    return json({ errors }, 400);
-  }
-
-  // Send using slack
-  // Unlike Netlify this does not have mechanisms to handle bot or abuse
-  // We should implement that in the long term, but for now, let's just see
-  const SLACK_WEBHOOK_URL = getEnvVariableOrThrow("SLACK_WEBHOOK_URL", context);
-
-  const referer = request.headers.get("Referer");
-  const path = referer ? new URL(referer).pathname : "";
-
-  const response = await fetch(SLACK_WEBHOOK_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      blocks: [
-        {
-          type: "header",
-          text: {
-            type: "plain_text",
-            text: "Kontakt forespørsel",
-            emoji: true,
-          },
-        },
-        ...[...formData.entries()].map(([key, value]) => ({
-          type: "section",
-          text: {
-            type: "plain_text",
-            text: `${key}: ${value}`,
-            emoji: false,
-          },
-        })),
-        {
-          type: "context",
-          elements: [
-            {
-              type: "plain_text",
-              text: `Page: ${path}`,
-              emoji: false,
-            },
-            {
-              type: "plain_text",
-              text: `ENV: ${process.env.NODE_ENV}`,
-              emoji: false,
-            },
-          ],
-        },
-      ],
+export async function action(args: DataFunctionArgs) {
+  return await slackClient(args).submit({
+    header: "Kontaktforespørsel",
+    schema: z.object({
+      name: z
+        .string()
+        .regex(
+          /^[A-Za-zÀ-ÖØ-öø-ÿ ']+$/,
+          "Navn kan kun inneholde bokstaver og mellomrom.",
+        )
+        .min(3, "Navn må være satt."),
+      email: z.string().email("Vi trenger en gyldig e-post."),
+      company: z.string().optional(),
     }),
-    headers: { "Content-Type": "application/json" },
   });
-  if (!response.ok) {
-    throw new Response("Could not submit form", { status: 500 });
-  }
-
-  return json(null, 201);
-};
+}
 
 interface ContactFormProps {
   title: React.ReactNode;
@@ -108,7 +42,10 @@ export const ContactForm = ({
   representatives,
 }: ContactFormProps) => {
   const fetcher = useFetcher<typeof action>();
-  const isSuccess = fetcher.type === "done" && !fetcher.data;
+  const isSuccess =
+    fetcher.type === "done" && fetcher.data && !("errors" in fetcher.data);
+  const errors =
+    fetcher.data && "errors" in fetcher.data ? fetcher.data.errors : undefined;
   return (
     <div
       id="kontaktskjema"
@@ -137,7 +74,7 @@ export const ContactForm = ({
               label="Navn"
               required
               placeholder="Ditt navn"
-              errors={fetcher.data?.errors}
+              errors={errors}
             />
             <Input id="company" label="Bedrift" placeholder="Din bedrift" />
             <Input
@@ -146,7 +83,7 @@ export const ContactForm = ({
               type="email"
               required
               placeholder="Din e-post"
-              errors={fetcher.data?.errors}
+              errors={errors}
             />
             <Button variant="solid" type="submit" className="mx-auto lg:mx-0">
               Kontakt meg

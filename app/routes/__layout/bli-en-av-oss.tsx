@@ -12,51 +12,11 @@ import { CapraLink } from "~/components/capra-link";
 import { ContentAndImageBox } from "~/components/content-and-image-box/content-and-image-box";
 import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
+import { teamTailorClient } from "~/integrations/team-tailor.server";
 import { cacheControlHeaders } from "~/utils/cache-control";
-import { getEnvVariableOrThrow } from "~/utils/env";
 import { metaTags } from "~/utils/meta-tags";
 import { groupBy, typedBoolean } from "~/utils/misc";
 import { fetchImageAssets } from "~/utils/sanity-image";
-
-/**
- * Team Tailor integration
- */
-interface TeamTailorJobsResponse {
-  data: TeamTailorJob[];
-}
-
-interface TeamTailorJob {
-  id: string;
-  attributes: {
-    title: string;
-    internal: boolean;
-  };
-  links: {
-    "careersite-job-url": string;
-  };
-  relationships: {
-    department: {
-      data?: {
-        type: "departments";
-        id: string;
-      };
-      links: {
-        related: string;
-      };
-    };
-  };
-}
-
-interface TeamTailorDepartmentsResponse {
-  data: TeamTailorDepartment[];
-}
-
-interface TeamTailorDepartment {
-  id: string;
-  attributes: {
-    name: string;
-  };
-}
 
 interface CapraJob {
   id: string;
@@ -65,18 +25,8 @@ interface CapraJob {
   department: string;
 }
 
-const TEAM_TAILOR_API_VERSION = "20210218";
-
 export async function loader({ context }: LoaderArgs) {
-  const TEAM_TAILOR_API_KEY = getEnvVariableOrThrow(
-    "TEAM_TAILOR_API_KEY",
-    context,
-  );
-
-  const teamTailorRequestHeaders = {
-    Authorization: `Token token=${TEAM_TAILOR_API_KEY}`,
-    "X-Api-Version": TEAM_TAILOR_API_VERSION,
-  };
+  const teamTailor = teamTailorClient({ context });
 
   // Fetch all job listings and their departments
   const [images, jobsTeamTailor, departmentsTeamTailor] = await Promise.all([
@@ -85,12 +35,8 @@ export async function loader({ context }: LoaderArgs) {
       "photo-sem-capracon",
       "photo-crowd-capracon",
     ]),
-    fetch("https://api.teamtailor.com/v1/jobs?include=department", {
-      headers: teamTailorRequestHeaders,
-    }).then((x) => x.json<TeamTailorJobsResponse>()),
-    fetch("https://api.teamtailor.com/v1/departments", {
-      headers: teamTailorRequestHeaders,
-    }).then((x) => x.json<TeamTailorDepartmentsResponse>()),
+    teamTailor.jobs(),
+    teamTailor.departments(),
   ]);
 
   const jobs = jobsTeamTailor.data
