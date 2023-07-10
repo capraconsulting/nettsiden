@@ -4,7 +4,7 @@ import { z } from "zod";
 import type { ClientArgs } from "~/integrations/types";
 import { requireEnvVariable } from "~/utils/env";
 
-const BASE_URL = "https://api.teamtailor.com/v1";
+const BASE_URL = "https://api.teamtailor.com/v1/";
 const API_VERSION = "20210218";
 
 const department = z.object({
@@ -42,12 +42,12 @@ export function teamTailorClient({ context }: Pick<ClientArgs, "context">) {
   const apiKey = requireEnvVariable("TEAM_TAILOR_API_KEY", context);
 
   async function fetchFromTeamTailor<T>(
-    path: `/${string}`,
+    path: string,
     schema: ZodSchema<T>,
   ): Promise<{
     data: T[];
   }> {
-    const res = await fetch(new URL(`${BASE_URL}${path}`), {
+    const res = await fetch(new URL(path, BASE_URL), {
       headers: {
         Authorization: `Token token=${apiKey}`,
         "X-Api-Version": API_VERSION,
@@ -84,7 +84,7 @@ export function teamTailorClient({ context }: Pick<ClientArgs, "context">) {
 
   return {
     fetch: fetchFromTeamTailor,
-    departments: () => fetchFromTeamTailor("/departments", department),
-    jobs: () => fetchFromTeamTailor("/jobs?include=department", job),
+    departments: () => fetchFromTeamTailor("departments", department),
+    jobs: () => fetchFromTeamTailor("jobs?include=department", job),
   };
 }
