@@ -60,6 +60,13 @@ const courses = [
     },
   },
   {
+    label: "Skap endring i ditt team",
+    link: {
+      href: "/dette-kan-vi/workshops/endring-kommunikasjon",
+      label: "Les mer og bestill",
+    },
+  },
+  {
     label: "Team Assessment Service",
   },
   {
