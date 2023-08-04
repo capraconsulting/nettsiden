@@ -212,8 +212,10 @@ export default function Component() {
           title="Ta kontakt!"
           description="Fyll ut skjemaet så kontakter vi deg for å sette opp og finne ut hvilken pakke som passer!
           Flere spørsmål? Ta kontakt med Anita eller Anne."
-          representatives={contactFormRepresentatives.filter((representative) =>
-            representative.name.includes("Tuva"),
+          representatives={contactFormRepresentatives.filter(
+            (representative) =>
+              representative.name.includes("Anita") ||
+              representative.name.includes("Anne"),
           )}
         />
       </div>
