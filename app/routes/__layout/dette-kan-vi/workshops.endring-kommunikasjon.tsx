@@ -63,9 +63,9 @@ export const headers: HeadersFunction = () => cacheControlHeaders;
 export const meta: V2_ServerRuntimeMetaFunction<typeof loader> = ({ data }) =>
   metaTags({
     title:
-      "Skaper du faktisk forretningsverdi med teknologien i selskapet ditt?",
+      "Fra dårlig kommunikasjon til tillit og skaperglede",
     description:
-      "Få et øyeblikksbilde av hvor godt rigget virksomheten din er for fart, sammen med konkrete forslag til forbedring!",
+      "Vi drømmer alle om det gode teamsamarbeidet hvor vi snakker det samme språket, spiller hverandre gode og kjenner på en god flyt. Det er ikke alltid like lett å få til i praksis. Vi hjelper deg med å komme i gang!",
 
     image: data?.images["social-image-smidighelsesjekk"].src,
     card: "summary_large_image",
@@ -80,16 +80,16 @@ export default function Component() {
     <>
       <Section>
         <TitleAndText
-          title="Skaper du faktisk forretningsverdi med teknologien i selskapet ditt?"
+          title="Fra dårlig kommunikasjon til tillit og skaperglede"
           titleAs="h1"
         >
-          Noen ganger kan det være verdifullt å bli evaluert utenfra. Nå tilbyr
-          vi gratis smidig helsesjekk slik at du kan finne ut hvordan dere
-          ligger an og hva deres potensiale for å øke verdiskapningen er!
+          Vi drømmer alle om det gode teamsamarbeidet hvor vi snakker det samme språket, spiller hverandre gode og kjenner på en god flyt.
+          Det er ikke alltid like lett å få til i praksis.
+          Vi hjelper deg med å komme i gang!
         </TitleAndText>
 
         <Button width="content" variant="solid" href="#kontaktskjema">
-          Få en smidig helsesjekk her!
+          Book workshop her
         </Button>
 
         <div className="relative overflow-hidden">
@@ -100,9 +100,9 @@ export default function Component() {
 
           <div className="md:absolute md:bottom-16 md:right-12 md:w-[50%] lg:min-h-[200px] lg:w-[40%]">
             <InformationCard className="bg-light-blue-20">
-              Capra har siden 2005 spesialisert seg på smidig utvikling,
-              transformasjon og ledelse i noen av Norges største virksomheter,
-              inkludert vår egen.
+              Anne Landro er en rutinert tjenestedesigner som har erfaring med hvordan selv ett ord kan velte et helt prosjekt.
+              <br /> <br />
+              Anita Jenbergsen har lang erfaring med ledelse og implementeringsprosesser med design. Hun vet hva som skjer når team ikke kommuniserer godt.
             </InformationCard>
 
             {isHydrated && (
@@ -121,13 +121,12 @@ export default function Component() {
       </Section>
 
       <Section>
-        <TitleAndText title="Hva er en smidig helsesjekk?" titleAs="h2">
-          En smidig helsesjekk gir deg et øyeblikksbilde av hvor godt rigget
-          virksomheten din er for fart, sammen med konkrete forslag til
-          forbedring.
+        <TitleAndText title="Vil du forbedre ditt team?" titleAs="h2">
+          Få de rette verktøyene til å skape endring når team har dårlig kommunikasjon og ikke klarer å levere som forventet.
+          Anne Landro og Anita Jenbergsen har skreddersydd 3 pakker med variasjon til hvor dypt du vil gå.
         </TitleAndText>
         <Button width="content" variant="solid" href="#kontaktskjema">
-          Book gratis smidig helsesjekk
+          Skap endring for ditt team
         </Button>
 
         <ol
@@ -139,41 +138,38 @@ export default function Component() {
         >
           <StepBox
             titleAs="h3"
-            title="Steg 1: Avklaringer"
-            description="Første møte blir vi enige om"
+            title="Pakke 1"
+            description="Denne pakken er en bli inspirert og øv på verktøyene-pakke. En speedintro til god kommunikasjon og skaperglede:"
             items={[
-              "Hvilket område ved virksomheten som skal vurderes",
-              "Hvilke nøkkelpersoner som skal intervjues",
-              "Fremdriftsplan og møter",
-            ]}
+              "God blanding mellom korte foredrag om teori og korte øvelser hvor gruppen(e) øver på å bruke de.",
+              "Teorier vi bygger på er blant annet fra Amy Edmondson og 5 Dysfunctions of a Team.",
+              "Deltagerne trenger ikke å være et fast team. Enkeltpersoner i et team kan delta og hente inspirasjon som de tar med til sitt team for å gjøre det bedre.",
+              "Workshop på 4 timer (inkludert pauser).",
+            ]} //TODO: PRIS MÅ MED
           />
           <StepBox
             titleAs="h3"
-            title="Steg 2: Innsiktsfase"
-            description="Vi henter informasjon ved"
+            title="Pakke 2"
+            description="Denne pakken er for å  forbedre teamsamarbeidet:"
             items={[
-              "Gjennomføre 6 kvalitative intervjuer",
-              "Utsendelse av vår utarbeidede interne spørreundersøkelse",
-              "Innhenting av KPIer/målsetninger og annen data",
-            ]}
+              "God blanding mellom korte foredrag om teori og verktøy",
+              "Teorier vi bygger på er blant annet fra Amy Edmondson og 5 dysfunctions of a team.",
+              "Deltakerne burde være  ett eller  to team som vil ha mer hjelp",
+              "Målet er å bruke verktøy for å  skape tillit, åpenhet og trygghet nok til at vi tør å ta de gode diskusjonene.",
+              "Workshop på 1 dag (inkludert pauser).",
+            ]} //TODO: PRIS MÅ MED
           />
           <StepBox
             titleAs="h3"
-            title="Steg 3: Bearbeidelse"
+            title="Pakke 3"
+            description="Denne pakken er for å dere som ønsker å gå i dybden for å rydde opp i større utfordringer i team:"
             items={[
-              "Vi bruker innsikten og kalibrerer opp mot vårt referansemateriale basert på erfaring og metodikk som er godt forankret i forskning.",
-            ]}
-          />
-          <StepBox
-            titleAs="h3"
-            title="Steg 4: Sluttrapport"
-            description="Basert på stegene over leverer vi en rapport på følgende"
-            items={[
-              "Overordnet vurdering av smidighet",
-              "Anbefalte tiltak med prioritering",
-              "Kvalitativ kost/nytte-vurdering av tiltak",
-              "Beskrivelse av forretningseffekt av tiltakene",
-            ]}
+              "God blanding mellom korte foredrag om teori og verktøy",
+              "Teorier vi bygger på er blant annet fra Amy Edmondson og 5 dysfunctions of a team.",
+              "Deltakerne burde være  ett eller  to team som vil ha mer hjelp",
+              "Målet er å bruke verktøy for å  skape tillit, åpenhet og trygghet nok til at vi tør å ta de gode diskusjonene, gå inn i en konflikt når det er nødvendig, og  gi hverandre tilbakemelding når det er behov for det.",
+              "Workshop på 2 dager (inkludert pauser).",
+            ]} //TODO: PRIS MÅ MED
           />
         </ol>
       </Section>
@@ -181,10 +177,9 @@ export default function Component() {
       <Section>
         <div className="relative flex w-11/12 max-w-7xl flex-col items-center">
           <InformationCard className="flex w-full max-w-7xl flex-col items-center bg-peach-20">
-            Med vår smidig helsesjekk følger det{" "}
-            <strong className="font-bold text-red">ingen forpliktelser.</strong>{" "}
-            Det skal sies at vi er såpass trygge på vår ekspertise at vi tror og
-            håper dere vil fortsette samarbeidet i dag eller i fremtiden.
+            Dette er perfekt for kick-off for team etter en ferie eller når man skal starte nye prosjekter.
+            Det er også for team som står litt fast eller trenger en liten restart. {" "}
+            <strong className="font-bold text-red">Vi skreddersyr alltid etter ditt behov.</strong>{" "}
           </InformationCard>
 
           {isHydrated && (
@@ -219,7 +214,8 @@ export default function Component() {
       <div className="w-screen">
         <ContactForm
           title="Ta kontakt!"
-          description="Fyll ut skjemaet så kontakter vi deg for en gratis smidig helsesjekk uten forpliktelser! Flere spørsmål? Ta kontakt med Tuva."
+          description="Fyll ut skjemaet så kontakter vi deg for å sette opp og finne ut hvilken pakke som passer!
+          Flere spørsmål? Ta kontakt med Anita eller Anne."
           representatives={contactFormRepresentatives.filter((representative) =>
             representative.name.includes("Tuva"),
           )}
