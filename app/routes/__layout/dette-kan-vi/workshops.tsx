@@ -138,7 +138,7 @@ export default function Workshops() {
       <Section>
         <div className="flex w-2/3 max-w-2xl flex-col">
           <h3 className="mb-4 flex cursor-pointer border-b border-b-[#ccc] pb-2 text-2xl font-bold">
-            Kurs og Workshops
+            Kurs og workshops
           </h3>
           <ul className="flex flex-col gap-3">
             {courses.map((x) => (
