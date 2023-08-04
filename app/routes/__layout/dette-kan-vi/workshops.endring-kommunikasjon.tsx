@@ -35,11 +35,7 @@ export async function loader() {
   const [images, contactFormRepresentatives, companyImages] = await Promise.all(
     [
       fetchImageAssets([
-        "photo-whiteboard-hga-sba",
-        [
-          "social-image-smidighelsesjekk",
-          (builder) => builder.width(1200).format("jpg"),
-        ],
+        "photo-workshop-endring-kommunikasjon-anne-anita",
       ]),
       fetchContactFormRepresentatives(),
       fetchCompanyImages(),
@@ -67,7 +63,7 @@ export const meta: V2_ServerRuntimeMetaFunction<typeof loader> = ({ data }) =>
     description:
       "Vi drømmer alle om det gode teamsamarbeidet hvor vi snakker det samme språket, spiller hverandre gode og kjenner på en god flyt. Det er ikke alltid like lett å få til i praksis. Vi hjelper deg med å komme i gang!",
 
-    image: data?.images["social-image-smidighelsesjekk"].src,
+    image: data?.images["photo-workshop-endring-kommunikasjon-anne-anita"].src,
     card: "summary_large_image",
   });
 
@@ -94,10 +90,9 @@ export default function Component() {
 
         <div className="relative overflow-hidden">
           <CapraImage
-            className="aspect-[3/2] w-screen max-w-7xl origin-bottom-right scale-[1.2] object-cover object-bottom lg:aspect-[3.8/2]"
-            image={images["photo-whiteboard-hga-sba"]}
+            className="aspect-[3/2] w-screen max-w-7xl origin-top scale-[1.5] object-cover object-bottom lg:aspect-[3.8/2]"
+            image={images["photo-workshop-endring-kommunikasjon-anne-anita"]}
           />
-
           <div className="md:absolute md:bottom-16 md:right-12 md:w-[50%] lg:min-h-[200px] lg:w-[40%]">
             <InformationCard className="bg-light-blue-20">
               Anne Landro er en rutinert tjenestedesigner som har erfaring med hvordan selv ett ord kan velte et helt prosjekt.
@@ -132,8 +127,6 @@ export default function Component() {
         <ol
           className={classNames(
             "flex w-11/12 max-w-3xl flex-col gap-8 lg:gap-12",
-            // TODO: Connect the steps with lines
-            // "[&>*]:before:self-stretch [&>*]:before:border [&>*]:before:border-main",
           )}
         >
           <StepBox
