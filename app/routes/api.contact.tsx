@@ -165,6 +165,23 @@ const Representatives = ({ representatives }: RepresentativesProps) => {
   );
 };
 
+export const fetchContactFormForWorkshopRepresentatives = () =>
+  getSanityClient()
+    .getAll(
+      "author",
+      `employee == true && "workshop-endring-kommunikasjon-contact-us" in placement`,
+    )
+    .then((authors) =>
+      authors.map(
+        (author): ContactFormRepresentative => ({
+          name: author.name ?? "",
+          email: author.email ?? "",
+          phoneNumber: author.phone,
+          image: author.image!.asset,
+        }),
+      ),
+    );
+
 export const fetchContactFormRepresentatives = () =>
   getSanityClient()
     .getAll("author", `employee == true && "contact-form" in placement`)

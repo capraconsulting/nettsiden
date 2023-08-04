@@ -8,7 +8,6 @@ import { json } from "@remix-run/server-runtime";
 
 import { Button } from "~/components/button";
 import { CapraImage } from "~/components/capra-image";
-import { Card } from "~/components/card";
 import { Pattern } from "~/components/pattern/pattern";
 import { Section } from "~/components/section";
 import { StepBox } from "~/components/step-box";
@@ -20,7 +19,7 @@ import {
 } from "~/routes/__layout/index";
 import {
   ContactForm,
-  fetchContactFormRepresentatives,
+  fetchContactFormForWorkshopRepresentatives,
 } from "~/routes/api.contact";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
@@ -36,7 +35,7 @@ export async function loader() {
   const [images, contactFormRepresentatives, companyImages] = await Promise.all(
     [
       fetchImageAssets(["photo-workshop-endring-kommunikasjon-anne-anita"]),
-      fetchContactFormRepresentatives(),
+      fetchContactFormForWorkshopRepresentatives(),
       fetchCompanyImages(),
     ],
   );

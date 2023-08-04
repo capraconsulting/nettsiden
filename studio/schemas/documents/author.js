@@ -105,6 +105,11 @@ export default {
             title: "Kontakt oss (TPU)",
             value: "tpu-contact-us",
           },
+          {
+            // found on the workshop page, two people have this
+            title: "Kontakt oss (Workshop endring og kommunikasjon)",
+            value: "workshop-endring-kommunikasjon-contact-us",
+          },
         ],
       },
     },
