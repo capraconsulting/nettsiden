@@ -11,6 +11,7 @@ import { CapraImage } from "~/components/capra-image";
 import { Card } from "~/components/card";
 import { Pattern } from "~/components/pattern/pattern";
 import { Section } from "~/components/section";
+import { StepBox } from "~/components/step-box";
 import { TitleAndText } from "~/components/title-and-text";
 import { useHydrated } from "~/hooks/use-hydrated";
 import {
@@ -255,37 +256,3 @@ const InformationCard = ({
   );
 };
 
-interface StepBoxProps {
-  titleAs: "h2" | "h3" | "h4";
-  title: React.ReactNode;
-  description?: React.ReactNode;
-  items?: React.ReactNode[];
-}
-const StepBox = ({
-                   titleAs: TitleComponent,
-                   title,
-                   description,
-                   items,
-                   extraInfo,
-                 }: StepBoxProps) => (
-  <Card as="li">
-    <article>
-      <TitleComponent className="font-bold uppercase text-main">
-        {title}
-      </TitleComponent>
-      <div>
-        <p>{description}</p>
-        <ul style={{ paddingLeft: 28, listStyle: "disc" }}>
-          {items?.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
-        <ul className="text-right font-bold uppercase text-main">
-          {extraInfo?.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
-      </div>
-    </article>
-  </Card>
-);
