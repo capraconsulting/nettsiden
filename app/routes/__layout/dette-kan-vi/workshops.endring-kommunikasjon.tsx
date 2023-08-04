@@ -145,7 +145,8 @@ export default function Component() {
               "Teorier vi bygger på er blant annet fra Amy Edmondson og 5 Dysfunctions of a Team.",
               "Deltagerne trenger ikke å være et fast team. Enkeltpersoner i et team kan delta og hente inspirasjon som de tar med til sitt team for å gjøre det bedre.",
               "Workshop på 4 timer (inkludert pauser).",
-            ]} //TODO: PRIS MÅ MED
+            ]}
+            extraInfo={["5000 kr per pers"]}
           />
           <StepBox
             titleAs="h3"
@@ -157,7 +158,8 @@ export default function Component() {
               "Deltakerne burde være  ett eller  to team som vil ha mer hjelp",
               "Målet er å bruke verktøy for å  skape tillit, åpenhet og trygghet nok til at vi tør å ta de gode diskusjonene.",
               "Workshop på 1 dag (inkludert pauser).",
-            ]} //TODO: PRIS MÅ MED
+            ]}
+            extraInfo={["7000 KR PER PERS/", "45 000 KR For  13 PERS"]}
           />
           <StepBox
             titleAs="h3"
@@ -169,7 +171,8 @@ export default function Component() {
               "Deltakerne burde være  ett eller  to team som vil ha mer hjelp",
               "Målet er å bruke verktøy for å  skape tillit, åpenhet og trygghet nok til at vi tør å ta de gode diskusjonene, gå inn i en konflikt når det er nødvendig, og  gi hverandre tilbakemelding når det er behov for det.",
               "Workshop på 2 dager (inkludert pauser).",
-            ]} //TODO: PRIS MÅ MED
+            ]}
+            extraInfo={["10 000 KR PER PERS"]}
           />
         </ol>
       </Section>
@@ -179,7 +182,9 @@ export default function Component() {
           <InformationCard className="flex w-full max-w-7xl flex-col items-center bg-peach-20">
             Dette er perfekt for kick-off for team etter en ferie eller når man skal starte nye prosjekter.
             Det er også for team som står litt fast eller trenger en liten restart. {" "}
-            <strong className="font-bold text-red">Vi skreddersyr alltid etter ditt behov.</strong>{" "}
+            <strong className="font-bold text-red">
+              Vi skreddersyr alltid etter ditt behov.
+            </strong>{" "}
           </InformationCard>
 
           {isHydrated && (
@@ -268,6 +273,7 @@ const StepBox = ({
                    title,
                    description,
                    items,
+                   extraInfo,
                  }: StepBoxProps) => (
   <Card as="li">
     <article>
@@ -278,6 +284,11 @@ const StepBox = ({
         <p>{description}</p>
         <ul style={{ paddingLeft: 28, listStyle: "disc" }}>
           {items?.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+        <ul className="text-right font-bold uppercase text-main">
+          {extraInfo?.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
