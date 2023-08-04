@@ -60,7 +60,7 @@ const courses = [
     },
   },
   {
-    label: "Skap endring i ditt team",
+    label: "Fra dårlig kommunikasjon til tillit og skaperglede",
     link: {
       href: "/dette-kan-vi/workshops/endring-kommunikasjon",
       label: "Les mer og bestill",
