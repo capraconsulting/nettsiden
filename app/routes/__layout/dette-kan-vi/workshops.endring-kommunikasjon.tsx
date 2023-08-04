@@ -35,9 +35,7 @@ export const handle: CapraHandle = {
 export async function loader() {
   const [images, contactFormRepresentatives, companyImages] = await Promise.all(
     [
-      fetchImageAssets([
-        "photo-workshop-endring-kommunikasjon-anne-anita",
-      ]),
+      fetchImageAssets(["photo-workshop-endring-kommunikasjon-anne-anita"]),
       fetchContactFormRepresentatives(),
       fetchCompanyImages(),
     ],
@@ -59,8 +57,7 @@ export const headers: HeadersFunction = () => cacheControlHeaders;
 
 export const meta: V2_ServerRuntimeMetaFunction<typeof loader> = ({ data }) =>
   metaTags({
-    title:
-      "Fra dårlig kommunikasjon til tillit og skaperglede",
+    title: "Fra dårlig kommunikasjon til tillit og skaperglede",
     description:
       "Vi drømmer alle om det gode teamsamarbeidet hvor vi snakker det samme språket, spiller hverandre gode og kjenner på en god flyt. Det er ikke alltid like lett å få til i praksis. Vi hjelper deg med å komme i gang!",
 
