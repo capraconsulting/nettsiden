@@ -88,7 +88,7 @@ export default function Component() {
 
         <div className="relative overflow-hidden">
           <CapraImage
-            className="aspect-[3/2] w-screen max-w-7xl origin-top scale-[1.5] object-cover object-bottom lg:aspect-[3.8/2]"
+            className="md:aspect-[3/2] md:w-screen md:max-w-7xl md:origin-top md:scale-[1.5] md:object-cover md:object-bottom lg:aspect-[3.8/2]"
             image={images["photo-workshop-endring-kommunikasjon-anne-anita"]}
           />
           <div className="md:absolute md:bottom-16 md:right-12 md:w-[50%] lg:min-h-[200px] lg:w-[40%]">
