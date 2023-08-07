@@ -28,11 +28,15 @@ export const StepBox = ({
             <li key={index}>{item}</li>
           ))}
         </ul>
-        <ul className="text-right font-bold uppercase text-main">
-          {extraInfo?.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
+        {extraInfo && (
+          <div className="pt-3">
+            <ul className="text-right font-bold uppercase text-main">
+              {extraInfo.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </article>
   </Card>
