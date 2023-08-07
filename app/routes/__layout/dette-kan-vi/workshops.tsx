@@ -136,7 +136,7 @@ export default function Workshops() {
         </Text>
       </Section>
       <Section>
-        <div className="flex w-2/3 max-w-2xl flex-col">
+        <div className="flex w-5/6 max-w-2xl flex-col md:w-3/4">
           <h3 className="mb-4 flex cursor-pointer border-b border-b-[#ccc] pb-2 text-2xl font-bold">
             Kurs og workshops
           </h3>
@@ -144,19 +144,19 @@ export default function Workshops() {
             {courses.map((x) => (
               <li
                 key={x.label}
-                className="text-md flex w-full justify-between md:text-xl"
+                className="flex w-full justify-between text-sm md:text-xl"
               >
-                <p>{x.label}</p>
+                <p className="w-3/5 md:w-2/3">{x.label}</p>
                 {x.link ? (
                   <CapraLink
                     href={x.link.href}
                     target="_blank"
-                    className="no-underline hover:underline"
+                    className="w-2/5 text-right no-underline hover:underline md:w-1/3"
                   >
                     {x.link.label}
                   </CapraLink>
                 ) : (
-                  <p>Kommer snart</p>
+                  <p className="w-2/5 text-right md:w-1/3">Kommer snart</p>
                 )}
               </li>
             ))}
