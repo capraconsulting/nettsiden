@@ -7,6 +7,7 @@ interface StepBoxProps {
   title: React.ReactNode;
   description?: React.ReactNode;
   items?: React.ReactNode[];
+  extraInfo?: React.ReactNode[];
 }
 
 export const StepBox = ({
