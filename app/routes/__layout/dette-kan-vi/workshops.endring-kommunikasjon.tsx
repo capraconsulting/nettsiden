@@ -234,9 +234,9 @@ export default function Component() {
 }
 
 const InformationCard = ({
-                           className,
-                           children,
-                         }: {
+  className,
+  children,
+}: {
   className?: string;
   children: React.ReactNode;
 }) => {
@@ -253,4 +253,3 @@ const InformationCard = ({
     </div>
   );
 };
-

@@ -1,5 +1,6 @@
-import { Card } from "~/components/card";
 import React from "react";
+
+import { Card } from "~/components/card";
 
 interface StepBoxProps {
   titleAs: "h2" | "h3" | "h4";
@@ -9,12 +10,12 @@ interface StepBoxProps {
 }
 
 export const StepBox = ({
-                   titleAs: TitleComponent,
-                   title,
-                   description,
-                   items,
-                   extraInfo,
-                 }: StepBoxProps) => (
+  titleAs: TitleComponent,
+  title,
+  description,
+  items,
+  extraInfo,
+}: StepBoxProps) => (
   <Card as="li">
     <article>
       <TitleComponent className="font-bold uppercase text-main">
