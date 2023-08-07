@@ -76,9 +76,10 @@ export default function Component() {
           title="Fra dårlig kommunikasjon til tillit og skaperglede"
           titleAs="h1"
         >
-          Vi drømmer alle om det gode teamsamarbeidet hvor vi snakker det samme språket, spiller hverandre gode og kjenner på en god flyt.
-          Det er ikke alltid like lett å få til i praksis.
-          Vi hjelper deg med å komme i gang!
+          Vi drømmer alle om det gode teamsamarbeidet hvor vi snakker det samme
+          språket, spiller hverandre gode og kjenner på en god flyt. Det er ikke
+          alltid like lett å få til i praksis. Vi hjelper deg med å komme i
+          gang!
         </TitleAndText>
 
         <Button width="content" variant="solid" href="#kontaktskjema">
@@ -92,9 +93,12 @@ export default function Component() {
           />
           <div className="md:absolute md:bottom-16 md:right-12 md:w-[50%] lg:min-h-[200px] lg:w-[40%]">
             <InformationCard className="bg-light-blue-20">
-              Anne Landro er en rutinert tjenestedesigner som har erfaring med hvordan selv ett ord kan velte et helt prosjekt.
+              Anne Landro er en rutinert tjenestedesigner som har erfaring med
+              hvordan selv ett ord kan velte et helt prosjekt.
               <br /> <br />
-              Anita Jenbergsen har lang erfaring med ledelse og implementeringsprosesser med design. Hun vet hva som skjer når team ikke kommuniserer godt.
+              Anita Jenbergsen har lang erfaring med ledelse og
+              implementeringsprosesser med design. Hun vet hva som skjer når
+              team ikke kommuniserer godt.
             </InformationCard>
 
             {isHydrated && (
@@ -114,8 +118,10 @@ export default function Component() {
 
       <Section>
         <TitleAndText title="Vil du forbedre ditt team?" titleAs="h2">
-          Få de rette verktøyene til å skape endring når team har dårlig kommunikasjon og ikke klarer å levere som forventet.
-          Anne Landro og Anita Jenbergsen har skreddersydd 3 pakker med variasjon til hvor dypt du vil gå.
+          Få de rette verktøyene til å skape endring når team har dårlig
+          kommunikasjon og ikke klarer å levere som forventet. Anne Landro og
+          Anita Jenbergsen har skreddersydd 3 pakker med variasjon til hvor dypt
+          du vil gå.
         </TitleAndText>
         <Button width="content" variant="solid" href="#kontaktskjema">
           Skap endring for ditt team
@@ -144,7 +150,7 @@ export default function Component() {
             description="Denne pakken er for å  forbedre teamsamarbeidet:"
             items={[
               "God blanding mellom korte foredrag om teori og verktøy",
-              "Teorier vi bygger på er blant annet fra Amy Edmondson og 5 dysfunctions of a team.",
+              "Teorier vi bygger på er blant annet fra Amy Edmondson og 5 Dysfunctions of a Team.",
               "Deltakerne burde være  ett eller  to team som vil ha mer hjelp",
               "Målet er å bruke verktøy for å  skape tillit, åpenhet og trygghet nok til at vi tør å ta de gode diskusjonene.",
               "Workshop på 1 dag (inkludert pauser).",
@@ -157,7 +163,7 @@ export default function Component() {
             description="Denne pakken er for å dere som ønsker å gå i dybden for å rydde opp i større utfordringer i team:"
             items={[
               "God blanding mellom korte foredrag om teori og verktøy",
-              "Teorier vi bygger på er blant annet fra Amy Edmondson og 5 dysfunctions of a team.",
+              "Teorier vi bygger på er blant annet fra Amy Edmondson og 5 Dysfunctions of a Team.",
               "Deltakerne burde være  ett eller  to team som vil ha mer hjelp",
               "Målet er å bruke verktøy for å  skape tillit, åpenhet og trygghet nok til at vi tør å ta de gode diskusjonene, gå inn i en konflikt når det er nødvendig, og  gi hverandre tilbakemelding når det er behov for det.",
               "Workshop på 2 dager (inkludert pauser).",
@@ -170,8 +176,9 @@ export default function Component() {
       <Section>
         <div className="relative flex w-11/12 max-w-7xl flex-col items-center">
           <InformationCard className="flex w-full max-w-7xl flex-col items-center bg-peach-20">
-            Dette er perfekt for kick-off for team etter en ferie eller når man skal starte nye prosjekter.
-            Det er også for team som står litt fast eller trenger en liten restart. {" "}
+            Dette er perfekt for kick-off for team etter en ferie eller når man
+            skal starte nye prosjekter. Det er også for team som står litt fast
+            eller trenger en liten restart.{" "}
             <strong className="font-bold text-red">
               Vi skreddersyr alltid etter ditt behov.
             </strong>{" "}
