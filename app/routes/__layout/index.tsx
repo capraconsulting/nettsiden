@@ -150,7 +150,7 @@ export default function Index() {
         color="lightBlue"
       >
         Ingen kan være best i alt! Derfor spesialiserer vi oss på utvalgte
-        markedsledenede teknologier.
+        markedsledende teknologier.
       </ContentAndImageBox>
 
       <BubbleSandwich
