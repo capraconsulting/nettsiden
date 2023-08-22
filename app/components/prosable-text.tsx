@@ -49,6 +49,16 @@ function Image(props: PortableTextTypeComponentProps<any>) {
   );
 }
 
+function Code(props: PortableTextTypeComponentProps<any>) {
+  if (!props.value?.code) {
+    return null;
+  }
+
+  return (
+    <Prism code={props.value?.code} language={props.value?.language ?? ""} />
+  );
+}
+
 interface ProseableTextProps {
   value: BlockContent;
   className?: string;
@@ -71,13 +81,7 @@ export const ProseableText = ({ value, className }: ProseableTextProps) => {
         value={value}
         components={{
           types: {
-            code: (props) =>
-              props.value.code ? (
-                <Prism
-                  code={props.value?.code}
-                  language={props.value?.language}
-                />
-              ) : null,
+            code: Code,
             image: Image,
             richTextImage: Image,
           },
