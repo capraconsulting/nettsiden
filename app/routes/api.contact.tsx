@@ -195,3 +195,17 @@ export const fetchContactFormRepresentatives = () =>
         }),
       ),
     );
+
+export const fetchContactFormForLifligRepresentatives = () =>
+  getSanityClient()
+    .getAll("author", `employee == true && "liflig-contact-us" in placement`)
+    .then((authors) =>
+      authors.map(
+        (author): ContactFormRepresentative => ({
+          name: author.name ?? "",
+          email: author.email ?? "",
+          phoneNumber: author.phone,
+          image: author.image!.asset,
+        }),
+      ),
+    );

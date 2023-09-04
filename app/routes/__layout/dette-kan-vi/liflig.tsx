@@ -1,7 +1,6 @@
 import { useLoaderData } from "@remix-run/react";
 import type {
-  HeadersFunction,
-  V2_ServerRuntimeMetaFunction,
+  HeadersFunction, V2_ServerRuntimeMetaFunction,
 } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
@@ -17,9 +16,16 @@ import { cacheControlHeaders } from "~/utils/cache-control";
 import { metaTags } from "~/utils/meta-tags";
 import { fetchImageAssets } from "~/utils/sanity-image";
 import { DetteHarViGjortCard } from "../dette-har-vi-gjort";
+import QuoteBlock from "~/components/quote-block";
+import {
+  ContactForm,
+  fetchContactFormForLifligRepresentatives,
+  fetchContactFormRepresentatives,
+} from "~/routes/api.contact";
+import React from "react";
 
 export const handle: CapraHandle = {
-  contactFormTitle: "Vil din bedrift prøve fremtidens leveransemodell?",
+
 };
 
 type SelvskrytExpanded = Omit<Selvskryt, "filter"> & {
@@ -27,16 +33,21 @@ type SelvskrytExpanded = Omit<Selvskryt, "filter"> & {
 };
 
 export const loader = async () => {
-  const [images, items] = await Promise.all([
+  const [images, contactFormRepresentatives, items] = await Promise.all([
     fetchImageAssets([
-      "icon-competence-red",
-      "icon-technical-red",
-      "icon-time-red",
+      "illustration-money",
+      "illustration-lock",
+      "illustration-group",
+      "icon-quote",
       "photo-money",
       "photo-money-spire",
-      "photo-kontor-gjensidige",
+      "liflig-europris",
+      "liflig-tavler",
+      "liflig-tomra",
+      "liflig-fnf",
       "photo-kontor-nrk",
     ]),
+    fetchContactFormForLifligRepresentatives(),
     getSanityClient().query<SelvskrytExpanded>(
       `* [_type == "selvskryt"] { ..., filter[]-> }`,
     ),
@@ -44,6 +55,7 @@ export const loader = async () => {
 
   return json({
     images,
+    contactFormRepresentatives,
     items: items.filter((item) =>
       item.filter.some((selvskrytFilter) => selvskrytFilter.title === "Liflig"),
     ),
@@ -60,149 +72,164 @@ export const meta: V2_ServerRuntimeMetaFunction = () =>
   });
 
 export default function Liflig() {
-  const { images, items } = useLoaderData<typeof loader>();
+  const { images, contactFormRepresentatives, items } = useLoaderData<typeof loader>();
   return (
     <>
       <Section>
         <TitleAndText
           title="Liflig - Skreddersydde IT-løsninger for bedriften din"
           titleAs="h1"
+          className={"max-w-5xl"}
         >
           Nye utviklingsmodeller krever nye arbeidsmåter. Liflig er til for at
           du skal slippe og tenke på håndtering av bla. konsulenter, forvaltning
           og tekniske valg. Det er vår jobb!
         </TitleAndText>
 
-        <div className="grid max-w-4xl grid-cols-1 gap-10 px-10 md:grid-cols-3">
+        <div className="grid max-w-7xl grid-cols-1 gap-10 px-10 md:grid-cols-3">
           <IconTitleAndTextBlock
-            title="Vi tar det tekniske"
+            title="Fleksible produktteam"
             titleAs="h2"
-            image={images["icon-technical-red"]}
+            image={images["illustration-group"]}
+            imageClassName={"!max-h-none h-48"}
+
           >
-            Du slipper tekniske valg og kan fokusere på det du er god på.{" "}
-            <strong>
-              Vi tar oss av bygging, sikkerhet, forvaltning og teknologier.
-            </strong>
+            Vi skalerer teamene våre etter dine behov for kompetanse og kapasitet. Om du ønsker å skalere opp eller ned, tilpasser vi månedsprisen
           </IconTitleAndTextBlock>
           <IconTitleAndTextBlock
-            title="Kort oppstartstid"
+            title="Vi tar ansvaret"
             titleAs="h2"
-            image={images["icon-time-red"]}
+            image={images["illustration-lock"]}
+            imageClassName={"!max-h-none h-48"}
+
           >
-            Vi har ferdig utviklet infrastruktur som gjør at{" "}
-            <strong>vi kan begynne å skrive kode fra dag 1.</strong>
+            Vi tar ansvaret for å overholde lovverk, sikkerhet og oppetid. Vi sikrer at løsningen er oppdater og enkel å videreutvikle, vedlikeholde og drifte.
           </IconTitleAndTextBlock>
 
           <IconTitleAndTextBlock
-            title="Kompetanse på laget"
+            title="Forutsigbar prismodell"
             titleAs="h2"
-            image={images["icon-competence-red"]}
+            image={images["illustration-money"]}
+            imageClassName={"!max-h-none h-48"}
           >
-            Modellen til Liflig gjør at{" "}
-            <strong>
-              du betaler for færre konsulenter, men får tilgang til ekspertise
-              fra flere.
-            </strong>
+            Fast månedspris betyr at du enkelt kan budsjettere uten uforutsette kostnader. Vi håndterer alt av sykdom, oppsigelse og ansettelse.
           </IconTitleAndTextBlock>
         </div>
       </Section>
-      <Section className="md:gap-20">
-        <TitleAndText title="Vi vil gjøre din jobb lettere!" titleAs="h2">
-          Visste du at Liflig betyr behagelig og noe man finner glede i? Liflig
-          er med andre ord følelsen når alle IT-systemer bare fungerer som det
-          skal.
-        </TitleAndText>
 
-        <ContentAndImageBox
-          title="Alltid tilgjengelig"
-          titleAs="h3"
-          image={images["photo-kontor-gjensidige"]}
-          color="peach"
-          height="40vw"
-          direction="left"
-        >
-          Liflig-teamet sitter <span lang="en">in house</span> på Capra sitt
-          hovedkontor i Oslo, du og din bedrift kan sitte akkurat hvor dere vil
-          i landet. Du som kunde skriver rett og slett direkte til teamet hva du
-          ønsker skal lages eller hva du opplever som feil. Første ledige i
-          teamet vil raskt plukke oppgavene og løse de for deg. Hvordan
-          oppgavene skal prioriteres velger du, men vi vil alltid rådgi deg om
-          hva som er viktig f.eks. med tanke på sikkerhet. Du skal få lov til å
-          drømme, mens vi tar oss av resten!
-        </ContentAndImageBox>
+      <QuoteBlock caption={"Andreas Tegle, Produktleder i Tavler"} image={images["icon-quote"]}>
+        Jeg kan gi dere en løs spesifikasjon og dra på ferie i en måned og være trygg på at det blir bra.
+      </QuoteBlock>
 
-        <ContentAndImageBox
-          title="Betal kun for det du trenger"
-          titleAs="h3"
-          image={images["photo-money-spire"]}
-          color="lightBlue"
-          height="40vw"
-          direction="right"
-        >
-          Liflig er et team med teknologer, som til sammen utgjør all den
-          kompetanse du trenger for å bygge den løsningen du ønsker. I
-          motsetning til å leie et prosjektteam med konsulenter, hvor hver
-          konsulent har hver sin ekspertise, booker du i Liflig den
-          arbeidskapasiteten du trenger uten å spesifisere hvilken kompetanse du
-          har behov for - du har alltid hele teamet og all kompetanse
-          tilgjengelig. Altså med Liflig kan du få tilgang til eksperter på
-          backend, UX, frontend, infrastruktur og arkitektur, men bare betale
-          for arbeidskapasiteten til f.eks. 2 konsulenter!
-        </ContentAndImageBox>
-
-        <ContentAndImageBox
-          title="Ingen uforutsette kostnader!"
-          titleAs="h3"
-          image={images["photo-money"]}
-          color="darkBlue"
-          height="60vw"
-          direction="left"
-        >
-          Siden du betaler for kapasitet og ikke enkelthoder, slipper du å
-          forholde deg til sykdom, permisjoner og andre uforutsette hendelser
-          livet garantert byr på. Vi jobber i team, så det vil alltid være noen
-          som er klare til å ta over oppgaven. Resultatet er ingen forsinkelser
-          i produksjon. Forvaltningsgjeld, den unødvendige tiden en utvikler
-          bruker på å forvalte tjenesten og løse feil, slipper du også. Med
-          riktig dokumentasjon, gode rutiner og at vi unngår å skape avhengighet
-          til 1 person som sitter med all kunnskapen, sikrer vi at vi kan
-          forvalte din tjeneste mer effektivt og enklere. For deg betyr det
-          totalt sett en rimeligere tjeneste og forutsigbart kostnadsbilde.
-        </ContentAndImageBox>
-
-        <ContentAndImageBox
-          title="Raskere utvikling"
-          titleAs="h3"
-          image={images["photo-kontor-nrk"]}
-          color="bordeaux"
-          height="40vw"
-          direction="right"
-        >
-          Har du et IT-problem du helst skulle løst i dag? Gjennom ferdig
-          utviklet infrastruktur og metode kan vi begynne å skrive kode så raskt
-          som fra dag én! Vi har allerede utviklet rammene som trengs for å
-          komme raskt igang med å skreddersy tjenesten til akkurat dine behov.
-          Om du ønsker å ta over driften av tjenesten din på sikt er også det
-          mulig. Vi har gode metoder for dokumentering, slik at en handover vil
-          gå smidig.
-        </ContentAndImageBox>
-      </Section>
       <Section>
-        <TitleAndText title="Kundehistorier" titleAs="h2">
-          Liflig leverer kontinuerlig verdi for kundene våre. Her har du noen
-          eksempler på hva Liflig har hjulpet andre med.
-        </TitleAndText>
-
-        <ul className="grid grid-cols-1 justify-center gap-12 sm:grid-cols-2 sm:gap-10 md:grid-cols-3 md:gap-8 lg:grid-cols-4 lg:gap-6">
-          {items.map((x) => (
-            <li key={x._id}>
-              <DetteHarViGjortCard key={x._id} selvskryt={x} />
-            </li>
-          ))}
-        </ul>
+        <TitleAndText
+          title="Hva får du av Liflig?"
+          titleAs="h1"
+          className={"max-w-5xl"}
+        />
+        <table className={"w-full max-w-5xl"}>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Liflig</th>
+              <th>Utviklingsteam</th>
+              <th>Low-code</th>
+              <th>Hyllevare</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className={"bg-blue-50"}>
+              <td className={"p-4"}>Skreddersøm</td>
+              <td className={"p-4 text-center"}>✅</td>
+              <td className={"p-4 text-center"}>✅</td>
+              <td className={"p-4 text-center"}>❌</td>
+              <td className={"p-4 text-center"}>❌</td>
+            </tr>
+            <tr>
+              <td className={"p-4"}>Inkludert sikkerhet og GDPR</td>
+              <td className={"p-4 text-center"}>✅</td>
+              <td className={"p-4 text-center"}>❌</td>
+              <td className={"p-4 text-center"}>✅</td>
+              <td className={"p-4 text-center"}>✅</td>
+            </tr>
+            <tr className={"bg-blue-50"}>
+              <td className={"p-4"}>Leverandøruavhengighet</td>
+              <td className={"p-4 text-center"}>✅</td>
+              <td className={"p-4 text-center"}>✅</td>
+              <td className={"p-4 text-center"}>❌</td>
+              <td className={"p-4 text-center"}>❌</td>
+            </tr>
+            <tr>
+              <td className={"p-4"}>Kun faste kostnader</td>
+              <td className={"p-4 text-center"}>✅</td>
+              <td className={"p-4 text-center"}>❌</td>
+              <td className={"p-4 text-center"}>❌</td>
+              <td className={"p-4 text-center"}>❌</td>
+            </tr>
+          </tbody>
+        </table>
       </Section>
-      <CallMeForm titleAs="h2" />
-      <div /> {/* Add some whitespace */}
+
+      <Section className={"md:gap-20"}>
+
+        <TitleAndText
+          title="Utfordringer som vi har løst"
+          titleAs="h2"
+          className={"max-w-5xl"}
+        />
+
+        <ContentAndImageBox
+          title="Europris"
+          titleAs="h3"
+          image={images["liflig-europris"]}
+          color="peach"
+
+          height="40vw"
+          direction="right"
+
+          readMoreLink={{linkText: "Les mer", to: "/dette-har-vi-gjort/europris"}}
+        >
+          Data om varelager, prising og kundeadferd, var spredt mellom mange systemer. Det ga utfordringer for GDPR, sikkerhet, fart og var åpenbar tapt forretningskritisk innsikt.
+        </ContentAndImageBox>
+
+
+        <ContentAndImageBox
+          title="Finans Norge"
+          titleAs="h3"
+          image={images["liflig-fnf"]}
+          color="darkBlue"
+
+          height="40vw"
+          direction="left"
+
+          readMoreLink={{linkText: "Les mer", to: "/dette-har-vi-gjort/finans-norge"}}
+        >
+          Trengte flere forretningskritiske systemer som automatiserte og reduserte behandlingstid. Tjenestene blir brukt av brannvesen, helsenett og Norges største forsikringsaktører.
+        </ContentAndImageBox>
+
+        <ContentAndImageBox
+          title="Tavler"
+          titleAs="h3"
+          image={images["liflig-tavler"]}
+          color="lightBlue"
+
+          height="40vw"
+          direction="right"
+
+        >
+          Gikk fra å levere en tjeneste med whiteboard, penn og møter, til å levere et totalt digitalt verktøy som kjernetjeneste!
+        </ContentAndImageBox>
+
+      </Section>
+
+      <div className="w-screen -mb-12">
+        <ContactForm
+          title="Vil din bedrift prøve fremtidens leveransemodell?"
+          description="Fyll ut skjemaet så kontakter vi deg!"
+          representatives={contactFormRepresentatives}
+        />
+      </div>
+
     </>
   );
 }
