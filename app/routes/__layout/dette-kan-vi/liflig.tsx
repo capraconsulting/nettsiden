@@ -8,14 +8,12 @@ import { ContentAndImageBox } from "~/components/content-and-image-box/content-a
 import IconTitleAndTextBlock from "~/components/icon-title-and-text-block";
 import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
-import { CallMeForm } from "~/routes/api.call-me";
 import { getSanityClient } from "~/sanity/sanity-client.server";
 import type { Selvskryt, Selvskrytfilter } from "~/sanity/schema";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { metaTags } from "~/utils/meta-tags";
 import { fetchImageAssets } from "~/utils/sanity-image";
-import { DetteHarViGjortCard } from "../dette-har-vi-gjort";
 import QuoteBlock from "~/components/quote-block";
 import {
   ContactForm,
@@ -184,7 +182,7 @@ export default function Liflig() {
           image={images["liflig-europris"]}
           color="peach"
 
-          height="40vw"
+          height="40vh"
           direction="right"
 
           readMoreLink={{linkText: "Les mer", to: "/dette-har-vi-gjort/europris"}}
@@ -199,7 +197,7 @@ export default function Liflig() {
           image={images["liflig-fnf"]}
           color="darkBlue"
 
-          height="40vw"
+          height="40vh"
           direction="left"
 
           readMoreLink={{linkText: "Les mer", to: "/dette-har-vi-gjort/finans-norge"}}
@@ -213,7 +211,7 @@ export default function Liflig() {
           image={images["liflig-tavler"]}
           color="lightBlue"
 
-          height="40vw"
+          height="40vh"
           direction="right"
 
         >
