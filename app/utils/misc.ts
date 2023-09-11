@@ -152,3 +152,7 @@ export function assertItemFound<T>(item: T | undefined): asserts item is T {
       status: 404,
     });
 }
+
+export const raise = (error: Error): never => {
+  throw error;
+};

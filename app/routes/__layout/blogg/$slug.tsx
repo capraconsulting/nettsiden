@@ -25,7 +25,7 @@ import {
 } from "~/utils/cache-control";
 import { urlFor } from "~/utils/imageBuilder";
 import { metaTags } from "~/utils/meta-tags";
-import { assertItemFound, typedBoolean } from "~/utils/misc";
+import { assertItemFound, raise, typedBoolean } from "~/utils/misc";
 
 export const handle: CapraHandle = {
   getSitemapEntries: () => getSanitySitemapEntries("blogg", "/blogg"),
@@ -70,11 +70,17 @@ export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
 export const meta: V2_ServerRuntimeMetaFunction<typeof loader> = ({ data }) =>
   metaTags({
-    title: data?.blogPost.helmetTitle ?? data?.blogPost.title!,
+    title:
+      data?.blogPost.helmetTitle ??
+      data?.blogPost.title ??
+      raise(new Error("Helmet title and title was undefined for blog post.")),
     description:
       data?.blogPost.helmetDescription ??
       getRawStringContent(data?.blogPost.ingress),
-    image: urlFor(data?.blogPost.mainImage!).url(),
+    image: urlFor(
+      data?.blogPost.mainImage ??
+        raise(new Error(`Main image for blog post is undefined.`)),
+    ).url(),
     author: data?.blogPost.authors,
     card: "summary_large_image",
   });

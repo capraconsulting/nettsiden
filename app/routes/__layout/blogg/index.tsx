@@ -16,7 +16,7 @@ import type { Author, Blogg, Bloggfilter } from "~/sanity/schema";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { urlFor } from "~/utils/imageBuilder";
 import { metaTags } from "~/utils/meta-tags";
-import { uniqueBy } from "~/utils/misc";
+import { raise, uniqueBy } from "~/utils/misc";
 
 type BloggExpanded = Omit<Blogg, "filter" | "authors"> & {
   filter: Bloggfilter[];
@@ -105,7 +105,13 @@ interface BloggCardProps {
 }
 export const BloggCard = ({ bloggEntry, imageProps }: BloggCardProps) => {
   return (
-    <Link prefetch="intent" to={bloggEntry.slug?.current!}>
+    <Link
+      prefetch="intent"
+      to={
+        bloggEntry.slug?.current ??
+        raise(new Error("Slug was undefined for blog-card."))
+      }
+    >
       <Card
         image={
           <div className="relative pb-[50%]">

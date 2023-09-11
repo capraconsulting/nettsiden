@@ -17,7 +17,7 @@ import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { urlFor } from "~/utils/imageBuilder";
 import { metaTags } from "~/utils/meta-tags";
-import { assertItemFound } from "~/utils/misc";
+import { assertItemFound, raise } from "~/utils/misc";
 
 export const handle: CapraHandle = {
   getSitemapEntries: () =>
@@ -37,7 +37,9 @@ export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
 export const meta: V2_ServerRuntimeMetaFunction<typeof loader> = ({ data }) =>
   metaTags({
-    title: data?.item.helmetTitle!,
+    title:
+      data?.item.helmetTitle ??
+      raise("Helmet title was undefined for DetteHarViGjort-page"),
     description: data?.item.helmetDescription,
   });
 
