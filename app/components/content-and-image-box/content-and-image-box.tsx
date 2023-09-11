@@ -37,7 +37,7 @@ interface Props {
   readMoreLink?: ReadMoreLink;
   hideMobileImage?: boolean;
 
-  imageClassName?: string
+  imageClassName?: string;
 }
 
 export const ContentAndImageBox: React.FC<Props> = ({
@@ -53,7 +53,7 @@ export const ContentAndImageBox: React.FC<Props> = ({
   readMoreLink,
   hideMobileImage = true,
 
-                                                      imageClassName
+  imageClassName,
 }) => {
   const { boxClassName, patternClassName } = getBoxConfig(color);
   const isHydrated = useHydrated();
