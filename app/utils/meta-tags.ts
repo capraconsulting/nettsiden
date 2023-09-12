@@ -1,7 +1,7 @@
 import type { V2_ServerRuntimeMetaDescriptor } from "@remix-run/server-runtime";
 
 interface MetaTags {
-  title: string;
+  title: string | undefined; // Force you to set the property, but allow undefined.
   description?: string;
   image?: string;
   card?: "summary" | "summary_large_image";
@@ -24,8 +24,8 @@ export function metaTags({
     description = `${COMPANY_NAME} AS`;
   }
 
-  if (!title.includes(COMPANY_NAME)) {
-    title = [title, COMPANY_NAME].join(" | ");
+  if (!title?.includes(COMPANY_NAME)) {
+    title = [title, COMPANY_NAME].filter(Boolean).join(" | ");
   }
 
   const tags: V2_ServerRuntimeMetaDescriptor[] = [

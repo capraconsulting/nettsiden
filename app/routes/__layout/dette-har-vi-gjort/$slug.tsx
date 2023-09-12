@@ -37,7 +37,7 @@ export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
 export const meta: V2_ServerRuntimeMetaFunction<typeof loader> = ({ data }) =>
   metaTags({
-    title: data?.item.helmetTitle!,
+    title: data?.item.helmetTitle,
     description: data?.item.helmetDescription,
   });
 
