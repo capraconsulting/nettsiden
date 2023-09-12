@@ -74,14 +74,14 @@ export const meta: V2_ServerRuntimeMetaFunction = () =>
 
 const TableThingy = () => {
   const TD = ({ children }: PropsWithChildren) => (
-    <td className="p-4">{children}</td>
+    <td className="px-1 py-4 lg:px-2">{children}</td>
   );
   const TH = ({
     children,
     first = false,
   }: PropsWithChildren<{ first?: boolean }>) => (
     <th
-      className={classNames("truncate px-2", {
+      className={classNames("truncate px-1 lg:px-2", {
         "!w-[30%]": first,
         "!w-[17%]": !first,
       })}
@@ -93,7 +93,7 @@ const TableThingy = () => {
     <img
       {...rest}
       alt={alt}
-      className={classNames("mx-auto h-6 w-6", className)}
+      className={classNames("mx-auto h-6 w-6 overflow-hidden", className)}
     />
   );
 
@@ -112,61 +112,61 @@ const TableThingy = () => {
         <tr className="bg-blue-50">
           <TD>Skreddersøm</TD>
           <TD>
-            <IMG src={Checked} className="h-6 w-6" alt="Checked" />
+            <IMG src={Checked} alt="Checked" />
           </TD>
           <TD>
-            <IMG src={Checked} className="h-6 w-6" alt="Checked" />
+            <IMG src={Checked} alt="Checked" />
           </TD>
           <TD>
-            <IMG src={Cross} className="h-6 w-6" alt="Unchecked" />
+            <IMG src={Cross} alt="Unchecked" />
           </TD>
           <TD>
-            <IMG src={Cross} className="h-6 w-6" alt="Unchecked" />
+            <IMG src={Cross} alt="Unchecked" />
           </TD>
         </tr>
         <tr>
           <TD>Inkludert sikkerhet og GDPR</TD>
           <TD>
-            <IMG src={Checked} className="h-6 w-6" alt="Checked" />
+            <IMG src={Checked} alt="Checked" />
           </TD>
           <TD>
-            <IMG src={Cross} className="h-6 w-6" alt="Unchecked" />
+            <IMG src={Cross} alt="Unchecked" />
           </TD>
           <TD>
-            <IMG src={Checked} className="h-6 w-6" alt="Checked" />
+            <IMG src={Checked} alt="Checked" />
           </TD>
           <TD>
-            <IMG src={Checked} className="h-6 w-6" alt="Checked" />
+            <IMG src={Checked} alt="Checked" />
           </TD>
         </tr>
         <tr className="bg-blue-50">
           <TD>Leverandøruavhengighet</TD>
           <TD>
-            <IMG src={Checked} className="h-6 w-6" alt="Checked" />
+            <IMG src={Checked} alt="Checked" />
           </TD>
           <TD>
-            <IMG src={Checked} className="h-6 w-6" alt="Checked" />
+            <IMG src={Checked} alt="Checked" />
           </TD>
           <TD>
-            <IMG src={Cross} className="h-6 w-6" alt="Unchecked" />
+            <IMG src={Cross} alt="Unchecked" />
           </TD>
           <TD>
-            <IMG src={Cross} className="h-6 w-6" alt="Unchecked" />
+            <IMG src={Cross} alt="Unchecked" />
           </TD>
         </tr>
         <tr>
           <TD>Kun faste kostnader</TD>
           <TD>
-            <IMG src={Checked} className="h-6 w-6" alt="Checked" />
+            <IMG src={Checked} alt="Checked" />
           </TD>
           <TD>
-            <IMG src={Cross} className="h-6 w-6" alt="Unchecked" />
+            <IMG src={Cross} alt="Unchecked" />
           </TD>
           <TD>
-            <IMG src={Cross} className="h-6 w-6" alt="Unchecked" />
+            <IMG src={Cross} alt="Unchecked" />
           </TD>
           <TD>
-            <IMG src={Cross} className="h-6 w-6" alt="Unchecked" />
+            <IMG src={Cross} alt="Unchecked" />
           </TD>
         </tr>
       </tbody>
