@@ -70,11 +70,11 @@ export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
 export const meta: V2_ServerRuntimeMetaFunction<typeof loader> = ({ data }) =>
   metaTags({
-    title: data?.blogPost.helmetTitle ?? data?.blogPost.title!,
+    title: data?.blogPost.helmetTitle ?? data?.blogPost.title,
     description:
       data?.blogPost.helmetDescription ??
       getRawStringContent(data?.blogPost.ingress),
-    image: urlFor(data?.blogPost.mainImage!).url(),
+    image: data?.blogPost.mainImage && urlFor(data.blogPost.mainImage).url(),
     author: data?.blogPost.authors,
     card: "summary_large_image",
   });

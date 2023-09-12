@@ -85,11 +85,19 @@ export default function BloggIndex() {
           <ul className="grid grid-cols-1 justify-center gap-12 sm:grid-cols-2 sm:gap-10 md:grid-cols-3 md:gap-8 lg:grid-cols-4 lg:gap-6">
             {data.items.map((x, i) => (
               <li key={x._id}>
-                <BloggCard
-                  key={x._id}
-                  bloggEntry={x}
-                  imageProps={{ loading: i >= 4 ? "lazy" : "eager" }}
-                />
+                {x.slug?.current ? (
+                  <Link prefetch="intent" to={x.slug.current}>
+                    <BloggCard
+                      bloggEntry={x}
+                      imageProps={{ loading: i >= 4 ? "lazy" : "eager" }}
+                    />
+                  </Link>
+                ) : (
+                  <BloggCard
+                    bloggEntry={x}
+                    imageProps={{ loading: i >= 4 ? "lazy" : "eager" }}
+                  />
+                )}
               </li>
             ))}
           </ul>
@@ -105,37 +113,35 @@ interface BloggCardProps {
 }
 export const BloggCard = ({ bloggEntry, imageProps }: BloggCardProps) => {
   return (
-    <Link prefetch="intent" to={bloggEntry.slug?.current!}>
-      <Card
-        image={
-          <div className="relative pb-[50%]">
-            <CapraImage
-              className="absolute h-full w-full object-cover"
-              alt="" // TODO
-              src={urlFor(bloggEntry.mainImage!)
-                .width(600 * 2)
-                .url()}
-              {...imageProps}
-            />
-          </div>
-        }
-      >
-        <p className="text-xl font-bold">{bloggEntry.title}</p>
-        <div>
-          {bloggEntry.authors.map((author) => (
-            <p key={author._id} className="text-grey">
-              {author.name}
-            </p>
-          ))}
+    <Card
+      image={
+        <div className="relative pb-[50%]">
+          <CapraImage
+            className="absolute h-full w-full object-cover"
+            alt="" // TODO
+            src={urlFor(bloggEntry.mainImage!)
+              .width(600 * 2)
+              .url()}
+            {...imageProps}
+          />
         </div>
-        <p className="text-sm font-light text-grey-dark">
-          {new Date(bloggEntry.publishedAt!).toLocaleDateString("no", {
-            year: "numeric",
-            month: "long",
-            day: "2-digit",
-          })}
-        </p>
-      </Card>
-    </Link>
+      }
+    >
+      <p className="text-xl font-bold">{bloggEntry.title}</p>
+      <div>
+        {bloggEntry.authors.map((author) => (
+          <p key={author._id} className="text-grey">
+            {author.name}
+          </p>
+        ))}
+      </div>
+      <p className="text-sm font-light text-grey-dark">
+        {new Date(bloggEntry.publishedAt!).toLocaleDateString("no", {
+          year: "numeric",
+          month: "long",
+          day: "2-digit",
+        })}
+      </p>
+    </Card>
   );
 };
