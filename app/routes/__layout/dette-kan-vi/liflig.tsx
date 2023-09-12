@@ -19,7 +19,6 @@ import { TitleAndText } from "~/components/title-and-text";
 import {
   ContactForm,
   fetchContactFormForLifligRepresentatives,
-  fetchContactFormRepresentatives,
 } from "~/routes/api.contact";
 import { getSanityClient } from "~/sanity/sanity-client.server";
 import type { Selvskryt, Selvskrytfilter } from "~/sanity/schema";
@@ -90,8 +89,12 @@ const TableThingy = () => {
       {children}
     </th>
   );
-  const IMG = ({ className, ...rest }: HTMLProps<HTMLImageElement>) => (
-    <img {...rest} className={classNames("mx-auto h-6 w-6", className)} />
+  const IMG = ({ className, alt, ...rest }: HTMLProps<HTMLImageElement>) => (
+    <img
+      {...rest}
+      alt={alt}
+      className={classNames("mx-auto h-6 w-6", className)}
+    />
   );
 
   return (
@@ -172,8 +175,7 @@ const TableThingy = () => {
 };
 
 export default function Liflig() {
-  const { images, contactFormRepresentatives, items } =
-    useLoaderData<typeof loader>();
+  const { images, contactFormRepresentatives } = useLoaderData<typeof loader>();
   return (
     <>
       <Section>
