@@ -72,7 +72,7 @@ export const meta: V2_ServerRuntimeMetaFunction = () =>
       "Du velger hva som skal bygges, vi vet hvordan! Hos oss får du en skreddersydd softwaretjeneste som alltid er oppdatert via en løpende kontrakt. Les mer >>",
   });
 
-const TableThingy = () => {
+const LifligAdvantagesTable = () => {
   const TD = ({ children }: PropsWithChildren) => (
     <td className="px-1 py-4 lg:px-2">{children}</td>
   );
@@ -98,7 +98,7 @@ const TableThingy = () => {
   );
 
   return (
-    <table className="w-full min-w-[500px] max-w-5xl">
+    <table className="w-full min-w-[500px] max-w-5xl mx-auto">
       <thead>
         <tr>
           <TH first></TH>
@@ -235,9 +235,9 @@ export default function Liflig() {
         <TitleAndText
           title="Hva får du av Liflig?"
           titleAs="h1"
-          className="max-w-5xl"
+          className="max-w-5xl mx-auto"
         />
-        <TableThingy />
+        <LifligAdvantagesTable />
       </Section>
 
       <Section className="md:gap-20">
