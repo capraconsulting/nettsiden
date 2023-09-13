@@ -110,6 +110,11 @@ export default {
             title: "Kontakt oss (Workshop endring og kommunikasjon)",
             value: "workshop-endring-kommunikasjon-contact-us",
           },
+          {
+            // found on Liflig page
+            title: "Kontakt oss (Liflig)",
+            value: "liflig-contact-us",
+          },
         ],
       },
     },

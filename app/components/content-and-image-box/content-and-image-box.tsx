@@ -36,6 +36,8 @@ interface Props {
   direction?: "left" | "right";
   readMoreLink?: ReadMoreLink;
   hideMobileImage?: boolean;
+
+  imageClassName?: string;
 }
 
 export const ContentAndImageBox: React.FC<Props> = ({
@@ -50,6 +52,8 @@ export const ContentAndImageBox: React.FC<Props> = ({
   direction = "left",
   readMoreLink,
   hideMobileImage = true,
+
+  imageClassName,
 }) => {
   const { boxClassName, patternClassName } = getBoxConfig(color);
   const isHydrated = useHydrated();
