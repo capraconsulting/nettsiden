@@ -32,7 +32,7 @@ interface Props {
 
   color: BoxColor;
 
-  height: `${number}vw`;
+  height: `${number}v${"w" | "h"}`;
   direction?: "left" | "right";
   readMoreLink?: ReadMoreLink;
   hideMobileImage?: boolean;

@@ -1,12 +1,14 @@
+import type { PropsWithChildren } from "react";
+
 import { classNames } from "~/utils/misc";
 
-interface TitleAndTextProps {
+type TitleAndTextProps = PropsWithChildren<{
   title: React.ReactNode;
   titleAs: "h1" | "h2" | "h3";
-  children: React.ReactNode;
   id?: string;
   className?: string;
-}
+}>;
+
 export const TitleAndText = ({
   title,
   titleAs: TitleComponent,
@@ -28,9 +30,11 @@ export const TitleAndText = ({
       <TitleComponent className="w-[95%] max-w-7xl text-3xl font-bold text-secondary md:text-4xl lg:text-6xl">
         {title}
       </TitleComponent>
-      <p className="w-[95%] max-w-2xl text-lg font-light text-secondary-80 md:text-xl lg:max-w-4xl lg:text-2xl">
-        {children}
-      </p>
+      {children && (
+        <p className="w-[95%] max-w-2xl text-lg font-light text-secondary-80 md:text-xl lg:max-w-4xl lg:text-2xl">
+          {children}
+        </p>
+      )}
     </div>
   );
 };

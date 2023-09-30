@@ -98,7 +98,7 @@ const LifligAdvantagesTable = () => {
   );
 
   return (
-    <table className="w-full min-w-[500px] max-w-5xl mx-auto">
+    <table className="mx-auto w-full min-w-[500px] max-w-5xl">
       <thead>
         <tr>
           <TH first></TH>
@@ -235,7 +235,7 @@ export default function Liflig() {
         <TitleAndText
           title="Hva får du av Liflig?"
           titleAs="h1"
-          className="max-w-5xl mx-auto"
+          className="mx-auto max-w-5xl"
         />
         <LifligAdvantagesTable />
       </Section>
