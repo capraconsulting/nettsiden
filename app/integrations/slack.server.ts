@@ -56,8 +56,19 @@ export function slackClient({ request, context }: ClientArgs) {
         }
       }
 
-      // Don't send anything to slack in development by default, remove this if you want to
-      if (process.env.NODE_ENV === "production") {
+      let shouldSubmitToSlack = process.env.NODE_ENV === "production";
+
+      const banList = context.SLACK_BANNED_USER_AGENTS_REGEX;
+      if (shouldSubmitToSlack && banList) {
+        try {
+          const regex = new RegExp(banList);
+          shouldSubmitToSlack = !regex.test(sharedMeta.UserAgent);
+        } catch (e) {
+          console.error("Failed to parse regex", e);
+        }
+      }
+
+      if (shouldSubmitToSlack) {
         const formBlocks = data ? Object.entries(data) : [];
 
         const response = await fetch(webHookUrl, {
