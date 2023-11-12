@@ -1,8 +1,8 @@
+import type { DataFunctionArgs } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 
 import type { ZodSchema } from "zod";
 
-import type { ClientArgs } from "~/integrations/types";
 import { requireEnvVariable } from "~/utils/env";
 import { getDomainUrl } from "~/utils/misc";
 
@@ -12,7 +12,7 @@ type SubmitParams<T extends object> = {
   schema?: ZodSchema<T>;
 };
 
-export function slackClient({ request, context }: ClientArgs) {
+export function slackClient({ request, context }: DataFunctionArgs) {
   const referer = request.headers.get("Referer");
   const path = referer ? new URL(referer).pathname : "?";
 

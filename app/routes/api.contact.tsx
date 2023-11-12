@@ -10,7 +10,7 @@ import { Button } from "~/components/button";
 import { CapraImage } from "~/components/capra-image";
 import { CapraLink } from "~/components/capra-link";
 import { slackClient } from "~/integrations/slack.server";
-import { getSanityClient } from "~/sanity/sanity-client.server";
+import { getOldSanityClient } from "~/sanity/sanity-client.server";
 import { urlFor } from "~/utils/imageBuilder";
 import { formatPhoneNumber } from "~/utils/misc";
 
@@ -166,7 +166,7 @@ const Representatives = ({ representatives }: RepresentativesProps) => {
 };
 
 export const fetchContactFormForWorkshopRepresentatives = () =>
-  getSanityClient()
+  getOldSanityClient()
     .getAll(
       "author",
       `employee == true && "workshop-endring-kommunikasjon-contact-us" in placement`,
@@ -183,7 +183,7 @@ export const fetchContactFormForWorkshopRepresentatives = () =>
     );
 
 export const fetchContactFormRepresentatives = () =>
-  getSanityClient()
+  getOldSanityClient()
     .getAll("author", `employee == true && "contact-form" in placement`)
     .then((authors) =>
       authors.map(
@@ -197,7 +197,7 @@ export const fetchContactFormRepresentatives = () =>
     );
 
 export const fetchContactFormForLifligRepresentatives = () =>
-  getSanityClient()
+  getOldSanityClient()
     .getAll("author", `employee == true && "liflig-contact-us" in placement`)
     .then((authors) =>
       authors.map(

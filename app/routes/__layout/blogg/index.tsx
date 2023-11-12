@@ -23,36 +23,6 @@ type BloggExpanded = Omit<Blogg, "filter" | "authors"> & {
   authors: Author[];
 };
 
-const URL_FILTER_KEY = "kategori";
-export const loader = async ({ request }: LoaderArgs) => {
-  const allItems = await getSanityClient().query<BloggExpanded>(
-    `* [_type == "blogg"]|order(publishedAt desc) { ..., filter[]->, authors[]-> }`,
-  );
-
-  // Hack: Replace null with empty list
-  // Perfably the groq api call should return empty list, but it returns null
-  allItems.forEach((item) => {
-    if (item.filter === null) item.filter = [];
-    if (item.authors === null) item.authors = [];
-  });
-
-  let filters = allItems.flatMap((x) => x.filter);
-  filters = uniqueBy(filters, (x) => x._id);
-
-  // Filter the results
-  const searchParams = new URL(request.url).searchParams;
-  const activeFilters = new Set(searchParams.getAll(URL_FILTER_KEY));
-  const filteredItems = allItems.filter(
-    (x) =>
-      activeFilters.size === 0 ||
-      x.filter.some((filter) => activeFilters.has(filter.title!)),
-  );
-
-  return json(
-    { items: filteredItems, filters },
-    { headers: cacheControlHeaders },
-  );
-};
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders;
 
 export const meta: V2_ServerRuntimeMetaFunction = () =>
@@ -62,8 +32,40 @@ export const meta: V2_ServerRuntimeMetaFunction = () =>
       "På bloggen vår kan du lese om hva som skjer i IT-bransjen. Vi vil dele tips, råd og mye snacks! Spesielt relevant for deg som skal starte å jobbe med IT.",
   });
 
+const URL_FILTER_KEY = "kategori";
+
+export const loader = async (args: LoaderArgs) => {
+  const allBloggPosts = await getSanityClient(args).fetch<BloggExpanded[]>(
+    `*[_type == "blogg"]|order(publishedAt desc) { ..., filter[]->, authors[]-> }`,
+  );
+
+  // Hack: Replace null with empty list
+  // Perfably the groq api call should return empty list, but it returns null
+  allBloggPosts.forEach((bloggPost) => {
+    if (bloggPost.filter === null) bloggPost.filter = [];
+    if (bloggPost.authors === null) bloggPost.authors = [];
+  });
+  let filters = allBloggPosts.flatMap((it) => it.filter);
+  filters = uniqueBy(filters, (x) => x._id);
+
+  // Filter the results
+  const searchParams = new URL(args.request.url).searchParams;
+  const activeFilters = new Set(searchParams.getAll(URL_FILTER_KEY));
+  const filteredBloggPosts = allBloggPosts.filter(
+    (x) =>
+      activeFilters.size === 0 ||
+      x.filter.some((filter) => activeFilters.has(filter.title!)),
+  );
+
+  return json(
+    { bloggPosts: filteredBloggPosts, filters },
+    { headers: cacheControlHeaders },
+  );
+};
+
 export default function BloggIndex() {
-  const data = useLoaderData<typeof loader>();
+  const { bloggPosts, filters } = useLoaderData<typeof loader>();
+
   const [search] = useSearchParams();
   return (
     <>
@@ -76,14 +78,14 @@ export default function BloggIndex() {
         <div className="flex flex-col gap-8">
           <Form method="get" action="">
             <FilterRow
-              filters={data.filters.map((x) => x.title!)}
+              filters={filters.map((x) => x.title!)}
               activeFilters={search.getAll(URL_FILTER_KEY)}
               filterKey={URL_FILTER_KEY}
             />
           </Form>
 
           <ul className="grid grid-cols-1 justify-center gap-12 sm:grid-cols-2 sm:gap-10 md:grid-cols-3 md:gap-8 lg:grid-cols-4 lg:gap-6">
-            {data.items.map((x, i) => (
+            {bloggPosts.map((x, i) => (
               <li key={x._id}>
                 {x.slug?.current ? (
                   <Link prefetch="intent" to={x.slug.current}>
@@ -116,14 +118,16 @@ export const BloggCard = ({ bloggEntry, imageProps }: BloggCardProps) => {
     <Card
       image={
         <div className="relative pb-[50%]">
-          <CapraImage
-            className="absolute h-full w-full object-cover"
-            alt="" // TODO
-            src={urlFor(bloggEntry.mainImage!)
-              .width(600 * 2)
-              .url()}
-            {...imageProps}
-          />
+          {bloggEntry.mainImage && (
+            <CapraImage
+              className="absolute h-full w-full object-cover"
+              alt="" // TODO
+              src={urlFor(bloggEntry.mainImage)
+                .width(600 * 2)
+                .url()}
+              {...imageProps}
+            />
+          )}
         </div>
       }
     >

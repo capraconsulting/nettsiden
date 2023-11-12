@@ -1,6 +1,6 @@
 import type { ImageUrlBuilder } from "@sanity/image-url/lib/types/builder";
 
-import { getSanityClient } from "~/sanity/sanity-client.server";
+import { getOldSanityClient } from "~/sanity/sanity-client.server";
 import { urlFor } from "./imageBuilder";
 
 export type Image = {
@@ -26,7 +26,7 @@ export type Images<T extends ImageParameter> = Record<ImageKey<T>, Image>;
 type ImageKey<T extends ImageParameter> = T extends string ? T : T[0];
 
 export async function fetchImageAssets<T extends ImageParameter>(images: T[]) {
-  const imageData = await getSanityClient().getAll(
+  const imageData = await getOldSanityClient().getAll(
     "imageAsset",
     `title in ${JSON.stringify(images.map(toKey))}`,
   );
