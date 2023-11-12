@@ -1,4 +1,5 @@
-import type { ClientArgs } from "~/integrations/types";
+import type { DataFunctionArgs } from "@remix-run/server-runtime";
+
 import type { BlockContent, Blogg, Selvskryt } from "~/sanity/schema";
 import { typedBoolean } from "~/utils/misc";
 
@@ -27,7 +28,10 @@ export function getRawStringContent(block: BlockContent | undefined): string {
     .join("\n\n");
 }
 
-export function isInPreviewMode({ request, context }: ClientArgs): boolean {
+export function isInPreviewMode({
+  request,
+  context,
+}: DataFunctionArgs): boolean {
   const requestUrl = new URL(request.url);
   return (
     requestUrl.searchParams.get("preview") === context.SANITY_PREVIEW_SECRET

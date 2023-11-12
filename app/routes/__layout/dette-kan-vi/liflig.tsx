@@ -1,5 +1,4 @@
 import type { HTMLProps, PropsWithChildren } from "react";
-import React from "react";
 import { useLoaderData } from "@remix-run/react";
 import type {
   HeadersFunction,
@@ -20,7 +19,7 @@ import {
   ContactForm,
   fetchContactFormForLifligRepresentatives,
 } from "~/routes/api.contact";
-import { getSanityClient } from "~/sanity/sanity-client.server";
+import { getOldSanityClient } from "~/sanity/sanity-client.server";
 import type { Selvskryt, Selvskrytfilter } from "~/sanity/schema";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
@@ -49,7 +48,7 @@ export const loader = async () => {
       "photo-kontor-nrk",
     ]),
     fetchContactFormForLifligRepresentatives(),
-    getSanityClient().query<SelvskrytExpanded>(
+    getOldSanityClient().query<SelvskrytExpanded>(
       `* [_type == "selvskryt"] { ..., filter[]-> }`,
     ),
   ]);

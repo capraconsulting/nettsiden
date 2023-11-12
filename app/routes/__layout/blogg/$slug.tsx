@@ -1,7 +1,7 @@
 import { useLoaderData } from "@remix-run/react";
 import type {
+  DataFunctionArgs,
   HeadersFunction,
-  LoaderArgs,
   V2_ServerRuntimeMetaFunction,
 } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
@@ -35,11 +35,11 @@ type BloggExpanded = Omit<Blogg, "authors"> & {
   authors?: Author[];
 };
 
-export const loader = async ({ params, request, context }: LoaderArgs) => {
-  const isPreviewMode = isInPreviewMode({ request, context });
-  const query = `* [_type == "blogg" && slug.current == "${params.slug}"]|{ ..., authors[]-> }`;
+export const loader = async (args: DataFunctionArgs) => {
+  const isPreviewMode = isInPreviewMode(args);
+  const query = `* [_type == "blogg" && slug.current == "${args.params.slug}"]|{ ..., authors[]-> }`;
   const blogPost = (
-    await getSanityClient({ request, context }).query<BloggExpanded>(query)
+    await getSanityClient(args).fetch<BloggExpanded[]>(query)
   )[0];
 
   assertItemFound(blogPost);
@@ -48,7 +48,7 @@ export const loader = async ({ params, request, context }: LoaderArgs) => {
     day: "numeric",
     month: "long",
     year: "numeric",
-  }).format(new Date(blogPost.publishedAt!));
+  }).format(new Date(blogPost.publishedAt ?? new Date()));
 
   const authors = new Intl.ListFormat("no-nb", {
     style: "long",
@@ -99,14 +99,16 @@ export default function BloggPost() {
       </p>
 
       <div className="relative left-[50%] ml-[-50vw] w-screen max-w-3xl md:left-0 md:ml-0 md:w-full">
-        <CapraImage
-          src={urlFor(blogPost.mainImage!)
-            .width(714 * 2)
-            .url()}
-          alt={getMainImageAlt(blogPost)}
-          loading="eager"
-          fetchpriority="high"
-        />
+        {blogPost.mainImage && (
+          <CapraImage
+            src={urlFor(blogPost.mainImage)
+              .width(714 * 2)
+              .url()}
+            alt={getMainImageAlt(blogPost)}
+            loading="eager"
+            fetchpriority="high"
+          />
+        )}
       </div>
 
       <ProseableText

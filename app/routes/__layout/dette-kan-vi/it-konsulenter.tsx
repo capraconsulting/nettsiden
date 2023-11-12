@@ -10,7 +10,7 @@ import IconTitleAndTextBlock from "~/components/icon-title-and-text-block";
 import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import { CallMeForm } from "~/routes/api.call-me";
-import { getSanityClient } from "~/sanity/sanity-client.server";
+import { getOldSanityClient } from "~/sanity/sanity-client.server";
 import type { Selvskryt, Selvskrytfilter } from "~/sanity/schema";
 import type { CapraHandle } from "~/types";
 import { cacheControlHeaders } from "~/utils/cache-control";
@@ -37,7 +37,7 @@ export const loader = async () => {
       "photo-whiteboard-and-person",
       "photo-kontor-ten",
     ]),
-    getSanityClient().query<SelvskrytExpanded>(
+    getOldSanityClient().query<SelvskrytExpanded>(
       `* [_type == "selvskryt"] { ..., filter[]-> }`,
     ),
   ]);

@@ -1,7 +1,8 @@
+import type { DataFunctionArgs } from "@remix-run/server-runtime";
+
 import type { ZodSchema } from "zod";
 import { z } from "zod";
 
-import type { ClientArgs } from "~/integrations/types";
 import { requireEnvVariable } from "~/utils/env";
 
 const BASE_URL = "https://api.teamtailor.com/v1/";
@@ -38,7 +39,9 @@ const job = z.object({
   }),
 });
 
-export function teamTailorClient({ context }: Pick<ClientArgs, "context">) {
+export function teamTailorClient({
+  context,
+}: Pick<DataFunctionArgs, "context">) {
   const apiKey = requireEnvVariable("TEAM_TAILOR_API_KEY", context);
 
   async function fetchFromTeamTailor<T>(

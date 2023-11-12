@@ -16,7 +16,7 @@ import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
 import type { ValueProposition } from "~/components/value-wheel/value-wheel";
 import { ValueWheel } from "~/components/value-wheel/value-wheel";
-import { getSanityClient } from "~/sanity/sanity-client.server";
+import { getOldSanityClient } from "~/sanity/sanity-client.server";
 import type { Author, JobCategory } from "~/sanity/schema";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import type { BrandColor } from "~/utils/constants";
@@ -47,7 +47,7 @@ export const loader = async () => {
       "icon-vision-development",
     ]),
     fetchEmployeeImages(),
-    getSanityClient().query<AuthorExpanded>(
+    getOldSanityClient().query<AuthorExpanded>(
       `* [_type == "author" && employee == true && "contact-us" in placement] | order(name){ ..., filter[]-> }`,
     ),
   ]);

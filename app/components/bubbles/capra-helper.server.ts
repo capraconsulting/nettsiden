@@ -1,10 +1,10 @@
-import { getSanityClient } from "~/sanity/sanity-client.server";
+import { getOldSanityClient } from "~/sanity/sanity-client.server";
 import type { Author } from "~/sanity/schema";
 import { urlFor } from "~/utils/imageBuilder";
 import { typedBoolean } from "~/utils/misc";
 
 export async function fetchEmployeeImages() {
-  const employees = await getSanityClient().query<Author>(
+  const employees = await getOldSanityClient().query<Author>(
     `* [_type == "author" && employee == true] | order(name)`,
 
     // TODO: Enable filtering on for when hotspot is set

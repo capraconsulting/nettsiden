@@ -13,7 +13,7 @@ import { Card } from "~/components/card";
 import { FilterRow } from "~/components/filter-row";
 import { Section } from "~/components/section";
 import { TitleAndText } from "~/components/title-and-text";
-import { getSanityClient } from "~/sanity/sanity-client.server";
+import { getOldSanityClient } from "~/sanity/sanity-client.server";
 import type { Selvskryt, Selvskrytfilter } from "~/sanity/schema";
 import { cacheControlHeaders } from "~/utils/cache-control";
 import { urlFor } from "~/utils/imageBuilder";
@@ -26,7 +26,7 @@ type SelvskrytExpanded = Omit<Selvskryt, "filter"> & {
 
 const URL_FILTER_KEY = "kategori";
 export const loader = async ({ request }: LoaderArgs) => {
-  const allItems = await getSanityClient().query<SelvskrytExpanded>(
+  const allItems = await getOldSanityClient().query<SelvskrytExpanded>(
     `* [_type == "selvskryt"] { ..., filter[]-> }`,
   );
 
