@@ -8,7 +8,7 @@ import {
   socialIcons,
   socialPlatforms,
 } from "~/utils/constants";
-import { capitalize, formatPhoneNumber } from "~/utils/misc";
+import { capitalize } from "~/utils/misc";
 import type { Images } from "~/utils/sanity-image";
 import { CapraImage } from "./capra-image";
 
@@ -127,11 +127,6 @@ export const Footer = ({ images }: FooterProps) => (
         <FooterModule title="Kontakt">
           <FooterLink href={externalLinks.mailto}>
             {contactInfo.email}
-          </FooterLink>
-        </FooterModule>
-        <FooterModule title="Telefon">
-          <FooterLink href={externalLinks.callUs}>
-            {formatPhoneNumber(contactInfo.phoneNumber)}
           </FooterLink>
         </FooterModule>
       </div>

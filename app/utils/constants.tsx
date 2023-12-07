@@ -27,7 +27,6 @@ export const menuItems: readonly MenuItem[] = [
 
 export const externalLinks = {
   mailto: `mailto:${contactInfo.email}`,
-  callUs: `tel:+47${contactInfo.phoneNumber}`,
   facebook: "https://facebook.com/capraconsulting",
   instagram: "https://instagram.com/capraconsulting",
   linkedIn: "https://linkedin.com/company/capraconsulting",
